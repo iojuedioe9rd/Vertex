@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+/.vs/Vertex
+/bin/Debug-windows-x86_64
+/bin-int/Debug-windows-x86_64
+*.user
+*.pyc
+*.vcxproj
+/vendor/premake/bin

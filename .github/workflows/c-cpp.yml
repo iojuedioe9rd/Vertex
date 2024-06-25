@@ -17,7 +17,7 @@ jobs:
       with:
         version: "5.0.0-beta2"
     - name: configure
-      run: git submodule update --init && premake5 gmake2
+      run: git submodule update --init && git clone https://github.com/iojuedioe9rd/glfw Engine/vendor/GLFW && premake5 gmake2
       
     - name: make
       run: make

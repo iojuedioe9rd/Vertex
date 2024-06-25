@@ -1,0 +1,9 @@
+[submodule "Engine/vendor/spdlog"]
+	path = Engine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Engine/vendor/GLFW"]
+	path = Engine/vendor/GLFW
+	url = https://github.com/iojuedioe9rd/glfw
+[submodule "Vertex/Engine/vendor/imgui"]
+	path = Vertex/Engine/vendor/imgui
+	url = https://github.com/TheCherno/imgui

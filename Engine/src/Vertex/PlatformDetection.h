@@ -1,6 +1,11 @@
 // Platform detection using predefined macros
 #ifdef _WIN32
 	/* Windows x64/x86 */
+#ifdef VX_BUILD_DLL
+#define VERTEX_API __declspec(dllexport)
+#else
+#define VERTEX_API __declspec(dllimport)
+#endif
 #ifdef _WIN64
 	/* Windows x64  */
 #define VX_PLATFORM_WINDOWS

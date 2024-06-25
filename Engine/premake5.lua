@@ -1,11 +1,14 @@
 project "Engine"
-	kind "StaticLib"
+	kind "SharedLib"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
 	
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "vxpch.h"
+	pchsource "src/vxpch.cpp"
 	
 	files
 	{
@@ -20,11 +23,16 @@ project "Engine"
 	}
 	
 	includedirs {
-		"src"
+		"src",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glad}"
 	}
 	
 	links {
-		"opengl32.lib"
+		"Glad",
+		"opengl32.lib",
+		"GLFW"
 	}
 	
 	filter "system:windows"
@@ -32,6 +40,13 @@ project "Engine"
 
 		defines
 		{
+			"VX_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
+		}
+		
+		postbuildcommands
+		{
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 		links

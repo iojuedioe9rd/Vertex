@@ -1,3 +1,5 @@
+include "Dependencies.lua"
+
 workspace "Vertex"
 	architecture "x86_64"
 	startproject "Sandbox"
@@ -17,7 +19,13 @@ workspace "Vertex"
 	}
 	
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-	
+
+group "Dependencies"
+include "Engine/vendor/GLFW"
+include "Engine/vendor/glad"
+group ""
+
+
 group "Core"
 	include "Engine"
 group ""

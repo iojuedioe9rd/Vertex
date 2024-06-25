@@ -15,7 +15,8 @@ project "Sandbox"
 	
 	includedirs
 	{
-		"%{wks.location}/Engine/src"
+		"%{wks.location}/Engine/src",
+		"%{IncludeDir.spdlog}"
 	}
 	
 	links

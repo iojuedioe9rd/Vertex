@@ -37,3 +37,9 @@
 *.pyc
 *.vcxproj
 /vendor/premake/bin
+*.filters
+*.bak
+/bin/Release-windows-x86_64
+/bin-int/Release-windows-x86_64
+/Engine/vendor/glad/bin/Release-windows-x86_64/Glad
+/Engine/vendor/glad/bin-int/Release-windows-x86_64/Glad

@@ -23,6 +23,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 group "Dependencies"
 include "Engine/vendor/GLFW"
 include "Engine/vendor/glad"
+include "Engine/vendor/imgui"
 group ""
 
 

@@ -8,12 +8,16 @@
 
 namespace Vertex
 {
+	Application* Application::app = nullptr;
 	Application::Application()
 	{
 		VX_PROFILE_FUNCTION();
 		m_LayerStack = new LayerStack();
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(VX_BIND_EVENT_FN(Vertex::Application::OnEvent));
+		app = this;
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	void Application::PushLayer(Layer* layer)
@@ -41,8 +45,8 @@ namespace Vertex
 
 		for (Layer* layer : *m_LayerStack)
 			layer->OnUpdate();
-		for (Layer* layer : *m_LayerStack)
-			layer->OnImGuiRender();
+		
+		
 	}
 
 	void Application::OnEvent(Event& e)
@@ -56,9 +60,12 @@ namespace Vertex
 
 		if (e.IsInCategory(EventCategoryApplication) && e.GetEventType() == EventType::WindowResize)
 		{
-			Update();
-			m_Window->OnUpdate();
+			
+			
 		}
+
+		m_ImGuiLayer->OnEvent(e);
+
 
 		for (auto it = m_LayerStack->rbegin(); it != m_LayerStack->rend(); ++it)
 		{
@@ -92,6 +99,10 @@ namespace Vertex
 		while (m_Running)
 		{
 			Update();
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : *m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 			m_Window->OnUpdate();
 		}
 		

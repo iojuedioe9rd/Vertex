@@ -2,7 +2,7 @@
 #include "Vertex/Core.h"
 #include "Window.h"
 #include "LayerStack.h"
-
+#include "ImGui/ImGuiLayer.h"
 
 namespace Vertex
 {
@@ -17,8 +17,15 @@ namespace Vertex
 		void PushOverlay(Layer* layer);
 		void Run();
 
+		Window& GetWindow() { return *m_Window; }
+
+		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
+		static Application& Get() { return *app; }
+
 		void OnEvent(Event& e);
 	private:
+		ImGuiLayer* m_ImGuiLayer;
+		static Application* app;
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		void Update();

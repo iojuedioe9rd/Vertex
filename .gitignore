@@ -43,3 +43,6 @@
 /bin-int/Release-windows-x86_64
 /Engine/vendor/glad/bin/Release-windows-x86_64/Glad
 /Engine/vendor/glad/bin-int/Release-windows-x86_64/Glad
+/Engine/vendor/glad/bin/Debug-windows-x86_64/Glad
+/Engine/vendor/glad/bin-int/Debug-windows-x86_64/Glad/Glad.tlog
+/Engine/vendor/glad/bin-int/Debug-windows-x86_64/Glad

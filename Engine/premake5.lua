@@ -27,14 +27,16 @@ project "Engine"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.glad}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.zlib}"
 	}
 	
 	links {
 		"Glad",
 		"opengl32.lib",
 		"GLFW",
-		"imgui"
+		"imgui",
+		"zlib"
 	}
 	
 	filter "system:windows"

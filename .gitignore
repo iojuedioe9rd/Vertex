@@ -31,8 +31,8 @@
 *.out
 *.app
 /.vs/Vertex
-/bin/Debug-windows-x86_64
-/bin-int/Debug-windows-x86_64
+*bin/*
+**bin-int/**/**/**/**/**/
 *.user
 *.pyc
 *.vcxproj
@@ -46,3 +46,9 @@
 /Engine/vendor/glad/bin/Debug-windows-x86_64/Glad
 /Engine/vendor/glad/bin-int/Debug-windows-x86_64/Glad/Glad.tlog
 /Engine/vendor/glad/bin-int/Debug-windows-x86_64/Glad
+/bin/Dist-windows-x86_64/Engine
+/bin-int/Dist-windows-x86_64
+/Engine/vendor/glad/bin-int/Dist-windows-x86_64/Glad
+/Engine/vendor/VertexOopsFormat/obj/Release
+/Engine/vendor/VertexOopsFormat/bin/Release
+/Engine/vendor/VertexOopsFormat

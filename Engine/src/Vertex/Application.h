@@ -3,6 +3,8 @@
 #include "Window.h"
 #include "LayerStack.h"
 #include "ImGui/ImGuiLayer.h"
+#include "ImGui/ImGuiWindowStack.h"
+#include "ImGui/ImGuiWindows/ConsoleWindow.h"
 
 namespace Vertex
 {
@@ -25,11 +27,13 @@ namespace Vertex
 		void OnEvent(Event& e);
 	private:
 		ImGuiLayer* m_ImGuiLayer;
+		ImGuiWindows::ConsoleWindow* m_ConsoleWindow;
 		static Application* app;
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		void Update();
 		LayerStack* m_LayerStack = 0;
+		ImGuiWindows::ImGuiWindowStack* m_ImGuiWindowStack = 0;
 	};
 	extern Vertex::Application* CreateApp();
 	

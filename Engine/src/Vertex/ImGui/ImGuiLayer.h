@@ -3,7 +3,7 @@
 
 namespace Vertex
 {
-	class ImGuiLayer : public Layer
+	class VERTEX_API ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

@@ -6,7 +6,7 @@
 #define BIT(x) (1 << x)
 
 #ifndef VX_DIST
-#define VX_ENABLE_ASSERTS
+
 #endif // !VX_DIST
 
 
@@ -14,8 +14,10 @@
 #define VX_ASSERT(x, ...) { if(!(x)) { VX_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #define VX_CORE_ASSERT(x, ...) { if(!(x)) { VX_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
-#define VX_ASSERT(x, ...)
-#define VX_CORE_ASSERT(x, ...)
+#include "Vertex/ErrorBox.h"
+
+#define VX_ASSERT(x, ...) { if(!(x)) { ErrorBox("Assertion Failed"); __debugbreak(); exit(-1); } }
+#define VX_CORE_ASSERT(x, ...) { if(!(x)) { ErrorBox("Core Assertion Failed"); __debugbreak(); exit(-1); } }
 #endif
 
 #define VX_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }

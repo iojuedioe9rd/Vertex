@@ -5,6 +5,7 @@
 #include "ImGui/ImGuiLayer.h"
 #include "ImGui/ImGuiWindowStack.h"
 #include "ImGui/ImGuiWindows/ConsoleWindow.h"
+#include "CommandBuffer/CommandBufferPool.h"
 
 namespace Vertex
 {
@@ -24,6 +25,11 @@ namespace Vertex
 		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 		static Application& Get() { return *app; }
 
+		CommandBuffer* GetCommandBuffer() { return m_CommandBufferPool->get(); }
+		
+		void ReownCommandBuffer(CommandBuffer* commandBuffer) { m_CommandBufferPool->reown(commandBuffer); }
+		
+
 		void OnEvent(Event& e);
 	private:
 		ImGuiLayer* m_ImGuiLayer;
@@ -32,6 +38,7 @@ namespace Vertex
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		void Update();
+		CommandBufferPool* m_CommandBufferPool;
 		LayerStack* m_LayerStack = 0;
 		ImGuiWindows::ImGuiWindowStack* m_ImGuiWindowStack = 0;
 	};

@@ -3,6 +3,7 @@
 #include "Vertex/Core.h"
 #include "Vertex/Logger.h"
 #include "Vertex/Debug/Instrumentor.h"
+#include "Vertex/CommandBuffer/CommandBuffer.h"
 
 #include <iostream>
 #include <memory>
@@ -15,6 +16,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+
 
 #ifdef VX_PLATFORM_WINDOWS
 

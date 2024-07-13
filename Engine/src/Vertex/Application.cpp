@@ -10,6 +10,10 @@
 using namespace Vertex::ImGuiWindows;
 namespace Vertex
 {
+
+	void log(const std::string& msg) {
+		VX_CORE_INFO(msg);
+	}
 	Application* Application::app = nullptr;
 	Application::Application()
 	{
@@ -83,6 +87,9 @@ namespace Vertex
 		app = this;
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
+
+		
+
 	}
 
 	void Application::PushLayer(Layer* layer)
@@ -110,8 +117,15 @@ namespace Vertex
 
 		for (Layer* layer : *m_LayerStack)
 			layer->OnUpdate();
+
+		m_ImGuiLayer->Begin();
+		for (Layer* layer : *m_LayerStack)
+			layer->OnImGuiRender();
+		for (BaseImGuiWindow* imGuiWindow : *m_ImGuiWindowStack)
+			imGuiWindow->OnUpdate();
+		m_ImGuiLayer->End();
 		
-		
+		m_Window->OnUpdate();
 	}
 
 	void Application::OnEvent(Event& e)
@@ -157,13 +171,8 @@ namespace Vertex
 		while (m_Running)
 		{
 			Update();
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : *m_LayerStack)
-				layer->OnImGuiRender();
-			for (BaseImGuiWindow* imGuiWindow : *m_ImGuiWindowStack)
-				imGuiWindow->OnUpdate();
-			m_ImGuiLayer->End();
-			m_Window->OnUpdate();
+			
+			
 		}
 		
 

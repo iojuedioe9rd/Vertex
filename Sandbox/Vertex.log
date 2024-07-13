@@ -1,2 +1,6 @@
-[16:37:44] [info] VERTEX: Creating window Vertex Engine (1280, 720)
-[16:37:45] [trace] VERTEX: Hi
+[20:37:21] [info] VERTEX: Creating window Vertex Engine (1280, 720)
+[20:37:22] [info] VERTEX: OpenGL Info:
+[20:37:22] [info] VERTEX:   Vendor: NVIDIA Corporation
+[20:37:22] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[20:37:22] [info] VERTEX:   Version: 4.6.0 NVIDIA 536.23
+[20:37:22] [trace] VERTEX: Hi

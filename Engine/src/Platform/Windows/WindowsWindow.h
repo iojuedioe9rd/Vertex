@@ -3,6 +3,7 @@
 #include "Vertex/Window.h"
 #include "Vertex/Debug/Instrumentor.h"
 #include <GLFW/glfw3.h>
+#include <Vertex/Renderer/GraphicsContext.h>
 
 namespace Vertex {
 
@@ -28,6 +29,7 @@ namespace Vertex {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

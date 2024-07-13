@@ -13,7 +13,11 @@ project "Engine"
 	files
 	{
 		"src/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		"vendor/glm/glm/**.hpp",
+		"vendor/glm/glm/**.inl",
+		"src/**.c",
+		"src/**.asm"
 	}
 	
 	defines
@@ -28,7 +32,8 @@ project "Engine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
-		"%{IncludeDir.zlib}"
+		"%{IncludeDir.zlib}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links {

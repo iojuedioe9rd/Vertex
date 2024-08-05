@@ -8,6 +8,8 @@ ExampleLayer::ExampleLayer()
 	
 }
 
+#define RunInNewScope(x) { x(); }
+
 void ExampleLayer::OnAttach()
 {
 	
@@ -35,21 +37,22 @@ void ExampleLayer::OnAttach()
 
 	m_SquareVA.reset(VertexArray::Create());
 
-	float squareVertices[3 * 4] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
+	float squareVertices[5 * 4] = {
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 	};
 
 	std::shared_ptr<VertexBuffer> squareVB;
 	squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 	squareVB->SetLayout({
-		{ ShaderDataType::Float3, "a_Position" }
+		{ ShaderDataType::Float3, "a_Position" },
+		{ ShaderDataType::Float2, "a_TexCoord" }
 		});
 	m_SquareVA->AddVertexBuffer(squareVB);
 
-	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0,  };
 	std::shared_ptr<IndexBuffer> squareIB;
 	squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 	m_SquareVA->SetIndexBuffer(squareIB);
@@ -91,39 +94,43 @@ void ExampleLayer::OnAttach()
 
 	m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
 
-	std::string blueShaderVertexSrc = R"(
+	std::string textureShaderVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
-
+			layout(location = 1) in vec2 a_TexCoord;
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
-
-			out vec3 v_Position;
-
+			out vec2 v_TexCoord;
 			void main()
 			{
-				v_Position = a_Position;
+				v_TexCoord = a_TexCoord;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
-	std::string blueShaderFragmentSrc = R"(
+	std::string textureShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
 
-			in vec3 v_Position;
+			in vec2 v_TexCoord;
 			
-			uniform vec3 u_Color;
+			uniform sampler2D u_Texture;
 
 			void main()
 			{
-				color = vec4(u_Color, 1.0);
+				color = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
-	m_BlueShader.reset(Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+	m_Texture = Texture2D::Create("assets/textures/Checkerboard.png");
+
+	m_BlueShader.reset(Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+	m_BlueShader->Bind();
+	m_BlueShader->UploadUniformInt("u_Texture", 0);
+	m_BlueShader->Unbind();
 }
 
 void ExampleLayer::OnDetach()
@@ -135,15 +142,33 @@ void ExampleLayer::OnUpdate(Timestep ts)
 	RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	RenderCommand::Clear();
 
-	m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
-	m_Camera.SetRotation(45.0f);
+
+
+	if (Input::IsKeyPressed(VX_KEY_LEFT))
+		m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+	else if (Input::IsKeyPressed(VX_KEY_RIGHT))
+		m_CameraPosition.x += m_CameraMoveSpeed * ts;
+
+	if (Input::IsKeyPressed(VX_KEY_UP))
+		m_CameraPosition.y += m_CameraMoveSpeed * ts;
+	else if (Input::IsKeyPressed(VX_KEY_DOWN))
+		m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+
+	if (Input::IsKeyPressed(VX_KEY_A))
+		m_CameraRotation += m_CameraRotationSpeed * ts;
+	if (Input::IsKeyPressed(VX_KEY_D))
+		m_CameraRotation -= m_CameraRotationSpeed * ts;
+
+	m_Camera.SetPosition(m_CameraPosition);
+	m_Camera.SetRotation(m_CameraRotation);
 
 	Renderer::BeginScene(m_Camera);
 
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 	m_BlueShader->Bind();
-	m_BlueShader->UploadUniformFloat3("u_Color", m_SquareColor);
+	
+	m_Texture->Bind();
 
 	for (int y = 0; y < 20; y++)
 	{
@@ -154,6 +179,7 @@ void ExampleLayer::OnUpdate(Timestep ts)
 			Renderer::Submit(m_BlueShader, m_SquareVA, transform);
 		}
 	}
+	
 
 	Renderer::EndScene();
 }

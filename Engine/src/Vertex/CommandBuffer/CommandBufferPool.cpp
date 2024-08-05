@@ -5,17 +5,27 @@ namespace Vertex {
 
     CommandBuffer* CommandBufferPool::get()
     {
-        if (!pool.empty()) {
-            CommandBuffer* cmdBuffer = pool.back();
-            pool.pop_back();
+        if (pool == nullptr)
+        {
+            VX_CORE_CRITICAL("POOL IS NULL");
+        }
+
+        if (pool->empty()) {
+            CommandBuffer* newBuffer = new CommandBuffer();
+            
+            return newBuffer;
+        }
+        else {
+            CommandBuffer* cmdBuffer = pool->back();
+            pool->pop_back();
+            
             return cmdBuffer;
         }
-        return new CommandBuffer();
     }
 
     void CommandBufferPool::reown(CommandBuffer* cmdBuffer)
     {
         cmdBuffer->clear();
-        pool.emplace_back(cmdBuffer);
+        pool->emplace_back(cmdBuffer);
     }
 }

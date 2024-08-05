@@ -17,6 +17,8 @@ namespace Vertex {
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 	private:
+		static void Submit_code(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
+
 		struct SceneData
 		{
 			glm::mat4 ViewProjectionMatrix;

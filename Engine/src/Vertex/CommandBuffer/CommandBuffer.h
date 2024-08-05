@@ -22,11 +22,17 @@ namespace Vertex
 
         void executeCommands() {
             for (auto cmd : commands) {
-                cmd->execute();
+                if (cmd)
+                {
+                    cmd->execute();
+                }
+                
             }
         }
 
         void clear() {
+            
+            VX_CORE_INFO("clear CommandBuffer: {0}", commands.size() - sizeof(ICommand));
             for (auto cmd : commands) {
                 delete cmd;
             }

@@ -106,6 +106,7 @@ namespace Vertex
 		
 		VX_PROFILE_FUNCTION();
 		m_LayerStack = new LayerStack();
+		m_CommandBufferPool = new CommandBufferPool();
 		m_ImGuiWindowStack = new ImGuiWindowStack();
 		m_ConsoleWindow = &ConsoleWindow::Get();
 		m_ImGuiWindowStack->PushImGuiWindow(m_ConsoleWindow);
@@ -145,7 +146,7 @@ namespace Vertex
 		Timestep timestep = time - m_LastFrameTime;
 		m_LastFrameTime = time;
 
-		VX_CORE_INFO("{0}", timestep.GetSeconds());
+		VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		
 
 		for (Layer* layer : *m_LayerStack)

@@ -89,7 +89,7 @@ void ExampleLayer::OnAttach()
 			}
 		)";
 
-	m_FlatColorShader.reset(Shader::Create(vertexSrc, fragmentSrc));
+	m_FlatColorShader = Shader::Create("FlatColor", vertexSrc, fragmentSrc);
 
 
 
@@ -98,7 +98,7 @@ void ExampleLayer::OnAttach()
 
 	
 
-	m_TextureShader.reset(Shader::Create("assets/shaders/Texture.glsl"));
+	m_TextureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 	m_TextureShader->Bind();
 	m_TextureShader->UploadUniformInt("u_Texture", 0);

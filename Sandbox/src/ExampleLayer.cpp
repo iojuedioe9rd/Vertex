@@ -3,7 +3,7 @@
 #include <Platform/OpenGL/OpenGLShader.h>
 
 ExampleLayer::ExampleLayer()
-	: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+	: m_CameraController(1280.0f / 720.0f)
 {
 	
 }
@@ -116,25 +116,9 @@ void ExampleLayer::OnUpdate(Timestep ts)
 
 
 
-	if (Input::IsKeyPressed(VX_KEY_LEFT))
-		m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-	else if (Input::IsKeyPressed(VX_KEY_RIGHT))
-		m_CameraPosition.x += m_CameraMoveSpeed * ts;
+	m_CameraController.OnUpdate(ts);
 
-	if (Input::IsKeyPressed(VX_KEY_UP))
-		m_CameraPosition.y += m_CameraMoveSpeed * ts;
-	else if (Input::IsKeyPressed(VX_KEY_DOWN))
-		m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-	if (Input::IsKeyPressed(VX_KEY_A))
-		m_CameraRotation += m_CameraRotationSpeed * ts;
-	if (Input::IsKeyPressed(VX_KEY_D))
-		m_CameraRotation -= m_CameraRotationSpeed * ts;
-
-	m_Camera.SetPosition(m_CameraPosition);
-	m_Camera.SetRotation(m_CameraRotation);
-
-	Renderer::BeginScene(m_Camera);
+	Renderer::BeginScene(m_CameraController.GetCamera());
 
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -169,6 +153,6 @@ void ExampleLayer::OnUpdate(Timestep ts)
 
 void ExampleLayer::OnEvent(Vertex::Event& e)
 {
-	
+	m_CameraController.OnEvent(e);
 }
   

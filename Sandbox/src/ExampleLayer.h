@@ -2,6 +2,7 @@
 #include "Vertex.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <Vertex/Renderer/Texture.h>
+#include <Vertex/OrthographicCameraController.h>
 
 
 class ExampleLayer : public Vertex::Layer
@@ -21,11 +22,13 @@ public:
 		ImGuiLink::Begin("Settings");
 		ImGuiLink::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
 
-		ImGuiLink::ColorEdit3("Cam Pos", glm::value_ptr(m_CameraPosition));
+		
 		ImGuiLink::End();
 	}
 
 private:
+
+	OrthographicCameraController m_CameraController;
 
 	ShaderLibrary m_ShaderLibrary;
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
@@ -38,7 +41,7 @@ private:
 
 	Ref<Texture2D> m_Texture, m_PlayerTexture;
 
-	OrthographicCamera m_Camera;
+	
 
 	glm::vec3 m_CameraPosition = {0.5f, 0.5f, 0.0f};
 	float m_CameraMoveSpeed = 5.0f;

@@ -113,6 +113,9 @@ namespace Vertex
 		m_Window = Ref<Window>(Window::Create());
 		m_Window->SetEventCallback(VX_BIND_EVENT_FN(Vertex::Application::OnEvent));
 		app = this;
+
+		Renderer::Init();
+
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 

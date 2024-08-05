@@ -9,6 +9,8 @@ namespace Vertex {
 	class VERTEX_API Renderer
 	{
 	public:
+		static void Init();
+
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 

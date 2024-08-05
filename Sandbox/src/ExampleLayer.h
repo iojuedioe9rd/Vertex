@@ -28,13 +28,13 @@ public:
 private:
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 
-	Ref<Shader> m_Shader;
+	Ref<Shader> m_FlatColorShader;
 	Ref<VertexArray> m_VertexArray;
 
-	Ref<Shader> m_BlueShader;
+	Ref<Shader> m_TextureShader;
 	Ref<VertexArray> m_SquareVA;
 
-	Ref<Texture2D> m_Texture;
+	Ref<Texture2D> m_Texture, m_PlayerTexture;
 
 	OrthographicCamera m_Camera;
 

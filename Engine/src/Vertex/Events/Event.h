@@ -59,8 +59,7 @@ namespace Vertex {
 
 	class VERTEX_API EventDispatcher
 	{
-		template<typename T>
-		using EventFn = std::function<bool(T&)>;
+		
 	public:
 		EventDispatcher(Event& event)
 			: m_Event(event)
@@ -68,13 +67,14 @@ namespace Vertex {
 			VX_PROFILE_FUNCTION();
 		}
 
-		template<typename T>
-		bool Dispatch(EventFn<T> func)
+		// F will be deduced by the compiler
+		template<typename T, typename F>
+		bool Dispatch(const F& func)
 		{
 			VX_PROFILE_FUNCTION();
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.handled = func(*(T*)&m_Event);
+				m_Event.handled = func(static_cast<T&>(m_Event));
 				return true;
 			}
 			return false;

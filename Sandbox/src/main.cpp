@@ -1,5 +1,5 @@
-#include <Vertex/EntryPoint.h>
 #include <Vertex.h>
+#include <Vertex/EntryPoint.h>
 #include "ExampleLayer.h"
 
 

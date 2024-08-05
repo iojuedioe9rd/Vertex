@@ -2,6 +2,7 @@
 #include "RIFF.h"
 #include "XOR.h"
 #include "compress.h"
+#include <Checksum.h>
 
 #define RIFF_VERSION 1
 namespace Vertex
@@ -31,44 +32,32 @@ namespace Vertex
         for (const auto& entry : fakefs.files) {
             const std::string& path = entry.first;
             const File& file = entry.second;
-            File f = file;
-            f.checksum = atof(f.content.c_str());
 
             Chunk chunk;
             strncpy(chunk.id, file.name.c_str(), 4);
             chunk.path = path;
-
-
             std::string dataToCompress = path + '\0' + file.content;
             std::string compressedData = compressString(dataToCompress);
-            std::string encryptedData = xorEncryptDecrypt(xorEncryptDecrypt(compressedData, encryptionKey), std::to_string(riffHeader.XORKey));
+            std::string encryptedData = xorEncryptDecrypt(compressedData, encryptionKey);
             chunk.size = static_cast<uint32_t>(encryptedData.size());
             chunk.data = new char[chunk.size];
             memcpy(chunk.data, encryptedData.data(), chunk.size);
             chunk.compressed = true;
 
+            std::vector<uint8_t> chunkData(chunk.data, chunk.data + chunk.size);
+            chunk.checksum = customChecksum(chunkData);
+
             outFile.write(chunk.id, 4);
             outFile.write(reinterpret_cast<char*>(&chunk.size), sizeof(chunk.size));
-
             outFile.write(reinterpret_cast<char*>(&chunk.compressed), sizeof(chunk.compressed));
-            f.checksum += 2;
-            f.checksum *= 7;
-            f.checksum -= 2;
-            f.checksum = (1 >> f.checksum);
-
-
-            outFile.write((char*)((void*)(&f.checksum)), sizeof(uint16_t));
-            size_t metadataSize = f.metadata.size();
-
+            outFile.write(reinterpret_cast<char*>(&chunk.checksum), sizeof(chunk.checksum));
             outFile.write(chunk.data, chunk.size);
-            chunk.size += file.metadata.size();
-            char buff[2];
-            buff[0] = file.checksum & 0xFF;
-            buff[1] = file.checksum >> 8;
 
+            std::cout << "Written chunk: " << std::string(chunk.id, 4)
+                << ", size: " << chunk.size
+                << ", checksum: " << chunk.checksum << std::endl;
 
-
-            riffSize += 8 + sizeof(chunk.compressed) + chunk.size + sizeof(uint16_t);
+            riffSize += 12 + sizeof(chunk.compressed) + chunk.size;
         }
 
         riffHeader.chunkSize = riffSize;
@@ -101,29 +90,27 @@ namespace Vertex
 
         while (inFile.peek() != EOF) {
             Chunk chunk;
-
-
             inFile.read(chunk.id, 4);
             inFile.read(reinterpret_cast<char*>(&chunk.size), sizeof(chunk.size));
             inFile.read(reinterpret_cast<char*>(&chunk.compressed), sizeof(chunk.compressed));
-
-            uint16_t checksum = 0;
-            inFile.read((char*)((void*)(&checksum)), sizeof(uint16_t));
-
+            inFile.read(reinterpret_cast<char*>(&chunk.checksum), sizeof(chunk.checksum));
             chunk.data = new char[chunk.size];
-
-
             inFile.read(chunk.data, chunk.size);
 
-
+            std::vector<uint8_t> chunkData(chunk.data, chunk.data + chunk.size);
+            uint32_t calculatedChecksum = customChecksum(chunkData);
+            if (calculatedChecksum != chunk.checksum) {
+                throw std::runtime_error("Checksum mismatch for chunk: " + std::string(chunk.id, 4));
+            }
 
             std::string encryptedData(chunk.data, chunk.size);
-            std::string compressedData = xorEncryptDecrypt(xorEncryptDecrypt(encryptedData, encryptionKey), std::to_string(riffHeader.XORKey));
+            std::string compressedData = xorEncryptDecrypt(encryptedData, encryptionKey);
             std::string dataStr = decompressString(compressedData);
 
             size_t pathEnd = dataStr.find('\0');
             chunk.path = dataStr.substr(0, pathEnd);
             std::string content = dataStr.substr(pathEnd + 1);
+
 
             fakefs.addFile(chunk.path, File(chunk.id, content));
         }

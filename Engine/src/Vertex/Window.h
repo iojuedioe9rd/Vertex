@@ -7,7 +7,7 @@
 
 namespace Vertex {
 
-	struct WindowProps
+	struct VERTEX_API WindowProps
 	{
 		std::string Title;
 		unsigned int Width;
@@ -22,10 +22,10 @@ namespace Vertex {
 	};
 
 	// Interface representing a desktop system based Window
-	class Window
+	class VERTEX_API Window
 	{
 	public:
-		using EventCallbackFn = std::function<void(Event&)>;
+		using EventCallbackFn = std::function<void(Event*)>;
 
 		virtual ~Window() {}
 

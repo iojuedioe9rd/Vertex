@@ -33,7 +33,8 @@ project "Engine"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.zlib}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"vendor/checksum/src"
 	}
 	
 	links {
@@ -41,7 +42,8 @@ project "Engine"
 		"opengl32.lib",
 		"GLFW",
 		"imgui",
-		"zlib"
+		"zlib",
+		"Checksum"
 	}
 	
 	filter "system:windows"

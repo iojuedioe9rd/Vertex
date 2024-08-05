@@ -2,6 +2,8 @@
 #include "spdlog/sinks/base_sink.h"
 #include "Vertex/ImGui/ImGuiWindows/ConsoleWindow.h"
 
+
+
 template<typename Mutex>
 class my_sink : public spdlog::sinks::base_sink <Mutex>
 {
@@ -17,7 +19,31 @@ protected:
         spdlog::memory_buf_t formatted;
         
         spdlog::sinks::base_sink<Mutex>::formatter_->format(msg, formatted);
-        Vertex::ImGuiWindows::ConsoleWindow::Get().UpdateLogMsg(fmt::to_string(formatted));
+        
+        Vertex::ImGuiWindows::ConsoleData* data = new Vertex::ImGuiWindows::ConsoleData();
+
+        
+        data->msg = fmt::to_string(formatted);
+
+        data->isCoreLogger = 0;
+
+        int j = 0;
+        const char* name = "VERTEX";
+        for (int i = 0; i < 7; i++)
+        {
+            
+            if (*(msg.logger_name.begin()) == *(name))
+            {
+                j++;
+            }
+        }
+
+
+        if (j >= 5) { data->isCoreLogger = 1; }
+
+        //data->isCoreLogger = msg.logger_name.begin() == "VERTEX";
+
+        Vertex::ImGuiWindows::ConsoleWindow::Get().UpdateLogMsg(data);
         
     }
 

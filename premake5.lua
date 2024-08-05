@@ -25,6 +25,7 @@ include "Engine/vendor/zlib"
 include "Engine/vendor/GLFW"
 include "Engine/vendor/glad"
 include "Engine/vendor/imgui"
+include "Engine/vendor/checksum"
 group ""
 
 

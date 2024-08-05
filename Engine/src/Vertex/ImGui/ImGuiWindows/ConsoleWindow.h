@@ -5,6 +5,14 @@ using namespace Vertex;
 namespace Vertex::ImGuiWindows
 {
 	
+	struct VERTEX_API ConsoleData
+	{
+		bool isCoreLogger;
+		std::string msg;
+		
+
+	};
+
 	class VERTEX_API ConsoleWindow : public BaseImGuiWindow
 	{
 	public:
@@ -12,7 +20,7 @@ namespace Vertex::ImGuiWindows
 
 		void OnUpdate() override;
 
-		void UpdateLogMsg(std::string msg);
+		void UpdateLogMsg(ConsoleData* data);
 
 		static ConsoleWindow& Get()
 		{

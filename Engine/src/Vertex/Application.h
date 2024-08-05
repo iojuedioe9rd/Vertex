@@ -6,6 +6,10 @@
 #include "ImGui/ImGuiWindowStack.h"
 #include "ImGui/ImGuiWindows/ConsoleWindow.h"
 #include "CommandBuffer/CommandBufferPool.h"
+#include "Renderer/Shader.h"
+#include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
+#include "Renderer/OrthographicCamera.h"
 
 namespace Vertex
 {
@@ -30,17 +34,23 @@ namespace Vertex
 		void ReownCommandBuffer(CommandBuffer* commandBuffer) { m_CommandBufferPool->reown(commandBuffer); }
 		
 
-		void OnEvent(Event& e);
+		void OnEvent(Event* e);
 	private:
 		ImGuiLayer* m_ImGuiLayer;
 		ImGuiWindows::ConsoleWindow* m_ConsoleWindow;
 		static Application* app;
-		std::unique_ptr<Window> m_Window;
+		Ref<Window> m_Window;
 		bool m_Running = true;
 		void Update();
 		CommandBufferPool* m_CommandBufferPool;
 		LayerStack* m_LayerStack = 0;
 		ImGuiWindows::ImGuiWindowStack* m_ImGuiWindowStack = 0;
+
+		
+
+		
+
+		OrthographicCamera m_Camera;
 	};
 	extern Vertex::Application* CreateApp();
 	

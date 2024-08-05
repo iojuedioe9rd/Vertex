@@ -4,7 +4,7 @@
 #include <memory>
 
 #define BIT(x) (1 << x)
-
+#define NULL 0
 #ifndef VX_DIST
 
 #endif // !VX_DIST

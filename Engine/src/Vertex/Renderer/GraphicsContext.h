@@ -2,7 +2,7 @@
 #include "Vertex/Core.h"
 namespace Vertex {
 
-	class GraphicsContext
+	class VERTEX_API GraphicsContext
 	{
 	public:
 		virtual void Init() = 0;

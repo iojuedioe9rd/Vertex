@@ -61,14 +61,14 @@ namespace Vertex {
 			data.Width = width;
 			data.Height = height;
 
-			WindowResizeEvent event(width, height);
+			WindowResizeEvent* event = new WindowResizeEvent(width, height);
 			data.EventCallback(event);
 		});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-			WindowCloseEvent event;
+			WindowCloseEvent* event = new WindowCloseEvent();
 			data.EventCallback(event);
 		});
 
@@ -80,19 +80,19 @@ namespace Vertex {
 			{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent event(key, 0);
+					KeyPressedEvent* event = new KeyPressedEvent(key, 0);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent event(key);
+					KeyReleasedEvent* event = new KeyReleasedEvent(key);
 					data.EventCallback(event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent event(key, true);
+					KeyPressedEvent* event = new KeyPressedEvent(key, true);
 					data.EventCallback(event);
 					break;
 				}
@@ -103,7 +103,7 @@ namespace Vertex {
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			KeyTypedEvent event(keycode);
+			KeyTypedEvent* event = new KeyTypedEvent(keycode);
 			data.EventCallback(event);
 		});
 
@@ -116,14 +116,14 @@ namespace Vertex {
 
 				case GLFW_PRESS:
 				{
-					MouseButtonPressedEvent event(button);
+					MouseButtonPressedEvent* event = new MouseButtonPressedEvent(button);
 					data.EventCallback(event);
 					break;
 				}
 
 				case GLFW_RELEASE:
 				{
-					MouseButtonReleasedEvent event(button);
+					MouseButtonReleasedEvent* event =  new MouseButtonReleasedEvent(button);
 					data.EventCallback(event);
 					break;
 				}
@@ -134,7 +134,7 @@ namespace Vertex {
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			MouseScrolledEvent event((float)xOffset, (float)yOffset);
+			MouseScrolledEvent* event = new MouseScrolledEvent((float)xOffset, (float)yOffset);
 			data.EventCallback(event);
 		});
 
@@ -142,7 +142,7 @@ namespace Vertex {
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			MouseMovedEvent event((float)xPos, (float)yPos);
+			MouseMovedEvent* event = new MouseMovedEvent((float)xPos, (float)yPos);
 			data.EventCallback(event);
 		});
 	}

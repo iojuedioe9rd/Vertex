@@ -20,9 +20,10 @@ namespace Vertex
     struct Chunk {
         char id[4];
         uint32_t size;
-        std::string path;
-        char* data;
         bool compressed;
+        char* data;
+        uint32_t checksum;
+        std::string path;
 
         Chunk() : data(nullptr), compressed(false) {}
         ~Chunk() { delete[] data; }

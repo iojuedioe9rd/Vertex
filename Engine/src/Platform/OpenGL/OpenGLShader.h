@@ -23,6 +23,7 @@ namespace Vertex {
 		}
 
 		virtual void UploadUniformInt(const std::string& name, int value) override;
+		virtual void UploadUniformIntArray(const std::string& name, int* values, uint32_t count) override;
 
 		virtual void UploadUniformFloat(const std::string& name, float value) override;
 		virtual void UploadUniformFloat2(const std::string& name, const glm::vec2& value) override;

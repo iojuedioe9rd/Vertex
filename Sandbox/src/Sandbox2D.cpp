@@ -25,6 +25,10 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(Timestep ts)
 {
+	static float rotation = 0.0f;
+	rotation += ts * 50.0f;
+
+
 	// Update
 	m_CameraController.OnUpdate(ts);
 
@@ -33,10 +37,11 @@ void Sandbox2D::OnUpdate(Timestep ts)
 	RenderCommand::Clear();
 
 	Renderer2D::BeginScene(m_CameraController.GetCamera());
-	//Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, glm::radians(-45.0f), { 0.8f, 0.2f, 0.3f, 1.0f });
+	Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
 	Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 	Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
-	//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 10.0f);
+	Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, m_CheckerboardTexture, 100.0f);
+	Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_CheckerboardTexture, 20.0f);
 	Renderer2D::EndScene();
 }
 

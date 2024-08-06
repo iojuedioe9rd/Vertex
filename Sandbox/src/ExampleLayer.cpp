@@ -3,10 +3,12 @@
 #include <Platform/OpenGL/OpenGLShader.h>
 
 ExampleLayer::ExampleLayer()
-	: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+	: m_CameraController(1280.0f / 720.0f)
 {
 	
 }
+
+#define RunInNewScope(x) { x(); }
 
 void ExampleLayer::OnAttach()
 {
@@ -35,21 +37,22 @@ void ExampleLayer::OnAttach()
 
 	m_SquareVA.reset(VertexArray::Create());
 
-	float squareVertices[3 * 4] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
+	float squareVertices[5 * 4] = {
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 	};
 
 	std::shared_ptr<VertexBuffer> squareVB;
 	squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 	squareVB->SetLayout({
-		{ ShaderDataType::Float3, "a_Position" }
+		{ ShaderDataType::Float3, "a_Position" },
+		{ ShaderDataType::Float2, "a_TexCoord" }
 		});
 	m_SquareVA->AddVertexBuffer(squareVB);
 
-	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0,  };
 	std::shared_ptr<IndexBuffer> squareIB;
 	squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 	m_SquareVA->SetIndexBuffer(squareIB);
@@ -58,57 +61,20 @@ void ExampleLayer::OnAttach()
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
-			out vec4 v_Color;
 
 			void main()
 			{
 				v_Position = a_Position;
-				v_Color = a_Color;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
 	std::string fragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec3 v_Position;
-			in vec4 v_Color;
-
-			void main()
-			{
-				color = vec4(v_Position * 0.5 + 0.5, 1.0);
-				color = v_Color;
-			}
-		)";
-
-	m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
-
-	std::string blueShaderVertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec3 v_Position;
-
-			void main()
-			{
-				v_Position = a_Position;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-	std::string blueShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
@@ -123,7 +89,20 @@ void ExampleLayer::OnAttach()
 			}
 		)";
 
-	m_BlueShader.reset(Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+	m_FlatColorShader = Shader::Create("FlatColor", vertexSrc, fragmentSrc);
+
+
+
+	m_PlayerTexture = Texture2D::Create("assets/textures/Player.png");
+	m_Texture = Texture2D::Create("assets/textures/Checkerboard.png");
+
+	
+
+	m_TextureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
+
+	m_TextureShader->Bind();
+	m_TextureShader->UploadUniformInt("u_Texture", 0);
+	m_TextureShader->Unbind();
 }
 
 void ExampleLayer::OnDetach()
@@ -135,15 +114,16 @@ void ExampleLayer::OnUpdate(Timestep ts)
 	RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	RenderCommand::Clear();
 
-	m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
-	m_Camera.SetRotation(45.0f);
 
-	Renderer::BeginScene(m_Camera);
+
+	m_CameraController.OnUpdate(ts);
+
+	Renderer::BeginScene(m_CameraController.GetCamera());
 
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-	m_BlueShader->Bind();
-	m_BlueShader->UploadUniformFloat3("u_Color", m_SquareColor);
+	m_FlatColorShader->Bind();
+	m_FlatColorShader->UploadUniformFloat3("u_Color", m_SquareColor);
 
 	for (int y = 0; y < 20; y++)
 	{
@@ -151,9 +131,20 @@ void ExampleLayer::OnUpdate(Timestep ts)
 		{
 			glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 			glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-			Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+			Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 		}
 	}
+
+	m_Texture->Bind();
+	Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+	m_PlayerTexture->Bind();
+	Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+
+
+	
+
+	
 
 	Renderer::EndScene();
 }
@@ -162,6 +153,6 @@ void ExampleLayer::OnUpdate(Timestep ts)
 
 void ExampleLayer::OnEvent(Vertex::Event& e)
 {
-	
+	m_CameraController.OnEvent(e);
 }
   

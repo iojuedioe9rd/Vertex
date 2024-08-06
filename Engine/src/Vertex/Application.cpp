@@ -106,12 +106,16 @@ namespace Vertex
 		
 		VX_PROFILE_FUNCTION();
 		m_LayerStack = new LayerStack();
+		m_CommandBufferPool = new CommandBufferPool();
 		m_ImGuiWindowStack = new ImGuiWindowStack();
 		m_ConsoleWindow = &ConsoleWindow::Get();
 		m_ImGuiWindowStack->PushImGuiWindow(m_ConsoleWindow);
 		m_Window = Ref<Window>(Window::Create());
 		m_Window->SetEventCallback(VX_BIND_EVENT_FN(Vertex::Application::OnEvent));
 		app = this;
+
+		Renderer::Init();
+
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
@@ -145,12 +149,16 @@ namespace Vertex
 		Timestep timestep = time - m_LastFrameTime;
 		m_LastFrameTime = time;
 
-		VX_CORE_INFO("{0}", timestep.GetSeconds());
+		VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		
 
-		for (Layer* layer : *m_LayerStack)
-			layer->OnUpdate(timestep);
+		if (!m_Minimized)
+		{
+			for (Layer* layer : *m_LayerStack)
+				layer->OnUpdate(timestep);
+		}
 
+		
 		m_ImGuiLayer->Begin();
 		for (Layer* layer : *m_LayerStack)
 			layer->OnImGuiRender();
@@ -175,7 +183,17 @@ namespace Vertex
 			VX_CORE_INFO("Window Resized");
 			Update();
 			WindowResizeEvent resizeE = (*(WindowResizeEvent*)(void*)(e));
-			glViewport(0, 0, resizeE.GetWidth(), resizeE.GetHeight());
+
+			if (resizeE.GetWidth() == 0 || resizeE.GetHeight() == 0)
+			{
+				m_Minimized = true;
+			}
+			else
+			{
+				m_Minimized = false;
+				Renderer::OnWindowResize(resizeE.GetWidth(), resizeE.GetHeight());
+			}
+			
 		}
 
 		

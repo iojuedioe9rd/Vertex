@@ -17,7 +17,9 @@ project "Engine"
 		"vendor/glm/glm/**.hpp",
 		"vendor/glm/glm/**.inl",
 		"src/**.c",
-		"src/**.asm"
+		"src/**.asm",
+		"vendor/stb_image/**.h",
+		"vendor/stb_image/**.cpp",
 	}
 	
 	defines
@@ -34,7 +36,8 @@ project "Engine"
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.zlib}",
 		"%{IncludeDir.glm}",
-		"vendor/checksum/src"
+		"vendor/checksum/src",
+		"vendor/stb_image"
 	}
 	
 	links {

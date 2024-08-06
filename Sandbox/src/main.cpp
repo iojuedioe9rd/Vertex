@@ -1,6 +1,7 @@
 #include <Vertex.h>
 #include <Vertex/EntryPoint.h>
-#include "ExampleLayer.h"
+//#include "ExampleLayer.h"
+#include "Sandbox2D.h"
 
 
 class Sandbox : public Vertex::Application
@@ -9,7 +10,7 @@ public:
 	Sandbox()
 	{
 		VX_CORE_TRACE("Hi");
-		PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 	~Sandbox()
 	{

@@ -21,6 +21,11 @@ namespace Vertex
         return ImGui::ColorEdit3(name, value);
     }
 
+    bool ImGuiLink::ColorEdit4(char* name, float* value)
+    {
+        return ImGui::ColorEdit4(name, value);
+    }
+
     void ImGuiLink::Text(const char* fmt)
     {
         ImGui::Text(fmt);

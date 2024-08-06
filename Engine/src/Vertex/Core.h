@@ -6,7 +6,7 @@
 #define BIT(x) (1 << x)
 #define NULL 0
 #ifndef VX_DIST
-
+#define VX_ENABLE_ASSERTS 1
 #endif // !VX_DIST
 
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vertex/PlatformDetection.h"
+#include "Vertex/Core/PlatformDetection.h"
 #include <memory>
 
 #define BIT(x) (1 << x)

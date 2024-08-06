@@ -1,6 +1,6 @@
 #include "vxpch.h"
 #include "Renderer.h"
-#include "Vertex/Application.h"
+#include "Vertex/Core/Application.h"
 #include "Vertex/CommandBuffer/CommandBufferPool.h"
 
 namespace Vertex {

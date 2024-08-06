@@ -1,5 +1,5 @@
 #pragma once
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 #include <string>
 
 #include <glm/glm.hpp>

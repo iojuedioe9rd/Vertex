@@ -2,7 +2,7 @@
 #include "Vertex.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <Vertex/Renderer/Texture.h>
-#include <Vertex/OrthographicCameraController.h>
+#include <Vertex/Core/OrthographicCameraController.h>
 
 
 class ExampleLayer : public Vertex::Layer

@@ -1,9 +1,9 @@
 #include "vxpch.h"
 #include "Application.h"
 #include "Vertex/Events/ApplicationEvent.h"
-#include "Vertex/Logger.h"
-#include "CustomFileFormat/FakeFS.h"
-#include "CustomFileFormat/RIFF.h"
+#include "Vertex/Core/Logger.h"
+#include "Vertex/CustomFileFormat/FakeFS.h"
+#include "Vertex/CustomFileFormat/RIFF.h"
 #include "ErrorBox.h"
 #include <glad/glad.h>
 #include "Vertex/Renderer/Renderer.h"

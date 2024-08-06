@@ -1,6 +1,6 @@
 #pragma once
 #include <Vertex.h>
-#include <Vertex/OrthographicCameraController.h>
+#include <Vertex/Core/OrthographicCameraController.h>
 #include "glm/glm.hpp"
 
 class Sandbox2D : public Vertex::Layer

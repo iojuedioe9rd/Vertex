@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vertex/Logger.h"
+#include "Vertex/Core/Logger.h"
 
 #include <algorithm>
 #include <chrono>

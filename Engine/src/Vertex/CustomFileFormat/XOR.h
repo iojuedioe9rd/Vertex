@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 namespace Vertex
 {
 

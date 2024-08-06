@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Vertex/Core.h"
+#include "Base.h"
 #include <string>
-#include "Events/Event.h"
+#include "Vertex/Events/Event.h"
 #include "Vertex/Core/Timestep.h"
 
 namespace Vertex

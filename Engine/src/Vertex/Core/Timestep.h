@@ -1,5 +1,5 @@
 #pragma once
-#include "Vertex/Core.h"
+#include "Base.h"
 
 #define MillisecondsToSeconds(t) (t / 1000.0f)
 #define SecondsToMilliseconds(t) (t * 1000.0f)

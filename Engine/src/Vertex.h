@@ -2,17 +2,17 @@
 
 #include "Vertex/Debug/Instrumentor.h"
 
-#include "Vertex/Input.h"
-#include "Vertex/KeyCodes.h"
-#include "Vertex/MouseButtonCodes.h"
+#include "Vertex/Core/Input.h"
+#include "Vertex/Core/KeyCodes.h"
+#include "Vertex/Core/MouseButtonCodes.h"
 
 #include "Vertex/ImGui/ImGuiLayer.h"
 #include "Vertex/ImGui/ImGuiLink.h"
 
 
-#include "Vertex/Core.h"
-#include "Vertex/Application.h"
-#include "Vertex/Logger.h"
+#include "Vertex/Core/Base.h"
+#include "Vertex/Core/Application.h"
+#include "Vertex/Core/Logger.h"
 
 // ---Renderer------------------------
 #include "Vertex/Renderer/Renderer.h"

@@ -1,8 +1,8 @@
 #include "vxpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Vertex/Input.h"
-#include "Vertex/KeyCodes.h"
+#include "Vertex/Core/Input.h"
+#include "Vertex/Core/KeyCodes.h"
 
 namespace Vertex {
 

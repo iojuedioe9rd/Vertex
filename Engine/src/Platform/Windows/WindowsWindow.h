@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vertex/Window.h"
+#include "Vertex/Core/Window.h"
 #include "Vertex/Debug/Instrumentor.h"
 #include <GLFW/glfw3.h>
 #include <Vertex/Renderer/GraphicsContext.h>

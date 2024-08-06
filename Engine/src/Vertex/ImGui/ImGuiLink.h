@@ -48,7 +48,7 @@ namespace Vertex
 		static void End();
 		static bool ColorEdit3(char* name, float* value);
         static bool ColorEdit4(char* name, float* value);
-        static void Text(const char* fmt);
+        static void Text(const char* fmt, ...);
         static bool BeginMenuBar();
         static bool BeginMenu(char* name, bool e = true);
         static bool MenuItem(const char* label, const char* shortcut = (const char*)0, bool selected = false, bool enabled = true);

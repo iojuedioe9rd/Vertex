@@ -9,7 +9,7 @@
 
 namespace Vertex {
 
-	static bool s_GLFWInitialized = false;
+	static uint8_t s_GLFWWindowCount = 0;
 
 	Window* Window::Create(const WindowProps& props)
 	{
@@ -38,16 +38,17 @@ namespace Vertex {
 
 		VX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized)
+		if (s_GLFWWindowCount == 0)
 		{
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			VX_CORE_ASSERT(success, "Could not intialize GLFW!");
 
-			s_GLFWInitialized = true;
+			
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		s_GLFWWindowCount++;
 		glfwMakeContextCurrent(m_Window);
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
@@ -150,7 +151,14 @@ namespace Vertex {
 	void WindowsWindow::Shutdown()
 	{
 		VX_PROFILE_FUNCTION();
-		glfwDestroyWindow(m_Window);
+		s_GLFWWindowCount--;
+		if (--s_GLFWWindowCount <= 0)
+		{
+			s_GLFWWindowCount = 0;
+			VX_CORE_INFO("Terminating GLFW");
+			glfwTerminate();
+		}
+		
 	}
 
 	void WindowsWindow::OnUpdate()

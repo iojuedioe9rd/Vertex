@@ -152,9 +152,13 @@ namespace Vertex
 		VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		
 
-		for (Layer* layer : *m_LayerStack)
-			layer->OnUpdate(timestep);
+		if (!m_Minimized)
+		{
+			for (Layer* layer : *m_LayerStack)
+				layer->OnUpdate(timestep);
+		}
 
+		
 		m_ImGuiLayer->Begin();
 		for (Layer* layer : *m_LayerStack)
 			layer->OnImGuiRender();
@@ -179,7 +183,17 @@ namespace Vertex
 			VX_CORE_INFO("Window Resized");
 			Update();
 			WindowResizeEvent resizeE = (*(WindowResizeEvent*)(void*)(e));
-			glViewport(0, 0, resizeE.GetWidth(), resizeE.GetHeight());
+
+			if (resizeE.GetWidth() == 0 || resizeE.GetHeight() == 0)
+			{
+				m_Minimized = true;
+			}
+			else
+			{
+				m_Minimized = false;
+				Renderer::OnWindowResize(resizeE.GetWidth(), resizeE.GetHeight());
+			}
+			
 		}
 
 		

@@ -40,6 +40,7 @@ namespace Vertex
 		ImGuiWindows::ConsoleWindow* m_ConsoleWindow;
 		static Application* app;
 		Ref<Window> m_Window;
+		bool m_Minimized = false;
 		bool m_Running = true;
 		void Update();
 		CommandBufferPool* m_CommandBufferPool;

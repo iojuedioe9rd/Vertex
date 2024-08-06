@@ -21,7 +21,8 @@ public:
 	{
 		ImGuiLink::Begin("Settings");
 		ImGuiLink::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
-
+		glm::vec3 camPos = m_CameraController.GetCamera().GetPosition();
+		ImGuiLink::ColorEdit3("Cam Pos", glm::value_ptr(camPos));
 		
 		ImGuiLink::End();
 	}

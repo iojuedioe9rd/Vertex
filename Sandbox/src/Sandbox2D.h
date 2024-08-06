@@ -2,6 +2,7 @@
 #include <Vertex.h>
 #include <Vertex/Core/OrthographicCameraController.h>
 #include "glm/glm.hpp"
+#include "Vertex/Renderer/Texture.h"
 
 class Sandbox2D : public Vertex::Layer
 {
@@ -21,6 +22,8 @@ private:
 	// Temp
 	Vertex::Ref<Vertex::VertexArray> m_SquareVA;
 	Vertex::Ref<Vertex::Shader> m_FlatColorShader;
+
+	Vertex::Ref<Vertex::Texture2D> m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };

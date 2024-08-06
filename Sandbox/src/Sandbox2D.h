@@ -16,6 +16,8 @@ public:
 	void OnUpdate(Vertex::Timestep ts) override;
 	virtual void OnImGuiRender() override;
 	void OnEvent(Vertex::Event& e) override;
+
+	void DockingCallback();
 private:
 	Vertex::OrthographicCameraController m_CameraController;
 

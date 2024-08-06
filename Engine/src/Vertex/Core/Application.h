@@ -33,6 +33,7 @@ namespace Vertex
 		
 		void ReownCommandBuffer(CommandBuffer* commandBuffer) { m_CommandBufferPool->reown(commandBuffer); }
 		
+		void Close();
 
 		void OnEvent(Event* e);
 	private:

@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
 using namespace Vertex;
 
 
@@ -58,13 +59,53 @@ void Sandbox2D::OnUpdate(Timestep ts)
 
 void Sandbox2D::OnImGuiRender()
 {
+	// Note: Switch this to true to enable dockspace
+	static bool dockingEnabled = 0;
+	ImGuiLink::Docking(dockingEnabled, [this]() { this->DockingCallback(); });
+
+	if (dockingEnabled == 0)
+	{
+		ImGuiLink::Begin("Settings");
+
+		auto stats = Renderer2D::GetStats();
+		ImGuiLink::Text("Renderer2D Stats:");
+		ImGuiLink::Text("Draw Calls: %d", stats.DrawCalls);
+		ImGuiLink::Text("Quads: %d", stats.QuadCount);
+		ImGuiLink::Text("Vertices: %d", stats.GetTotalVertexCount());
+		ImGuiLink::Text("Indices: %d", stats.GetTotalIndexCount());
+
+		ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
+		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+		ImGuiLink::Image((void*)textureID, glm::vec2{ 256.0f, 256.0f });
+		ImGuiLink::End();
+	}
+}
+
+void Sandbox2D::OnEvent(Event& e)
+{
+	m_CameraController.OnEvent(e);
+}
+
+void Sandbox2D::DockingCallback()
+{
+	if (ImGuiLink::BeginMenuBar())
+	{
+		if (ImGuiLink::BeginMenu("File"))
+		{
+			// Disabling fullscreen would allow the window to be moved to the front of other windows, 
+			// which we can't undo at the moment without finer window depth/z control.
+			//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+			if (ImGuiLink::MenuItem("Exit")) Application::Get().Close();
+			ImGuiLink::EndMenu();
+		}
+
+		ImGuiLink::EndMenuBar();
+	}
+
 	ImGuiLink::Begin("Settings");
-	
 
-	ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
-	ImGuiLink::End();
-
-	ImGuiLink::Begin("Stats");
 	auto stats = Renderer2D::GetStats();
 	ImGuiLink::Text("Renderer2D Stats:");
 	ImGuiLink::Text("Draw Calls: %d", stats.DrawCalls);
@@ -72,11 +113,11 @@ void Sandbox2D::OnImGuiRender()
 	ImGuiLink::Text("Vertices: %d", stats.GetTotalVertexCount());
 	ImGuiLink::Text("Indices: %d", stats.GetTotalIndexCount());
 
+	ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
+	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+	ImGuiLink::Image((void*)textureID, glm::vec2{ 256.0f, 256.0f });
 	ImGuiLink::End();
-}
 
-void Sandbox2D::OnEvent(Event& e)
-{
-	m_CameraController.OnEvent(e);
+	
 }

@@ -169,6 +169,11 @@ namespace Vertex
 		m_Window->OnUpdate();
 	}
 
+	void Application::Close()
+	{
+		m_Running = 0;
+	}
+
 	void Application::OnEvent(Event* e)
 	{
 		VX_PROFILE_FUNCTION();

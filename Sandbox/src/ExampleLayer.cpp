@@ -3,7 +3,7 @@
 #include <Platform/OpenGL/OpenGLShader.h>
 
 ExampleLayer::ExampleLayer()
-	: m_CameraController(1280.0f / 720.0f)
+	: m_CameraController(1280.0f / 720.0f, true)
 {
 	
 }

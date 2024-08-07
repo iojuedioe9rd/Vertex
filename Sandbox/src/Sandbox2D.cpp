@@ -18,6 +18,11 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+
+	FramebufferSpecification fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_Framebuffer = Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetach()
@@ -34,7 +39,7 @@ void Sandbox2D::OnUpdate(Timestep ts)
 	m_CameraController.OnUpdate(ts);
 
 	// Render
-
+	m_Framebuffer->Bind();
 	Renderer2D::ResetStats();
 	RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	RenderCommand::Clear();
@@ -55,12 +60,13 @@ void Sandbox2D::OnUpdate(Timestep ts)
 		}
 	}
 	Renderer2D::EndScene();
+	m_Framebuffer->Unbind();
 }
 
 void Sandbox2D::OnImGuiRender()
 {
 	// Note: Switch this to true to enable dockspace
-	static bool dockingEnabled = 0;
+	static bool dockingEnabled = 1;
 	ImGuiLink::Docking(dockingEnabled, [this]() { this->DockingCallback(); });
 
 	if (dockingEnabled == 0)
@@ -76,8 +82,8 @@ void Sandbox2D::OnImGuiRender()
 
 		ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGuiLink::Image((void*)textureID, glm::vec2{ 256.0f, 256.0f });
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		ImGuiLink::Image((void*)textureID, glm::vec2{ 1280, 720 });
 		ImGuiLink::End();
 	}
 }
@@ -115,8 +121,8 @@ void Sandbox2D::DockingCallback()
 
 	ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-	ImGuiLink::Image((void*)textureID, glm::vec2{ 256.0f, 256.0f });
+	uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+	ImGuiLink::Image((void*)textureID, glm::vec2{ 1280, 720 });
 	ImGuiLink::End();
 
 	

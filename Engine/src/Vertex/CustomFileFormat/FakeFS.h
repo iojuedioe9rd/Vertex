@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <cstring>
 #include <stdexcept>
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 
 namespace Vertex
 {

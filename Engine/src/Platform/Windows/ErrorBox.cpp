@@ -1,5 +1,5 @@
 #include "vxpch.h"
-#include "Vertex/ErrorBox.h"
+#include "Vertex/Core/ErrorBox.h"
 
 VERTEX_API void ErrorBox(std::string message)
 {

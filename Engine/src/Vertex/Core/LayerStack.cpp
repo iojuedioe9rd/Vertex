@@ -1,5 +1,5 @@
 #include "vxpch.h"
-#include "Vertex/LayerStack.h"
+#include "LayerStack.h"
 
 namespace Vertex 
 {

@@ -1,7 +1,7 @@
 #include "vxpch.h"
 #include "WindowsInput.h"
 
-#include "Vertex/Application.h"
+#include "Vertex/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Vertex {

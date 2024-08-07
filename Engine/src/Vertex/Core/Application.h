@@ -1,15 +1,15 @@
 #pragma once
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 #include "Window.h"
 #include "LayerStack.h"
-#include "ImGui/ImGuiLayer.h"
-#include "ImGui/ImGuiWindowStack.h"
-#include "ImGui/ImGuiWindows/ConsoleWindow.h"
-#include "CommandBuffer/CommandBufferPool.h"
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-#include "Renderer/OrthographicCamera.h"
+#include "Vertex/ImGui/ImGuiLayer.h"
+#include "Vertex/ImGui/ImGuiWindowStack.h"
+#include "Vertex/ImGui/ImGuiWindows/ConsoleWindow.h"
+#include "Vertex/CommandBuffer/CommandBufferPool.h"
+#include "Vertex/Renderer/Shader.h"
+#include "Vertex/Renderer/Buffer.h"
+#include "Vertex/Renderer/VertexArray.h"
+#include "Vertex/Renderer/OrthographicCamera.h"
 
 namespace Vertex
 {
@@ -33,6 +33,7 @@ namespace Vertex
 		
 		void ReownCommandBuffer(CommandBuffer* commandBuffer) { m_CommandBufferPool->reown(commandBuffer); }
 		
+		void Close();
 
 		void OnEvent(Event* e);
 	private:

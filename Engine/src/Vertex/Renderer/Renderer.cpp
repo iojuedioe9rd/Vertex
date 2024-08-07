@@ -1,7 +1,8 @@
 #include "vxpch.h"
 #include "Renderer.h"
-#include "Vertex/Application.h"
+#include "Vertex/Core/Application.h"
 #include "Vertex/CommandBuffer/CommandBufferPool.h"
+#include "Renderer2D.h"
 
 namespace Vertex {
 
@@ -11,6 +12,7 @@ namespace Vertex {
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)

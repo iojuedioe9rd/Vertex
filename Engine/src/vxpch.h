@@ -1,7 +1,7 @@
 #pragma once
-#include "Vertex/PlatformDetection.h"
-#include "Vertex/Core.h"
-#include "Vertex/Logger.h"
+#include "Vertex/Core/PlatformDetection.h"
+#include "Vertex/Core/Base.h"
+#include "Vertex/Core/Logger.h"
 #include "Vertex/Debug/Instrumentor.h"
 #include "Vertex/CommandBuffer/CommandBuffer.h"
 

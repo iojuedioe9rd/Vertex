@@ -1,5 +1,5 @@
 #pragma once
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 #include "Vertex/ImGui/BaseImGuiWindow.h"
 using namespace Vertex;
 namespace Vertex::ImGuiWindows

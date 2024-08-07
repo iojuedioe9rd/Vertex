@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <string>
 #include "FakeFS.h"
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 namespace Vertex
 {
     struct RIFFHeader {

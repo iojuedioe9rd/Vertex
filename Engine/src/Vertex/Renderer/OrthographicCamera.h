@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
 
 namespace Vertex {
 

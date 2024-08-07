@@ -1,5 +1,6 @@
 #pragma once
-#include "Vertex/Core.h"
+#include "Vertex/Core/Base.h"
+#include <glm/glm.hpp>
 
 namespace Vertex
 {
@@ -47,12 +48,15 @@ namespace Vertex
 		static bool Begin(char* name, bool* p_open = (bool*)(NULL), ImGuiWindowFlags flags = ImGuiWindowFlags::ImGuiWindowFlags_None);
 		static void End();
 		static bool ColorEdit3(char* name, float* value);
-        static void Text(const char* fmt);
+        static bool ColorEdit4(char* name, float* value);
+        static void Text(const char* fmt, ...);
         static bool BeginMenuBar();
         static bool BeginMenu(char* name, bool e = true);
         static bool MenuItem(const char* label, const char* shortcut = (const char*)0, bool selected = false, bool enabled = true);
         static void EndMenu();
         static void EndMenuBar();
+        static void Docking(bool dockingEnabled = true, std::function<void()> callback = NULL);
+        static void Image(void* imageID, glm::vec2 size);
 	};
 
 }

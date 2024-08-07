@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vertex/Input.h"
+#include "Vertex/Core/Input.h"
 
 namespace Vertex {
 

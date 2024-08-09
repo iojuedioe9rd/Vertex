@@ -20,6 +20,8 @@ project "Engine"
 		"src/**.asm",
 		"vendor/stb_image/**.h",
 		"vendor/stb_image/**.cpp",
+		"vendor/miniaudio/**.h",
+		"vendor/miniaudio/**.cpp",
 	}
 	
 	defines
@@ -37,7 +39,9 @@ project "Engine"
 		"%{IncludeDir.zlib}",
 		"%{IncludeDir.glm}",
 		"vendor/checksum/src",
-		"vendor/stb_image"
+		"vendor/stb_image",
+		"vendor/miniaudio"
+		
 	}
 	
 	links {
@@ -47,6 +51,7 @@ project "Engine"
 		"imgui",
 		"zlib",
 		"Checksum"
+		
 	}
 	
 	filter "system:windows"
@@ -65,7 +70,7 @@ project "Engine"
 
 		links
 		{
-			
+			"winmm"
 		}
 		
 	filter "configurations:Debug"

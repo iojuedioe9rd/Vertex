@@ -4,6 +4,7 @@
 #include "glm/glm.hpp"
 #include "Vertex/Renderer/Texture.h"
 #include <Vertex/Renderer/Framebuffer.h>
+#include "Vertex/Audio/Audio.h"
 
 class Sandbox2D : public Vertex::Layer
 {
@@ -21,6 +22,8 @@ public:
 	void DockingCallback();
 private:
 	Vertex::OrthographicCameraController m_CameraController;
+
+	Audio* audio;
 
 	// Temp
 	Vertex::Ref<Vertex::VertexArray> m_SquareVA;

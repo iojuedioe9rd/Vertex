@@ -2,12 +2,11 @@
 #include "Application.h"
 #include "Vertex/Events/ApplicationEvent.h"
 #include "Vertex/Core/Logger.h"
-#include "Vertex/CustomFileFormat/FakeFS.h"
-#include "Vertex/CustomFileFormat/RIFF.h"
 #include "ErrorBox.h"
 #include <glad/glad.h>
 #include "Vertex/Renderer/Renderer.h"
 #include <GLFW/glfw3.h>
+#include "Vertex/CustomFileFormat/FakeFS.h"
 
 static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 {
@@ -44,65 +43,8 @@ namespace Vertex
 	Application::Application()
 		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
-		/*
-		{
-			FakeFS fakefs;
-			fakefs.addFile("path/to/texture.png", File("DATA", "This is the content of texture.png."));
-			fakefs.addFile("path/to/model.obj", File("DATA", "This is the content of model.obj."));
-			fakefs.addFile("path/to/script.lua", File("DATA", "This is the content of script.lua."));
-			
-			FakeFS fakefs2;
-			fakefs2.addFile("path/to/texture1.png", File("DATA", "This is the content of texture1.png."));
-			fakefs2.addFile("path/to/model1.obj", File("DATA", "This is the content of model1.obj."));
-			fakefs2.addFile("path/to/script1.lua", File("DATA", "This is the content of script1.lua.", "This is data"));
-
-			fakefs.addFS(fakefs2);
-
-			// Define the encryption key
-			std::string encryptionKey = "my_secret_key";
-
-			// Write the custom RIFF file with encryption
-			writeRIFFFile("vertex_assets.vertex", fakefs, encryptionKey);
-
-			// Create a new fake file system to read into
-			FakeFS readFakefs;
-
-			// Read the custom RIFF file with decryption
-			try {
-				readRIFFFile("vertex_assets.riff", readFakefs, encryptionKey);
-			}
-			catch (const std::runtime_error& e) {
-				std::cerr << e.what() << std::endl;
-				
-			}
-
-			// Read and print the content of the files
-			try {
-				std::string content1 = readFile(readFakefs, "path/to/texture.png");
-				std::cout << "Content of texture.png: " << content1 << std::endl;
-
-				std::string content2 = readFile(readFakefs, "path/to/model.obj");
-				std::cout << "Content of model.obj: " << content2 << std::endl;
-
-				std::string content3 = readFile(readFakefs, "path/to/script.lua");
-				std::cout << "Content of script.lua: " << content3 << std::endl;
-
-				std::string content4 = readFile(readFakefs, "path/to/texture1.png");
-				std::cout << "Content of texture1.png: " << content1 << std::endl;
-
-				std::string content5 = readFile(readFakefs, "path/to/model1.obj");
-				std::cout << "Content of model1.obj: " << content2 << std::endl;
-
-				std::string content6 = readFile(readFakefs, "path/to/script1.lua");
-				std::cout << "Content of script1.lua: " << content3 << std::endl;
-
-				
-			}
-			catch (const std::runtime_error& e) {
-				std::cerr << e.what() << std::endl;
-			}
-
-		}*/
+		
+		
 		
 		VX_PROFILE_FUNCTION();
 		m_LayerStack = new LayerStack();
@@ -120,6 +62,7 @@ namespace Vertex
 		PushOverlay(m_ImGuiLayer);
 
 		
+
 
 		
 	}

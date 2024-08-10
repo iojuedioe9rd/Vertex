@@ -3714,6 +3714,8 @@ See below for some tips on improving performance.
 #ifndef miniaudio_h
 #define miniaudio_h
 
+#include <Vertex/Core/Base.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -3978,7 +3980,7 @@ typedef ma_uint16 wchar_t;
             #define MA_API  MA_DLL_IMPORT
         #endif
     #else
-        #define MA_API extern
+        #define MA_API extern VERTEX_API
     #endif
 #endif
 

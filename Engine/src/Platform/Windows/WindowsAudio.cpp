@@ -18,7 +18,7 @@ namespace Vertex {
 
 
 
-	WindowsAudio::WindowsAudio(const std::string& filepath, bool loop)
+	WindowsAudio::WindowsAudio(const char* filepath, bool loop)
 		: m_filepath(filepath), m_loop(loop)
 	{
 		
@@ -37,7 +37,7 @@ namespace Vertex {
 		{
 			ma_result result;
 
-			result = ma_sound_init_from_file(&engine, m_filepath.c_str(), 0, NULL, NULL, &m_sound);
+			result = ma_sound_init_from_file(&engine, m_filepath, 0, NULL, NULL, &m_sound);
 
 			if (result != MA_SUCCESS) {
 				VX_CORE_ASSERT(0, "AUDIO ERORR!");
@@ -55,7 +55,7 @@ namespace Vertex {
 	void WindowsAudio::Play()
 	{
 		
-		VX_CORE_INFO("playing");
+		VX_CORE_INFO("Playing Audio: {0}", m_filepath);
 
 		
 

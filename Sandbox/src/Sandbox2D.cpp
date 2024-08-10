@@ -8,9 +8,11 @@
 
 #include <Vertex/Audio/AudioManager.h>
 
+#include <Vertex/CustomFileFormat/FakeFS.h>
+
 
 using namespace Vertex;
-std::string name = "idk.wav";
+
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f)
@@ -20,7 +22,8 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
-	audio = AudioManager::GetAudioFromFileName(name, true);
+	audio = AudioManager::GetAudioFromFileName("assets/music/idk.wav", true);
+	audio->Play();
 
 	FramebufferSpecification fbSpec;
 	fbSpec.Width = 1280;
@@ -39,17 +42,14 @@ float t = 0.1f;
 
 void Sandbox2D::OnUpdate(Timestep ts)
 {
-	VX_CORE_INFO("{0}", name);
+	
 
 	static float rotation = 0.0f;
 	rotation += ts * 50.0f;
 
-	if (t <= 0)
-	{
-		audio->Play();
-		t = 5;
-	}
-	t -= ts;
+	
+	
+		
 
 	// Update
 	m_CameraController.OnUpdate(ts);

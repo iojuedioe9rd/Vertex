@@ -35,4 +35,5 @@ group ""
 
 group "Misc"
 	include "Sandbox"
+	include "Engine/vendor/VertCLI"
 group ""

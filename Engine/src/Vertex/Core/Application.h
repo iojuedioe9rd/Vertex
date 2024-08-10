@@ -17,7 +17,7 @@ namespace Vertex
 	class VERTEX_API Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Vertex App");
 		virtual ~Application();
 
 		void PushLayer(Layer* layer);

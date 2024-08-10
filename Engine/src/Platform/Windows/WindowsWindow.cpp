@@ -36,7 +36,7 @@ namespace Vertex {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		VX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		VX_CORE_INFO("Creating window: {0} ({1}, {2}, {3})", props.Title, props.Width, props.Height, (float)props.Width / (float)props.Height);
 
 		if (s_GLFWWindowCount == 0)
 		{

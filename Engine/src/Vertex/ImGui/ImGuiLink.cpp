@@ -111,10 +111,15 @@ namespace Vertex
         }
     }
 
-    void ImGuiLink::Image(void* imageID, glm::vec2 size)
+    ImVec2 Vec2ToImVec2(glm::vec2 v)
     {
-        ImVec2 ve(size.x, size.y);
-        ImGui::Image((void*)imageID, ve);
+        return ImVec2{ v.x, v.y };
+    }
+
+    void ImGuiLink::Image(void* imageID, glm::vec2 size, glm::vec2 uv0, glm::vec2 uv1)
+    {
+        
+        ImGui::Image((void*)imageID, Vec2ToImVec2(size), Vec2ToImVec2(uv0), Vec2ToImVec2(uv1));
     }
 
     

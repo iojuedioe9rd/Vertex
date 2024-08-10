@@ -31,6 +31,7 @@ group ""
 
 group "Core"
 	include "Engine"
+	include "Vertex-Editor"
 group ""
 
 group "Misc"

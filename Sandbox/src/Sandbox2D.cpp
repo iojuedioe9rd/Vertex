@@ -22,13 +22,13 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
-	audio = AudioManager::GetAudioFromFileName("assets/music/idk.wav", true);
-	audio->Play();
+	//audio = AudioManager::GetAudioFromFileName("assets/music/idk.wav", true);
+	//audio->Play();
 
-	FramebufferSpecification fbSpec;
-	fbSpec.Width = 1280;
-	fbSpec.Height = 720;
-	m_Framebuffer = Framebuffer::Create(fbSpec);
+	//FramebufferSpecification fbSpec;
+	//fbSpec.Width = 1280;
+	//fbSpec.Height = 720;
+	//m_Framebuffer = Framebuffer::Create(fbSpec);
 
 	
 }
@@ -55,9 +55,9 @@ void Sandbox2D::OnUpdate(Timestep ts)
 	m_CameraController.OnUpdate(ts);
 
 	// Render
-	m_Framebuffer->Bind();
+	
 	Renderer2D::ResetStats();
-	RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+	RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 0 });
 	RenderCommand::Clear();
 
 	Renderer2D::BeginScene(m_CameraController.GetCamera());
@@ -76,55 +76,13 @@ void Sandbox2D::OnUpdate(Timestep ts)
 		}
 	}
 	Renderer2D::EndScene();
-	m_Framebuffer->Unbind();
+	
 }
 
 void Sandbox2D::OnImGuiRender()
 {
-	// Note: Switch this to true to enable dockspace
-	static bool dockingEnabled = 1;
-	ImGuiLink::Docking(dockingEnabled, [this]() { this->DockingCallback(); });
 
-	if (dockingEnabled == 0)
-	{
-		ImGuiLink::Begin("Settings");
 
-		auto stats = Renderer2D::GetStats();
-		ImGuiLink::Text("Renderer2D Stats:");
-		ImGuiLink::Text("Draw Calls: %d", stats.DrawCalls);
-		ImGuiLink::Text("Quads: %d", stats.QuadCount);
-		ImGuiLink::Text("Vertices: %d", stats.GetTotalVertexCount());
-		ImGuiLink::Text("Indices: %d", stats.GetTotalIndexCount());
-
-		ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
-
-		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
-		ImGuiLink::Image((void*)textureID, glm::vec2{ 1280, 720 });
-		ImGuiLink::End();
-	}
-}
-
-void Sandbox2D::OnEvent(Event& e)
-{
-	m_CameraController.OnEvent(e);
-}
-
-void Sandbox2D::DockingCallback()
-{
-	if (ImGuiLink::BeginMenuBar())
-	{
-		if (ImGuiLink::BeginMenu("File"))
-		{
-			// Disabling fullscreen would allow the window to be moved to the front of other windows, 
-			// which we can't undo at the moment without finer window depth/z control.
-			//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
-
-			if (ImGuiLink::MenuItem("Exit")) Application::Get().Close();
-			ImGuiLink::EndMenu();
-		}
-
-		ImGuiLink::EndMenuBar();
-	}
 
 	ImGuiLink::Begin("Settings");
 
@@ -137,9 +95,14 @@ void Sandbox2D::DockingCallback()
 
 	ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-	uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
-	ImGuiLink::Image((void*)textureID, glm::vec2{ 1280, 720 });
+	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+	ImGuiLink::Image((void*)textureID, glm::vec2{ 100, 100 });
 	ImGuiLink::End();
 
-	
 }
+
+void Sandbox2D::OnEvent(Event& e)
+{
+	m_CameraController.OnEvent(e);
+}
+

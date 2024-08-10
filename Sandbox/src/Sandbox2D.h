@@ -19,11 +19,11 @@ public:
 	virtual void OnImGuiRender() override;
 	void OnEvent(Vertex::Event& e) override;
 
-	void DockingCallback();
+	
 private:
 	Vertex::OrthographicCameraController m_CameraController;
 
-	Audio* audio;
+	//Audio* audio;
 
 	// Temp
 	Vertex::Ref<Vertex::VertexArray> m_SquareVA;
@@ -33,5 +33,5 @@ private:
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
-	Framebuffer* m_Framebuffer;
+	//Framebuffer* m_Framebuffer;
 };

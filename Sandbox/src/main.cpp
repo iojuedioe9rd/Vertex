@@ -8,6 +8,7 @@ class Sandbox : public Vertex::Application
 {
 public:
 	Sandbox()
+		: Application("Sandbox")
 	{
 		VX_CORE_TRACE("Hi");
 		PushLayer(new Sandbox2D());

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Vertex/Core/Base.h"
 
 namespace Vertex {

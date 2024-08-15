@@ -11,6 +11,8 @@
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <execution> // For parallel execution policies
+
 
 #include <string>
 #include <sstream>

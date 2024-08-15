@@ -28,6 +28,7 @@ namespace Vertex
 
 		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 		static Application& Get() { return *app; }
+		static glm::vec2 GetWindowSize() { return glm::vec2(app->m_Window->GetWidth(), app->m_Window->GetHeight()); }
 
 		CommandBuffer* GetCommandBuffer() { return m_CommandBufferPool->get(); }
 		

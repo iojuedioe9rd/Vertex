@@ -78,9 +78,9 @@ namespace Vertex {
 		// Note: Switch this to true to enable dockspace
 		static bool dockingEnabled = true;
 
-		
+		ImGuiLink::Docking()
 
-		if (!dockingEnabled)
+		if (dockingEnabled = 0)
 		{
 			
 			ImGuiLink::Begin("Settings");

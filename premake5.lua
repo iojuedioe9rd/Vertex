@@ -2,7 +2,7 @@ include "Dependencies.lua"
 
 workspace "Vertex"
 	architecture "x86_64"
-	startproject "Sandbox"
+	startproject "Vertex-Editor"
 
 	configurations
 	{

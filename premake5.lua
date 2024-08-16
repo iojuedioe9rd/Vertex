@@ -2,7 +2,7 @@ include "Dependencies.lua"
 
 workspace "Vertex"
 	architecture "x86_64"
-	startproject "Vertex-Editor"
+	startproject "Game"
 
 	configurations
 	{
@@ -31,7 +31,7 @@ group ""
 
 group "Core"
 	include "Engine"
-	include "Vertex-Editor"
+	include "Game"
 group ""
 
 group "Misc"

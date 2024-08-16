@@ -5,11 +5,22 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Vertex/Core/Input.h"
+#include "Entity.h"
+#include "Player.h"
+#include "GridManager.h"
+
+GridManager* gridManager;
 
 namespace Vertex {
+
+	std::vector<Entity*> Entitys;
+
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f), m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f })
 	{
+		Entitys = std::vector<Entity*>();
+
+		gridManager = new GridManager();
 	}
 
 	void EditorLayer::OnAttach()
@@ -24,6 +35,12 @@ namespace Vertex {
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_CameraController.GetCamera().SetWindowSize(1280, 720);
+
+		Player* player = new Player();
+
+		
+
+		Entitys.push_back(player);
 	}
 
 	void EditorLayer::OnDetach()
@@ -33,10 +50,15 @@ namespace Vertex {
 
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
-
+		
 		
 
 		VX_PROFILE_FUNCTION();
+
+		for (Entity* e : Entitys)
+		{
+			e->update(ts);
+		}
 
 		// Update
 		m_CameraController.OnUpdate(ts);
@@ -66,7 +88,10 @@ namespace Vertex {
 			Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
 			Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_CheckerboardTexture, 20.0f);
 
-			
+			for (Entity* e : Entitys)
+			{
+				e->draw(ts);
+			}
 
 			
 
@@ -91,11 +116,11 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Note: Switch this to true to enable dockspace
-		static bool dockingEnabled = true;
+		static bool dockingEnabled = 0;
 
 		ImGuiLink::Docking(0, [this] { DockSpaceCallback(); });
 
-		if (dockingEnabled = 0)
+		if (dockingEnabled == 0)
 		{
 			
 			ImGuiLink::Begin("Settings");
@@ -112,6 +137,9 @@ namespace Vertex {
 			uint32_t textureID = m_CheckerboardTexture->GetRendererID();
 			ImGuiLink::Image((void*)textureID, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
 			
+			
+
+			ImGuiLink::End();
 		}
 		
 	}

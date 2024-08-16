@@ -12,6 +12,7 @@ namespace Vertex {
 			: Application("Game")
 		{
 			PushLayer(new EditorLayer());
+			
 		}
 
 		~GameApp()

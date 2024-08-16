@@ -122,6 +122,18 @@ namespace Vertex
         ImGui::Image((void*)imageID, Vec2ToImVec2(size), Vec2ToImVec2(uv0), Vec2ToImVec2(uv1));
     }
 
+    bool ImGuiLink::ImageButtonWithText(void* texture, const std::string& text, float x, float y, float w, float h)
+    {
+        ImGui::SetCursorPos({ x, y });
+        bool clicked = ImGui::ImageButton(("Button_" + text).c_str(), texture, { w, h });
+        ImVec2 text_size = ImGui::CalcTextSize(text.c_str());
+        ImGui::GetForegroundDrawList()->AddText(
+            { x + (w - text_size.x) * 0.5f, y + (h - text_size.y) * 0.5f },
+            ImGui::GetColorU32(ImGuiCol_Text),
+            text.c_str());
+        return clicked;
+    }
+
     
 
 }

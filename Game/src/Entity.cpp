@@ -2,7 +2,7 @@
 
 namespace Vertex {
 
-	Entity::Entity(glm::vec2 pos, Texture* tex)
+	Entity::Entity(glm::vec2 pos, Ref<Texture2D> tex)
 	{
 		m_pos = pos;
 		m_tex = tex;

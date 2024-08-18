@@ -15,6 +15,10 @@ out vec4 v_Color;
 out vec2 v_TexCoord;
 out float v_TexIndex;
 out float v_TilingFactor;
+out vec4 v_worldPosition;
+
+// We define clip planes; the value will be negative if outside.
+out float gl_ClipDistance[1];
 
 void main()
 {
@@ -22,7 +26,13 @@ void main()
 	v_TexCoord = a_TexCoord;
 	v_TexIndex = a_TexIndex;
 	v_TilingFactor = a_TilingFactor;
-	gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+	vec4 worldPosition =  u_ViewProjection * vec4(a_Position, 1.0);
+	gl_Position = worldPosition;
+
+	// Define a clipping plane; here it's simply the y > 1 plane
+   
+
+	v_worldPosition = worldPosition;
 }
 
 #type fragment
@@ -34,10 +44,13 @@ in vec4 v_Color;
 in vec2 v_TexCoord;
 in float v_TexIndex;
 in float v_TilingFactor;
+in vec4 v_Position; // The position in clip space passed from the vertex shader
 
-uniform sampler2D u_Textures[32];
+uniform sampler2D u_Textures[128];
 
 void main()
 {
-	color = texture(u_Textures[int(v_TexIndex)], v_TexCoord * v_TilingFactor) * v_Color;
+
+	color = (texture(u_Textures[int(v_TexIndex)], v_TexCoord * v_TilingFactor) * v_Color);
+	
 }

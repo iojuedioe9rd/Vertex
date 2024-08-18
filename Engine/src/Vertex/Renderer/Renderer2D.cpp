@@ -214,6 +214,9 @@ namespace Vertex {
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			FlushAndReset();
 
+		if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)
+			FlushAndReset();
+
 		glm::vec4 color = tintColor;
 
 		float textureIndex = 0.0f;
@@ -329,6 +332,7 @@ namespace Vertex {
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			FlushAndReset();
 
+		
 		glm::vec4 color = tintColor;
 
 		float textureIndex = 0.0f;

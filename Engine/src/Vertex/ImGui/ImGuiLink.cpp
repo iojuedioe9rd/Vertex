@@ -116,22 +116,63 @@ namespace Vertex
         return ImVec2{ v.x, v.y };
     }
 
+    glm::vec2 ImVec2ToVec2(ImVec2 v)
+    {
+        return glm::vec2{ v.x, v.y };
+    }
+
     void ImGuiLink::Image(void* imageID, glm::vec2 size, glm::vec2 uv0, glm::vec2 uv1)
     {
         
         ImGui::Image((void*)imageID, Vec2ToImVec2(size), Vec2ToImVec2(uv0), Vec2ToImVec2(uv1));
     }
 
-    bool ImGuiLink::ImageButtonWithText(void* texture, const std::string& text, float x, float y, float w, float h)
+    bool ImGuiLink::ImageButtonWithText(void* texture, const std::string& text, glm::vec2 size, int num, glm::vec2 padding, glm::vec2 uv0, glm::vec2 uv1)
     {
-        ImGui::SetCursorPos({ x, y });
-        bool clicked = ImGui::ImageButton(("Button_" + text).c_str(), texture, { w, h });
-        ImVec2 text_size = ImGui::CalcTextSize(text.c_str());
-        ImGui::GetForegroundDrawList()->AddText(
-            { x + (w - text_size.x) * 0.5f, y + (h - text_size.y) * 0.5f },
-            ImGui::GetColorU32(ImGuiCol_Text),
-            text.c_str());
-        return clicked;
+        
+
+        ImGui::BeginGroup();  // Lock horizontal position
+
+        float buttonWidth = size.x;
+        float spacing = ImGui::GetStyle().ItemSpacing.x;  // Get default spacing between items
+        int numButtons = num;
+        float totalWidth = numButtons * buttonWidth + (numButtons - 1) * spacing;
+
+        float windowWidth = ImGui::GetWindowSize().x;
+        float centerPos = (windowWidth - totalWidth) * 0.5f;
+        ImGui::SetCursorPosX(centerPos);
+        
+        // Calculate the size of the button (image + text height)
+        ImVec2 textSize = ImGui::CalcTextSize(text.c_str());
+        float totalHeight = size.y + padding.y + textSize.y;
+
+        // Calculate the position to start drawing the image
+        float startX = ImGui::GetCursorPosX() + padding.x;
+
+        // Center the image
+        float startXImage = startX + (textSize.x - size.x) * 0.5f;
+
+        // Render the image button
+        ImGui::SetCursorPosX(startXImage);
+
+        bool c = (ImGui::ImageButton(texture, Vec2ToImVec2(size), Vec2ToImVec2(uv0), Vec2ToImVec2(uv1)));
+            // Handle button click here if needed
+        
+
+        // Render the text centered below the image
+        float startXText = startX + (size.x - textSize.x) * 0.5f;
+        ImGui::SetCursorPosX(startXText);
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() - padding.y);  // Adjust Y position for padding
+        ImGui::TextUnformatted(text.c_str());
+
+        ImGui::EndGroup();  // End locking horizontal position
+
+        return c;
+    }
+
+    void ImGuiLink::SameLine()
+    {
+        ImGui::SameLine();
     }
 
     

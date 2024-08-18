@@ -3,14 +3,14 @@
 #include <glm/glm.hpp>
 #include <Vertex/Renderer/Texture.h>
 #include <Vertex/Core/Timestep.h>
+#include "UUID.h"
 
-#define ENTITY_TYPE_PLAYER 0
-#define ENTITY_TYPE_EMEMY  1
+#define ENTITY_TYPE_PLAYER BIT(0)
+#define ENTITY_TYPE_EMEMY  BIT(1)
 
 namespace Vertex {
 
 	
-
 	class Entity {
 	public: 
 		Entity(glm::vec2 pos, Ref<Texture2D> tex);
@@ -38,9 +38,13 @@ namespace Vertex {
 
 		virtual uint16_t getEntityType() = 0;
 
-
+		bool operator==(const Entity& other) const
+		{
+			return id == other.id;
+		}
 
 	protected:
+		UUID id;
 		glm::vec2 m_pos;
 		float m_angle = 0;
 		glm::vec2 m_scale = glm::vec2(1, 1);

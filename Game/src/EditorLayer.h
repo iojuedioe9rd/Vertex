@@ -4,6 +4,8 @@
 #include <Vertex/Renderer/Framebuffer.h>
 #include <Vertex/Renderer/Texture.h>
 #include "TileMap.h"
+#include "Entity.h"
+#include "GridManager.h"
 
 namespace Vertex {
 
@@ -11,7 +13,7 @@ namespace Vertex {
 	{
 	public:
 		EditorLayer();
-		virtual ~EditorLayer() = default;
+		virtual ~EditorLayer() override;
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
@@ -20,8 +22,21 @@ namespace Vertex {
 		virtual void OnImGuiRender() override;
 		void OnEvent(Event& e) override;
 
+		std::vector<Entity*> GetEntitys();
+
+		void RemoveE(Entity* e);
+
 		void DockSpaceCallback();
+		GridManager* GetGridManager() { return gridManager; }
+
+		static EditorLayer Get() { return *gameLayer; }
 	private:
+
+		// £100 not $100
+		int money = 100;
+
+		static EditorLayer* gameLayer;
+		GridManager* gridManager;
 		OrthographicCameraController m_CameraController;
 		TileMap* tileMap;
 
@@ -31,6 +46,7 @@ namespace Vertex {
 		Framebuffer* m_Framebuffer;
 
 		Ref<Texture2D> m_CheckerboardTexture;
+		std::array<Ref<Texture2D>, 2> m_UITextures;
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 	};

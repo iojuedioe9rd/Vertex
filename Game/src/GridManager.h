@@ -22,6 +22,7 @@ namespace Vertex {
 	private:
 		Ref<Texture2D> tex;
 		Ref<Texture2D> tex2;
+		Ref<Texture2D> tex3;
 		PathGenerator* pathGenerator;
 		TileMap* tileMap;
 	};

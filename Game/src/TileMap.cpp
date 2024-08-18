@@ -12,6 +12,7 @@ namespace Vertex {
 		t->colour = colour;
 		t->uuid = get_uuid();
 		tiles.push_back(t);
+		return t;
 	}
 
 	bool TileMap::Remove(Tile* tile)
@@ -21,8 +22,11 @@ namespace Vertex {
 			if (tile->uuid == t->uuid)
 			{
 				delete tile;
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	void TileMap::Draw()

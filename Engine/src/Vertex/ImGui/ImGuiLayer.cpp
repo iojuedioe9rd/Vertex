@@ -43,6 +43,10 @@ namespace Vertex
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
+		float fontSize = 18.0f;// *2.0f;
+		
+		io.FontDefault = io.Fonts->AddFontFromFileTTF("assets/fonts/CatsFont.ttf", fontSize);
+
 		SetDarkThemeColors();
 
 

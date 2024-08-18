@@ -57,8 +57,8 @@ namespace Vertex
         static void EndMenuBar();
         static void Docking(bool dockingEnabled = true, std::function<void()> callback = NULL);
         static void Image(void* imageID, glm::vec2 size, glm::vec2 uv0 = glm::vec2(0,0), glm::vec2 uv1 = glm::vec2(1,1));
-        static bool ImageButtonWithText(void* texture, const std::string& text, float x, float y, float w, float h);
-        
+        static bool ImageButtonWithText(void* texture, const std::string& text, glm::vec2 size, int numButtons = 1, glm::vec2 padding = glm::vec2(0,0), glm::vec2 uv0 = glm::vec2(0, 0), glm::vec2 uv1 = glm::vec2(1, 1));
+        static void SameLine();
 	};
 
 }

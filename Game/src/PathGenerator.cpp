@@ -1,5 +1,6 @@
 #include "PathGenerator.h"
 #include "rand.h"
+#include <vxpch.h>
 
 namespace Vertex {
 
@@ -11,7 +12,7 @@ namespace Vertex {
 
 	PathGenerator::~PathGenerator()
 	{
-		pathCells.clear();
+		
 	}
 
 	std::vector<glm::i32vec2> PathGenerator::GeneratePath(int l, glm::i32vec2 offset)
@@ -112,13 +113,26 @@ namespace Vertex {
 			int x = pathCell.x;
 			int y = pathCell.y;
 
+			
+
 			if (x > gridWidth - 3) { continue; }
 			if (y > gridHeight - 3) { continue; }
+			if (gridHeight < 0)
+			{
+				if (y < gridHeight + 3) { continue; }
+				
+			}
+
+			if (gridWidth < 0)
+			{
+				if (x < gridWidth + 3) { continue; }
+			}
 
 			if (CellIsFree(x, y + 3) && CellIsFree(x + 1, y + 3) && CellIsFree(x + 2, y + 3) &&
 				CellIsFree(x, y + 2) && CellIsFree(x-1,y+2) && CellIsFree(x + 1, y + 2) && CellIsFree(x + 2, y + 2) &&
 				CellIsFree(x, y + 1) && CellIsFree(x - 1, y + 1) && CellIsFree(x + 1, y + 1) && CellIsFree(x + 2, y + 1) &&
-				CellIsFree(x + 1, y) && CellIsFree(x + 2, y))
+				CellIsFree(x + 1, y) && CellIsFree(x + 2, y) &&
+				CellIsFree(x - 2, y - 3) && CellIsFree(x + 2, y - 1))
 			{
 				std::vector<glm::i32vec2> b;
 				b.push_back(glm::i32vec2(x + 1, y));
@@ -133,6 +147,8 @@ namespace Vertex {
 				b.push_back(glm::i32vec2(x, y));
 
 				pathCells.insert(pathCells.begin() + i, b.begin(), b.end());
+
+				
 
 				return true;
 			}

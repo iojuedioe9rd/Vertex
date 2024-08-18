@@ -20,7 +20,11 @@ namespace Vertex {
 	{
 		Entitys = std::vector<Entity*>();
 
-		gridManager = new GridManager();
+		tileMap = new TileMap();
+
+		glm::i32vec2 size = glm::i32vec2(14, 8) * 10;
+		gridManager = new GridManager(tileMap, size.x, size.y, glm::i32vec2(-size.x * .5f, -size.y * .5f));
+
 	}
 
 	void EditorLayer::OnAttach()
@@ -87,6 +91,8 @@ namespace Vertex {
 			Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
 			Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
 			Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, rotation, m_CheckerboardTexture, 20.0f);
+
+			tileMap->Draw();
 
 			for (Entity* e : Entitys)
 			{

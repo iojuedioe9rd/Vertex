@@ -3,6 +3,7 @@
 #include <Vertex/Core/OrthographicCameraController.h>
 #include <Vertex/Renderer/Framebuffer.h>
 #include <Vertex/Renderer/Texture.h>
+#include "TileMap.h"
 
 namespace Vertex {
 
@@ -22,6 +23,7 @@ namespace Vertex {
 		void DockSpaceCallback();
 	private:
 		OrthographicCameraController m_CameraController;
+		TileMap* tileMap;
 
 		// Temp
 		Ref<VertexArray> m_SquareVA;

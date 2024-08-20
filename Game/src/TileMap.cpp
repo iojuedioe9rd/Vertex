@@ -37,6 +37,15 @@ namespace Vertex {
 		}
 	}
 
+	void TileMap::Clear()
+	{
+		for (Tile* t : tiles)
+		{
+			delete t;
+		}
+		tiles.clear();
+	}
+
 	TileMap::TileMap()
 	{
 	}

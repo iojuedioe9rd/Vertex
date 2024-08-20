@@ -9,7 +9,11 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "GridManager.h"
+#include "Vertex/Audio/AudioManager.h"
 
+#include <iostream>
+#include <cstdlib>
+#include <chrono>
 
 
 namespace Vertex {
@@ -20,32 +24,83 @@ namespace Vertex {
 		float speed;
 		float sizeMod;
 		int count;
+		float rate;
 	};
 
 	struct Wave
 	{
-		EntityWave entityWave;
+		std::vector<EntityWave> entityWaves;
 		float rate;
 	};
+
+	Audio* music;
 
 	std::vector<Entity*> Entitys;
 	int waveIndex = 0;
 
 	EditorLayer* EditorLayer::gameLayer;
-	std::array< Wave, 12> waves;
+	std::array< Wave, 5> waves;
 
 
 	void SetupWaves()
 	{
 		Wave wave1 = Wave();
-		wave1.entityWave = EntityWave();
-		wave1.rate = .5f;
-		wave1.entityWave.count = 5;
-		wave1.entityWave.health = 100;
-		wave1.entityWave.sizeMod = 0;
-		wave1.entityWave.speed = 1;
+		wave1.entityWaves.emplace_back(EntityWave());
+		wave1.rate = 1.0f;
+		wave1.entityWaves[0].count = 5;
+		wave1.entityWaves[0].health = 100;
+		wave1.entityWaves[0].sizeMod = 0;
+		wave1.entityWaves[0].speed = 1;
+		wave1.entityWaves[0].rate = 1.0f;
+
+		Wave wave2 = Wave();
+		wave2.entityWaves.emplace_back(EntityWave());
+		wave2.rate = 1.0f;
+		wave2.entityWaves[0].count = 10;
+		wave2.entityWaves[0].health = 200;
+		wave2.entityWaves[0].sizeMod = 1;
+		wave2.entityWaves[0].speed = 5;
+		wave2.entityWaves[0].rate = 1.0f;
+
+		Wave wave3 = Wave();
+		wave3.entityWaves.emplace_back(EntityWave());
+		wave3.rate = 1.0f;
+		wave3.entityWaves[0].count = 20;
+		wave3.entityWaves[0].health = 300;
+		wave3.entityWaves[0].sizeMod = 2;
+		wave3.entityWaves[0].speed = 10;
+		wave3.entityWaves[0].rate = 1.0f;
+
+		Wave wave4 = Wave();
+		wave4.entityWaves.emplace_back(EntityWave());
+		wave4.rate = 1.0f;
+		wave4.entityWaves[0].count = 30;
+		wave4.entityWaves[0].health = 300;
+		wave4.entityWaves[0].sizeMod = 3;
+		wave4.entityWaves[0].speed = 10;
+		wave4.entityWaves[0].rate = 1.0f;
+
+		Wave wave5 = Wave();
+		wave5.entityWaves.emplace_back(EntityWave());
+		wave5.entityWaves.emplace_back(EntityWave());
+		wave5.rate = 1.0f;
+		wave5.entityWaves[0].count = 100;
+		wave5.entityWaves[0].health = 300;
+		wave5.entityWaves[0].sizeMod = 3;
+		wave5.entityWaves[0].speed = 10;
+		wave5.entityWaves[0].rate = 1.0f;
+
+		wave5.entityWaves[1].count = 1;
+		wave5.entityWaves[1].health = 100;
+		wave5.entityWaves[1].sizeMod = 10;
+		wave5.entityWaves[1].speed = .5f;
+		wave5.entityWaves[1].rate = 1.0f;
 
 		waves[0] = wave1;
+		waves[1] = wave2;
+		waves[2] = wave3;
+		waves[3] = wave4;
+		waves[4] = wave5;
 		
 	}
 
@@ -54,15 +109,20 @@ namespace Vertex {
 	{
 		Entitys = std::vector<Entity*>();
 
+		waves = std::array<Wave, 5>();
+
 		SetupWaves();
 
 		tileMap = new TileMap();
 
 		glm::i32vec2 size = glm::i32vec2(14, 8) * 10;
-		gridManager = new GridManager(tileMap, size.x, size.y, glm::i32vec2(-size.x * .5f, -size.y * .5f));
+		gridManager = new GridManager(tileMap, 1, size.x, size.y, glm::i32vec2(-size.x * .5f, -size.y * .5f));
 
 
 		gameLayer = this;
+
+		music = Audio::Create("assets/music/tdhtth.wav", 1);
+		music->Play();
 	}
 
 	EditorLayer::~EditorLayer()
@@ -70,18 +130,104 @@ namespace Vertex {
 		
 	}
 
-	Enemy* e;
+	bool HayBad()
+	{
+		bool v = 0;
+
+		for (Entity* e : Entitys)
+		{
+
+			if (v) { break; }
+			if (e->getEntityType() == ENTITY_TYPE_EMEMY)
+			{
+				v = 1;
+				break;
+			}
+		}
+
+		return v;
+	}
+
+	void thread(EditorLayer* editorLayer)
+	{
+		int l = 1;
+		while (true)
+		{
+			int waveIndex = 0;
+
+
+			using namespace std::chrono_literals;
+			typedef std::chrono::seconds s;
+
+
+			for (; waveIndex < waves.size(); )
+			{
+				auto duration = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::duration<float>(waves[waveIndex].rate));
+
+
+
+				std::this_thread::sleep_for(duration);
+
+				for (int i = 0; i < waves[waveIndex].entityWaves.size(); i++)
+				{
+					for (int j = 0; j < waves[waveIndex].entityWaves[i].count; j++)
+					{
+						duration = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::duration<float>(waves[waveIndex].entityWaves[i].rate));
+
+						std::this_thread::sleep_for(duration);
+
+						Enemy* e = new Enemy(waves[waveIndex].entityWaves[i].health, waves[waveIndex].entityWaves[i].speed, 0.1f);
+						e->setTex((editorLayer->m_UITextures[2]));
+
+						Entitys.push_back(std::move(e));
+					}
+
+
+					bool s = 0;
+					while (!s)
+					{
+						std::this_thread::sleep_for(1ms);
+						if (!HayBad())
+						{
+							s = 1;
+
+						}
+					}
+
+				}
+				waveIndex++;
+
+
+			}
+
+			glm::i32vec2 size = glm::i32vec2(14, 8) * 10;
+			editorLayer->tileMap->Clear();
+
+			editorLayer->gridManager = new GridManager(editorLayer->tileMap, l, size.x, size.y, glm::i32vec2(-size.x * .5f, -size.y * .5f));
+		}
+
+		
+
+		
+	}
+
+	
+
+	std::thread* thread_obj;
+
+	
+	
 	void EditorLayer::OnAttach()
 	{
 		VX_PROFILE_FUNCTION();
 
 		m_CheckerboardTexture = Texture2D::Create("assets/textures/Player.png");
 
-		m_UITextures = std::array< Ref<Texture2D>, 2>();
+		m_UITextures = std::array< Ref<Texture2D>, 3>();
 		
 		m_UITextures[0] = Texture2D::Create("assets/textures/Player.png");
 		m_UITextures[1] = Texture2D::Create("assets/textures/T-UI.png");
-
+		m_UITextures[2] = Texture2D::Create("assets/textures/Enemy.png");
 
 		FramebufferSpecification fbSpec;
 		fbSpec.Width = 1280;
@@ -94,14 +240,14 @@ namespace Vertex {
 
 		
 
-		e = new Enemy(100, 5, 0.1f);
+		//Enemy* e = new Enemy(100, 5, 0.1f);
 
 		
-		
+		//e->setTex(m_UITextures[2]);
 
-		Entitys.push_back(e);
+		//Entitys.push_back(e);
 
-		
+		thread_obj = new std::thread(thread, this);
 	}
 
 	void EditorLayer::OnDetach()
@@ -115,22 +261,33 @@ namespace Vertex {
 	int cat_id;
 	bool make_cat;
 
+	
+	int timer = 0;
+	
+	
+
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
-		t += ts;
-		if (t >= 5)
-		{
-			e = new Enemy(100, 5, 0);
-			Entitys.push_back(e);
-			t = 0;
-		}
+		
 
 		VX_PROFILE_FUNCTION();
 
-		for (Entity* e : Entitys)
+		if (t == 10.0f)
 		{
-			e->update(ts);
+			for (Entity* e : Entitys)
+			{
+				if (e == nullptr) { continue; }
+
+				
+
+				e->update(ts);
+			}
 		}
+		else
+		{
+			t++;
+		}
+		
 
 		
 
@@ -154,6 +311,8 @@ namespace Vertex {
 			static float rotation = 0.0f;
 			rotation += ts * 50.0f;
 
+			VX_INFO("{0}", money);
+
 			VX_PROFILE_SCOPE("Renderer Draw");
 			Renderer2D::BeginScene(m_CameraController.GetCamera());
 			Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
@@ -165,13 +324,17 @@ namespace Vertex {
 			
 
 			tileMap->Draw();
-
 			
-			for (Entity* e : Entitys)
+			
+			if (t == 10.0f)
 			{
-				e->draw(ts);
+				for (Entity* e : Entitys)
+				{
+					if (e == nullptr) { continue; }
+					e->draw(ts);
+				}
 			}
-
+			
 			
 			
 
@@ -240,10 +403,11 @@ namespace Vertex {
 
 			ImGuiLink::Begin("Shop");
 
+
 			uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-			if (ImGuiLink::ImageButtonWithText((void*)m_UITextures[0]->GetRendererID(), "Basic cat. 50 UNS", glm::vec2(100, 100), 1, glm::vec2(0, 0), glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 }))
+			if (ImGuiLink::ImageButtonWithText((void*)m_UITextures[0]->GetRendererID(), "Basic cat.", glm::vec2(100, 100), 1, glm::vec2(0, 0), glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 }))
 			{
-				if (money >= 50)
+				
 				{
 					make_cat = true;
 					cat_id = 0;
@@ -251,10 +415,22 @@ namespace Vertex {
 				}
 				
 			};
-			ImGuiLink::ImageButtonWithText((void*)m_UITextures[1]->GetRendererID(), "Turret Cat. 200 UNS", glm::vec2(100, 100), 1, glm::vec2(0, 0), glm::vec2{0, 1}, glm::vec2{1, 0});
+			//ImGuiLink::ImageButtonWithText((void*)m_UITextures[1]->GetRendererID(), "Turret Cat. 200 UNS", glm::vec2(100, 100), 1, glm::vec2(0, 0), glm::vec2{0, 1}, glm::vec2{1, 0});
 			
+
+
 			ImGuiLink::End();
 
+			ImGuiLink::Begin("Info");
+
+			
+
+			if (isDie)
+			{
+				ImGuiLink::Text("Lol bro is die ):<");
+			}
+
+			ImGuiLink::End();
 			
 		}
 		
@@ -306,6 +482,16 @@ namespace Vertex {
 		ImGuiLink::End();
 
 		
+	}
+
+	void EditorLayer::AddMoney(int v)
+	{
+		money += v;
+	}
+
+	void EditorLayer::Kill()
+	{
+		isDie = true;
 	}
 
 }

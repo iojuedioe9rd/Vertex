@@ -8,7 +8,7 @@ namespace Vertex {
 	{
 	public:
 		
-		GridManager(TileMap* tileMap, int gridWidth = 14, int gridHeight = 8, glm::i32vec2 offset = glm::i32vec2(0,0));
+		GridManager(TileMap* tileMap, int l = 1, int gridWidth = 14, int gridHeight = 8, glm::i32vec2 offset = glm::i32vec2(0, 0));
 		~GridManager();
 
 		std::vector<glm::i32vec2> GetPathCells()

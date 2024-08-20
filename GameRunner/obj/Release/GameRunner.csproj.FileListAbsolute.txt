@@ -1,0 +1,6 @@
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\GameRunner\bin\Release\GameRunner.exe
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\GameRunner\bin\Release\GameRunner.pdb
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\GameRunner\obj\Release\GameRunner.csproj.AssemblyReference.cache
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\GameRunner\obj\Release\GameRunner.csproj.CoreCompileInputs.cache
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\GameRunner\obj\Release\GameRunner.exe
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\GameRunner\obj\Release\GameRunner.pdb

@@ -30,11 +30,12 @@ namespace Vertex {
 		GridManager* GetGridManager() { return gridManager; }
 
 		static EditorLayer Get() { return *gameLayer; }
-	private:
 
 		// £100 not $100
 		int money = 100;
 
+		void AddMoney(int v);
+		
 		static EditorLayer* gameLayer;
 		GridManager* gridManager;
 		OrthographicCameraController m_CameraController;
@@ -46,9 +47,26 @@ namespace Vertex {
 		Framebuffer* m_Framebuffer;
 
 		Ref<Texture2D> m_CheckerboardTexture;
-		std::array<Ref<Texture2D>, 2> m_UITextures;
+		std::array<Ref<Texture2D>, 3> m_UITextures;
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+
+		int baseHsrgfdg = 100;
+
+
+
+		void damage(int v)
+		{
+			baseHsrgfdg -= v;
+			if (baseHsrgfdg <= 0)
+			{
+				Kill();
+			}
+		}
+	private:
+		bool isDie = 0;
+		void Kill();
+		
 	};
 
 }

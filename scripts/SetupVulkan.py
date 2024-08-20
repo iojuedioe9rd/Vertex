@@ -11,10 +11,11 @@ from urllib.request import urlopen
 class VulkanConfiguration:
     requiredVulkanVersion = "1.3."
     installVulkanVersion = "1.3.216.0"
-    vulkanDirectory = "./Hazel/vendor/VulkanSDK"
+    vulkanDirectory = "./Engine/vendor/VulkanSDK"
 
     @classmethod
     def Validate(cls):
+	cls.__InstallVulkanSDK()
         if (not cls.CheckVulkanSDK()):
             print("Vulkan SDK not installed correctly.")
             return

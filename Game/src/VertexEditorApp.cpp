@@ -9,7 +9,7 @@ namespace Vertex {
 	{
 	public:
 		GameApp()
-			: Application("Game")
+			: Application("Shrinking Scales, Feline Fury")
 		{
 			PushLayer(new EditorLayer());
 			

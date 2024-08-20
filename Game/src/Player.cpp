@@ -37,12 +37,13 @@ namespace Vertex {
 		
 	}
 
-	float fr = 0.1f;
+	float fr = 1;
 
 	Player::Player() : Entity(glm::vec2(0, 0), Texture2D::Create("assets/textures/Player.png"))
 	{
 		id = get_uuid();
 		m_scale = glm::vec2(1, 1);
+		oww = Audio::Create("assets/music/oww.wav");
 	}
 
 	Ref<Texture2D> Player::getTex()
@@ -59,9 +60,11 @@ namespace Vertex {
 			Enemy* e = GetClosestEnemy(m_pos);
 			if (e != nullptr)
 			{
-				e->Damage(1);
-			}
 
+				e->Damage(10);
+				oww->Play();
+			}
+			timer = 0;
 			
 		}
 		

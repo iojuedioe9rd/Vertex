@@ -3,7 +3,7 @@
 
 namespace Vertex {
 
-	GridManager::GridManager(TileMap* tileMap, int gridWidth, int gridHeight, glm::i32vec2 offset)
+	GridManager::GridManager(TileMap* tileMap, int l, int gridWidth, int gridHeight, glm::i32vec2 offset)
 	{
 		this->tex = Texture2D::Create("assets/textures/tile1.png");
 		this->tex3 = Texture2D::Create("assets/textures/tile2.png");
@@ -14,7 +14,7 @@ namespace Vertex {
 
 		pathGenerator = new PathGenerator(gridWidth, gridHeight);
 
-		int l =1 ;
+		
 		std::vector<glm::i32vec2> path = pathGenerator->GeneratePath(l, offset);
 		
 

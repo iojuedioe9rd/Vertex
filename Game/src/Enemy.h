@@ -29,6 +29,8 @@ namespace Vertex {
 		virtual void update(Timestep ts) override;
 		virtual void draw(Timestep ts) override;
 
+		void setTex(Ref<Texture2D> tex);
+
 		virtual uint16_t getEntityType() override;
 
 		void Damage(int amount);

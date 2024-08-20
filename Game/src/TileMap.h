@@ -23,6 +23,7 @@ namespace Vertex {
 		bool Remove(Tile* tile);
 
 		void Draw();
+		void Clear();
 
 		TileMap();
 		~TileMap();

@@ -40,7 +40,8 @@ namespace Vertex
 		size += lerp(0, 1, (float)health / (float)healthMax);
 		size += lerp(0, 1, (float)(speed - .1) / (float)(speedMax - .1));
 
-		size = lerp(0.1, 1, size / 2) + (sizeMod);
+		size = lerp(0, 1, size / 2);
+
 
 		return size;
 	}
@@ -49,20 +50,22 @@ namespace Vertex
 	{
 		rngOffset = static_cast<float>(rand(0, 100)) / static_cast<float>(100);
 		id = get_uuid();
-		m_tex = Texture2D::Create("assets/textures/Enemy.png");
-
-		m_pos = glm::vec2(-100, 0);
+		
+		std::vector<glm::i32vec2> pathCells = EditorLayer::Get().GetGridManager()->GetPathCells();
+		m_pos = pathCells[0];
 		meeeeeeeee = new EnemyS();
 		meeeeeeeee->health = health;
 		meeeeeeeee->healthMax = health;
 
 		meeeeeeeee->speed = speed;
 		meeeeeeeee->speedMax = speed;
+
+		
 	}
 
 	Enemy::~Enemy()
 	{
-		delete meeeeeeeee;
+		
 	}
 
 	Ref<Texture2D> Enemy::getTex()
@@ -92,7 +95,9 @@ namespace Vertex
 				nextPathCellIndex++;
 				if (nextPathCellIndex >= pathCells.size())
 				{
+					EditorLayer::Get().damage(meeeeeeeee->health);
 					Damage(1000 * meeeeeeeee->health);
+
 				}
 			}
 			
@@ -106,6 +111,11 @@ namespace Vertex
 		Renderer2D::DrawRotatedQuad(m_pos, size, 0, m_tex);
 	}
 
+	void Enemy::setTex(Ref<Texture2D> tex)
+	{
+		m_tex = tex;
+	}
+
 	uint16_t Enemy::getEntityType()
 	{
 		return ENTITY_TYPE_EMEMY;
@@ -113,6 +123,7 @@ namespace Vertex
 
 	void Enemy::Damage(int amount)
 	{
+		EditorLayer::Get().AddMoney(1);
 		if (this == nullptr || (int)this == 0x1) { return; }
 		float ogSpeed = meeeeeeeee->speed;
 		if (meeeeeeeee->speed > .1f)
@@ -128,13 +139,20 @@ namespace Vertex
 		if (meeeeeeeee->speed <= .1f)
 		{
 			meeeeeeeee->health -= ogSpeed - amount * -1;
-			if (meeeeeeeee->health <= 0)
+			if (meeeeeeeee->health <= 0 && (unsigned long long)meeeeeeeee != 0xdddddddddddddddd)
 			{
 				EditorLayer::Get().RemoveE(this);
+				
+				
+				
 			}
 		}
 
-		meeeeeeeee->sizeMod -= amount / meeeeeeeee->sizeModMax;
+		if (this != nullptr && (unsigned long long)meeeeeeeee != 0xdddddddddddddddd && meeeeeeeee->health > 0)
+		{
+			meeeeeeeee->sizeMod -= amount / meeeeeeeee->sizeModMax;
+		}
+		
 
 		
 	}

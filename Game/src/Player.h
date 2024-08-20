@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include <Vertex/Audio/Audio.h>
 
 
 namespace Vertex {
@@ -9,6 +10,7 @@ namespace Vertex {
 	public:
 		Player();
 
+		Audio* oww;
 
 		virtual Ref<Texture2D> getTex() override;
 		virtual void update(Timestep ts) override;

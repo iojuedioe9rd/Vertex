@@ -3,6 +3,7 @@
 #include <Vertex/Core/OrthographicCameraController.h>
 #include <Vertex/Renderer/Framebuffer.h>
 #include <Vertex/Renderer/Texture.h>
+#include "VXEntities.h"
 
 namespace Vertex {
 
@@ -21,6 +22,8 @@ namespace Vertex {
 
 		void DockSpaceCallback();
 	private:
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
+
 		OrthographicCameraController m_CameraController;
 
 		// Temp
@@ -29,6 +32,12 @@ namespace Vertex {
 		Framebuffer* m_Framebuffer;
 
 		Ref<Texture2D> m_CheckerboardTexture;
+
+		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
+
+		Scene* m_ActiveScene;
+		ENTPropStaticSprite m_SquareEntity;
+
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 	};

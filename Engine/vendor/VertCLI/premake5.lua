@@ -22,7 +22,8 @@ project "VertCLI"
 	
 	links
 	{
-		"Engine"
+		"Engine",
+		"VXEntities"
 	}
 	
 	filter "system:windows"

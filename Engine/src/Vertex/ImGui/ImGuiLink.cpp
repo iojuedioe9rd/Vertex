@@ -116,10 +116,50 @@ namespace Vertex
         return ImVec2{ v.x, v.y };
     }
 
+    glm::vec2 ImVec2ToVec2(ImVec2 v)
+    {
+        return glm::vec2{ v.x, v.y };
+    }
+
     void ImGuiLink::Image(void* imageID, glm::vec2 size, glm::vec2 uv0, glm::vec2 uv1)
     {
         
         ImGui::Image((void*)imageID, Vec2ToImVec2(size), Vec2ToImVec2(uv0), Vec2ToImVec2(uv1));
+    }
+
+    bool ImGuiLink::ImageButton(void* imageID, glm::vec2 size, glm::vec2 uv0, glm::vec2 uv1)
+    {
+        return ImGui::ImageButton(imageID, Vec2ToImVec2(size), Vec2ToImVec2(uv0), Vec2ToImVec2(uv1));
+    }
+
+    void ImGuiLink::PushStyleVar(int styleVar, glm::vec2 idk)
+    {
+        ImGui::PushStyleVar(styleVar, Vec2ToImVec2(idk));
+    }
+
+    void ImGuiLink::PopStyleVar()
+    {
+        ImGui::PopStyleVar();
+    }
+
+    glm::vec2 ImGuiLink::GetContentRegionAvail()
+    {
+        return ImVec2ToVec2(ImGui::GetContentRegionAvail());
+    }
+
+    bool ImGuiLink::IsWindowFocused()
+    {
+        return ImGui::IsWindowFocused();
+    }
+
+    bool ImGuiLink::IsWindowHovered()
+    {
+        return  ImGui::IsWindowHovered();
+    }
+
+    void ImGuiLink::Separator()
+    {
+        ImGui::Separator();
     }
 
     

@@ -22,6 +22,8 @@ project "Engine"
 		"vendor/stb_image/**.cpp",
 		"vendor/miniaudio/**.h",
 		"vendor/miniaudio/**.cpp",
+		"vendor/simple_ecs/**.h",
+		"vendor/simple_ecs/**.cpp",
 	}
 	
 	defines
@@ -40,7 +42,9 @@ project "Engine"
 		"%{IncludeDir.glm}",
 		"vendor/checksum/src",
 		"vendor/stb_image",
-		"vendor/miniaudio"
+		"vendor/miniaudio",
+		"%{IncludeDir.entt}",
+		"vendor/simple_ecs"
 		
 	}
 	

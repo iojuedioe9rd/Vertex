@@ -58,7 +58,7 @@ namespace Vertex {
 			{ ShaderDataType::Float4, "a_Color" },
 			{ ShaderDataType::Float2, "a_TexCoord" },
 			{ ShaderDataType::Float, "a_TexIndex" },
-			{ ShaderDataType::Float, "a_TilingFactor"}
+			{ ShaderDataType::Float, "a_TilingFactor" }
 			});
 		s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
 
@@ -80,7 +80,7 @@ namespace Vertex {
 			offset += 4;
 		}
 
-		Ref<IndexBuffer> quadIB(IndexBuffer::Create(quadIndices, s_Data.MaxIndices));
+		Ref<IndexBuffer> quadIB = Ref<IndexBuffer>(IndexBuffer::Create(quadIndices, s_Data.MaxIndices));
 		s_Data.QuadVertexArray->SetIndexBuffer(quadIB);
 		delete[] quadIndices;
 
@@ -107,12 +107,12 @@ namespace Vertex {
 
 	void Renderer2D::Shutdown()
 	{
-		delete[] s_Data.QuadVertexBufferBase;
+		VX_PROFILE_FUNCTION();
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		
+		VX_PROFILE_FUNCTION();
 
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
@@ -125,7 +125,7 @@ namespace Vertex {
 
 	void Renderer2D::EndScene()
 	{
-		
+		VX_PROFILE_FUNCTION();
 
 		uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
 		s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
@@ -135,13 +135,11 @@ namespace Vertex {
 
 	void Renderer2D::Flush()
 	{
-		if (s_Data.QuadIndexCount == 0)
-			return; // Nothing to draw
-
+		// Bind textures
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 			s_Data.TextureSlots[i]->Bind(i);
-		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 
+		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 		s_Data.Stats.DrawCalls++;
 	}
 
@@ -162,6 +160,8 @@ namespace Vertex {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		VX_PROFILE_FUNCTION();
+
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			FlushAndReset();
 
@@ -211,10 +211,12 @@ namespace Vertex {
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
+		VX_PROFILE_FUNCTION();
+
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			FlushAndReset();
 
-		glm::vec4 color = tintColor;
+		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 		float textureIndex = 0.0f;
 		for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
@@ -276,6 +278,8 @@ namespace Vertex {
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
 	{
+		VX_PROFILE_FUNCTION();
+
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			FlushAndReset();
 
@@ -326,10 +330,12 @@ namespace Vertex {
 
 	void Renderer2D::DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
 	{
+		VX_PROFILE_FUNCTION();
+
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			FlushAndReset();
 
-		glm::vec4 color = tintColor;
+		constexpr glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 		float textureIndex = 0.0f;
 		for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)

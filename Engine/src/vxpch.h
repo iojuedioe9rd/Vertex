@@ -5,6 +5,8 @@
 #include "Vertex/Debug/Instrumentor.h"
 #include "Vertex/CommandBuffer/CommandBuffer.h"
 
+#include <glm/glm.hpp>
+
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -12,6 +14,7 @@
 #include <array>
 #include <functional>
 #include <execution> // For parallel execution policies
+#include <random>
 
 
 #include <string>

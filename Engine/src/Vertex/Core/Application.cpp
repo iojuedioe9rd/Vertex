@@ -92,7 +92,7 @@ namespace Vertex
 		Timestep timestep = time - m_LastFrameTime;
 		m_LastFrameTime = time;
 
-		VX_CORE_INFO("{0}", timestep.GetMilliseconds());
+		//VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		
 
 		if (!m_Minimized)

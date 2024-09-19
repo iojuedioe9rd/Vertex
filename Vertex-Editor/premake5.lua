@@ -16,13 +16,16 @@ project "Vertex-Editor"
 	includedirs
 	{
 		"%{wks.location}/Engine/src",
+		"%{wks.location}/VXEntities/src",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 	
 	links
 	{
-		"Engine"
+		"Engine",
+		"VXEntities"
 	}
 	
 	filter "system:windows"

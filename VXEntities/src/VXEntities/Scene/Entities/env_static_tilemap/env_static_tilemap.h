@@ -14,7 +14,7 @@ namespace Vertex {
 		public:
 			glm::i32vec2 pos = glm::i32vec2();
 			glm::vec4 colour = glm::vec4(1,1,1,1);
-			Texture2D* tex = nullptr;
+			Ref<Texture2D> tex = nullptr;
 		};
 
 		ENTEnvStaticTilemap()
@@ -30,8 +30,8 @@ namespace Vertex {
 		virtual void Update(Timestep& ts) override;
 		virtual void Draw(Timestep& ts)   override;
 
-		void SetTile(glm::i32vec2 pos, Texture2D* tex, glm::vec4 colour, bool m_override = true);
-		void AddTile(glm::i32vec2 pos, Texture2D* tex, glm::vec4 colour)
+		void SetTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool m_override = true);
+		void AddTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour)
 		{
 			SetTile(pos, tex, colour, false);
 		}

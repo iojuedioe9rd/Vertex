@@ -5,6 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Vertex/Core/Input.h"
+#include "Entities/json_static_tilemap/json_static_tilemap.h"
 
 
 namespace Vertex {
@@ -36,7 +37,7 @@ namespace Vertex {
 
 		auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
 		
-		m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
+		m_ActiveScene->CreateEntity<ENTJsonStaticTilemap>("JsonStaticTilemap").Setup(&m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap"));
 		
 		
 		square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };

@@ -13,11 +13,11 @@ namespace Vertex
 	{
 		for (Tile t : Tiles)
 		{
-			Renderer2D::DrawQuad(t.pos, glm::vec2(1, 1), t.colour);
+			Renderer2D::DrawQuad(t.pos, glm::vec2(1, 1), t.tex, 1, t.colour);
 		}
 	}
 
-	void ENTEnvStaticTilemap::SetTile(glm::i32vec2 pos, Texture2D* tex, glm::vec4 colour, bool m_override)
+	void ENTEnvStaticTilemap::SetTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool m_override)
 	{
 		for ( Tile t : Tiles )
 		{

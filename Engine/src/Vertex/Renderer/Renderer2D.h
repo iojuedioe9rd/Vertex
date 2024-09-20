@@ -12,6 +12,7 @@ namespace Vertex {
 		static void Shutdown();
 
 		static void BeginScene(const OrthographicCamera& camera);
+		static void BeginScene(const glm::mat4 viewProjectionMatrix);
 		static void EndScene();
 		static void Flush();
 

@@ -113,9 +113,15 @@ namespace Vertex {
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		VX_PROFILE_FUNCTION();
+		BeginScene(camera.GetViewProjectionMatrix());
+	}
+
+	void Renderer2D::BeginScene(const glm::mat4 viewProjectionMatrix)
+	{
+		VX_PROFILE_FUNCTION();
 
 		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+		s_Data.TextureShader->UploadUniformMat4("u_ViewProjection", viewProjectionMatrix);
 
 		s_Data.QuadIndexCount = 0;
 		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;

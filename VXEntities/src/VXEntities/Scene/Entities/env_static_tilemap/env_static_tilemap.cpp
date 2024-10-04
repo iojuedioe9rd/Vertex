@@ -17,13 +17,14 @@ namespace Vertex
 		}
 	}
 
-	void ENTEnvStaticTilemap::SetTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool m_override)
+	void ENTEnvStaticTilemap::SetTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool m_override, bool isCollidable)
 	{
 		for ( Tile t : Tiles )
 		{
 			if (m_override && pos == t.pos) {
 				t.tex = tex;
 				t.colour = colour;
+				t.isCollidable = isCollidable;
 				return;
 			}
 		}
@@ -31,6 +32,7 @@ namespace Vertex
 		Tile t = Tile();
 		t.pos = pos;
 		t.tex = tex;
+		t.isCollidable = isCollidable;
 		t.colour = colour;
 		Tiles.emplace_back(t);
 
@@ -47,6 +49,29 @@ namespace Vertex
 				}
 				return true;
 			}
+		}
+
+		return false;
+	}
+	bool ENTEnvStaticTilemap::BoxCollision(glm::vec3 rectPos, glm::vec2 rectSize)
+	{
+		for (auto& i : Tiles)
+		{
+			if (!i.isCollidable) continue;
+			glm::vec4 rect1 = glm::vec4(rectPos.x, rectPos.y, rectPos.z, rectSize.x);
+			glm::vec4 rect2 = glm::vec4(i.pos.x, i.pos.y, 1, 1);
+
+
+			if (
+				rect1.x < rect2.x + rect2.w &&
+				rect1.x + rect1.w > rect2.x &&
+				rect1.y < rect2.y + rectSize.y &&
+				rect1.y + rectSize.y > rect2.y
+				) {
+				return true;
+
+			}
+			
 		}
 
 		return false;

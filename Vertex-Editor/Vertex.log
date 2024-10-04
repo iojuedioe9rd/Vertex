@@ -1,409 +1,184 @@
-[21:25:03] [info] VERTEX: Creating window: Vertex Editor (1280, 720, 1.7777778)
-[21:25:04] [info] VERTEX: GLAD STATUS: 1
-[21:25:04] [info] VERTEX: OpenGL Info:
-[21:25:04] [info] VERTEX:   Vendor: NVIDIA Corporation
-[21:25:04] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[21:25:04] [info] VERTEX:   Version: 4.6.0 NVIDIA 536.23
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 2
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 1
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0
-[21:25:04] [info] APP: 0.75773185
-[21:25:04] [info] APP: 0.8748264
-[21:25:05] [info] APP: 0.9775278
-[21:25:05] [info] APP: 0.98623306
-[21:25:05] [info] APP: 0.9902655
-[21:25:05] [info] APP: 0.9920725
-[21:25:05] [info] APP: 0.99397165
-[21:25:05] [info] APP: 0.9951882
-[21:25:05] [info] APP: 0.99668187
-[21:25:05] [info] APP: 0.99789906
-[21:25:05] [info] APP: 0.99883986
-[21:25:05] [info] APP: 0.9995026
-[21:25:05] [info] APP: 0.9998919
-[21:25:05] [info] APP: 0.9999311
-[21:25:05] [info] APP: 0.99969673
-[21:25:05] [info] APP: 0.9970391
-[21:25:05] [info] APP: 0.9958016
-[21:25:05] [info] APP: 0.992914
-[21:25:05] [info] APP: 0.9908641
-[21:25:05] [info] APP: 0.9884792
-[21:25:05] [info] APP: 0.9858018
-[21:25:05] [info] APP: 0.98288393
-[21:25:05] [info] APP: 0.9796883
-[21:25:05] [info] APP: 0.9762053
-[21:25:05] [info] APP: 0.9724418
-[21:25:05] [info] APP: 0.96843714
-[21:25:05] [info] APP: 0.96412253
-[21:25:05] [info] APP: 0.9595815
-[21:25:05] [info] APP: 0.95476025
-[21:25:05] [info] APP: 0.9496653
-[21:25:05] [info] APP: 0.9443247
-[21:25:05] [info] APP: 0.9387053
-[21:25:05] [info] APP: 0.9328097
-[21:25:05] [info] APP: 0.9266605
-[21:25:05] [info] APP: 0.9194848
-[21:25:05] [info] APP: 0.9136234
-[21:25:05] [info] APP: 0.9054711
-[21:25:05] [info] APP: 0.89517576
-[21:25:05] [info] APP: 0.8890373
-[21:25:05] [info] APP: 0.88372475
-[21:25:06] [info] APP: 0.87666476
-[21:25:06] [info] APP: 0.8685106
-[21:25:06] [info] APP: 0.86014885
-[21:25:06] [info] APP: 0.85149145
-[21:25:06] [info] APP: 0.8426426
-[21:25:06] [info] APP: 0.8335296
-[21:25:06] [info] APP: 0.8242229
-[21:25:06] [info] APP: 0.81461906
-[21:25:06] [info] APP: 0.80489284
-[21:25:06] [info] APP: 0.7948605
-[21:25:06] [info] APP: 0.78468645
-[21:25:06] [info] APP: 0.7741408
-[21:25:06] [info] APP: 0.75911933
-[21:25:06] [info] APP: 0.74905056
-[21:25:06] [info] APP: 0.73653823
-[21:25:06] [info] APP: 0.72571063
-[21:25:06] [info] APP: 0.71776116
-[21:25:06] [info] APP: 0.691479
-[21:25:06] [info] APP: 0.6775276
-[21:25:06] [info] APP: 0.6581297
-[21:25:06] [info] APP: 0.60517806
-[21:25:06] [info] APP: 0.46734974
-[21:25:06] [info] APP: 0.4404096
-[21:25:06] [info] APP: 0.39539284
-[21:25:06] [info] APP: 0.38305882
-[21:25:06] [info] APP: 0.37180197
-[21:25:06] [info] APP: 0.3606103
-[21:25:06] [info] APP: 0.344902
-[21:25:06] [info] APP: 0.3292462
-[21:25:06] [info] APP: 0.31215945
-[21:25:06] [info] APP: 0.29762918
-[21:25:06] [info] APP: 0.28166947
-[21:25:06] [info] APP: 0.2657027
-[21:25:06] [info] APP: 0.24953686
-[21:25:06] [info] APP: 0.2334602
-[21:25:06] [info] APP: 0.21717636
-[21:25:06] [info] APP: 0.18724126
-[21:25:06] [info] APP: 0.17816839
-[21:25:06] [info] APP: 0.16791612
-[21:25:06] [info] APP: 0.15151988
-[21:25:06] [info] APP: 0.13502349
-[21:25:06] [info] APP: 0.11864724
-[21:25:06] [info] APP: 0.10183073
-[21:25:06] [info] APP: 0.085338056
-[21:25:07] [info] APP: 0.06876679
-[21:25:07] [info] APP: 0.052197956
-[21:25:07] [info] APP: 0.03549751
-[21:25:07] [info] APP: 0.018854605
-[21:25:07] [info] APP: 0.002224833
-[21:25:07] [info] APP: -0.014483748
-[21:25:07] [info] APP: -0.031096539
-[21:25:07] [info] APP: -0.047855776
-[21:25:07] [info] APP: -0.06444738
-[21:25:07] [info] APP: -0.081092
-[21:25:07] [info] APP: -0.097618885
-[21:25:07] [info] APP: -0.114223346
-[21:25:07] [info] APP: -0.13073166
-[21:25:07] [info] APP: -0.14842926
-[21:25:07] [info] APP: -0.16374625
-[21:25:07] [info] APP: -0.1802219
-[21:25:07] [info] APP: -0.19652136
-[21:25:07] [info] APP: -0.21284148
-[21:25:07] [info] APP: -0.22905926
-[21:25:07] [info] APP: -0.2888262
-[21:25:07] [info] APP: -0.30737075
-[21:25:07] [info] APP: -0.33096194
-[21:25:07] [info] APP: -0.3418985
-[21:25:07] [info] APP: -0.3565409
-[21:25:07] [info] APP: -0.3719137
-[21:25:07] [info] APP: -0.38735002
-[21:25:07] [info] APP: -0.40267107
-[21:25:07] [info] APP: -0.41788533
-[21:25:07] [info] APP: -0.43294805
-[21:25:07] [info] APP: -0.4479878
-[21:25:07] [info] APP: -0.47491896
-[21:25:07] [info] APP: -0.48397934
-[21:25:07] [info] APP: -0.49345642
-[21:25:07] [info] APP: -0.5065071
-[21:25:07] [info] APP: -0.5207664
-[21:25:07] [info] APP: -0.5349648
-[21:25:07] [info] APP: -0.5489623
-[21:25:07] [info] APP: -0.57133436
-[21:25:07] [info] APP: -0.5839372
-[21:25:07] [info] APP: -0.5900598
-[21:25:07] [info] APP: -0.6034157
-[21:25:07] [info] APP: -0.6166942
-[21:25:07] [info] APP: -0.6297202
-[21:25:07] [info] APP: -0.6426055
-[21:25:07] [info] APP: -0.65525424
-[21:25:07] [info] APP: -0.66771126
-[21:25:07] [info] APP: -0.6800751
-[21:25:07] [info] APP: -0.69216126
-[21:25:07] [info] APP: -0.7040396
-[21:25:07] [info] APP: -0.715816
-[21:25:07] [info] APP: -0.7273514
-[21:25:07] [info] APP: -0.7387167
-[21:25:07] [info] APP: -0.7498081
-[21:25:07] [info] APP: -0.76072216
-[21:25:07] [info] APP: -0.7714454
-[21:25:07] [info] APP: -0.78209376
-[21:25:07] [info] APP: -0.79228675
-[21:25:08] [info] APP: -0.80235404
-[21:25:08] [info] APP: -0.81213856
-[21:25:08] [info] APP: -0.82175934
-[21:25:08] [info] APP: -0.8310878
-[21:25:08] [info] APP: -0.84027547
-[21:25:08] [info] APP: -0.84919727
+[21:12:50] [info] VERTEX: Creating window: Vertex Editor (1280, 720, 1.7777778)
+[21:12:51] [info] VERTEX: GLAD STATUS: 1
+[21:12:51] [info] VERTEX: OpenGL Info:
+[21:12:51] [info] VERTEX:   Vendor: NVIDIA Corporation
+[21:12:51] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[21:12:51] [info] VERTEX:   Version: 4.6.0 NVIDIA 536.23
+[21:12:57] [info] APP: Player spawned at: x = 257, y = 46
+[21:13:43] [info] VERTEX: Window Resized
+[21:13:49] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:49] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:50] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:51] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:51] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:51] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:52] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:53] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:54] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:54] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:54] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:56] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:13:57] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:57] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:13:59] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:00] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:00] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:00] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:00] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:02] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:03] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:04] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:05] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:06] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:06] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:06] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:06] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:06] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:06] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:07] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:10] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:11] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav
+[21:14:11] [info] VERTEX: Playing Audio: assets/music/Tormentor 01.wav
+[21:14:11] [info] VERTEX: Playing Audio: assets/music/Tormentor.wav

@@ -7,6 +7,7 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "Vertex/Core/Application.h"
 
 namespace Vertex {
 
@@ -110,18 +111,24 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 	}
 
-	void Renderer2D::BeginScene(const OrthographicCamera& camera)
+	void Renderer2D::BeginScene(const OrthographicCamera& camera, float u_ZoomFactor)
 	{
 		VX_PROFILE_FUNCTION();
-		BeginScene(camera.GetViewProjectionMatrix());
+		BeginScene(camera.GetViewProjectionMatrix(), u_ZoomFactor);
 	}
 
-	void Renderer2D::BeginScene(const glm::mat4 viewProjectionMatrix)
+	void Renderer2D::BeginScene(const glm::mat4 viewProjectionMatrix, float u_ZoomFactor)
 	{
 		VX_PROFILE_FUNCTION();
 
 		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->UploadUniformFloat2("u_Resolution", Application::GetWindowSize());
+		s_Data.TextureShader->UploadUniformFloat("u_VignetteRadius", 1.5f);
+		s_Data.TextureShader->UploadUniformFloat("u_VignetteSoftness", 0.45f);
+		s_Data.TextureShader->UploadUniformFloat("u_BloomThreshold", 0.5f); // Adjust threshold
+		s_Data.TextureShader->UploadUniformFloat("u_BloomIntensity", 1.5f); // Adjust intensity
 		s_Data.TextureShader->UploadUniformMat4("u_ViewProjection", viewProjectionMatrix);
+		s_Data.TextureShader->UploadUniformFloat("u_ZoomFactor", u_ZoomFactor);
 
 		s_Data.QuadIndexCount = 0;
 		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
@@ -409,3 +416,184 @@ namespace Vertex {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

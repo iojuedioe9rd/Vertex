@@ -4,6 +4,7 @@
 #include <Vertex/Renderer/Framebuffer.h>
 #include <Vertex/Renderer/Texture.h>
 #include "VXEntities.h"
+#include "Vertex/postprocessing.h"
 
 namespace Vertex {
 
@@ -20,16 +21,15 @@ namespace Vertex {
 		virtual void OnImGuiRender() override;
 		void OnEvent(Event& e) override;
 
+		
+
 		void DockSpaceCallback();
 	private:
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
 		OrthographicCameraController m_CameraController;
 
-		// Temp
-		Ref<VertexArray> m_SquareVA;
-		Ref<Shader> m_FlatColorShader;
-		Framebuffer* m_Framebuffer;
+		PostProcessing postProcessing;
 
 		Ref<Texture2D> m_CheckerboardTexture;
 

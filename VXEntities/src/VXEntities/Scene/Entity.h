@@ -112,6 +112,16 @@ namespace Vertex {
 #pragma endregion
 
 #pragma region Procedures
+
+		virtual void ImGuiRenderTime()
+		{
+			ImGuiRender();
+
+			for (Entity* ent : m_children)
+			{
+				ent->ImGuiRenderTime();
+			}
+		}
 		
 		void UpdateTime(Timestep& ts)
 		{
@@ -137,6 +147,7 @@ namespace Vertex {
 
 		virtual void Update(Timestep& ts) = NULL;
 		virtual void Draw(Timestep& ts)   = NULL;
+		virtual void ImGuiRender()        = NULL;
 		virtual std::string GetEntName()  =	NULL;
 		
 	protected:

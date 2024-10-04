@@ -8,13 +8,14 @@ namespace Vertex {
 	class ENTEnvStaticTilemap : public Entity
 	{
 	public:
-
+		virtual void ImGuiRender() override {};
 		class Tile : public Object
 		{
 		public:
 			glm::i32vec2 pos = glm::i32vec2();
 			glm::vec4 colour = glm::vec4(1,1,1,1);
 			Ref<Texture2D> tex = nullptr;
+			bool isCollidable;
 		};
 
 		ENTEnvStaticTilemap()
@@ -30,10 +31,10 @@ namespace Vertex {
 		virtual void Update(Timestep& ts) override;
 		virtual void Draw(Timestep& ts)   override;
 
-		void SetTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool m_override = true);
-		void AddTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour)
+		void SetTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool m_override = true, bool isCollidable = true);
+		void AddTile(glm::i32vec2 pos, Ref<Texture2D> tex, glm::vec4 colour, bool isCollidable = true)
 		{
-			SetTile(pos, tex, colour, false);
+			SetTile(pos, tex, colour, false, isCollidable);
 		}
 		
 		bool RemoveTile(glm::i32vec2 pos);
@@ -47,6 +48,8 @@ namespace Vertex {
 		{
 			return "env_static_tilemap";
 		}
+
+		bool BoxCollision(glm::vec3 rectPos, glm::vec2 rectSize);
 
 		glm::vec4 colour = glm::vec4(1, 1, 1, 1);
 

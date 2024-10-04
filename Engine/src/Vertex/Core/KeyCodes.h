@@ -139,11 +139,7 @@ namespace Vertex
 		Menu = 348
 	} Key;
 
-	inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode)
-	{
-		os << static_cast<int32_t>(keyCode);
-		return os;
-	}
+	
 }
 
 // From glfw3.h

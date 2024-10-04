@@ -9,20 +9,19 @@
 
 #pragma once(lib, Winmm.lib)
 
-bool isInit = 0;
 
 
 ma_engine engine;
 
 namespace Vertex {
 
-
+	uint16_t AudioRefCount = 0;
 
 	WindowsAudio::WindowsAudio(const char* filepath, bool loop)
 		: m_filepath(filepath), m_loop(loop)
 	{
 		
-		if (!isInit)
+		if (AudioRefCount == 0)
 		{
 			ma_result result = ma_engine_init(NULL, &engine);
 			if (result != MA_SUCCESS) {
@@ -31,9 +30,9 @@ namespace Vertex {
 
 			
 
-			isInit = 1;
+			
 		}
-
+		++AudioRefCount;
 		{
 			ma_result result;
 
@@ -49,7 +48,14 @@ namespace Vertex {
 
 	WindowsAudio::~WindowsAudio()
 	{
-		ma_sound_uninit(&m_sound);
+		--AudioRefCount;
+
+		if (AudioRefCount == 0)
+		{
+			ma_sound_uninit(&m_sound);
+		}
+
+		
 	}
 
 	void WindowsAudio::Play()

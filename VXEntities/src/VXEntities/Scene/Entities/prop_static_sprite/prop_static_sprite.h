@@ -23,6 +23,8 @@ namespace Vertex {
 			return "prop_static_sprite";
 		}
 
+		virtual void ImGuiRender() override {};
+
 		glm::vec4 colour = glm::vec4(1,1,1,1);
 
 	private:

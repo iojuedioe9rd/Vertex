@@ -12,35 +12,36 @@ namespace Vertex {
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 	}
 
-	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)
+	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation, bool canBeMoved)
+		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation), m_canBeMoved(canBeMoved)
 	{
 	}
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
-		if (Input::IsKeyPressed(VX_KEY_A))
-		{
-			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-			m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-		}
-		else if (Input::IsKeyPressed(VX_KEY_D))
-		{
-			m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-			m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-		}
+		if (m_canBeMoved) {
+			if (Input::IsKeyPressed(VX_KEY_A))
+			{
+				m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+				m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+			}
+			else if (Input::IsKeyPressed(VX_KEY_D))
+			{
+				m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+				m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+			}
 
-		if (Input::IsKeyPressed(VX_KEY_W))
-		{
-			m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-			m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+			if (Input::IsKeyPressed(VX_KEY_W))
+			{
+				m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+				m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+			}
+			else if (Input::IsKeyPressed(VX_KEY_S))
+			{
+				m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+				m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+			}
 		}
-		else if (Input::IsKeyPressed(VX_KEY_S))
-		{
-			m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-			m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-		}
-
 		if (m_Rotation)
 		{
 			if (Input::IsKeyPressed(VX_KEY_Q))

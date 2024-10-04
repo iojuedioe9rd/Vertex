@@ -13,6 +13,8 @@ namespace Vertex {
 			return GL_VERTEX_SHADER;
 		if (type == "fragment" || type == "pixel")
 			return GL_FRAGMENT_SHADER;
+		if (type == "compute")
+			return GL_COMPUTE_SHADER;
 
 		VX_CORE_ASSERT(false, "Unknown shader type!");
 		return 0;
@@ -139,14 +141,17 @@ namespace Vertex {
 		// Note the different functions here: glGetProgram* instead of glGetShader*.
 		GLint isLinked = 0;
 		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
-		if (isLinked == GL_FALSE)
+		if (isLinked == 0)
 		{
-			GLint maxLength = 0;
+			// Retrieve the log length
+			GLint maxLength;
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 
-			// The maxLength includes the NULL character
+			// Allocate the log buffer
 			std::vector<GLchar> infoLog(maxLength);
-			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+
+			// Retrieve the info log
+			glGetProgramInfoLog(program, maxLength, nullptr, infoLog.data());
 
 			// We don't need the program anymore.
 			glDeleteProgram(program);

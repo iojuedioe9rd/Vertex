@@ -61,8 +61,35 @@ namespace Vertex {
 
 	
 
+	
+	bool Scene::RemoveEntity(Entity& entity)
+	{
+		for (size_t i = 0; i < m_Entitys.size(); i++)
+		{
+			if ((*m_Entitys[i]) == entity)
+			{
+				
+				m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());
+				delete &entity;
+				return true;
+			}
+				//int int_to_remove = n;
+				//m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), int_to_remove), m_Entitys.end());
+		}
 
-	void Scene::OnUpdate(Timestep ts)
+		return 0;
+
+
+	}
+	void Scene::OnImGuiRender()
+	{
+		for (Entity* ent : m_Entitys)
+		{
+			ent->ImGuiRenderTime();
+		}
+	}
+
+	void Scene::OnUpdate(Timestep& ts)
 	{
 		for (Entity* ent : m_Entitys)
 		{

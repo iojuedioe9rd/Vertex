@@ -23,7 +23,7 @@ namespace Vertex {
 				delete orthographicCamera;
 			}
 		}
-
+		virtual void ImGuiRender() override {};
 		virtual void Update(Timestep& ts) override
 		{
 			if (isAOrthographicCamera && orthographicCamera == nullptr)

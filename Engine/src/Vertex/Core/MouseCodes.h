@@ -21,11 +21,7 @@ namespace Vertex {
 		ButtonMiddle = Button2
 	} Mouse;
 
-	inline std::ostream& operator<<(std::ostream& os, MouseCode mouseCode)
-	{
-		os << static_cast<int32_t>(mouseCode);
-		return os;
-	}
+	
 }
 
 #define VX_MOUSE_BUTTON_0      ::Vertex::Mouse::Button0

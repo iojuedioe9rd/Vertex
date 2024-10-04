@@ -17,6 +17,7 @@ namespace Vertex {
 
 		~VertexEditor()
 		{
+
 			VXEntities_FREE();
 		}
 	};

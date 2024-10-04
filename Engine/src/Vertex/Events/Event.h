@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vertex/Core/Base.h"
+#include "Vertex/Debug/Instrumentor.h"
 
 #include <string>
 #include <functional>

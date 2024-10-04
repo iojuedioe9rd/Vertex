@@ -17,6 +17,8 @@ project "Vertex-Editor"
 	{
 		"%{wks.location}/Engine/src",
 		"%{wks.location}/VXEntities/src",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.glad}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}"
@@ -25,6 +27,8 @@ project "Vertex-Editor"
 	links
 	{
 		"Engine",
+		"GLFW",
+		"opengl32.lib",
 		"VXEntities"
 	}
 	

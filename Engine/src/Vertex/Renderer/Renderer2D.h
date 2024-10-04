@@ -11,8 +11,8 @@ namespace Vertex {
 		static void Init();
 		static void Shutdown();
 
-		static void BeginScene(const OrthographicCamera& camera);
-		static void BeginScene(const glm::mat4 viewProjectionMatrix);
+		static void BeginScene(const OrthographicCamera& camera, float u_ZoomFactor);
+		static void BeginScene(const glm::mat4 viewProjectionMatrix, float u_ZoomFactor);
 		static void EndScene();
 		static void Flush();
 

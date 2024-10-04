@@ -29,7 +29,12 @@ namespace Vertex
 		}
 
 
-		void OnUpdate(Timestep ts);
+		bool RemoveEntity(Entity& entity);
+		
+
+		void OnUpdate(Timestep& ts);
+
+		void OnImGuiRender();
 
 		std::vector<Entity*>::iterator begin() { return m_Entitys.begin(); }
 		std::vector<Entity*>::iterator end() { return m_Entitys.end(); }

@@ -31,6 +31,11 @@ namespace Vertex {
 		Ref<Shader> m_FlatColorShader;
 		Framebuffer* m_Framebuffer;
 
+		ENTPointCamera2D* m_CameraEntity;
+		ENTPointCamera2D* m_SecondCamera;
+
+		bool m_PrimaryCamera = true;
+
 		Ref<Texture2D> m_CheckerboardTexture;
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };

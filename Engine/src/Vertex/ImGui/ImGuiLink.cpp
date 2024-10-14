@@ -162,6 +162,16 @@ namespace Vertex
         ImGui::Separator();
     }
 
+    void ImGuiLink::DragFloat3(std::string label, float* value)
+    {
+        ImGui::DragFloat3(label.c_str(), value);
+    }
+
+    bool ImGuiLink::Checkbox(std::string label, bool* v)
+    {
+        return ImGui::Checkbox(label.c_str(), v);
+    }
+
     
 
 }

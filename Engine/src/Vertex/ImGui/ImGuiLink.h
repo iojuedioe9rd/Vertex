@@ -106,6 +106,8 @@ namespace Vertex
         static bool IsWindowFocused();
         static bool IsWindowHovered();
         static void Separator();
+        static void DragFloat3(std::string label, float* value);
+        static bool Checkbox(std::string label, bool* v);
 	};
 
 }

@@ -4,6 +4,7 @@
 
 #include <string>
 #include <functional>
+#include "Vertex/Debug/Instrumentor.h"
 
 namespace Vertex {
 

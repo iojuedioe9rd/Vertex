@@ -38,6 +38,14 @@ namespace Vertex {
 		
 		m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
 		
+		m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
+		
+		m_CameraEntity->isPrimary = true;
+
+		m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
+		
+		m_SecondCamera->isPrimary = false;
+
 		
 		square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
 		square.SetIsVisible(true);
@@ -70,26 +78,32 @@ namespace Vertex {
 
 		// Render
 		Renderer2D::ResetStats();
-		//m_Framebuffer->Bind();
+		m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
-		Renderer2D::BeginScene(m_CameraController.GetCamera());
+		Ref<Camera> camera;
+		glm::mat4 transform;
+		if (m_ActiveScene->GetACameraInScene(&camera, true, &transform, true))
+		{
+			Renderer2D::BeginScene(*camera, transform);
 
 
-		Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-		Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-		Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
-		// Update scene
-		m_ActiveScene->OnUpdate(ts);
-		m_SquareEntity.pos = glm::vec3(0, sinf(t) * 100, 0);
-		VX_INFO("{0}", sinf(t));
+			Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
+			Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+			Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
+			// Update scene
+			m_ActiveScene->OnUpdate(ts);
+			m_SquareEntity.pos = glm::vec3(0, sinf(t) * 100, 0);
+			VX_INFO("{0}", sinf(t));
+
+
+
+			Renderer2D::EndScene();
+		}
 		
-		
 
-		Renderer2D::EndScene();
-
-		//m_Framebuffer->Unbind();
+		m_Framebuffer->Unbind();
 	}
 
 	void EditorLayer::OnImGuiRender()
@@ -97,11 +111,11 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Note: Switch this to true to enable dockspace
-		static bool dockingEnabled = 0;
+		static bool dockingEnabled = 1;
 
 		ImGuiLink::Docking(dockingEnabled, [this] { DockSpaceCallback(); });
 
-		if (1)
+		if (0)
 		{
 			
 			ImGuiLink::Begin("Settings");
@@ -152,6 +166,15 @@ namespace Vertex {
 			ImGuiLink::Separator();
 
 		}
+		ImGuiLink::ColorEdit3("Camera Transform", glm::value_ptr(m_CameraEntity->pos));
+
+		if (ImGuiLink::Checkbox("Camera A", &m_PrimaryCamera))
+		{
+			m_CameraEntity->isPrimary = m_PrimaryCamera;
+			m_SecondCamera->isPrimary = !m_PrimaryCamera;
+
+		}
+
 		ImGuiLink::End();
 
 		ImGuiLink::PushStyleVar(ImGuiLink::ImGuiStyleVar_WindowPadding, glm::vec2{ 0, 0 });
@@ -168,6 +191,7 @@ namespace Vertex {
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
+			m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 		}
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();

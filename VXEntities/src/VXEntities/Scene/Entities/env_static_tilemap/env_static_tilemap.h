@@ -35,6 +35,10 @@ namespace Vertex {
 		{
 			SetTile(pos, tex, colour, false);
 		}
+		virtual void EventH(Event& e) override
+		{
+
+		}
 		
 		bool RemoveTile(glm::i32vec2 pos);
 

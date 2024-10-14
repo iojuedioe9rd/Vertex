@@ -2,6 +2,7 @@
 
 #include "OrthographicCamera.h"
 #include "Texture.h"
+#include "Camera.h"
 
 namespace Vertex {
 
@@ -13,6 +14,7 @@ namespace Vertex {
 
 		static void BeginScene(const OrthographicCamera& camera);
 		static void BeginScene(const glm::mat4 viewProjectionMatrix);
+		static void BeginScene(const Camera& camera, const glm::mat4& transform);
 		static void EndScene();
 		static void Flush();
 

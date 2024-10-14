@@ -3,6 +3,8 @@
 #include "Vertex/Core/Timestep.h"
 #include <string>
 #include <vector>  // Include this for std::vector
+#include <Vertex/Renderer/Camera.h>
+#include <Vertex/Events/Event.h>
 
 namespace Vertex
 {
@@ -28,8 +30,11 @@ namespace Vertex
 			return *entity;
 		}
 
-
+		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, bool usePrimaryCam = true);
 		void OnUpdate(Timestep ts);
+		void OnEvent(Event& e);
+		void OnViewportResize(uint32_t width, uint32_t height);
+
 
 		std::vector<Entity*>::iterator begin() { return m_Entitys.begin(); }
 		std::vector<Entity*>::iterator end() { return m_Entitys.end(); }
@@ -43,6 +48,7 @@ namespace Vertex
 	private:
 		std::vector<Entity*> m_Entitys;
 		std::string m_name;
+		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
 		friend class Entity;
 	};

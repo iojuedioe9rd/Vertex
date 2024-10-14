@@ -22,6 +22,10 @@ namespace Vertex {
 		{
 			return "prop_static_sprite";
 		}
+		virtual void EventH(Event& e) override
+		{
+
+		}
 
 		glm::vec4 colour = glm::vec4(1,1,1,1);
 

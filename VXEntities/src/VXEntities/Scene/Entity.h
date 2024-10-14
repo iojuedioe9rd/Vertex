@@ -132,10 +132,21 @@ namespace Vertex {
 				ent->DrawTime(ts);
 			}
 		}
+		void EventTime(Event& e)
+		{
+			EventH(e);
+
+			for (Entity* ent : m_children)
+			{
+				ent->EventTime(e);
+			}
+		
+		}
 
 #pragma endregion
 
 		virtual void Update(Timestep& ts) = NULL;
+		virtual void EventH(Event& e)     = NULL;
 		virtual void Draw(Timestep& ts)   = NULL;
 		virtual std::string GetEntName()  =	NULL;
 		

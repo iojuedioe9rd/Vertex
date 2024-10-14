@@ -1,6 +1,11 @@
 #include "info_player.h"
 #include <Vertex/Renderer/Renderer2D.h>
 #include <Vertex/Core/Input.h>
+#include "../json_static_tilemap/json_static_tilemap.h"
+#include "../../EditorLayer.h"
+#include "../prop_key_door/prop_key_door.h"
+#include "../npc_enemy/npc_enemy.h"
+
 
 Ref<std::vector<ENTGuner*>> lol = Ref<std::vector<ENTGuner*>>();
 
@@ -62,13 +67,42 @@ namespace Vertex {
 		lol.reset(new std::vector<ENTGuner*>());
 	}
 
+	bool ENTInfoPlayer::GoToNextPos(glm::vec3 nextPos)
+	{
+		if (m_tilemap->GetTilemap()->BoxCollision(nextPos, size))
+		{
+			return false;
+		}
+
+		ENTPropKeyDoor* door = nullptr;
+		door = m_tilemap->GetDoorOnPos(nextPos, size);
+		if (door != nullptr)
+		{
+			if (door->IsLocked())
+			{
+				if (door->CanPlayerUnLock && hasPermission(door->m_key))
+				{
+					RemoveKey(door->m_key);
+					door->UnLock();
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
 	void ENTInfoPlayer::Update(Timestep& ts)
 	{
 
 		if (hasThePlayerDied) return;
 		t += ts;
 		glm::vec3 nextPos = NextPos(speed, pos, ts);
-		if (!m_tilemap->BoxCollision(nextPos, size))
+
+		if (GoToNextPos(nextPos))
 		{
 			pos = nextPos;
 		}
@@ -103,22 +137,26 @@ namespace Vertex {
 	void ENTInfoPlayer::Draw(Timestep& ts)
 	{
 		t += ts;
-		Renderer2D::DrawQuad(glm::vec2(pos.x, pos.y + (sin(t) / 10)), size, m_texA[0], 1);
+		Renderer2D::DrawQuad(glm::vec2(pos.x, pos.y + (sin(t) / 10)), size, m_texA[0], 1, glm::vec4(1), 1);
 
 		if (hasPermission(Key::Red))
 		{
-			Renderer2D::DrawQuad(glm::vec3(-10, -6, 0) + m_cam->m_CameraPosition, size * 2.0f, m_texA[0], 1);
-		}
 
-		if (hasPermission(Key::Blue))
-		{
-			Renderer2D::DrawQuad(glm::vec3(-8, -6, 0) + m_cam->m_CameraPosition, size * 2.0f, m_texA[0], 1);
+			Renderer2D::DrawQuad(glm::vec3(-10, -6, 0) + m_cam->m_CameraPosition, size * 2.0f, m_texA[2], 1, glm::vec4(1,0,0,1), true);
 		}
 
 		if (hasPermission(Key::Green))
 		{
-			Renderer2D::DrawQuad(glm::vec3(-6, -6, 0) + m_cam->m_CameraPosition, size * 2.0f, m_texA[0], 1);
+			Renderer2D::DrawQuad(glm::vec3(-8, -6, 0) + m_cam->m_CameraPosition, size * 2.0f, m_texA[2], 1, glm::vec4(0, 1, 0, 1), true);
+			
 		}
+
+		if (hasPermission(Key::Blue))
+		{
+			Renderer2D::DrawQuad(glm::vec3(-6, -6, 0) + m_cam->m_CameraPosition, size * 2.0f, m_texA[2], 1, glm::vec4(0.1f, 0.1f, 1, 1), true);
+		}
+		Renderer2D::DrawQuad(m_cam->m_CameraPosition, glm::vec2(23.11101f , 13.0f), EditorLayer::GetMeEeeeeEEEeEeee()->crt_front_screen_display_tex, 1, glm::vec4(1, 1, 1, 1), true);
+		
 
 		//VX_INFO("{0}, {1}, {2}", m_cam->m_CameraPosition.x, m_cam->m_CameraPosition.y, m_cam->m_CameraPosition.z);
 	}
@@ -126,7 +164,12 @@ namespace Vertex {
 	{
 		ImGuiLink::Begin("Player Info");
 		ImGuiLink::Text("Health: %.1f%%", GetHealthPercent() * 200.0f);
+		
 
+		ImGuiLink::End();
+
+		ImGuiLink::Begin("Game Info");
+		ImGuiLink::Text("Enemies Killed: %.1f%%", ((float)std::max({ KilledEnemys, 0 }) / (m_tilemap->GetEnemys().size())) * 100.0f);
 		ImGuiLink::End();
 	}
 	void ENTInfoPlayer::OnDeath()
@@ -153,7 +196,7 @@ namespace Vertex {
 
 		for (float i = 0.01f; i < 12.0f; i += 0.01f)
 		{
-			if (m_tilemap->BoxCollision(pos + dir * i, size))
+			if (m_tilemap->GetTilemap()->BoxCollision(pos + dir * i, size))
 			{
 				break;
 			}
@@ -166,12 +209,14 @@ namespace Vertex {
 		pos += dir * try_lol;
 	}
 
-	void ENTInfoPlayer::Setup(Ref<Texture2D> tex, Ref<Texture2D> tex2, ENTEnvStaticTilemap* tilemap, OrthographicCameraController* cam)
+	void ENTInfoPlayer::Setup(Ref<Texture2D> tex, Ref<Texture2D> tex2, Ref<Texture2D> tex3, ENTJsonStaticTilemap* tilemap, OrthographicCameraController* cam)
 	{
+		if (this == nullptr) { return; }
 		m_cam = cam;
-		key = static_cast<uint8_t>(Key::Red) | static_cast<uint8_t>(Key::Green) | static_cast<uint8_t>(Key::Blue);
+		//key = static_cast<uint8_t>(Key::Red) | static_cast<uint8_t>(Key::Green) | static_cast<uint8_t>(Key::Blue);
 		m_texA[0] = tex;
 		m_texA[1] = tex2;
+		m_texA[2] = tex3;
 		m_tilemap = tilemap;
 	}
 }

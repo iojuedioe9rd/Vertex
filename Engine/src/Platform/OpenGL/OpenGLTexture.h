@@ -11,6 +11,8 @@ namespace Vertex {
 	public:
 		OpenGLTexture2D(uint32_t width, uint32_t height);
 		OpenGLTexture2D(const std::string& path);
+		// const std::string& format, int resourceID
+		OpenGLTexture2D(const std::string& format, int resourceID);
 		virtual ~OpenGLTexture2D();
 
 		virtual uint32_t GetWidth() const override { return m_Width; }
@@ -29,6 +31,7 @@ namespace Vertex {
 		std::string m_Path;
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;
+
 		GLenum m_InternalFormat, m_DataFormat;
 	};
 

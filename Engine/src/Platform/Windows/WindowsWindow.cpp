@@ -6,6 +6,39 @@
 #include <Vertex/Events/MouseEvent.h>
 
 #include <glad/glad.h>
+#include <stb_image.h>
+// IDB_BITMAP1 104
+#include <windows.h>
+#include <glfw/glfw3.h>
+
+unsigned char* LoadPNGFromResource(int resourceID, int* width, int* height, int* channels) {
+	HRSRC hResource = FindResource(NULL, MAKEINTRESOURCE(resourceID), L"PNG");
+	if (!hResource) {
+		std::cerr << "Failed to find PNG resource." << std::endl;
+		return nullptr;
+	}
+
+	HGLOBAL hMemory = LoadResource(NULL, hResource);
+	if (!hMemory) {
+		std::cerr << "Failed to load resource." << std::endl;
+		return nullptr;
+	}
+
+	void* pData = LockResource(hMemory);
+	DWORD size = SizeofResource(NULL, hResource);
+	if (!pData || size == 0) {
+		std::cerr << "Failed to lock resource." << std::endl;
+		return nullptr;
+	}
+
+	unsigned char* imageData = stbi_load_from_memory((unsigned char*)pData, size, width, height, channels, STBI_rgb_alpha);
+	if (!imageData) {
+		std::cerr << "Failed to load PNG from resource." << std::endl;
+	}
+
+	return imageData;
+}
+
 
 namespace Vertex {
 
@@ -46,8 +79,28 @@ namespace Vertex {
 
 			
 		}
+		 
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		GLFWimage images[1];  // Array of GLFWimage (you can have more icons if needed)
+		int width, height, channels;
+
+		unsigned char* pixels = LoadPNGFromResource(104, &width, &height, &channels);  // Load the bitmap resource
+
+		if (pixels) {
+			images[0].width = width;
+			images[0].height = height;
+			images[0].pixels = pixels;
+
+			// Set the window icon
+			glfwSetWindowIcon(m_Window, 1, images);
+
+			// Free the image data after setting the icon
+			stbi_image_free(pixels);  // Free image memory after use
+		}
+		else {
+			std::cerr << "Failed to load the window icon." << std::endl;
+		}
 		s_GLFWWindowCount++;
 		glfwMakeContextCurrent(m_Window);
 		m_Context = new OpenGLContext(m_Window);

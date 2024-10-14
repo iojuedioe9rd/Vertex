@@ -55,6 +55,7 @@ namespace Vertex
 	}
 	bool ENTEnvStaticTilemap::BoxCollision(glm::vec3 rectPos, glm::vec2 rectSize)
 	{
+		if (this == nullptr) return false;
 		for (auto& i : Tiles)
 		{
 			if (!i.isCollidable) continue;

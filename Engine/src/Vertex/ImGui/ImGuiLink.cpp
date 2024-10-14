@@ -1,6 +1,7 @@
 #include "vxpch.h"
 #include "ImGuiLink.h"
 #include <imgui.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Vertex
 {
@@ -13,6 +14,7 @@ namespace Vertex
     void ImGuiLink::End()
     {
         ImGui::End();
+        
     }
 
 
@@ -160,6 +162,16 @@ namespace Vertex
     void ImGuiLink::Separator()
     {
         ImGui::Separator();
+    }
+
+    void ImGuiLink::InputFloat3(std::string l, glm::vec3& v)
+    {
+        ImGui::InputFloat3(l.c_str(), glm::value_ptr(v));
+    }
+
+    bool ImGuiLink::Button(std::string l)
+    {
+        return ImGui::Button(l.c_str());
     }
 
     

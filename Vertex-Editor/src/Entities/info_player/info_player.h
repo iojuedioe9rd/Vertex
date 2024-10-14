@@ -4,10 +4,14 @@
 #include "../base_health_system/base_health_system.h"
 #include "Vertex/Renderer/Renderer2D.h"
 
+#define KEY_RED ::Vertex::ENTInfoPlayer::Key::Red
+#define KEY_GREEN ::Vertex::ENTInfoPlayer::Key::Green
+#define KEY_BLUE ::Vertex::ENTInfoPlayer::Key::Blue
+
 namespace Vertex {
 
 	class ENTGuner;
-	
+	class ENTJsonStaticTilemap;
 
 	class ENTInfoPlayer : public ENTBaseHealthSystem<int, 0>
 	{
@@ -29,10 +33,13 @@ namespace Vertex {
 
 		}
 		void pass();
+
+		bool GoToNextPos(glm::vec3 nextPos);
+
 		ENTInfoPlayer(std::string name, Scene* scene) : ENTBaseHealthSystem(name, scene)
 		{
 			pass();
-			Init(100, 253);
+			Init(131 - 5, 254);
 			
 		}
 		~ENTInfoPlayer();
@@ -55,6 +62,13 @@ namespace Vertex {
 			return (static_cast<uint8_t>(key) & static_cast<uint8_t>(perm)) != 0;
 		}
 
+		void KilledEnemy()
+		{
+			KilledEnemys++;
+		}
+
+		int KilledEnemys = -1;
+
 		void RemoveKey(Key keyToRemove)
 		{
 			key &= ~static_cast<uint8_t>(keyToRemove);  // Remove the specified flag
@@ -62,16 +76,16 @@ namespace Vertex {
 		virtual void OnDeath() override;
 		void Die(glm::vec3 senderPos);
 
-		void Setup(Ref<Texture2D> tex, Ref<Texture2D> tex2, ENTEnvStaticTilemap* tilemap, OrthographicCameraController* cam);
+		void Setup(Ref<Texture2D> tex, Ref<Texture2D> tex2, Ref<Texture2D> tex3, ENTJsonStaticTilemap* tilemap, OrthographicCameraController* cam);
 
 	private:
 		bool hasThePlayerDied = 0;
 		uint8_t key;
 
 		OrthographicCameraController* m_cam;
-		std::array<Ref<Texture2D>, 2> m_texA = std::array<Ref<Texture2D>, 2>();
+		std::array<Ref<Texture2D>, 3> m_texA = std::array<Ref<Texture2D>, 3>();
 		
-		ENTEnvStaticTilemap* m_tilemap;
+		ENTJsonStaticTilemap* m_tilemap;
 		bool isSetup;
 
 	};
@@ -138,7 +152,7 @@ namespace Vertex {
 		virtual void Draw(Timestep& ts)
 		{
 
-			Renderer2D::DrawQuad(glm::vec2(pos.x, pos.y), glm::vec2(size.x, size.y), m_tex, 1);
+			Renderer2D::DrawQuad(glm::vec2(pos.x, pos.y), glm::vec2(size.x, size.y), m_tex, 1, glm::vec4(1), true);
 		}
 
 

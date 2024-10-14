@@ -16,4 +16,11 @@ namespace Vertex
 #endif
 	}
 
+	Audio* Audio::Create(int resourceId, bool loop)
+	{
+#ifdef VX_PLATFORM_WINDOWS
+		return new WindowsAudio(resourceId, loop);
+#endif
+	}
+
 }

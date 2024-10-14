@@ -1,5 +1,7 @@
 #pragma once
 
+#define retASMName return
+
 #include "VXEntities/MainLib.h"
 
 #include "VXEntities/Scene/Entity.h"

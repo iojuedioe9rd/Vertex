@@ -115,6 +115,7 @@ namespace Vertex {
 
 		virtual void ImGuiRenderTime()
 		{
+			if (this == nullptr) { return; }
 			ImGuiRender();
 
 			for (Entity* ent : m_children)
@@ -125,21 +126,25 @@ namespace Vertex {
 		
 		void UpdateTime(Timestep& ts)
 		{
+			if (this == nullptr) { return; }
 			Update(ts);
 
 			for (Entity* ent : m_children)
 			{
-				ent->UpdateTime(ts);
+				if (ent != nullptr)
+					ent->UpdateTime(ts);
 			}
 		}
 
 		void DrawTime(Timestep& ts)
 		{
+			if (this == nullptr) { return; }
 			Draw(ts);
 
 			for (Entity* ent : m_children)
 			{
-				ent->DrawTime(ts);
+				if(ent != nullptr)
+					ent->DrawTime(ts);
 			}
 		}
 

@@ -58,4 +58,21 @@ namespace Vertex
 		Scenes[name] = newScene; // Add it to the map
 		return newScene;
 	}
+	bool VXEntities_RemoveScene(Scene* scene)
+	{
+		try
+		{
+			for (Entity* ent : *scene)
+			{
+				scene->RemoveEntity(*ent);
+			}
+			
+		}
+		catch (const std::exception& ex)
+		{
+			VX_CORE_ASSERT(0, ex.what());
+			return false;
+		}
+		
+	}
 }

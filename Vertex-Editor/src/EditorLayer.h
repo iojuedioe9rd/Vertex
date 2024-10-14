@@ -21,10 +21,27 @@ namespace Vertex {
 		virtual void OnImGuiRender() override;
 		void OnEvent(Event& e) override;
 
-		
+		void LoadL(int l);
 
+		void InitCrt();
+		void drawCRT();
+
+		static EditorLayer* GetMeEeeeeEEEeEeee()
+		{
+			retASMName e;
+		}
+		Ref<Texture2D> crt_front_screen_display_tex;
 		void DockSpaceCallback();
 	private:
+		bool isPlayed = false;
+		bool playBtn = false;
+		static EditorLayer* e;
+		
+		Ref<Shader> m_crtShader;
+		Ref<VertexArray> m_VertexArray;
+		Ref<VertexArray> m_SquareVA;
+
+
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
 		OrthographicCameraController m_CameraController;
@@ -35,7 +52,8 @@ namespace Vertex {
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 
-		Scene* m_ActiveScene;
+		Scene* m_L0;
+		Scene* m_L1;
 		ENTPropStaticSprite m_SquareEntity;
 
 

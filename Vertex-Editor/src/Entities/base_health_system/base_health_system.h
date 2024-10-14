@@ -36,7 +36,9 @@ namespace Vertex {
         }
 
         T Heal(T Amount) {
+            if (m_health < min - 1) m_health = min + 1;
             m_health += Amount;
+            
             if (m_health > m_maxHealth) m_health = m_maxHealth;
             return m_health;
         }

@@ -60,7 +60,7 @@ void Sandbox2D::OnUpdate(Timestep ts)
 	RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 0 });
 	RenderCommand::Clear();
 
-	Renderer2D::BeginScene(m_CameraController.GetCamera());
+	Renderer2D::BeginScene(m_CameraController.GetCamera(), 1, 1);
 	Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
 	Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 	Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);

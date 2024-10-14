@@ -17,13 +17,15 @@ namespace Vertex {
 		{
 			m_Audio = AudioManager::GetAudioFromFileName("assets/music/Tormentor.wav");
 			m_Audio2 = AudioManager::GetAudioFromFileName("assets/music/Tormentor 01.wav");
-			Init(15, 25);
+			Init(100, 200);
+			Heal(rand() % 99);
 		}
 		~ENTNpcEnemy();
 
 		virtual void Update(Timestep& ts) override;
 		virtual void Draw(Timestep& ts)   override;
 		float t = 0.0f;
+		float t2 = 0.0f;
 
 		float maxTime = 5.0f;
 		float initMaxTime = 5.0f;
@@ -43,6 +45,9 @@ namespace Vertex {
 			maxTime = dist(rng) ;
 			initMaxTime = dist(rng);
 
+			std::uniform_int_distribution<int> dist2(0, 1000);
+			m_Audio->SetVolume((float)dist2(rng) / (float)1000);
+			m_Audio2->SetVolume((float)dist2(rng) / (float)1000);
 
 			m_player = player;
 			m_tex = tex;

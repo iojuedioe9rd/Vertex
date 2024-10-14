@@ -106,6 +106,8 @@ namespace Vertex
         static bool IsWindowFocused();
         static bool IsWindowHovered();
         static void Separator();
+        static void InputFloat3(std::string l, glm::vec3& v);
+        static bool Button(std::string l);
 	};
 
 }

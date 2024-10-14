@@ -7,12 +7,19 @@
 #include <iostream>
 #include <Vertex/Core/Logger.h>
 #include "../npc_enemy/npc_enemy.h"
+#include "../prop_key_door/prop_key_door.h"
+#define GLM_ENABLE_EXPERIMENTAL 1
+#include <glm/gtx/transform.hpp>
 
 
 
-#define MAP_SIZE   16
-#define MAP_WALL   1
-#define MAP_PLAYER 2
+#define MAP_SIZE        16
+#define MAP_WALL        1
+#define MAP_PLAYER      2
+#define MAP_ENEMY       3
+#define MAP_ENEMY_FAKE  4
+#define MAP_DOOR_RED    5
+#define MAP_DOOR_RED_UP 6
 #define TILE_SIZE  32
 
 using json = nlohmann::json;
@@ -21,6 +28,7 @@ using json = nlohmann::json;
 
 namespace Vertex {
     std::vector<ENTNpcEnemy*> Enemys = std::vector<ENTNpcEnemy*>();
+    std::vector<ENTPropKeyDoor*> Doors = std::vector<ENTPropKeyDoor*>();
 
     std::vector<std::vector<uint8_t>> ENTJsonStaticTilemap::GetAllWalls()
     {
@@ -41,8 +49,24 @@ namespace Vertex {
         return data;
     }
 
-    void t(ENTJsonStaticTilemap* thisA, Scene* m_Scene, std::string fileName)
+    std::vector<ENTNpcEnemy*> ENTJsonStaticTilemap::GetEnemys()
     {
+        return Enemys;
+    }
+
+    void CreateDoor(Entity* l, int x, int y, int height, int width, Scene* m_Scene, const std::string& colourName, ENTInfoPlayer::Key key, float rotation, std::array<Ref<Texture2D>, 1>* doorTex)
+    {
+        l = &m_Scene->CreateEntity<ENTPropKeyDoor>("Door " + colourName);
+        l->pos = glm::vec3(x - (width / 2), y - (height / 2), 0);
+        l->rotation.z = rotation;
+        static_cast<ENTPropKeyDoor*>(l)->Setup(doorTex, key);
+        Doors.push_back(static_cast<ENTPropKeyDoor*>(l));
+    }
+
+    void t(ENTJsonStaticTilemap* thisA, Scene* m_Scene, std::string fileName, std::atomic<bool>* done)
+    {
+        
+
         // Load and parse JSON data efficiently
         ENTJsonStaticTilemap::jsonData jsonA = thisA->FromJSON(fileName);
 
@@ -62,11 +86,11 @@ namespace Vertex {
             for (int x = 0; x < jsonA.width; ++x) {
 
 
-                ENTNpcEnemy* l;
+                Entity* l;
                 switch (data[y][x])
                 {
                 case MAP_WALL:
-                    thisA->m_tilemap->AddTile(glm::i32vec2(x, y - (jsonA.height / 2)), thisA->textures[0], glm::vec4(1, 1, 1, 1));
+                    thisA->m_tilemap->AddTile(glm::i32vec2(x - (jsonA.width / 2), y - (jsonA.height / 2)), thisA->textures[0], glm::vec4(1, 1, 1, 1));
                     break;
                 case MAP_PLAYER:
                     if (thisA->m_player != nullptr)
@@ -74,30 +98,40 @@ namespace Vertex {
                         m_Scene->RemoveEntity(*thisA->m_player);
                     }
                     thisA->m_player = &m_Scene->CreateEntity<ENTInfoPlayer>("Player");
-                    thisA->m_player->Setup(thisA->textures[1], thisA->textures[3], thisA->m_tilemap, thisA->m_cam);
+                    
                     // Adjust the player's position based on the actual grid size
                     thisA->m_player->pos = glm::vec3(
-                        x,  // Adjust for x position
+                        x - (jsonA.width / 2),  // Adjust for x position
                         y - (jsonA.height / 2), // Adjust for y position
                         0
                     );
 
                     VX_INFO("Player spawned at: x = {0}, y = {1}", thisA->m_player->pos.x, thisA->m_player->pos.y);
                     break;
-                case 3:
+                case MAP_ENEMY:
                     l = &m_Scene->CreateEntity<ENTNpcEnemy>("Enemy");
 
                     l->pos = glm::vec3(
-                        x,  // Adjust for x position
+                        x - (jsonA.width / 2),  // Adjust for x position
                         y - (jsonA.height / 2), // Adjust for y position
                         0
                     );
+                    
 
-                    Enemys.push_back(l);
+                    Enemys.push_back((ENTNpcEnemy*)l);
                     break;
 
-                case 4:
-                    thisA->m_tilemap->AddTile(glm::i32vec2(x, y - (jsonA.height / 2)), thisA->textures[2], glm::vec4(1, 1, 1, 1));
+                case MAP_ENEMY_FAKE:
+                    thisA->m_tilemap->AddTile(glm::i32vec2(x - (jsonA.width / 2), y - (jsonA.height / 2)), thisA->textures[2], glm::vec4(1, 1, 1, 1));
+                    
+                    break;
+                case MAP_DOOR_RED:
+                    CreateDoor(l, x, y, jsonA.height, jsonA.width, m_Scene, std::string("RED"), ENTInfoPlayer::Key::Red, -180, thisA->doorTex);
+
+                    break;
+                case MAP_DOOR_RED_UP:
+                    CreateDoor(l, x, y, jsonA.height, jsonA.width, m_Scene, std::string("RED"), ENTInfoPlayer::Key::Red, 90, thisA->doorTex);
+
                     break;
                 case 21:
                     VX_INFO("Bro get out!!!!!!!!!!!!!!!!!!!");
@@ -114,12 +148,39 @@ namespace Vertex {
             }
         }
         // l->Setup(m_player, textures[1], this);
+        thisA->m_player->Setup(thisA->textures[1], thisA->textures[3], thisA->textures[4], thisA, thisA->m_cam);
         int i = 0;
         for (ENTNpcEnemy* l : Enemys)
         {
             l->Setup(thisA->m_player, thisA->textures[2], thisA, i);
             i++;
         }
+        *done = true;
+    }
+
+    ENTPropKeyDoor* ENTJsonStaticTilemap::GetDoorOnPos(glm::vec2 pos, glm::vec2 size)
+    {
+        for (ENTPropKeyDoor* l : Doors)
+        {
+            glm::mat4 transform = glm::translate(glm::mat4(1.0f), l->pos)
+                * glm::rotate(glm::mat4(1.0f), glm::radians(l->rotation.z), { 0.0f, 0.0f, 1.0f })
+                * glm::scale(glm::mat4(1.0f), { l->size.x, l->size.y, 1.0f });;
+            glm::vec4 rect1 = glm::vec4(pos.x, pos.y, 0, size.x);
+            glm::vec4 Doorpos = transform[0];
+            glm::vec4 Doorsize = transform[1];
+
+
+            if (!!(
+                rect1.x < Doorpos.x + Doorsize.x &&
+                rect1.x + rect1.w > Doorsize.x &&
+                rect1.y < Doorsize.y + size.y &&
+                rect1.y + size.y > Doorsize.y)
+                ) {
+                return l;
+
+            }
+        }
+        return nullptr;
     }
 
     void ENTJsonStaticTilemap::Setup(ENTEnvStaticTilemap* tilemap, OrthographicCameraController& cam)
@@ -128,15 +189,15 @@ namespace Vertex {
 		tilemap->Clear();
 
         m_cam = &cam;
-
-        std::thread* thread_object = new std::thread(t, this, m_Scene, std::string("map/map1.json"));
+        std::atomic<bool> done = false;
+        std::thread* thread_object = new std::thread(t, this, m_Scene, std::string("map/map1.json"), &done);
         
         thread_object->join();
         delete thread_object;
 		
 	}
 
-    void ENTJsonStaticTilemap::ReDoSetup(std::string filename, ENTEnvStaticTilemap* tilemap, OrthographicCameraController& cam)
+    std::thread* ENTJsonStaticTilemap::ReDoSetup(std::string filename, ENTEnvStaticTilemap* tilemap, OrthographicCameraController& cam, std::atomic<bool>& done)
     {
         m_tilemap = tilemap;
         tilemap->Clear();
@@ -149,10 +210,15 @@ namespace Vertex {
             m_Scene->RemoveEntity(*e);
         }
 
-        std::thread* thread_object = new std::thread(t, this, m_Scene, filename);
+        for (ENTPropKeyDoor* d : Doors)
+        {
+            RemoveEntity(d);
+            
+        }
 
-        thread_object->join();
-        delete thread_object;
+        std::thread* thread_object = new std::thread(t, this, m_Scene, filename, &done);
+
+        return thread_object;
 
     }
 
@@ -171,6 +237,38 @@ namespace Vertex {
             //m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), int_to_remove), m_Entitys.end());
         }
     }
+
+    void ENTJsonStaticTilemap::RemoveEntity(Entity* e)
+    {
+        for (size_t i = 0; i < Doors.size(); i++)
+        {
+            if ((*Doors[i]) == *e)
+            {
+
+                Doors.erase(std::remove(Doors.begin(), Doors.end(), e), Doors.end());
+                m_Scene->RemoveEntity(*e);
+                return;
+
+            }
+            //int int_to_remove = n;
+            //m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), int_to_remove), m_Entitys.end());
+        }
+
+        for (size_t i = 0; i < Enemys.size(); i++)
+        {
+            if ((*Enemys[i]) == *e)
+            {
+
+                Enemys.erase(std::remove(Enemys.begin(), Enemys.end(), e), Enemys.end());
+                m_Scene->RemoveEntity(*e);
+                return;
+
+            }
+            //int int_to_remove = n;
+            //m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), int_to_remove), m_Entitys.end());
+        }
+    }
+    
 
     ENTJsonStaticTilemap::jsonData ENTJsonStaticTilemap::FromJSON(std::string& filename)
     {

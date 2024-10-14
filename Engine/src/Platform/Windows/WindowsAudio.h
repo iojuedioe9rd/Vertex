@@ -8,10 +8,13 @@ namespace Vertex
 	{
 	public:
 		WindowsAudio(const char* filepath, bool loop);
+		WindowsAudio(int resourceId, bool loop);
 		~WindowsAudio();
 
 		virtual void Play() override;
 		virtual void Stop() override;
+
+		virtual void SetVolume(float volume) override;
 
 	private:
 		const char* m_filepath;

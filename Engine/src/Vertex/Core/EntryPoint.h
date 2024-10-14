@@ -8,7 +8,9 @@
 
 extern Vertex::Application* Vertex::CreateApp();
 
-int main(int argc, char** argv)
+#include <windows.h>
+
+int main()
 {
 	VX_PROFILE_BEGIN_SESSION("Startup", "VertexProfile-Startup.json");
 	Vertex::Logger::Init();
@@ -22,5 +24,13 @@ int main(int argc, char** argv)
 	Vertex::AudioManager::Bye();
 	delete app;
 }
+
+
+int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)
+{
+
+	return main();
+}
+
 
 #endif

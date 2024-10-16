@@ -30,6 +30,8 @@ namespace Vertex
 			return *entity;
 		}
 
+		bool RemoveEntity(Entity& entity);
+
 		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, bool usePrimaryCam = true);
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);

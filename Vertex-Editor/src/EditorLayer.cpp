@@ -97,7 +97,7 @@ namespace Vertex {
 			// Update scene
 			m_ActiveScene->OnUpdate(ts);
 			m_SquareEntity.pos = glm::vec3(0, sinf(t) * 100, 0);
-			VX_INFO("{0}", sinf(t));
+			//VX_INFO("{0}", sinf(t));
 
 
 

@@ -119,6 +119,10 @@ namespace Vertex
         static bool Selectable(char* name, bool* selected);
         static bool DragFloat(std::string label, float value_ptr[1]);
         static void DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f);
+        static bool BeginPopupContextWindow();
+        static void EndPopup();
+        static bool Button(std::string label);
+        static bool BeginPopupContextItem();
 	};
 
 }

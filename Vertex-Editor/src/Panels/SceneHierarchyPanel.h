@@ -10,17 +10,18 @@ namespace Vertex {
 	{
 	public:
 		SceneHierarchyPanel() = default;
-		SceneHierarchyPanel(const Scene* scene);
-		void SetContext(const Scene* scene);
+		SceneHierarchyPanel(Scene* scene);
+		void SetContext(Scene* scene);
 		void OnImGuiRender();
 
 	private:
 		void DrawEntityNode(Entity* entity);
 		void DrawEntity(Entity* entity);
 	private:
-		const Scene* m_Context;
+		Scene* m_Context;
+		bool m_CreateEntityPopup;
 		Entity* m_SelectionContext = nullptr;
-
+		Entity* m_EntityToRemove = nullptr;
 	};
 
 	

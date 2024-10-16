@@ -64,6 +64,23 @@ namespace Vertex {
 	
 
 
+	bool Scene::RemoveEntity(Entity& entity)
+	{
+		for (size_t i = 0; i < m_Entitys.size(); i++)
+		{
+			if ((*m_Entitys[i]) == entity)
+			{
+
+				m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());
+				delete& entity;
+				return true;
+			}
+			//int int_to_remove = n;
+			//m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), int_to_remove), m_Entitys.end());
+		}
+		return 0;
+	}
+
 	bool Scene::GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform, bool usePrimaryCam)
 	{
 		for (Entity* ent : m_Entitys)

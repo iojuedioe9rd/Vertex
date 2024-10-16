@@ -225,6 +225,7 @@ namespace Vertex
 
     void ImGuiLink::DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue, float columnWidth)
     {
+        
         ImGui::PushID(label.c_str());
         ImGui::Columns(2);
         ImGui::SetColumnWidth(0, columnWidth);
@@ -266,6 +267,26 @@ namespace Vertex
         ImGui::PopStyleVar();
         ImGui::Columns(1);
         ImGui::PopID();
+    }
+
+    bool ImGuiLink::BeginPopupContextWindow()
+    {
+        return ImGui::BeginPopupContextWindow();
+    }
+
+    void ImGuiLink::EndPopup()
+    {
+        ImGui::EndPopup();
+    }
+
+    bool ImGuiLink::Button(std::string label)
+    {
+        return ImGui::Button(label.c_str());
+    }
+
+    bool ImGuiLink::BeginPopupContextItem()
+    {
+        return ImGui::BeginPopupContextItem();
     }
 
     

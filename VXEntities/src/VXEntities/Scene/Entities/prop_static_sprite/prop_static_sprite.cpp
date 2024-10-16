@@ -14,6 +14,6 @@ namespace Vertex
 	void ENTPropStaticSprite::Draw(Timestep& ts)
 	{
 
-		Renderer2D::DrawRotatedQuad(glm::vec2(pos.x, pos.y), glm::vec2(size.x, size.y), rotation.z, colour);
+		Renderer2D::DrawRotatedQuad(pos, glm::vec2(size.x, size.y), rotation.z, colour);
 	}
 }

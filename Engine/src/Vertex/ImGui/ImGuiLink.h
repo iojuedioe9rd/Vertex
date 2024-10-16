@@ -114,6 +114,10 @@ namespace Vertex
         static void TreePop();
         static bool InputText(char* sdd, char* buffer, size_t buffer_size);
         static bool IsMouseDown(int mouseButton);
+        static bool BeginCombo(char* name, char* idk);
+        static void EndCombo();
+        static bool Selectable(char* name, bool* selected);
+        static bool DragFloat(std::string label, float value_ptr[1]);
 	};
 
 }

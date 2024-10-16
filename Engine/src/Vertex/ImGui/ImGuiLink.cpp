@@ -202,6 +202,26 @@ namespace Vertex
         return ImGui::IsMouseDown(mouseButton);
     }
 
+    bool ImGuiLink::BeginCombo(char* name, char* idk)
+    {
+        return ImGui::BeginCombo(name, idk);
+    }
+
+    void ImGuiLink::EndCombo()
+    {
+        ImGui::EndCombo();
+    }
+
+    bool ImGuiLink::Selectable(char* name, bool* selected)
+    {
+        return ImGui::Selectable(name, selected);
+    }
+
+    bool ImGuiLink::DragFloat(std::string label, float value_ptr[1])
+    {
+        return ImGui::DragFloat(label.c_str(), value_ptr);
+    }
+
     
 
 }

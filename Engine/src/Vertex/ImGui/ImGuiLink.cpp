@@ -162,14 +162,44 @@ namespace Vertex
         ImGui::Separator();
     }
 
-    void ImGuiLink::DragFloat3(std::string label, float* value)
+    void ImGuiLink::DragFloat3(std::string label, float* value, float speed)
     {
-        ImGui::DragFloat3(label.c_str(), value);
+        ImGui::DragFloat3(label.c_str(), value, speed);
     }
 
     bool ImGuiLink::Checkbox(std::string label, bool* v)
     {
         return ImGui::Checkbox(label.c_str(), v);
+    }
+
+    bool ImGuiLink::TreeNodeEx(std::string srt_id, int Flags, std::string label)
+    {
+        return ImGui::TreeNodeEx(srt_id.c_str(), (ImGuiTreeNodeFlags)Flags, label.c_str());
+    }
+
+    bool ImGuiLink::TreeNodeEx(void* ptr_id, int Flags, std::string label)
+    {
+        return ImGui::TreeNodeEx(ptr_id, (ImGuiTreeNodeFlags)Flags, label.c_str());
+    }
+
+    bool ImGuiLink::IsItemClicked()
+    {
+        return ImGui::IsItemClicked();
+    }
+
+    void ImGuiLink::TreePop()
+    {
+        ImGui::TreePop();
+    }
+
+    bool ImGuiLink::InputText(char* sdd, char* buffer, size_t buffer_size)
+    {
+        return ImGui::InputText(sdd, buffer, buffer_size);
+    }
+
+    bool ImGuiLink::IsMouseDown(int mouseButton)
+    {
+        return ImGui::IsMouseDown(mouseButton);
     }
 
     

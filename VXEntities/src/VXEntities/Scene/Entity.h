@@ -27,7 +27,7 @@ namespace Vertex {
 		glm::vec3 size = glm::vec3(1,1,1);
 		glm::vec3 rotation = glm::vec3(0, 0, 0);
 
-		std::string name()
+		std::string& name()
 		{
 			return m_name;
 		}

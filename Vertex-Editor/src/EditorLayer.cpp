@@ -3,7 +3,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
+#include "Panels/SceneHierarchyPanel.h"
 #include "Vertex/Core/Input.h"
 
 
@@ -52,6 +52,8 @@ namespace Vertex {
 
 		m_SquareEntity = square;
 		m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	float t = 0.0f;
@@ -155,6 +157,8 @@ namespace Vertex {
 		ImGuiLink::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGuiLink::Text("Indices: %d", stats.GetTotalIndexCount());
 
+
+
 		if (true)
 		{
 			ImGuiLink::Separator();
@@ -200,9 +204,7 @@ namespace Vertex {
 		ImGuiLink::End();
 		ImGuiLink::PopStyleVar();
 
-		ImGuiLink::Begin("Hi");
-		
-		ImGuiLink::End();
+		m_SceneHierarchyPanel.OnImGuiRender();
 
 		
 	}

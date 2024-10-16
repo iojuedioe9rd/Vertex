@@ -4,6 +4,7 @@
 #include <Vertex/Renderer/Framebuffer.h>
 #include <Vertex/Renderer/Texture.h>
 #include "VXEntities.h"
+#include "Panels/SceneHierarchyPanel.h"
 
 namespace Vertex {
 
@@ -45,6 +46,9 @@ namespace Vertex {
 
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+
+		// Panels
+		SceneHierarchyPanel m_SceneHierarchyPanel;
 	};
 
 }

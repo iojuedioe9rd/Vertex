@@ -106,8 +106,14 @@ namespace Vertex
         static bool IsWindowFocused();
         static bool IsWindowHovered();
         static void Separator();
-        static void DragFloat3(std::string label, float* value);
+        static void DragFloat3(std::string label, float* value, float speed = 1.0f);
         static bool Checkbox(std::string label, bool* v);
+        static bool TreeNodeEx(std::string srt_id, int Flags, std::string label);
+        static bool TreeNodeEx(void* ptr_id, int Flags, std::string label);
+        static bool IsItemClicked();
+        static void TreePop();
+        static bool InputText(char* sdd, char* buffer, size_t buffer_size);
+        static bool IsMouseDown(int mouseButton);
 	};
 
 }

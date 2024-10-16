@@ -9,16 +9,24 @@
 #define VX_ENABLE_ASSERTS 1
 #endif // !VX_DIST
 
-
 #ifdef VX_ENABLE_ASSERTS
-#define VX_ASSERT(x, ...) { if(!(x)) { VX_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#define VX_CORE_ASSERT(x, ...) { if(!(x)) { VX_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#if defined(VX_PLATFORM_WINDOWS)
+		#define VX_DEBUGBREAK() __debugbreak()
+	#elif defined(VX_PLATFORM_LINUX)
+		#include <signal.h>
+		#define VX_DEBUGBREAK() raise(SIGTRAP)
+	#else
+		#error "Platform doesn't support debugbreak yet!"
+	#endif
+	#define VX_ENABLE_ASSERTS
 #else
-#include "Vertex/Core/ErrorBox.h"
-
-#define VX_ASSERT(x, ...) { if(!(x)) { ErrorBox("Assertion Failed"); __debugbreak(); exit(-1); } }
-#define VX_CORE_ASSERT(x, ...) { if(!(x)) { ErrorBox("Core Assertion Failed"); __debugbreak(); exit(-1); } }
+	#define VX_DEBUGBREAK()
 #endif
+
+
+
+#define VX_EXPAND_MACRO(x) x
+#define VX_STRINGIFY_MACRO(x) #x
 
 #define VX_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
@@ -41,3 +49,5 @@ namespace Vertex {
 	}
 
 }
+#include "Vertex/Core/Logger.h"
+#include "Vertex/Core/Assert.h"

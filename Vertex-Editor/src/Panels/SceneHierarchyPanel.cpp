@@ -77,7 +77,12 @@ namespace Vertex {
 
 		if (ImGuiLink::TreeNodeEx(entity->GetID() + "Transform", ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
 		{
-			ImGuiLink::DragFloat3("Position", glm::value_ptr(entity->pos), 0.1f);
+			ImGuiLink::DrawVec3Control("Position", entity->pos);
+			
+			ImGuiLink::DrawVec3Control("Rotation", entity->rotation);
+			
+			ImGuiLink::DrawVec3Control("Size", entity->size, 1.0f);
+			
 			ImGuiLink::TreePop();
 		}
 	}

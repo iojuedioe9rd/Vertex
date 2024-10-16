@@ -1,6 +1,7 @@
-[19:43:03] [info] VERTEX: Creating window: Vertex Editor (1280, 720, 1.7777778)
-[19:43:03] [info] VERTEX: GLAD STATUS: 1
-[19:43:03] [info] VERTEX: OpenGL Info:
-[19:43:03] [info] VERTEX:   Vendor: NVIDIA Corporation
-[19:43:03] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[19:43:03] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[20:38:03] [info] VERTEX: Creating window: Vertex Editor (1280, 720, 1.7777778)
+[20:38:04] [info] VERTEX: GLAD STATUS: 1
+[20:38:04] [info] VERTEX: OpenGL Info:
+[20:38:04] [info] VERTEX:   Vendor: NVIDIA Corporation
+[20:38:04] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[20:38:04] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[20:38:12] [error] APP: Assertion 'false' failed at Scene.cpp:69

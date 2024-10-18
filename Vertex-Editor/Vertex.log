@@ -1,7 +1,6 @@
-[20:35:40] [info] VERTEX: Creating window: Vertex Editor (1280, 720, 1.7777778)
-[20:35:41] [info] VERTEX: GLAD STATUS: 1
-[20:35:41] [info] VERTEX: OpenGL Info:
-[20:35:41] [info] VERTEX:   Vendor: NVIDIA Corporation
-[20:35:41] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[20:35:41] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[20:39:08] [info] VERTEX: Window Resized
+[20:56:27] [info] VERTEX: Creating window: Vertex Editor (1280, 720, 1.7777778)
+[20:56:28] [info] VERTEX: GLAD STATUS: 1
+[20:56:28] [info] VERTEX: OpenGL Info:
+[20:56:28] [info] VERTEX:   Vendor: NVIDIA Corporation
+[20:56:28] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[20:56:28] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94

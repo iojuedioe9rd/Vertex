@@ -257,7 +257,7 @@ namespace Vertex {
 
 	void EditorLayer::SaveSceneAs()
 	{
-		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
+		std::string filepath = FileDialogs::SaveFile("Vertex Scene (*.vertex)\0*.vertex\0");
 		if (!filepath.empty())
 		{
 			SceneSerializer serializer(&m_ActiveScene);

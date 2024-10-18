@@ -37,6 +37,17 @@ namespace Vertex
 		void OnEvent(Event& e);
 		void OnViewportResize(uint32_t width, uint32_t height);
 
+		void KillAllEntitys()
+		{
+			for (Entity* ent : m_Entitys)
+			{
+				if (RemoveEntity(*ent))
+				{
+					
+					
+				}
+			}
+		}
 
 		std::vector<Entity*>::iterator begin() { return m_Entitys.begin(); }
 		std::vector<Entity*>::iterator end() { return m_Entitys.end(); }

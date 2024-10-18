@@ -26,4 +26,9 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 		m_id = get_uuid();
 	}
+	void Object::SetID(UUID id)
+	{
+		VX_PROFILE_FUNCTION();
+		m_id = id;
+	}
 }

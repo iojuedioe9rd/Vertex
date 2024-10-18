@@ -1,0 +1,56 @@
+Scene: Untitled
+Entities:
+  - Entity: e15649co-drnv-69im-2hs7-2n9v5173m9bd-7vxbtese98sxe-pgx3-r2gh-amdx-qv4q4yef4nk-vil80v
+    Tag: Green Square
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PropStaticSprite:
+      Colour: [0, 1, 0, 1]
+  - Entity: y10p4q51-llpx-dnz8-4tl-zv6lkk1p9o68-zllmvf89923hi-m3qm-dxck-s7c2-5m3yl7pixfga-6g0lyq
+    Tag: Tilemap
+    EntityType: env_static_tilemap
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    EnvStaticTilemap:
+      Tiles:
+        - Pos: [1, 5, 0]
+          Colour: [0.200000003, 0.300000012, 0.800000012, 1]
+  - Entity: 2fx6o1ac-q6fy-87m9-csqf-0q6y2smqcimd-c6iv2nqoy4qdsy-7ri4-a8ao-7cze-eexl1y63zmsa-29cqos
+    Tag: Camera Entity
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: hm71nbvc-skfg-abno-qoas-oml47exdtnb-5n0q7cb71kmx8-ptra-pp77-lrfo-p72o6eb9m3ei-oxaek2
+    Tag: Clip-Space Entity
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: false
+      FixedAspectRatio: false

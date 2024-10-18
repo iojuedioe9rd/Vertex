@@ -4,11 +4,7 @@
 #include <filesystem>
 
 #ifdef VX_ENABLE_ASSERTS
-namespace Vertex::Assert
-{
-	
-	
-}
+
 // Alteratively we could use the same "default" message for both "WITH_MSG" and "NO_MSG" and
 // provide support for custom formatting by concatenating the formatting string instead of having the format inside the default message
 #define VX_INTERNAL_ASSERT_IMPL(type, check, msg, ...) { if(!(check)) { VX##type##ERROR(msg, __VA_ARGS__); VX_DEBUGBREAK(); } }

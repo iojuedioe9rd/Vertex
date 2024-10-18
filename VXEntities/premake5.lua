@@ -2,6 +2,8 @@ project "VXEntities"
     kind "StaticLib"
     language "C++"
     staticruntime "off"
+	cppdialect "C++17"
+
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -22,12 +24,14 @@ project "VXEntities"
 		"%{wks.location}/Engine/src",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.yaml_cpp}"
 	
     }
 	
 	links
 	{
+		"yaml-cpp",
 		"Engine"
 	}
     

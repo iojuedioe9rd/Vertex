@@ -1,5 +1,7 @@
 include "Dependencies.lua"
 
+
+
 workspace "Vertex"
 	architecture "x86_64"
 	startproject "Vertex-Editor"
@@ -11,7 +13,10 @@ workspace "Vertex"
 		"Dist"
 	}
 
-	
+	defines
+	{
+		"YAML_CPP_STATIC_DEFINE"
+	}
 
 	flags
 	{
@@ -22,6 +27,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
 include "Engine/vendor/zlib"
+include "Engine/vendor/yaml-cpp"
 include "Engine/vendor/GLFW"
 include "Engine/vendor/glad"
 include "Engine/vendor/imgui"

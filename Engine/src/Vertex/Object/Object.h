@@ -18,6 +18,11 @@ namespace Vertex {
 		UUID GetID();
 		void Destroy();
 		void RegenID();
+
+	private:
+		void SetID(UUID id);
+		friend class SceneSerializer;
+		friend class Entity;
 	};
 
 }

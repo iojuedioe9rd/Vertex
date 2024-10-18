@@ -1,0 +1,35 @@
+Scene: Untitled
+Entities:
+  - Entity: e9rc44v2-86dk-14li-7kz1-ogho4l6p1s-b15cd8dbthmhe-oqp1-i6a-f1gp-t0k5go2o49p-2gbsrp
+    Tag: Green Square
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PropStaticSprite:
+      Colour: [0, 1, 0, 1]
+  - Entity: xkaeqvd0-fe3c-3ft6-2rp-6mlcoaz5kkmo-s70etk2dsgiy2s-dvpg-xcq-inz-y5ycg9c87pav-4s5nrs
+    Tag: Tilemap
+    EntityType: env_static_tilemap
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+  - Entity: f4zq9erc-9h5z-199-80ct-fqnohvtbcbxq-t0fp72ggv6svnb-edcs-e7em-dfph-zzldsvst1mcq-1bkqi1
+    Tag: Camera Entity
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+    Primary: true
+    FixedAspectRatio: false

@@ -2,6 +2,7 @@
 
 #include "Vertex/Core/PlatformDetection.h"
 #include <memory>
+#include "glm/glm.hpp"
 
 #define BIT(x) (1 << x)
 #define NULL 0

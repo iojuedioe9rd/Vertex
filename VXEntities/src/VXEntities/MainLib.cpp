@@ -15,6 +15,14 @@ bool VXEntities_INITEntities()
 	return true;
 }
 
+bool VXEntities_INIT_Scene_Serializer()
+{
+	bool s = true;
+	VX_CORE_ASSERT(useEntities, "Entities not init!");
+	s = useEntities;
+	return s;
+}
+
 bool VXEntities_INIT(uint32_t flags)
 {
 	bool s = true;
@@ -26,7 +34,14 @@ bool VXEntities_INIT(uint32_t flags)
 			return s;
 		}
 	}
-
+	if (flags & VXEntities_INIT_USE_SCENE_SERIALIZER)
+	{
+		s = VXEntities_INIT_Scene_Serializer();
+		if (!s)
+		{
+			return s;
+		}
+	}
 }
 
 bool VXEntities_FREE()

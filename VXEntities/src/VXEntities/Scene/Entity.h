@@ -7,6 +7,8 @@
 #include <vector>
 #include "Vertex/Core/Timestep.h"
 #include <glm/glm.hpp>
+#include "Vertex/Object/SerializationObject.h"
+#include "SceneSerializer.h"
 
 namespace Vertex {
 
@@ -149,6 +151,27 @@ namespace Vertex {
 		virtual void EventH(Event& e)     = NULL;
 		virtual void Draw(Timestep& ts)   = NULL;
 		virtual std::string GetEntName()  =	NULL;
+		virtual SerializationObject Serialize()
+		{
+			SerializationObject obj = SerializationObject();
+			obj.Add("Entity", GetID());
+			obj.Add("Tag", name());
+			obj.Add("EntityType", GetEntName());
+			obj.Add("Transform_Translation", pos);
+			obj.Add("Transform_Size", size);
+			obj.Add("Transform_Rotation", rotation);
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj)
+		{
+			SetID(obj.Get<std::string>("Entity"));
+			m_name = obj.Get<std::string>("Tag");
+			pos = obj.Get<glm::vec3>("Transform_Translation");
+			size = obj.Get<glm::vec3>("Transform_Size"); // Updated for glm::vec3
+			rotation = obj.Get<glm::vec3>("Transform_Rotation"); // Handle rotation as glm::vec3
+			return true;
+		}
 		
 	protected:
 		Scene* m_Scene = nullptr;

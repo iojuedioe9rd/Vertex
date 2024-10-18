@@ -54,6 +54,9 @@ namespace Vertex {
 		m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
+		
+		
 	}
 
 	float t = 0.0f;
@@ -148,6 +151,27 @@ namespace Vertex {
 
 	void EditorLayer::DockSpaceCallback()
 	{
+		if (ImGuiLink::BeginMenuBar())
+		{
+			if (ImGuiLink::BeginMenu("File"))
+			{
+				if (ImGuiLink::MenuItem("Serialize"))
+				{
+					SceneSerializer serializer(&m_ActiveScene);
+					serializer.Serialize("assets/scenes/Example.vertex");
+				}
+
+				if (ImGuiLink::MenuItem("Deserialize"))
+				{
+					SceneSerializer serializer(&m_ActiveScene);
+					m_ActiveScene->KillAllEntitys();
+					serializer.Deserialize("assets/scenes/Example.vertex");
+				}
+				ImGuiLink::EndMenu();
+			}
+			ImGuiLink::EndMenuBar();
+		}
+
 		ImGuiLink::Begin("Settings");
 
 		auto stats = Renderer2D::GetStats();

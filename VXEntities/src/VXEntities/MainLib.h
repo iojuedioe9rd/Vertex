@@ -3,9 +3,10 @@
 #include <string>
 
 #define VXEntities_INIT_USE_ENTITIES BIT(0)
+#define VXEntities_INIT_USE_SCENE_SERIALIZER BIT(1)
 //#define VXEntities_INIT_USE_MONO	 BIT(1)
 
-#define VXEntities_INIT_USE_EVERYTHING (VXEntities_INIT_USE_ENTITIES)
+#define VXEntities_INIT_USE_EVERYTHING (VXEntities_INIT_USE_ENTITIES | VXEntities_INIT_USE_SCENE_SERIALIZER)
 
 bool VXEntities_INIT(uint32_t flags);
 bool VXEntities_FREE();

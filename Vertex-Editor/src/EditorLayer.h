@@ -5,6 +5,8 @@
 #include <Vertex/Renderer/Texture.h>
 #include "VXEntities.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include <Vertex/Events/KeyEvent.h>
+#include <Vertex/Events/Event.h>
 
 namespace Vertex {
 
@@ -23,6 +25,13 @@ namespace Vertex {
 
 		void DockSpaceCallback();
 	private:
+		bool OnKeyPressed(KeyPressedEvent& e);
+		void NewScene();
+		void OpenScene();
+		void SaveSceneAs();
+	private:
+
+
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
 		OrthographicCameraController m_CameraController;

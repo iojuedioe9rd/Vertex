@@ -73,4 +73,38 @@ namespace Vertex
 		Scenes[name] = newScene; // Add it to the map
 		return newScene;
 	}
+	bool VXEntities_RemoveScene(Scene* scene)
+	{
+		if (scene == nullptr) return false;
+
+		try
+		{
+			Scenes.erase(scene->name());
+			delete scene;
+			scene = nullptr;
+			return true;
+		}
+		catch (const std::exception& ex)
+		{
+			VX_CORE_ASSERT(false, ex.what());
+		}
+		return false;
+		
+	}
+	bool VXEntities_RemoveScene(std::string name)
+	{
+		try
+		{
+			Scene* scene = Scenes[name];
+			Scenes.erase(name);
+			delete scene;
+			return true;
+		}
+		catch (const std::exception& ex)
+		{
+			VX_CORE_ASSERT(false, ex.what());
+		}
+		return false;
+		
+	}
 }

@@ -1,6 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: e9rc44v2-86dk-14li-7kz1-ogho4l6p1s-b15cd8dbthmhe-oqp1-i6a-f1gp-t0k5go2o49p-2gbsrp
+  - Entity: 8rk9z68x-813b-bekl-qp1q-rsm9omldfmrx-po6o5z0t0fsmq6-aa0e-2yy4-at1p-14f20k8ifegy-71va5m
     Tag: Green Square
     EntityType: prop_static_sprite
     Transform:
@@ -9,14 +9,18 @@ Entities:
       Rotation: [0, 0, 0]
     PropStaticSprite:
       Colour: [0, 1, 0, 1]
-  - Entity: xkaeqvd0-fe3c-3ft6-2rp-6mlcoaz5kkmo-s70etk2dsgiy2s-dvpg-xcq-inz-y5ycg9c87pav-4s5nrs
+  - Entity: gyhx8sx3-brcm-t9b5-zypk-eeod7tqpbrya-k2hz499klmnk3m-sesc-yzp2-ezrd-sqipns2x86sv-hx9zpf
     Tag: Tilemap
     EntityType: env_static_tilemap
     Transform:
       Translation: [0, 0, 0]
       Size: [1, 1, 1]
       Rotation: [0, 0, 0]
-  - Entity: f4zq9erc-9h5z-199-80ct-fqnohvtbcbxq-t0fp72ggv6svnb-edcs-e7em-dfph-zzldsvst1mcq-1bkqi1
+    EnvStaticTilemap:
+      Tiles:
+        - Pos: [1, 5, 0]
+          Colour: [0.200000003, 0.300000012, 0.800000012, 1]
+  - Entity: 80an7yrp-rcvn-84qh-vqcv-bfr15t0tyet-cein1dlc8iksh5-1dmk-nih9-20vk-czgxq4c79khr-oktef
     Tag: Camera Entity
     EntityType: point_camera_2d
     Transform:
@@ -31,5 +35,31 @@ Entities:
       OrthographicSize: 10
       OrthographicNear: -1
       OrthographicFar: 1
-    Primary: true
-    FixedAspectRatio: false
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 4qzo3zae-m3ff-svo7-260-2phrttp2n2hs-lk35rddvcxthe-yve8-ggzb-qmlp-gslneyk67kpm-l4b2fs
+    Tag: Clip-Space Entity
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: false
+      FixedAspectRatio: false
+  - Entity: 7vo73aeq-zfa6-1qfi-69vv-ci8gns5nbdzq-2zshke4hy0cxbv-inns-ncgv-nzq-xempsc11lfl1-esf7qi
+    Tag: Him
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, 1.79999995, 0.800000012]
+      Size: [0.300000012, 5.69999981, 1]
+      Rotation: [0, -1.29999995, 39.2999992]
+    PropStaticSprite:
+      Colour: [1, 0.370656371, 0, 1]

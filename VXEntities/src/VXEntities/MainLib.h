@@ -13,6 +13,6 @@ bool VXEntities_FREE();
 
 namespace Vertex {
 	Scene* VXEntities_MakeOrGetScene(std::string name);
-
-	
+	bool VXEntities_RemoveScene(Scene* scene);
+	bool VXEntities_RemoveScene(std::string name);
 }

@@ -18,6 +18,7 @@ namespace Vertex {
 	void SceneHierarchyPanel::SetContext(Scene* scene)
 	{
 		m_Context = scene;
+		m_SelectionContext = nullptr;
 	}
 	char ent_name_buffer[256];
 	char ent_type_buffer[256];

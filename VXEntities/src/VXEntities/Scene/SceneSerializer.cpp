@@ -215,6 +215,7 @@ namespace Vertex {
 			if (entityType == "point_camera_2d")
 			{
 				entity = &m_Scene->CreateEntity<ENTPointCamera2D>(entityID);
+				
 			}
 			if (entityType == "env_static_tilemap")
 			{

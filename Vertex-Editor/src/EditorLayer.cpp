@@ -5,7 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Panels/SceneHierarchyPanel.h"
 #include "Vertex/Core/Input.h"
-
+#include "Vertex/Utils/Utils.h"
 
 namespace Vertex {
 	EditorLayer::EditorLayer()
@@ -157,15 +157,12 @@ namespace Vertex {
 			{
 				if (ImGuiLink::MenuItem("Serialize"))
 				{
-					SceneSerializer serializer(&m_ActiveScene);
-					serializer.Serialize("assets/scenes/Example.vertex");
+					SaveSceneAs();
 				}
 
 				if (ImGuiLink::MenuItem("Deserialize"))
 				{
-					SceneSerializer serializer(&m_ActiveScene);
-					m_ActiveScene->KillAllEntitys();
-					serializer.Deserialize("assets/scenes/Example.vertex");
+					OpenScene();
 				}
 				ImGuiLink::EndMenu();
 			}
@@ -212,14 +209,14 @@ namespace Vertex {
 		m_ViewportHovered = ImGuiLink::IsWindowHovered();
 
 		glm::vec2 viewportPanelSize = ImGuiLink::GetContentRegionAvail();
-
+		m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 		if (m_ViewportSize != viewportPanelSize)
 		{
 			m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
-			m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+			//m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 		}
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
@@ -231,6 +228,41 @@ namespace Vertex {
 		m_SceneHierarchyPanel.OnImGuiRender();
 
 		
+	}
+
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
+	{
+		return false;
+	}
+
+	void EditorLayer::NewScene()
+	{
+		
+		VXEntities_RemoveScene(m_ActiveScene);
+		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+	}
+
+	void EditorLayer::OpenScene()
+	{
+		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
+		if (!filepath.empty())
+		{
+			NewScene();
+			SceneSerializer serializer(&m_ActiveScene);
+			serializer.Deserialize(filepath);
+		}
+	}
+
+	void EditorLayer::SaveSceneAs()
+	{
+		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
+		if (!filepath.empty())
+		{
+			SceneSerializer serializer(&m_ActiveScene);
+			serializer.Serialize(filepath);
+		}
 	}
 
 }

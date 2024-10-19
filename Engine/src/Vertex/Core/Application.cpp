@@ -40,7 +40,7 @@ namespace Vertex
 	Application* Application::app = nullptr;
 
 	
-	Application::Application(const std::string& name)
+	Application::Application(const std::string& name, uint32_t width, uint32_t height)
 		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		
@@ -52,7 +52,7 @@ namespace Vertex
 		m_ImGuiWindowStack = new ImGuiWindowStack();
 		m_ConsoleWindow = &ConsoleWindow::Get();
 		m_ImGuiWindowStack->PushImGuiWindow(m_ConsoleWindow);
-		m_Window = Ref<Window>(Window::Create(WindowProps(name)));
+		m_Window = Ref<Window>(Window::Create(WindowProps(name, width, height)));
 		m_Window->SetEventCallback(VX_BIND_EVENT_FN(Vertex::Application::OnEvent));
 		app = this;
 

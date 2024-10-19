@@ -104,19 +104,25 @@ namespace Vertex {
 
 		int flags = ((m_SelectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
 
+		
+		if (ImGuiLink::BeginPopupContextItem())
+		{
+			if (ImGuiLink::MenuItem("Delete Entity"))
+				m_EntityToRemove = entity;
+			ImGuiLink::EndPopup();
+		}
+
 		bool opened = ImGuiLink::TreeNodeEx(entity->GetID(), flags, tag);
+		if (ImGuiLink::IsMouseDown(0) && ImGuiLink::IsWindowHovered())
+			m_SelectionContext = nullptr;
 		if (ImGuiLink::IsItemClicked())
 		{
 			m_SelectionContext = entity;
 		}
+		
 
-		bool entityDeleted = false;
-		if (ImGuiLink::BeginPopupContextItem())
-		{
-			if (ImGuiLink::MenuItem("Delete Entity"))
-				entityDeleted = true;
-			ImGuiLink::EndPopup();
-		}
+
+		
 
 		if (opened)
 		{
@@ -125,12 +131,6 @@ namespace Vertex {
 			if (opened)
 				ImGuiLink::TreePop();
 			ImGuiLink::TreePop();
-		}
-
-		if (entityDeleted)
-		{
-			m_EntityToRemove = entity;
-			
 		}
 	}
 

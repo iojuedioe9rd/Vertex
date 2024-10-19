@@ -6,10 +6,11 @@
 #include "Vertex/Audio/AudioManager.h"
 #ifdef VX_PLATFORM_WINDOWS
 
-extern Vertex::Application* Vertex::CreateApp();
+#include "Platform/Windows/WindowsEntryPoint.h"
 
-int main(int argc, char** argv)
+extern int Vertex_main(int argc, char** argv)
 {
+
 	VX_PROFILE_BEGIN_SESSION("Startup", "VertexProfile-Startup.json");
 	Vertex::Logger::Init();
 	Vertex::AudioManager::Init();
@@ -22,5 +23,21 @@ int main(int argc, char** argv)
 	Vertex::AudioManager::Bye();
 	delete app;
 }
+
+int console_ansi_main(int argc, char* argv[]) {
+	return Vertex_main_getcmdline(Vertex_main);
+}
+
+#if UNICODE
+int console_wmain(int argc, wchar_t* wargv[], wchar_t* wenvp) {
+	return Vertex_main_getcmdline(Vertex_main);
+}
+#endif
+
+#ifndef VERTEX_DLL
+int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR szCmdLine, int sw) {
+	return Vertex_main_getcmdline(Vertex_main);
+}
+#endif // !VERTEX_DLL
 
 #endif

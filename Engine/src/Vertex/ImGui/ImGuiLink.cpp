@@ -315,7 +315,18 @@ namespace Vertex
         return glm::vec2(windowPosX, windowPosY);
     }
 
+    glm::vec2 ImGuiLink::GetMousePos()
+    {
+        return ImVec2ToVec2(ImGui::GetMousePos());
+    }
+
+    glm::vec2 ImGuiLink::GetCursorPos()
+    {
+        return ImVec2ToVec2(ImGui::GetCursorPos());
+    }
+
     
+
 
 }
 

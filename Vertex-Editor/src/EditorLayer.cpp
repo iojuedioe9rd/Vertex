@@ -23,7 +23,7 @@ namespace Vertex {
 		m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
 
 		FramebufferSpecification fbSpec;
-		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
+		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
 		fbSpec.Width = 1600;
 		fbSpec.Height = 900;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
@@ -109,6 +109,20 @@ namespace Vertex {
 			m_SquareEntity.pos = glm::vec3(0, sinf(t) * 100, 0);
 			//VX_INFO("{0}", sinf(t));
 
+			auto mx = ImGuiLink::GetMousePos().x;
+			auto my = ImGuiLink::GetMousePos().y;
+			mx -= m_ViewportBounds[0].x;
+			my -= m_ViewportBounds[0].y;
+			glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+			my = viewportSize.y - my;
+			int mouseX = (int)mx;
+			int mouseY = (int)my;
+
+			if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+			{
+				int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+				VX_CORE_WARN("Pixel data = {0}", pixelData);
+			}
 
 
 			Renderer2D::EndScene();
@@ -217,6 +231,7 @@ namespace Vertex {
 
 		ImGuiLink::PushStyleVar(ImGuiLink::ImGuiStyleVar_WindowPadding, glm::vec2{ 0, 0 });
 		ImGuiLink::Begin("Viewport");
+		auto viewportOffset = ImGuiLink::GetCursorPos(); // Includes tab bar
 
 		m_ViewportFocused = ImGuiLink::IsWindowFocused();
 		m_ViewportHovered = ImGuiLink::IsWindowHovered();
@@ -235,7 +250,14 @@ namespace Vertex {
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGuiLink::Image((void*)textureID, glm::vec2{ Application::Get().GetWindow().GetWidth(), Application::Get().GetWindow().GetHeight() }, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
 
+		auto windowSize = ImGuiLink::GetWindowSize();
+		auto minBound = ImGuiLink::GetWindowPos();
+		minBound.x += viewportOffset.x;
+		minBound.y += viewportOffset.y;
 
+		glm::vec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+		m_ViewportBounds[0] = { minBound.x, minBound.y };
+		m_ViewportBounds[1] = { maxBound.x, maxBound.y };
 
 		Entity* selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
 		if (selectedEntity != nullptr && m_GizmoType != -1)

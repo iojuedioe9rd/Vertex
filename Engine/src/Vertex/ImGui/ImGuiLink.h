@@ -125,6 +125,8 @@ namespace Vertex
         static bool BeginPopupContextItem();
         static glm::vec2 GetWindowSize();
         static glm::vec2 GetWindowPos();
+        static glm::vec2 GetMousePos();
+        static glm::vec2 GetCursorPos();
 	};
 
 }

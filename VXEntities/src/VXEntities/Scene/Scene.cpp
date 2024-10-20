@@ -81,7 +81,7 @@ namespace Vertex {
 		return 0;
 	}
 
-	bool Scene::GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform, bool usePrimaryCam)
+	bool Scene::GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform, ENTPointCamera2D** cam, bool usePrimaryCam)
 	{
 		for (Entity* ent : m_Entitys)
 		{
@@ -92,6 +92,11 @@ namespace Vertex {
 				if (0 || camera2D->isPrimary) // Optionally check if it's the primary camera
 				{
 					*mainCamera = camera2D->camera; // Set the main camera
+
+					if (cam)
+					{
+						*cam = camera2D;
+					}
 					if (cameraTransform) // If the transform pointer is provided, update it
 					{
 						glm::mat4 transform = glm::translate(glm::mat4(1.0f), camera2D->pos)
@@ -99,14 +104,24 @@ namespace Vertex {
 							* glm::scale(glm::mat4(1.0f), { camera2D->size.x, camera2D->size.y, 1.0f });
 						*cameraTransform = transform;
 					}
+
+					
 					return true; // Successfully found a 2D camera
 				}
+
 			}
 		}
 		return false;
 	}
 
 	void Scene::OnUpdate(Timestep ts)
+	{
+		VX_WARN("Use OnUpdateRuntime");
+		OnUpdateRuntime(ts);
+
+	}
+
+	void Scene::OnUpdateRuntime(Timestep ts)
 	{
 		for (Entity* ent : m_Entitys)
 		{
@@ -117,7 +132,14 @@ namespace Vertex {
 		{
 			ent->DrawTime(ts);
 		}
+	}
 
+	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
+	{
+		for (Entity* ent : m_Entitys)
+		{
+			ent->DrawTime(ts);
+		}
 	}
 
 	void Scene::OnEvent(Event& e)

@@ -6,6 +6,9 @@
 #include "Panels/SceneHierarchyPanel.h"
 #include "Vertex/Core/Input.h"
 #include "Vertex/Utils/Utils.h"
+#include "Vertex/ImGui/ImGuizmoLink.h"
+#include "Vertex/Math/Math.h"
+#include <VXEntities/Scene/EditorCamera.h>
 
 namespace Vertex {
 	EditorLayer::EditorLayer()
@@ -32,6 +35,9 @@ namespace Vertex {
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
+
+		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
+
 		// Entity
 
 		auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
@@ -79,7 +85,7 @@ namespace Vertex {
 
 		// Update
 		if (m_ViewportFocused)
-			m_CameraController.OnUpdate(ts);
+			m_EditorCamera.OnUpdate(ts);
 
 		// Render
 		Renderer2D::ResetStats();
@@ -89,16 +95,16 @@ namespace Vertex {
 
 		Ref<Camera> camera;
 		glm::mat4 transform;
-		if (m_ActiveScene->GetACameraInScene(&camera, true, &transform, true))
+		if (true)
 		{
-			Renderer2D::BeginScene(*camera, transform);
-
+			//Renderer2D::BeginScene(*camera, transform);
+			Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 
 			//Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
 			//Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 			//Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
 			// Update scene
-			m_ActiveScene->OnUpdate(ts);
+			m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 			m_SquareEntity.pos = glm::vec3(0, sinf(t) * 100, 0);
 			//VX_INFO("{0}", sinf(t));
 
@@ -137,6 +143,8 @@ namespace Vertex {
 			uint32_t textureID = m_CheckerboardTexture->GetRendererID();
 			ImGuiLink::Image((void*)textureID, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
 
+			
+
 			ImGuiLink::End();
 			
 		}
@@ -146,6 +154,10 @@ namespace Vertex {
 	void EditorLayer::OnEvent(Event& e)
 	{
 		m_CameraController.OnEvent(e);
+		m_EditorCamera.OnEvent(e);
+
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<KeyPressedEvent>(VX_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 		
 	}
 
@@ -216,11 +228,51 @@ namespace Vertex {
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
-			//m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 		}
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGuiLink::Image((void*)textureID, glm::vec2{ Application::Get().GetWindow().GetWidth(), Application::Get().GetWindow().GetHeight() }, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
+
+
+
+		Entity* selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+		if (selectedEntity != nullptr && m_GizmoType != -1)
+		{
+			ImGuizmoLink::SetOrthographic(false);
+			ImGuizmoLink::SetDrawlist();
+
+			ImGuizmoLink::SetRect(glm::vec4(0,0, ImGuiLink::GetWindowSize()));
+
+			const auto& camera = cam->camera;
+			const glm::mat4& cameraProjection = m_EditorCamera.GetProjection();
+			glm::mat4 cameraView = m_EditorCamera.GetViewMatrix();
+
+			glm::mat4 transform = Vertex::Math::ComposeTransform(selectedEntity->pos, selectedEntity->size, selectedEntity->rotation);
+
+			// Snapping
+			bool snap = Input::IsKeyPressed(Key::LeftControl);
+			float snapValue = 0.5f;
+
+			if (m_GizmoType == ImGuizmoLink::OPERATION::ROTATE)
+				snapValue = 45.0f;
+
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+
+			ImGuizmoLink::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+				(ImGuizmoLink::OPERATION)m_GizmoType, ImGuizmoLink::LOCAL, glm::value_ptr(transform),
+				nullptr, snap ? snapValues : nullptr);
+
+			if (true)
+			{
+				glm::vec3 translation, rotation, scale;
+				Math::DecomposeTransform(transform, translation, rotation, scale);
+				glm::vec3 deltaRotation = rotation - selectedEntity->rotation;
+				selectedEntity->pos = translation;
+				selectedEntity->rotation += deltaRotation;
+				selectedEntity->size = scale;
+			}
+		}
 
 		ImGuiLink::End();
 		ImGuiLink::PopStyleVar();
@@ -232,7 +284,50 @@ namespace Vertex {
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
 	{
-		return false;
+		// Shortcuts
+		if (e.GetRepeatCount() > 0)
+			return false;
+
+		bool control = Input::IsKeyPressed(Key::LeftControl) || Input::IsKeyPressed(Key::RightControl);
+		bool shift = Input::IsKeyPressed(Key::LeftShift) || Input::IsKeyPressed(Key::RightShift);
+		switch (e.GetKeyCode())
+		{
+		case KeyCode::N:
+		{
+			if (control)
+				NewScene();
+
+			break;
+		}
+		case Key::O:
+		{
+			if (control)
+				OpenScene();
+
+			break;
+		}
+		case Key::S:
+		{
+			if (control && shift)
+				SaveSceneAs();
+
+			break;
+		}
+
+		// Gizmos
+		case Key::Q:
+			m_GizmoType = -1;
+			break;
+		case Key::W:
+			m_GizmoType = ImGuizmoLink::OPERATION::TRANSLATE;
+			break;
+		case Key::E:
+			m_GizmoType = ImGuizmoLink::OPERATION::ROTATE;
+			break;
+		case Key::R:
+			m_GizmoType = ImGuizmoLink::OPERATION::SCALE;
+			break;
+		}
 	}
 
 	void EditorLayer::NewScene()

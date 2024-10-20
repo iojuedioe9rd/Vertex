@@ -113,8 +113,8 @@ namespace Vertex {
 		}
 
 		bool opened = ImGuiLink::TreeNodeEx(entity->GetID(), flags, tag);
-		if (ImGuiLink::IsMouseDown(0) && ImGuiLink::IsWindowHovered())
-			m_SelectionContext = nullptr;
+		
+		
 		if (ImGuiLink::IsItemClicked())
 		{
 			m_SelectionContext = entity;

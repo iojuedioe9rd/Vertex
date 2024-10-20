@@ -5,10 +5,11 @@
 #include <vector>  // Include this for std::vector
 #include <Vertex/Renderer/Camera.h>
 #include <Vertex/Events/Event.h>
+#include "EditorCamera.h"
 
 namespace Vertex
 {
-
+	class ENTPointCamera2D;
 	class Entity;
 	
 	class Scene
@@ -32,8 +33,10 @@ namespace Vertex
 
 		bool RemoveEntity(Entity& entity);
 
-		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, bool usePrimaryCam = true);
+		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, ENTPointCamera2D** cam = nullptr, bool usePrimaryCam = true);
 		void OnUpdate(Timestep ts);
+		void OnUpdateRuntime(Timestep ts);
+		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
 		void OnEvent(Event& e);
 		void OnViewportResize(uint32_t width, uint32_t height);
 

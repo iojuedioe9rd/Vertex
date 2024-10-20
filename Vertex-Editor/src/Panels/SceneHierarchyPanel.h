@@ -14,9 +14,13 @@ namespace Vertex {
 		void SetContext(Scene* scene);
 		void OnImGuiRender();
 
+		Entity* GetSelectedEntity() { return m_SelectionContext; }
+
 	private:
 		void DrawEntityNode(Entity* entity);
 		void DrawEntity(Entity* entity);
+
+		
 	private:
 		Scene* m_Context;
 		bool m_CreateEntityPopup;

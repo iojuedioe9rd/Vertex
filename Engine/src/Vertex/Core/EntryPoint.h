@@ -22,6 +22,8 @@ extern int Vertex_main(int argc, char** argv)
 
 	Vertex::AudioManager::Bye();
 	delete app;
+
+	return 0;
 }
 
 int console_ansi_main(int argc, char* argv[]) {

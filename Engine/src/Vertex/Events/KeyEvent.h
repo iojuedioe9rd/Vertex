@@ -3,13 +3,14 @@
 #include "Event.h"
 #include "Vertex/Debug/Instrumentor.h"
 #include <sstream>
+#include <Vertex/Core/KeyCodes.h>
 
 namespace Vertex {
 
 	class KeyEvent : public Event
 	{
 	public:
-		inline int GetKeyCode() const { VX_PROFILE_FUNCTION(); return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { VX_PROFILE_FUNCTION(); return (KeyCode)m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:

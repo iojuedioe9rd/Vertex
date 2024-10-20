@@ -1,6 +1,5 @@
 #include "vxpch.h"
 #include "ImGuiLayer.h"
-#include "vxpch.h"
 
 #include <imgui.h>
 #include <imgui_internal.h>
@@ -13,6 +12,7 @@
 // TEMPORARY
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include <ImGuizmo.h>
 
 namespace Vertex
 {
@@ -82,6 +82,8 @@ namespace Vertex
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
+		ImGuizmo::Enable(true);
 		
 	}
 	void ImGuiLayer::End()

@@ -44,7 +44,8 @@ project "Engine"
 		"vendor/stb_image",
 		"vendor/miniaudio",
 		"%{IncludeDir.entt}",
-		"vendor/simple_ecs"
+		"vendor/simple_ecs",
+		"%{IncludeDir.imguizmo}"
 		
 	}
 	
@@ -54,7 +55,8 @@ project "Engine"
 		"GLFW",
 		"imgui",
 		"zlib",
-		"Checksum"
+		"Checksum",
+		"ImGuizmo"
 		
 	}
 	

@@ -7,6 +7,7 @@
 #include "Panels/SceneHierarchyPanel.h"
 #include <Vertex/Events/KeyEvent.h>
 #include <Vertex/Events/Event.h>
+#include <VXEntities/Scene/EditorCamera.h>
 
 namespace Vertex {
 
@@ -46,6 +47,8 @@ namespace Vertex {
 
 		bool m_PrimaryCamera = true;
 
+		EditorCamera m_EditorCamera;
+
 		Ref<Texture2D> m_CheckerboardTexture;
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
@@ -53,8 +56,11 @@ namespace Vertex {
 		Scene* m_ActiveScene;
 		ENTPropStaticSprite m_SquareEntity;
 
+		ENTPointCamera2D* cam;
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+
+		int m_GizmoType = -1;
 
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;

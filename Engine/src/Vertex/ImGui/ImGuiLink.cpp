@@ -299,6 +299,22 @@ namespace Vertex
         return ImGui::BeginPopupContextItem();
     }
 
+    glm::vec2 ImGuiLink::GetWindowSize()
+    {
+        float windowWidth = (float)ImGui::GetWindowWidth();
+        float windowHeight = (float)ImGui::GetWindowHeight();
+
+        return glm::vec2(windowWidth, windowHeight);
+    }
+
+    glm::vec2 ImGuiLink::GetWindowPos()
+    {
+        float windowPosX = (float)ImGui::GetWindowPos().x;
+        float windowPosY = (float)ImGui::GetWindowPos().y;
+
+        return glm::vec2(windowPosX, windowPosY);
+    }
+
     
 
 }

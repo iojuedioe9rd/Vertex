@@ -123,6 +123,8 @@ namespace Vertex
         static void EndPopup();
         static bool Button(std::string label);
         static bool BeginPopupContextItem();
+        static glm::vec2 GetWindowSize();
+        static glm::vec2 GetWindowPos();
 	};
 
 }

@@ -94,6 +94,8 @@ namespace Vertex {
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
+		m_Framebuffer->ClearAttachment(1, -1);
+
 		Ref<Camera> camera;
 		glm::mat4 transform;
 		if (true)
@@ -121,7 +123,22 @@ namespace Vertex {
 			if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 			{
 				int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-				VX_CORE_WARN("Pixel data = {0}", pixelData);
+				m_HoveredEntity = nullptr;
+				for (Entity* ent : *m_ActiveScene)
+				{
+					int id = 0;
+					for (char c : ent->GetID())
+					{
+						id += c;
+					}
+
+					if (id == pixelData)
+					{
+						VX_INFO("m_HoveredEntity is ", ent->name().c_str());
+						m_HoveredEntity = ent;
+						break;
+					}
+				}
 			}
 
 

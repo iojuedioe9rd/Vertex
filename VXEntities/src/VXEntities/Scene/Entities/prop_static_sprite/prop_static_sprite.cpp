@@ -1,5 +1,6 @@
 ﻿#include "prop_static_sprite.h"
 #include "Vertex/Renderer/Renderer2D.h"
+#include "Vertex/Math/Math.h"
 
 namespace Vertex
 {
@@ -13,7 +14,12 @@ namespace Vertex
 
 	void ENTPropStaticSprite::Draw(Timestep& ts)
 	{
-
-		Renderer2D::DrawRotatedQuad(pos, glm::vec2(size.x, size.y), rotation.z, colour);
+		int id = 0;
+		for (char c : GetID())
+		{
+			id += c;
+		}
+		glm::mat4 mat = Math::ComposeTransform(pos, size, rotation);
+		Renderer2D::DrawMatrix(mat, colour, id);
 	}
 }

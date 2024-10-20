@@ -351,6 +351,36 @@ namespace Vertex
         return ImGui::NextColumn();
     }
 
+    bool ImGuiLink::BeginDragDropSource()
+    {
+        return ImGui::BeginDragDropSource();
+    }
+
+    bool ImGuiLink::SetDragDropPayload(const char* type, const void* data, size_t data_size)
+    {
+        return ImGui::SetDragDropPayload(type, data, data_size);
+    }
+
+    ImGuiLink::ImGuiPayload* ImGuiLink::AcceptDragDropPayload(const char* name)
+    {
+        return (ImGuiLink::ImGuiPayload*)ImGui::AcceptDragDropPayload(name);
+    }
+
+    bool ImGuiLink::BeginDragDropTarget()
+    {
+        return ImGui::BeginDragDropTarget();
+    }
+
+    void ImGuiLink::EndDragDropTarget()
+    {
+        ImGui::EndDragDropTarget();
+    }
+
+    void ImGuiLink::EndDragDropSource()
+    {
+        ImGui::EndDragDropSource();
+    }
+
     
 
 

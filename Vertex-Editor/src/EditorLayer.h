@@ -9,6 +9,7 @@
 #include <Vertex/Events/Event.h>
 #include <VXEntities/Scene/EditorCamera.h>
 #include "Panels/ContentBrowserPanel.h"
+#include <filesystem>
 
 namespace Vertex {
 
@@ -31,6 +32,7 @@ namespace Vertex {
 		void NewScene();
 		void OpenScene();
 		void SaveSceneAs();
+		void OpenScene(const std::filesystem::path& path);
 	private:
 
 

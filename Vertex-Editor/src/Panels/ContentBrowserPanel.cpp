@@ -17,10 +17,10 @@ bool endsWith(const std::string& fullString, const std::string& ending)
 namespace Vertex
 {
 	// TODO: Once we have projects, change this
-	static const std::filesystem::path s_AssetPath = "assets";
+	extern  const std::filesystem::path g_AssetPath = "assets";
 
 	ContentBrowserPanel::ContentBrowserPanel()
-		: m_CurrentDirectory(s_AssetPath)
+		: m_CurrentDirectory(g_AssetPath)
 	{
 		m_DirectoryIcon = Texture2D::Create("Resources/Icons/ContentBrowser/DirectoryIcon.png");
 		m_FileIcon = Texture2D::Create("Resources/Icons/ContentBrowser/FileIcon.png");
@@ -30,7 +30,7 @@ namespace Vertex
 	{
 		ImGuiLink::Begin("Content Browser");
 
-		if (m_CurrentDirectory != std::filesystem::path(s_AssetPath))
+		if (m_CurrentDirectory != std::filesystem::path(g_AssetPath))
 		{
 			if (ImGuiLink::Button("<-"))
 			{
@@ -54,11 +54,19 @@ namespace Vertex
 		for (auto& directoryEntry : std::filesystem::directory_iterator(m_CurrentDirectory))
 		{
 			const auto& path = directoryEntry.path();
-			auto relativePath = std::filesystem::relative(path, s_AssetPath);
+			auto relativePath = std::filesystem::relative(path, g_AssetPath);
 			std::string filenameString = relativePath.filename().string();
 
 			Ref<Texture2D> icon = directoryEntry.is_directory() ? m_DirectoryIcon : m_FileIcon;
 			ImGuiLink::ImageButton((void*)icon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+
+			if (ImGuiLink::BeginDragDropSource())
+			{
+				const wchar_t* itemPath = relativePath.c_str();
+				ImGuiLink::SetDragDropPayload("CONTENT_BROWSER_ITEM", itemPath, (wcslen(itemPath) + 1) * sizeof(wchar_t));
+				ImGuiLink::EndDragDropSource();
+			}
+
 			if (ImGuiLink::IsItemHovered() && ImGuiLink::IsMouseDoubleClicked(ImGuiLink::ImGuiMouseButton::Left))
 			{
 				if (directoryEntry.is_directory())

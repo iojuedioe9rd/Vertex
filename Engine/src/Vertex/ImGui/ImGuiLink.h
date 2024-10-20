@@ -14,6 +14,27 @@ namespace Vertex
 
 	public:
 
+        struct VERTEX_API ImGuiPayload
+        {
+            // Members
+            void* Data;               // Data (copied and owned by dear imgui)
+            int             DataSize;           // Data size
+
+            // [Internal]
+            uint32_t        SourceId;           // Source item id
+            uint32_t        SourceParentId;     // Source parent id (if available)
+            int             DataFrameCount;     // Data timestamp
+            char            DataType[32 + 1];     // Data type tag (short user-supplied string, 32 characters max)
+            bool            Preview;            // Set when AcceptDragDropPayload() was called and mouse has been hovering the target item (nb: handle overlapping drag targets)
+            bool            Delivery;           // Set when AcceptDragDropPayload() was called and mouse button is released over the target item.
+
+            ImGuiPayload() { Clear(); }
+            void Clear() { SourceId = SourceParentId = 0; Data = NULL; DataSize = 0; memset(DataType, 0, sizeof(DataType)); DataFrameCount = -1; Preview = Delivery = false; }
+            bool IsDataType(const char* type) const { return DataFrameCount != -1 && strcmp(type, DataType) == 0; }
+            bool IsPreview() const { return Preview; }
+            bool IsDelivery() const { return Delivery; }
+        };
+
         enum ImGuiWindowFlags
         {
             ImGuiWindowFlags_None = 0,
@@ -139,6 +160,13 @@ namespace Vertex
         static bool IsMouseDoubleClicked(ImGuiMouseButton mouseButton);
         static void TextWrapped(std::string str);
         static void NextColumn();
+
+        static bool BeginDragDropSource();
+        static bool SetDragDropPayload(const char* type, const void* data, size_t data_size);
+        static ImGuiPayload* AcceptDragDropPayload(const char* name);
+        static bool BeginDragDropTarget();
+        static void EndDragDropTarget();
+        static void EndDragDropSource();
 	};
 
 }

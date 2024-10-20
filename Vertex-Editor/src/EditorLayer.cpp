@@ -11,6 +11,9 @@
 #include <VXEntities/Scene/EditorCamera.h>
 
 namespace Vertex {
+
+	extern const std::filesystem::path g_AssetPath;
+
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f), m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f })
 	{
@@ -284,6 +287,16 @@ namespace Vertex {
 		m_ViewportBounds[0] = { minBound.x, minBound.y };
 		m_ViewportBounds[1] = { maxBound.x, maxBound.y };
 
+		if (ImGuiLink::BeginDragDropTarget())
+		{
+			if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+			{
+				const wchar_t* path = (const wchar_t*)payload->Data;
+				OpenScene(std::filesystem::path(g_AssetPath) / path);
+			}
+			ImGuiLink::EndDragDropTarget();
+		}
+
 		Entity* selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
 		if (selectedEntity != nullptr && m_GizmoType != -1)
 		{
@@ -406,6 +419,13 @@ namespace Vertex {
 			SceneSerializer serializer(&m_ActiveScene);
 			serializer.Serialize(filepath);
 		}
+	}
+
+	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	{
+		NewScene();
+		SceneSerializer serializer(&m_ActiveScene);
+		serializer.Deserialize(path.string());
 	}
 
 }

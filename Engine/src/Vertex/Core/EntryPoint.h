@@ -14,7 +14,7 @@ extern int Vertex_main(int argc, char** argv)
 	VX_PROFILE_BEGIN_SESSION("Startup", "VertexProfile-Startup.json");
 	Vertex::Logger::Init();
 	Vertex::AudioManager::Init();
-	Vertex::Application* app = Vertex::CreateApp();
+	Vertex::Application* app = Vertex::CreateApp({ argc, argv });
 	VX_PROFILE_END_SESSION();
 	VX_PROFILE_BEGIN_SESSION("Runtime", "VertexProfile-Runtime.json");
 	app->Run();

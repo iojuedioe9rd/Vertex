@@ -8,8 +8,8 @@ namespace Vertex {
 	class VertexEditor : public Application
 	{
 	public:
-		VertexEditor()
-			: Application("Vertex Editor", 1600, 900)
+		VertexEditor(ApplicationCommandLineArgs args)
+			: Application("Vertex Editor", 1600, 900, args)
 		{
 			VXEntities_INIT(VXEntities_INIT_USE_EVERYTHING);
 			PushLayer(new EditorLayer());
@@ -22,9 +22,9 @@ namespace Vertex {
 	};
 
 	
-	Application* Vertex::CreateApp()
+	Application* Vertex::CreateApp(ApplicationCommandLineArgs args)
 	{
-		return new Vertex::VertexEditor();
+		return new Vertex::VertexEditor(args);
 	}
 }
 

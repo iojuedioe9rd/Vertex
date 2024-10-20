@@ -37,6 +37,14 @@ namespace Vertex {
 
 		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
 
+		auto commandLineArgs = Application::Get().GetCommandLineArgs();
+		if (commandLineArgs.Count > 1)
+		{
+			auto sceneFilePath = commandLineArgs[1];
+			SceneSerializer serializer(&m_ActiveScene);
+			serializer.Deserialize(sceneFilePath);
+		}
+
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 		// Entity
@@ -318,7 +326,7 @@ namespace Vertex {
 		ImGuiLink::PopStyleVar();
 
 		m_SceneHierarchyPanel.OnImGuiRender();
-
+		m_ContentBrowserPanel.OnImGuiRender();
 		
 	}
 

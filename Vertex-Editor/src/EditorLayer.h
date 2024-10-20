@@ -8,6 +8,7 @@
 #include <Vertex/Events/KeyEvent.h>
 #include <Vertex/Events/Event.h>
 #include <VXEntities/Scene/EditorCamera.h>
+#include "Panels/ContentBrowserPanel.h"
 
 namespace Vertex {
 
@@ -67,6 +68,7 @@ namespace Vertex {
 
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
+		ContentBrowserPanel m_ContentBrowserPanel;
 	};
 
 }

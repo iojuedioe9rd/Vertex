@@ -40,8 +40,8 @@ namespace Vertex
 	Application* Application::app = nullptr;
 
 	
-	Application::Application(const std::string& name, uint32_t width, uint32_t height)
-		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+	Application::Application(const std::string& name, uint32_t width, uint32_t height, ApplicationCommandLineArgs args)
+		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CommandLineArgs(args)
 	{
 		
 		

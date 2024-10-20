@@ -88,7 +88,7 @@ namespace Vertex {
 		
 		t += ts;
 		
-		m_ViewportFocused = true;
+		
 
 		VX_PROFILE_FUNCTION();
 

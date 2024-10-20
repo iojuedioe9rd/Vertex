@@ -325,6 +325,32 @@ namespace Vertex
         return ImVec2ToVec2(ImGui::GetCursorPos());
     }
 
+    void ImGuiLink::Columns(int columnCount, const char* id, bool border)
+    {
+        ImGui::Columns(columnCount, id, border);
+    }
+
+    bool ImGuiLink::IsItemHovered()
+    {
+        return ImGui::IsItemHovered();
+    }
+
+    bool ImGuiLink::IsMouseDoubleClicked(ImGuiMouseButton mouseButton)
+    {
+        return ImGui::IsMouseDoubleClicked(mouseButton);
+    }
+
+    void ImGuiLink::TextWrapped(std::string str)
+    {
+        ImGui::TextWrapped(str.c_str());
+
+    }
+
+    void ImGuiLink::NextColumn()
+    {
+        return ImGui::NextColumn();
+    }
+
     
 
 

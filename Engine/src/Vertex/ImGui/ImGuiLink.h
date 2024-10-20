@@ -86,6 +86,13 @@ namespace Vertex
             ImGuiStyleVar_COUNT
         };
 
+        enum ImGuiMouseButton
+        {
+            Left,
+            Right,
+            Middle
+        };
+
 
 		static bool Begin(char* name, bool* p_open = (bool*)(NULL), ImGuiWindowFlags flags = ImGuiWindowFlags::ImGuiWindowFlags_None);
 		static void End();
@@ -127,6 +134,11 @@ namespace Vertex
         static glm::vec2 GetWindowPos();
         static glm::vec2 GetMousePos();
         static glm::vec2 GetCursorPos();
+        static void Columns(int columnCount = 1, const char* id = 0, bool border = true);
+        static bool IsItemHovered();
+        static bool IsMouseDoubleClicked(ImGuiMouseButton mouseButton);
+        static void TextWrapped(std::string str);
+        static void NextColumn();
 	};
 
 }

@@ -1,22 +1,7 @@
-[17:38:39] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[17:38:40] [info] VERTEX: GLAD STATUS: 1
-[17:38:40] [info] VERTEX: OpenGL Info:
-[17:38:40] [info] VERTEX:   Vendor: NVIDIA Corporation
-[17:38:40] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[17:38:40] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[17:38:43] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:48] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:51] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:51] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:51] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:51] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:52] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:52] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:52] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:52] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:52] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:53] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:53] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:53] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:53] [info] VERTEX: Playing Audio: assets\music\idk.wav
-[17:38:53] [info] VERTEX: Playing Audio: assets\music\idk.wav
+[19:25:31] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[19:25:32] [info] VERTEX: GLAD STATUS: 1
+[19:25:32] [info] VERTEX: OpenGL Info:
+[19:25:32] [info] VERTEX:   Vendor: NVIDIA Corporation
+[19:25:32] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[19:25:32] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[19:25:38] [info] VERTEX: Window Resized

@@ -1,7 +1,6 @@
-[15:11:06] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[15:11:07] [info] VERTEX: GLAD STATUS: 1
-[15:11:07] [info] VERTEX: OpenGL Info:
-[15:11:07] [info] VERTEX:   Vendor: NVIDIA Corporation
-[15:11:07] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[15:11:07] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[15:11:07] [error] VERTEX: Assertion failed: Framebuffer is incomplete!
+[15:13:10] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[15:13:10] [info] VERTEX: GLAD STATUS: 1
+[15:13:10] [info] VERTEX: OpenGL Info:
+[15:13:10] [info] VERTEX:   Vendor: NVIDIA Corporation
+[15:13:10] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[15:13:10] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94

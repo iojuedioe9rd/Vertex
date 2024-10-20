@@ -9,7 +9,7 @@ namespace Vertex {
 	{
 	public:
 		VertexEditor()
-			: Application("Vertex Editor")
+			: Application("Vertex Editor", 1600, 900)
 		{
 			VXEntities_INIT(VXEntities_INIT_USE_EVERYTHING);
 			PushLayer(new EditorLayer());

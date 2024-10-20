@@ -23,8 +23,9 @@ namespace Vertex {
 		m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
 
 		FramebufferSpecification fbSpec;
-		fbSpec.Width = 1280;
-		fbSpec.Height = 720;
+		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
+		fbSpec.Width = 1600;
+		fbSpec.Height = 900;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_CameraController.GetCamera().SetWindowSize(1280, 720);

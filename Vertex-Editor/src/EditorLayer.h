@@ -33,6 +33,12 @@ namespace Vertex {
 		void OpenScene();
 		void SaveSceneAs();
 		void OpenScene(const std::filesystem::path& path);
+
+		void OnScenePlay();
+		void OnSceneStop();
+
+		// UI Panels
+		void UI_Toolbar();
 	private:
 
 
@@ -55,6 +61,8 @@ namespace Vertex {
 		Entity* m_HoveredEntity = nullptr;
 
 		Ref<Texture2D> m_CheckerboardTexture;
+		Ref<Texture2D> m_IconPlay;
+		Ref<Texture2D> m_IconStop;
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		glm::vec2 m_ViewportBounds[2];
@@ -71,6 +79,14 @@ namespace Vertex {
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
 		ContentBrowserPanel m_ContentBrowserPanel;
+
+		enum class SceneState
+		{
+			Edit = BIT(0),
+			Play = BIT(1)
+		};
+
+		SceneState m_SceneState = SceneState::Edit;
 	};
 
 }

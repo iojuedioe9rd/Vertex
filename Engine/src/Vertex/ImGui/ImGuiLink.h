@@ -1,6 +1,7 @@
 #pragma once
 #include "Vertex/Core/Base.h"
 #include <glm/glm.hpp>
+#include "../vendor/imgui/imgui_internal.h"
 
 typedef int ImGuiStyleVar;
 
@@ -35,7 +36,7 @@ namespace Vertex
             bool IsDelivery() const { return Delivery; }
         };
 
-        enum ImGuiWindowFlags
+        enum ImGuiWindowFlags: int
         {
             ImGuiWindowFlags_None = 0,
             ImGuiWindowFlags_NoTitleBar = 1 << 0,
@@ -145,11 +146,11 @@ namespace Vertex
         static bool BeginCombo(char* name, char* idk);
         static void EndCombo();
         static bool Selectable(char* name, bool* selected);
-        static bool DragFloat(std::string label, float value_ptr[1]);
+        static bool DragFloat(std::string label, float value_ptr[1], float speed = 0.0f, float min = 0.0f, float max = 0.0f);
         static void DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f);
         static bool BeginPopupContextWindow();
         static void EndPopup();
-        static bool Button(std::string label);
+        static bool Button(std::string label, glm::vec2 size = glm::vec2(0,0));
         static bool BeginPopupContextItem();
         static glm::vec2 GetWindowSize();
         static glm::vec2 GetWindowPos();
@@ -167,7 +168,14 @@ namespace Vertex
         static bool BeginDragDropTarget();
         static void EndDragDropTarget();
         static void EndDragDropSource();
+
+        static void* GetContext();
+
+
+
 	};
+
+
 
 }
 

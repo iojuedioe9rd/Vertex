@@ -10,7 +10,10 @@ project "Vertex-Editor"
 	files
 	{
 		"src/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
+		"src/**.rc",
+		"src/**.ico",
+		"src/**.png"
 	}
 	
 	includedirs
@@ -19,13 +22,15 @@ project "Vertex-Editor"
 		"%{wks.location}/VXEntities/src",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.imgui}"
 	}
 	
 	links
 	{
 		"Engine",
-		"VXEntities"
+		"VXEntities",
+		"ImGui"
 	}
 	
 	filter "system:windows"

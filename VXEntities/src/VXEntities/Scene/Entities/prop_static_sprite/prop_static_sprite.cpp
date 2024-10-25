@@ -20,6 +20,15 @@ namespace Vertex
 			id += c;
 		}
 		glm::mat4 mat = Math::ComposeTransform(pos, size, rotation);
-		Renderer2D::DrawMatrix(mat, colour, id);
+
+		if (texture)
+		{
+			Renderer2D::DrawMatrix(mat, texture, tilingFactor, colour, id);
+		}
+		else
+		{
+			Renderer2D::DrawMatrix(mat, colour, id);
+		}
+		
 	}
 }

@@ -9,6 +9,9 @@
 #include "Vertex/ImGui/ImGuizmoLink.h"
 #include "Vertex/Math/Math.h"
 #include <VXEntities/Scene/EditorCamera.h>
+#include "resource.h"
+#include <imgui.h>
+#include <imgui_internal.h>
 
 namespace Vertex {
 
@@ -24,6 +27,8 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+		m_IconPlay = Texture2D::CreateWin(IDB_PNG4, "PNG");
+		m_IconStop = Texture2D::CreateWin(IDB_PNG5, "PNG");
 
 		FramebufferSpecification fbSpec;
 		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
@@ -74,7 +79,7 @@ namespace Vertex {
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 		
-		
+		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 	}
 
 	float t = 0.0f;
@@ -96,8 +101,7 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Update
-		if (m_ViewportFocused)
-			m_EditorCamera.OnUpdate(ts);
+		
 
 		// Render
 		Renderer2D::ResetStats();
@@ -111,15 +115,34 @@ namespace Vertex {
 		glm::mat4 transform;
 		if (true)
 		{
-			//Renderer2D::BeginScene(*camera, transform);
-			Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
+			switch (m_SceneState)
+			{
+				case SceneState::Edit:
+				{
+					if (m_ViewportFocused)
+						m_CameraController.OnUpdate(ts);
+					m_EditorCamera.OnUpdate(ts);
 
-			//Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-			//Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-			//Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, m_SquareColor);
-			// Update scene
-			m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
-			m_SquareEntity.pos = glm::vec3(0, sinf(t) * 100, 0);
+					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
+					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
+					Renderer2D::EndScene();
+
+					break;
+				}
+				case SceneState::Play:
+				{
+					Ref<Camera> cam;
+					glm::mat4 p_cam;
+					if (m_ActiveScene->GetACameraInScene(&cam, true, &p_cam))
+					{
+						Renderer2D::BeginScene(cam->GetProjection(), p_cam);
+						m_ActiveScene->OnUpdateRuntime(ts);
+						Renderer2D::EndScene();
+					}
+					
+					break;
+				}
+			}
 			//VX_INFO("{0}", sinf(t));
 
 			auto mx = ImGuiLink::GetMousePos().x;
@@ -224,14 +247,14 @@ namespace Vertex {
 			ImGuiLink::EndMenuBar();
 		}
 
-		ImGuiLink::Begin("Settings");
+		ImGui::Begin("Settings");
 
 		auto stats = Renderer2D::GetStats();
-		ImGuiLink::Text("Renderer2D Stats:");
-		ImGuiLink::Text("Draw Calls: %d", stats.DrawCalls);
-		ImGuiLink::Text("Quads: %d", stats.QuadCount);
-		ImGuiLink::Text("Vertices: %d", stats.GetTotalVertexCount());
-		ImGuiLink::Text("Indices: %d", stats.GetTotalIndexCount());
+		ImGui::Text("Renderer2D Stats:");
+		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+		ImGui::Text("Quads: %d", stats.QuadCount);
+		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
+		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
 
 
@@ -255,7 +278,7 @@ namespace Vertex {
 
 		}
 
-		ImGuiLink::End();
+		ImGui::End();
 
 		ImGuiLink::PushStyleVar(ImGuiLink::ImGuiStyleVar_WindowPadding, glm::vec2{ 0, 0 });
 		ImGuiLink::Begin("Viewport");
@@ -340,6 +363,8 @@ namespace Vertex {
 
 		m_SceneHierarchyPanel.OnImGuiRender();
 		m_ContentBrowserPanel.OnImGuiRender();
+
+		UI_Toolbar();
 		
 	}
 
@@ -426,6 +451,47 @@ namespace Vertex {
 		NewScene();
 		SceneSerializer serializer(&m_ActiveScene);
 		serializer.Deserialize(path.string());
+	}
+
+	void EditorLayer::OnScenePlay()
+	{
+		m_SceneState = SceneState::Play;
+	}
+
+	void EditorLayer::OnSceneStop()
+	{
+		m_SceneState = SceneState::Edit;
+	}
+
+	void EditorLayer::UI_Toolbar()
+	{
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+		auto& colors = ImGui::GetStyle().Colors;
+		const auto& buttonHovered = colors[ImGuiCol_ButtonHovered];
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(buttonHovered.x, buttonHovered.y, buttonHovered.z, 0.5f));
+		const auto& buttonActive = colors[ImGuiCol_ButtonActive];
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(buttonActive.x, buttonActive.y, buttonActive.z, 0.5f));
+
+		ImGui::Begin("##toolbar", nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		float size = ImGui::GetWindowHeight() - 4.0f;
+		Ref<Texture2D> icon = m_SceneState == SceneState::Edit ? m_IconPlay : m_IconStop;
+
+		ImGui::SetCursorPosX((ImGui::GetWindowContentRegionMax().x * 0.5f) - (size * 0.5f));
+
+		if (ImGui::ImageButton((ImTextureID)icon->GetRendererID(), ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), 0))
+		{
+			if (m_SceneState == SceneState::Edit)
+				OnScenePlay();
+			else if (m_SceneState == SceneState::Play)
+				OnSceneStop();
+		}
+		ImGui::PopStyleVar(2);
+		ImGui::PopStyleColor(3);
+		ImGui::End();
+
 	}
 
 }

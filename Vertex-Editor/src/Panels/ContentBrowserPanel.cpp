@@ -1,6 +1,7 @@
 #include "ContentBrowserPanel.h"
 #include "Vertex/Audio/AudioManager.h"
 #include <Vertex/ImGui/ImGuiLink.h>
+#include "../resource.h"
 
 bool endsWith(const std::string& fullString, const std::string& ending)
 {
@@ -22,8 +23,9 @@ namespace Vertex
 	ContentBrowserPanel::ContentBrowserPanel()
 		: m_CurrentDirectory(g_AssetPath)
 	{
-		m_DirectoryIcon = Texture2D::Create("Resources/Icons/ContentBrowser/DirectoryIcon.png");
-		m_FileIcon = Texture2D::Create("Resources/Icons/ContentBrowser/FileIcon.png");
+
+		m_DirectoryIcon = Texture2D::CreateWin(IDB_PNG2, "PNG");
+		m_FileIcon = Texture2D::CreateWin(IDB_PNG3, "PNG");
 	}
 
 	void ContentBrowserPanel::OnImGuiRender()

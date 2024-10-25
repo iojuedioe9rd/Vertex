@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Entity.h"
+#include "Vertex/Renderer/Texture.h"
 
 namespace Vertex {
 
@@ -28,6 +29,8 @@ namespace Vertex {
 		}
 
 		glm::vec4 colour = glm::vec4(1,1,1,1);
+		Ref<Texture2D> texture;
+		float tilingFactor = 1.0f;
 
 	private:
 

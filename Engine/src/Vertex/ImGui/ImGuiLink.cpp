@@ -218,9 +218,9 @@ namespace Vertex
         return ImGui::Selectable(name, selected);
     }
 
-    bool ImGuiLink::DragFloat(std::string label, float value_ptr[1])
+    bool ImGuiLink::DragFloat(std::string label, float value_ptr[1], float speed, float min, float max)
     {
-        return ImGui::DragFloat(label.c_str(), value_ptr);
+        return ImGui::DragFloat(label.c_str(), value_ptr, speed, min, max);
     }
 
     void ImGuiLink::DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue, float columnWidth)
@@ -289,9 +289,9 @@ namespace Vertex
         ImGui::EndPopup();
     }
 
-    bool ImGuiLink::Button(std::string label)
+    bool ImGuiLink::Button(std::string label, glm::vec2 size)
     {
-        return ImGui::Button(label.c_str());
+        return ImGui::Button(label.c_str(), Vec2ToImVec2(size));
     }
 
     bool ImGuiLink::BeginPopupContextItem()
@@ -379,6 +379,11 @@ namespace Vertex
     void ImGuiLink::EndDragDropSource()
     {
         ImGui::EndDragDropSource();
+    }
+
+    void* ImGuiLink::GetContext()
+    {
+        return GImGui;
     }
 
     

@@ -7,8 +7,18 @@
 #define ImGuiTreeNodeFlags_OpenOnArrow 128
 #define ImGuiTreeNodeFlags_DefaultOpen 32
 
+#define NUM_TEXTURE_EXTENSIONS 5
+const char* texturesFileExtensions[NUM_TEXTURE_EXTENSIONS] = {
+	".png",
+	".jpg",
+	".jpeg",
+	".bmp",
+	".tga"
+};
 
 namespace Vertex {
+
+	extern const std::filesystem::path g_AssetPath;
 
 	SceneHierarchyPanel::SceneHierarchyPanel(Scene* scene)
 	{
@@ -223,6 +233,36 @@ namespace Vertex {
 		{
 			
 			ImGuiLink::ColorEdit4("Color", glm::value_ptr(entity->colour));
+
+
+			ImGuiLink::Button("Texture", glm::vec2(100.0f, 0.0f));
+			if (ImGuiLink::BeginDragDropTarget())
+			{
+				if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+				{
+					const wchar_t* path = (const wchar_t*)payload->Data;
+					std::filesystem::path texturePath = std::filesystem::path(g_AssetPath) / path;
+					std::string extension = texturePath.extension().string();
+					
+					bool isValidExtension = false;
+
+					for (int i = 0; i < NUM_TEXTURE_EXTENSIONS; ++i) {
+						if (extension == texturesFileExtensions[i]) {
+							isValidExtension = true;
+							break;
+						}
+					}
+
+					if (isValidExtension)
+					{
+						entity->texture = Texture2D::Create(texturePath.string());
+					}
+
+				}
+				ImGuiLink::EndDragDropTarget();
+			}
+			ImGuiLink::DragFloat("Tiling Factor", &entity->tilingFactor, 0.1f, 0.0f, 100.0f);
+
 			ImGuiLink::TreePop();
 		}
 	}

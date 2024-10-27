@@ -182,6 +182,9 @@ namespace Vertex {
 			out << YAML::Key << "PropStaticSprite";
 			out << YAML::BeginMap;
 			out << YAML::Key << "Colour" << YAML::Value << sprite->colour;
+			if (sprite->texture && !sprite->texture->GetPath().empty())
+				out << YAML::Key << "TexturePath" << YAML::Value << sprite->texture->GetPath();
+			out << YAML::Key << "TilingFactor" << YAML::Value << sprite->tilingFactor;
 			out << YAML::EndMap;
 		}
 
@@ -192,6 +195,9 @@ namespace Vertex {
 			out << YAML::Key << "PropDynamicSprite";
 			out << YAML::BeginMap;
 			out << YAML::Key << "Colour" << YAML::Value << sprite->colour;
+			if (sprite->texture && !sprite->texture->GetPath().empty())
+				out << YAML::Key << "TexturePath" << YAML::Value << sprite->texture->GetPath();
+			out << YAML::Key << "TilingFactor" << YAML::Value << sprite->tilingFactor;
 			out << YAML::EndMap;
 		}
 
@@ -389,10 +395,15 @@ namespace Vertex {
 
 		// Deserialization for specific entity types
 		if (entity->GetEntName() == "prop_static_sprite") {
+			auto propStaticSpriteNode = node["PropStaticSprite"];
 			ENTPropStaticSprite* sprite = static_cast<ENTPropStaticSprite*>(entity);
-			if (node["PropStaticSprite"]["Colour"]) {
-				sprite->colour = node["PropStaticSprite"]["Colour"].as<glm::vec4>(); // Assuming colour is a glm::vec4
+			if (propStaticSpriteNode && propStaticSpriteNode["Colour"]) {
+				sprite->colour = propStaticSpriteNode["Colour"].as<glm::vec4>(); // Assuming colour is a glm::vec4
 			}
+			if (propStaticSpriteNode && propStaticSpriteNode["TexturePath"])
+				sprite->texture = Texture2D::Create(propStaticSpriteNode["TexturePath"].as<std::string>());
+			if (propStaticSpriteNode && propStaticSpriteNode["TilingFactor"])
+				sprite->tilingFactor = propStaticSpriteNode["TilingFactor"].as<float>();
 		}
 
 
@@ -401,6 +412,10 @@ namespace Vertex {
 			ENTPropDynamicSprite* sprite = static_cast<ENTPropDynamicSprite*>(entity);
 			if (propDynamicSpriteNode && propDynamicSpriteNode["Colour"]) {
 				sprite->colour = propDynamicSpriteNode["Colour"].as<glm::vec4>(); // Assuming colour is a glm::vec4
+				if (propDynamicSpriteNode["TexturePath"])
+					sprite->texture = Texture2D::Create(propDynamicSpriteNode["TexturePath"].as<std::string>());
+				if (propDynamicSpriteNode["TilingFactor"])
+					sprite->tilingFactor = propDynamicSpriteNode["TilingFactor"].as<float>();
 			}
 		}
 

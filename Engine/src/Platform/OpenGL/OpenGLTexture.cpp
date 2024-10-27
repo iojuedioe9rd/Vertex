@@ -25,7 +25,7 @@ namespace Vertex
 	}
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
-		: m_Path(path)
+		: m_Path(path), m_Name(path)
 	{
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
@@ -63,7 +63,8 @@ namespace Vertex
 		stbi_image_free(data);
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(int resID, const std::string& format)
+	OpenGLTexture2D::OpenGLTexture2D(int resID, const std::string& format) :
+		m_Name("App resource ID: " + std::to_string(resID) + " , Format: " + format)
 	{
 		int width, height, channels;
 		stbi_uc* data = (stbi_uc*)TextureUtils::load_tex_win_rc(resID, format, &width, &height, &channels);

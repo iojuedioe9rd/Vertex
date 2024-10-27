@@ -1,11 +1,11 @@
 Scene: Untitled
 Entities:
-  - Entity: l1k4migd-x0nt-yi0-5xve-9r73fyo00q47-k7ttvp2flxkts2-fm7n-at7p-t6n9-1soatiekenz-kl7kv4
+  - Entity: 6pb33s5a-xqb7-tcfq-scs-zp7irm9op3io-x093f72vq2l5h-fmp3-l8a3-y246-xac95cs27nnk-alaizy
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
-      Translation: [0, -11.5, 0]
-      Size: [280.399994, 1, 1]
+      Translation: [0, -17.5, 0]
+      Size: [280.399994, 12, 1]
       Rotation: [0, 0, 0]
     BaseRigidbody2D:
       BodyType: Static
@@ -19,7 +19,8 @@ Entities:
       RestitutionThreshold: 0.5
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
-  - Entity: t9ovfqn2-q93b-gzt-3lxb-g52dc4o6zhcq-75miatyhd7gob-rgm8-bz43-e52o-rgrdm5dm5xom-qagaiq
+      TilingFactor: 1
+  - Entity: lvl28dk7-7fo2-ilsg-pxtt-cchl5qhzke-fxn5q89i44slb0-6qn-918-c5yk-ys57pfkhi0f-7s132
     Tag: Cam
     EntityType: point_camera_2d
     Transform:
@@ -31,12 +32,12 @@ Entities:
       PerspectiveFOV: 0.785398185
       PerspectiveNear: 0.00999999978
       PerspectiveFar: 1000
-      OrthographicSize: 30
+      OrthographicSize: 60
       OrthographicNear: -1
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: qmr8pe-ahap-kt8x-go1k-ieks2vq7bqkx-714bacd8giotx-pv1k-rf55-xzn1-7qxyltrg88ix-746z6b
+  - Entity: ohmbx0pg-svpm-rd3n-9124-reav8o8e8td-qs2y0rfly78fdt-6a16-lka-hote-k1ax2evznet-ezhadg
     Tag: Sprite
     EntityType: prop_dynamic_sprite
     Transform:
@@ -54,8 +55,17 @@ Entities:
       Restitution: 1
       RestitutionThreshold: 0.959999979
     PropDynamicSprite:
-      Colour: [0, 0.941176474, 1, 0.250980407]
+      Colour: [1, 1, 1, 1]
+      TexturePath: assets\textures\Player.png
+      TilingFactor: 1
+  - Entity: 53e6qhfx-oaf-pbpp-6e90-8fdv5d1dmmr-hnn6xb9brekk8-msv0-pxlr-nh2d-c3o6xyqvccsb-3k7ep
+    Tag: Circle
+    EntityType: prop_2d_circle
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
 ---
 Checksum
 ---
-4470027260790606073
+9406177292493116835

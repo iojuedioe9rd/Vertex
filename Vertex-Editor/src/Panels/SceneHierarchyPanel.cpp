@@ -86,6 +86,11 @@ namespace Vertex {
 				if (type == "prop_static_sprite")
 				{
 					m_Context->CreateEntity<ENTPropStaticSprite>(tag);
+				}                       
+
+				if (type == "prop_dynamic_sprite")
+				{
+					m_Context->CreateEntity<ENTPropDynamicSprite>(tag);
 				}
 
 				if (type == "point_camera_2d")
@@ -107,21 +112,14 @@ namespace Vertex {
 		}
 	}
 
+	Entity* popupContextEntity = nullptr;
 	void SceneHierarchyPanel::DrawEntityNode(Entity* entity)
 	{
 		
 		std::string& tag = entity->name();
 
 		int flags = ((m_SelectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
-
 		
-		if (ImGuiLink::BeginPopupContextItem())
-		{
-			if (ImGuiLink::MenuItem("Delete Entity"))
-				m_EntityToRemove = entity;
-			ImGuiLink::EndPopup();
-		}
-
 		bool opened = ImGuiLink::TreeNodeEx(entity->GetID(), flags, tag);
 		
 		
@@ -146,7 +144,7 @@ namespace Vertex {
 
 #pragma region DrawEntity Code
 
-	void DrawBaseEntity(Entity* entity)
+	void DrawBaseEntity(Entity* entity, Entity** m_EntityToRemove)
 	{
 		
 		auto& tag = entity->name();
@@ -157,6 +155,11 @@ namespace Vertex {
 		if (ImGuiLink::InputText("Tag", buffer, sizeof(buffer)))
 		{
 			tag = std::string(buffer);
+		}
+		ImGui::SameLine();
+		if (ImGuiLink::Button("Delete"))
+		{
+			*m_EntityToRemove = entity;
 		}
 
 		if (ImGuiLink::TreeNodeEx(entity->GetID() + "Transform", ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
@@ -227,7 +230,47 @@ namespace Vertex {
 		}
 	}
 
-	void DrawSpriteRendererProp(ENTPropStaticSprite* entity)
+	void DrawStaticDynamicRendererProp(ENTPropDynamicSprite* entity)
+	{
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTPropDynamicSprite).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer"))
+		{
+
+			ImGuiLink::ColorEdit4("Color", glm::value_ptr(entity->colour));
+
+
+			ImGuiLink::Button("Texture", glm::vec2(100.0f, 0.0f));
+			if (ImGuiLink::BeginDragDropTarget())
+			{
+				if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+				{
+					const wchar_t* path = (const wchar_t*)payload->Data;
+					std::filesystem::path texturePath = std::filesystem::path(g_AssetPath) / path;
+					std::string extension = texturePath.extension().string();
+
+					bool isValidExtension = false;
+
+					for (int i = 0; i < NUM_TEXTURE_EXTENSIONS; ++i) {
+						if (extension == texturesFileExtensions[i]) {
+							isValidExtension = true;
+							break;
+						}
+					}
+
+					if (isValidExtension)
+					{
+						entity->texture = Texture2D::Create(texturePath.string());
+					}
+
+				}
+				ImGuiLink::EndDragDropTarget();
+			}
+			ImGuiLink::DragFloat("Tiling Factor", &entity->tilingFactor, 0.1f, 0.0f, 100.0f);
+
+			ImGuiLink::TreePop();
+		}
+	}
+
+	void DrawStaticSpriteRendererProp(ENTPropStaticSprite* entity)
 	{
 		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTPropStaticSprite).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer"))
 		{
@@ -267,12 +310,65 @@ namespace Vertex {
 		}
 	}
 
+	void DrawBoxCollider2DImGui(ENTBaseBoxCollier2D* ent)
+	{
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTBaseBoxCollier2D).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Box Collider 2D"))
+		{
+			ImGui::DragFloat2("Offset", glm::value_ptr(ent->Offset));
+			ImGui::DragFloat("Density", &ent->Density, 0.01f, 0.0f, 1.0f);
+			ImGui::DragFloat("Friction", &ent->Friction, 0.01f, 0.0f, 1.0f);
+			ImGui::DragFloat("Restitution", &ent->Restitution, 0.01f, 0.0f, 1.0f);
+			ImGui::DragFloat("Restitution Threshold", &ent->RestitutionThreshold, 0.01f, 0.0f);
+			ImGuiLink::TreePop();
+		}
+	}
+
+	void DrawRB2DImGui(ENTBaseRigidbody2D* ent)
+	{
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTBaseRigidbody2D).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Rigidbody 2D"))
+		{
+			
+			if (!(ent->GetEntName() == "prop_static_sprite" || ent->GetEntName() == "prop_dynamic_sprite"))
+			{
+				const char* bodyTypeStrings[] = { "Static", "Dynamic", "Kinematic" };
+				const char* currentBodyTypeString = bodyTypeStrings[(int)ent->Type];
+				if (ImGui::BeginCombo("Body Type", currentBodyTypeString))
+				{
+					for (int i = 0; i < 2; i++)
+					{
+						bool isSelected = currentBodyTypeString == bodyTypeStrings[i];
+						if (ImGui::Selectable(bodyTypeStrings[i], isSelected))
+						{
+							currentBodyTypeString = bodyTypeStrings[i];
+							ent->Type = (ENTBaseRigidbody2D::BodyType)i;
+						}
+						if (isSelected)
+							ImGui::SetItemDefaultFocus();
+					}
+					ImGui::EndCombo();
+				}
+			}
+
+			ImGui::Checkbox("Fixed Rotation", &ent->FixedRotation);
+			ImGuiLink::TreePop();
+		}
+	}
+
 	void SceneHierarchyPanel::DrawEntity(Entity* entity)
 	{
 		if (entity == nullptr) return;
-		DrawBaseEntity(entity);
+		DrawBaseEntity(entity, &m_EntityToRemove);
 		if (entity->GetEntName() == "point_camera_2d") { DrawCameraProp((ENTPointCamera2D*)entity); }
-		if (entity->GetEntName() == "prop_static_sprite") { DrawSpriteRendererProp((ENTPropStaticSprite*)entity); }
+		if (entity->GetEntName() == "prop_static_sprite") { DrawStaticSpriteRendererProp((ENTPropStaticSprite*)entity); }
+		if (entity->GetEntName() == "prop_dynamic_sprite") { DrawStaticDynamicRendererProp((ENTPropDynamicSprite*)entity); }
+		if (auto boxCollider2D = dynamic_cast<ENTBaseBoxCollier2D*>(entity))
+		{
+			DrawBoxCollider2DImGui(boxCollider2D);
+		}
+		if (auto rb2D = dynamic_cast<ENTBaseRigidbody2D*>(entity))
+		{
+			DrawRB2DImGui(rb2D);
+		}
 	}
 #pragma endregion
 

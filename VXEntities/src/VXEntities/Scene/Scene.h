@@ -7,6 +7,8 @@
 #include <Vertex/Events/Event.h>
 #include "EditorCamera.h"
 
+class b2World;
+
 namespace Vertex
 {
 	class ENTPointCamera2D;
@@ -32,6 +34,9 @@ namespace Vertex
 		}
 
 		bool RemoveEntity(Entity& entity);
+
+		void OnRuntimeStart();
+		void OnRuntimeStop();
 
 		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, ENTPointCamera2D** cam = nullptr, bool usePrimaryCam = true);
 		void OnUpdate(Timestep ts);
@@ -65,6 +70,8 @@ namespace Vertex
 		std::vector<Entity*> m_Entitys;
 		std::string m_name;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
+
+		b2World* m_PhysicsWorld = nullptr;
 
 		friend class Entity;
 	};

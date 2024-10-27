@@ -1,17 +1,18 @@
 #pragma once
 #include "../../Entity.h"
+#include "../base_box_collider_2d/base_box_collider_2d.h"
 #include "Vertex/Renderer/Texture.h"
 
 namespace Vertex {
 
-	class ENTPropStaticSprite : public Entity
+	class ENTPropStaticSprite : public ENTBaseBoxCollier2D
 	{
 	public:
 		ENTPropStaticSprite()
 		{
 
 		}
-		ENTPropStaticSprite(std::string name, Scene* scene) : Entity(name, scene)
+		ENTPropStaticSprite(std::string name, Scene* scene) : ENTBaseBoxCollier2D(name, scene)
 		{
 			
 		}

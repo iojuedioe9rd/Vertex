@@ -151,6 +151,10 @@ namespace Vertex {
 		virtual void EventH(Event& e)     = NULL;
 		virtual void Draw(Timestep& ts)   = NULL;
 		virtual std::string GetEntName()  =	NULL;
+		virtual void PhysUpdate(Timestep& ts)
+		{
+
+		}
 		virtual SerializationObject Serialize()
 		{
 			SerializationObject obj = SerializationObject();

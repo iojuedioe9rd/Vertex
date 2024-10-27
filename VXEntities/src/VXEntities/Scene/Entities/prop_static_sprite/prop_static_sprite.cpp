@@ -14,6 +14,10 @@ namespace Vertex
 
 	void ENTPropStaticSprite::Draw(Timestep& ts)
 	{
+		if (Type != ENTBaseRigidbody2D::BodyType::Static)
+		{
+			Type = ENTBaseRigidbody2D::BodyType::Static;
+		}
 		int id = 0;
 		for (char c : GetID())
 		{

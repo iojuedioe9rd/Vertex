@@ -7,4 +7,5 @@ IncludeDir["VertexOopsFormat"] = "%{wks.location}/Engine/vendor/VertexOopsFormat
 IncludeDir["glm"] = "%{wks.location}/Engine/vendor/glm"
 IncludeDir["entt"] = "%{wks.location}/Engine/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/Engine/vendor/yaml-cpp/include"
+IncludeDir["Box2D"] = "%{wks.location}/Engine/vendor/Box2D/include"
 IncludeDir["imguizmo"] = "%{wks.location}/Engine/vendor/ImGuizmo"

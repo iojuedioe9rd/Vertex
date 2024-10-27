@@ -25,14 +25,16 @@ project "VXEntities"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.Box2D}"
 	
     }
 	
 	links
 	{
 		"yaml-cpp",
-		"Engine"
+		"Engine",
+		"Box2D"
 	}
     
     filter "system:windows"

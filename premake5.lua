@@ -26,6 +26,7 @@ workspace "Vertex"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
+include "Engine/vendor/Box2D"
 include "Engine/vendor/ImGuizmo"
 include "Engine/vendor/zlib"
 include "Engine/vendor/yaml-cpp"

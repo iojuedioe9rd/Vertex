@@ -1,0 +1,61 @@
+Scene: Untitled
+Entities:
+  - Entity: 2rv0x0yl-rh8-qqbx-qv2l-c9evophly5mt-y8ockh4iyx7085-v78o-m1ze-4gf8-5q6658qn55r2-kxzly
+    Tag: Floor
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, -11.5, 0]
+      Size: [280.399994, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, -24]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+  - Entity: 40zqbnmy-b3vb-r29-40io-d3nqsi3akanx-gnksghtkl0zs27-4qav-inl8-riy-r60k2ccli61t-58vrrq
+    Tag: Cam
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, -9, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 30
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: l58nn3h3-z0z-g2a8-h2es-355924f38zh-y5zngcgf4zsdv-gmin-ymc-0zit-ia756kr5qyf9-n9zdr0
+    Tag: Sprite
+    EntityType: prop_dynamic_sprite
+    Transform:
+      Translation: [1.00816123e-06, 8, 0]
+      Size: [6.69999981, 10.1999998, 3.29999995]
+      Rotation: [0, 0, 23]
+    BaseRigidbody2D:
+      BodyType: Dynamic
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 1
+      RestitutionThreshold: 0.959999979
+    PropStaticSprite:
+      Colour: [0, 1, 1, 1]
+---
+Checksum
+---
+6525740046429829225

@@ -8,4 +8,5 @@
 #include "VXEntities/Scene/Entities/env_static_tilemap/env_static_tilemap.h"
 #include "VXEntities/Scene/Entities/point_camera_2d/point_camera_2d.h"
 #include "VXEntities/Scene/SceneSerializer.h"
+#include "VXEntities/Scene/Entities/prop_dynamic_sprite/prop_dynamic_sprite.h"
 

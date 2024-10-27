@@ -1,22 +1,35 @@
 #include "vxpch.h"
 
-
-
 #include "Scene.h"
 #include "Vertex/Renderer/Renderer2D.h"
 
 #include <glm/glm.hpp>
 
-
-
-
 #include "Entity.h"
 #include "Entities/point_camera_2d/point_camera_2d.h"
 #include <glm/ext/matrix_transform.hpp>
 
+// Box2D
+#include "box2d/b2_world.h"
+#include "box2d/b2_body.h"
+#include "box2d/b2_fixture.h"
+#include "box2d/b2_polygon_shape.h"
+
+#include "Entities/base_box_collider_2d/base_box_collider_2d.h"
+
 
 namespace Vertex {
-
+	static b2BodyType Rigidbody2DTypeToBox2DBody(ENTBaseRigidbody2D::BodyType bodyType)
+	{
+		switch (bodyType)
+		{
+		case ENTBaseRigidbody2D::BodyType::Static:    return b2_staticBody;
+		case ENTBaseRigidbody2D::BodyType::Dynamic:   return b2_dynamicBody;
+		case ENTBaseRigidbody2D::BodyType::Kinematic: return b2_kinematicBody;
+		}
+		VX_CORE_ASSERT(false, "Unknown body type");
+		return b2_staticBody;
+	}
 	static void DoMath(const glm::mat4& transform)
 	{
 
@@ -66,19 +79,57 @@ namespace Vertex {
 
 	bool Scene::RemoveEntity(Entity& entity)
 	{
-		for (size_t i = 0; i < m_Entitys.size(); i++)
-		{
-			if ((*m_Entitys[i]) == entity)
-			{
+		m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());
+		delete& entity;
+		return true;
+	}
 
-				m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());
-				delete& entity;
-				return true;
+	b2Body* SetupRB2D(ENTBaseRigidbody2D* rb2d, b2World* m_PhysicsWorld)
+	{
+		b2BodyDef bodyDef;
+		bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d->Type);
+		bodyDef.position.Set(rb2d->pos.x, rb2d->pos.y);
+
+		bodyDef.angle = rb2d->rotation.z;
+
+		b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
+		body->SetFixedRotation(rb2d->FixedRotation);
+		rb2d->SetRuntimeBody(body);
+
+		return body;
+	}
+
+
+
+	void Scene::OnRuntimeStart()
+	{
+		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
+
+		for (Entity* ent: m_Entitys)
+		{
+			if (auto boxCollider = dynamic_cast<ENTBaseBoxCollier2D*>(ent))
+			{
+				b2Body* body = SetupRB2D(boxCollider, m_PhysicsWorld);
+
+				b2PolygonShape boxShape;
+				boxShape.SetAsBox(boxCollider->Size.x * boxCollider->size.x, boxCollider->Size.y * boxCollider->size.y);
+
+				b2FixtureDef fixtureDef;
+				fixtureDef.shape = &boxShape;
+				fixtureDef.density = boxCollider->Density;
+				fixtureDef.friction = boxCollider->Friction;
+				fixtureDef.restitution = boxCollider->Restitution;
+				fixtureDef.restitutionThreshold = boxCollider->RestitutionThreshold;
+
+				body->CreateFixture(&fixtureDef);
 			}
-			//int int_to_remove = n;
-			//m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), int_to_remove), m_Entitys.end());
 		}
-		return 0;
+	}
+
+	void Scene::OnRuntimeStop()
+	{
+		delete m_PhysicsWorld;
+		m_PhysicsWorld = nullptr;
 	}
 
 	bool Scene::GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform, ENTPointCamera2D** cam, bool usePrimaryCam)
@@ -128,6 +179,17 @@ namespace Vertex {
 			ent->UpdateTime(ts);
 		}
 
+		if (m_PhysicsWorld != nullptr)
+		{
+			const int32_t velocityIterations = 6 * 2;
+			const int32_t positionIterations = 2 * 2;
+			m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);
+			for (Entity* ent : m_Entitys)
+			{
+				ent->PhysUpdate(ts);
+			}
+		}
+		
 		for (Entity* ent : m_Entitys)
 		{
 			ent->DrawTime(ts);

@@ -33,6 +33,9 @@ namespace Vertex {
 		void OpenScene();
 		void SaveSceneAs();
 		void OpenScene(const std::filesystem::path& path);
+		void SaveScene();
+
+		void SerializeScene(Scene* scene, const std::filesystem::path& path);
 
 		void OnScenePlay();
 		void OnSceneStop();
@@ -68,6 +71,8 @@ namespace Vertex {
 		glm::vec2 m_ViewportBounds[2];
 
 		Scene* m_ActiveScene;
+		Scene* m_EditorScene;
+		std::filesystem::path m_EditorScenePath;
 		ENTPropStaticSprite m_SquareEntity;
 
 		ENTPointCamera2D* cam;

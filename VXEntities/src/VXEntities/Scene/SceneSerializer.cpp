@@ -189,7 +189,7 @@ namespace Vertex {
 		{
 			ENTPropStaticSprite* sprite = static_cast<ENTPropStaticSprite*>(entity);
 			VX_CORE_ASSERT(sprite != nullptr, "sprite is null!");
-			out << YAML::Key << "PropStaticSprite";
+			out << YAML::Key << "PropDynamicSprite";
 			out << YAML::BeginMap;
 			out << YAML::Key << "Colour" << YAML::Value << sprite->colour;
 			out << YAML::EndMap;

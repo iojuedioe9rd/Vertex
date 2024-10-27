@@ -80,6 +80,8 @@ namespace Vertex {
 
 		
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
+
+		OpenScene();
 	}
 
 	float t = 0.0f;
@@ -423,6 +425,7 @@ namespace Vertex {
 		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_EditorScene = m_ActiveScene;
 	}
 
 	void EditorLayer::OpenScene()
@@ -430,9 +433,7 @@ namespace Vertex {
 		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
 		if (!filepath.empty())
 		{
-			NewScene();
-			SceneSerializer serializer(&m_ActiveScene);
-			serializer.Deserialize(filepath);
+			OpenScene(filepath);
 		}
 	}
 
@@ -448,21 +449,54 @@ namespace Vertex {
 
 	void EditorLayer::OpenScene(const std::filesystem::path& path)
 	{
+		if (m_SceneState != SceneState::Edit)
+			OnSceneStop();
+
 		NewScene();
-		SceneSerializer serializer(&m_ActiveScene);
-		serializer.Deserialize(path.string());
+		SceneSerializer serializer(&m_EditorScene);
+		if(serializer.Deserialize(path.string()));
+		{
+			m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_SceneHierarchyPanel.SetContext(m_EditorScene);
+
+			m_ActiveScene = m_EditorScene;
+			m_EditorScenePath = path;
+		}
+	}
+
+	void EditorLayer::SaveScene()
+	{
+		if (!m_EditorScenePath.empty())
+			SerializeScene(m_ActiveScene, m_EditorScenePath);
+		else
+			SaveSceneAs();
+	}
+
+	void EditorLayer::SerializeScene(Scene* scene, const std::filesystem::path& path)
+	{
+		SceneSerializer serializer(&scene);
+		serializer.Serialize(path.string());
 	}
 
 	void EditorLayer::OnScenePlay()
 	{
 		m_SceneState = SceneState::Play;
+
+		m_ActiveScene = Scene::Copy(m_EditorScene, std::string("Runtime"));
 		m_ActiveScene->OnRuntimeStart();
+
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnSceneStop()
 	{
 		m_SceneState = SceneState::Edit;
+
 		m_ActiveScene->OnRuntimeStop();
+		VXEntities_RemoveScene(m_ActiveScene);
+		m_ActiveScene = m_EditorScene;
+
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::UI_Toolbar()

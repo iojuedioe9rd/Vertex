@@ -33,6 +33,14 @@ namespace Vertex
 			return *entity;
 		}
 
+		template <typename T>
+		T& CreateEntity(T& entity)
+		{
+			T* newEntity = new T(entity);
+			m_Entitys.push_back(newEntity);
+			return *newEntity;
+		}
+
 		bool RemoveEntity(Entity& entity);
 
 		void OnRuntimeStart();
@@ -44,6 +52,8 @@ namespace Vertex
 		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
 		void OnEvent(Event& e);
 		void OnViewportResize(uint32_t width, uint32_t height);
+
+		static Scene* Copy(Scene* other, std::string& name);
 
 		void KillAllEntitys()
 		{

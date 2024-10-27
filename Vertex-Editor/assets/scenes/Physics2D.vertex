@@ -1,6 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: 2rv0x0yl-rh8-qqbx-qv2l-c9evophly5mt-y8ockh4iyx7085-v78o-m1ze-4gf8-5q6658qn55r2-kxzly
+  - Entity: l1k4migd-x0nt-yi0-5xve-9r73fyo00q47-k7ttvp2flxkts2-fm7n-at7p-t6n9-1soatiekenz-kl7kv4
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
@@ -19,7 +19,7 @@ Entities:
       RestitutionThreshold: 0.5
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
-  - Entity: 40zqbnmy-b3vb-r29-40io-d3nqsi3akanx-gnksghtkl0zs27-4qav-inl8-riy-r60k2ccli61t-58vrrq
+  - Entity: t9ovfqn2-q93b-gzt-3lxb-g52dc4o6zhcq-75miatyhd7gob-rgm8-bz43-e52o-rgrdm5dm5xom-qagaiq
     Tag: Cam
     EntityType: point_camera_2d
     Transform:
@@ -36,7 +36,7 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: l58nn3h3-z0z-g2a8-h2es-355924f38zh-y5zngcgf4zsdv-gmin-ymc-0zit-ia756kr5qyf9-n9zdr0
+  - Entity: qmr8pe-ahap-kt8x-go1k-ieks2vq7bqkx-714bacd8giotx-pv1k-rf55-xzn1-7qxyltrg88ix-746z6b
     Tag: Sprite
     EntityType: prop_dynamic_sprite
     Transform:
@@ -53,9 +53,9 @@ Entities:
       Friction: 0.5
       Restitution: 1
       RestitutionThreshold: 0.959999979
-    PropStaticSprite:
-      Colour: [0, 1, 1, 1]
+    PropDynamicSprite:
+      Colour: [0, 0.941176474, 1, 0.250980407]
 ---
 Checksum
 ---
-6525740046429829225
+4470027260790606073

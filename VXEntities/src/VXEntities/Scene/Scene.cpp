@@ -1,5 +1,6 @@
 #include "vxpch.h"
 
+
 #include "Scene.h"
 #include "Vertex/Renderer/Renderer2D.h"
 
@@ -16,6 +17,9 @@
 #include "box2d/b2_polygon_shape.h"
 
 #include "Entities/base_box_collider_2d/base_box_collider_2d.h"
+#include "../MainLib.h"
+#include "Entities/prop_static_sprite/prop_static_sprite.h"
+#include "../../VXEntities.h"
 
 
 namespace Vertex {
@@ -230,6 +234,44 @@ namespace Vertex {
 				
 			}
 		}
+	}
+
+	template<typename EntityType>
+	static void CopyEntity(EntityType* ent, Scene* scene, bool haveSameUUID)
+	{
+		if (!dynamic_cast<Entity*>(ent) || !dynamic_cast<EntityType*>(ent))
+		{
+			return;
+		}
+
+		EntityType* newEntity = &scene->CreateEntity<EntityType>(*ent);
+		if (auto newEnt = dynamic_cast<Entity*>(newEntity))
+		{
+			newEnt->onAdded(scene);
+			if (haveSameUUID)
+			{
+				newEnt->SetID(ent->GetID());
+			}
+		}
+		
+	}
+
+	Scene* Scene::Copy(Scene* other, std::string& name)
+	{
+		Scene* newScene = VXEntities_MakeOrGetScene(name);
+
+		newScene->m_ViewportWidth = other->m_ViewportWidth;
+		newScene->m_ViewportHeight = other->m_ViewportHeight;
+
+		for (Entity* ent: *other)
+		{
+			CopyEntity<ENTPropStaticSprite>(dynamic_cast<ENTPropStaticSprite*>(ent), newScene, true);
+			CopyEntity<ENTPropDynamicSprite>(dynamic_cast<ENTPropDynamicSprite*>(ent), newScene, true);
+			CopyEntity<ENTPointCamera2D>(dynamic_cast<ENTPointCamera2D*>(ent), newScene, true);
+			CopyEntity<ENTEnvStaticTilemap>(dynamic_cast<ENTEnvStaticTilemap*>(ent), newScene, true);
+		}
+
+		return newScene;
 	}
 
 }

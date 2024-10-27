@@ -176,7 +176,13 @@ namespace Vertex {
 			rotation = obj.Get<glm::vec3>("Transform_Rotation"); // Handle rotation as glm::vec3
 			return true;
 		}
+
+		void onAdded(Scene* scene)
+		{
+			m_Scene = scene;
+		}
 		
+
 	protected:
 		Scene* m_Scene = nullptr;
 		std::string m_name;
@@ -189,10 +195,9 @@ namespace Vertex {
 		bool m_isVisible = true;
 
 
-		void onAdded(Scene* scene)
-		{
-			m_Scene = scene;
-		}
+		
+
+		friend class Scene;
 		
 	};
 }

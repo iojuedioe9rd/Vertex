@@ -83,14 +83,40 @@ namespace Vertex
 		layer->OnAttach();
 	}
 
+	float prevTime = 0.0;
+	float crntTime = 0.0;
+	float timeDiff;
+	uint32_t counter = 0;
+
+	float GetFPS()
+	{
+		crntTime = Time::GetTime();
+		timeDiff = crntTime - prevTime;
+		counter++;
+		if (timeDiff >= 1.0 / 30.0)
+		{
+			float FPS = ((1.0 / timeDiff) * counter);
+			prevTime = crntTime;
+			counter = 0;
+			return FPS;
+		}
+
+		return Time::GetFPS();
+	}
+
+
 	float m_LastFrameTime = 0.0f;
 	void Application::Update()
 	{
 		VX_PROFILE_FUNCTION();
 		
-		float time = (float)glfwGetTime();
+		float time = (float)Time::GetTime();
 		Timestep timestep = time - m_LastFrameTime;
 		m_LastFrameTime = time;
+
+		Time::m_Timestep = timestep;
+
+		Time::FPS = GetFPS();
 
 		//VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		

@@ -258,7 +258,7 @@ namespace Vertex {
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-
+		ImGui::Text("FPS: %d", static_cast<int>(std::round(Time::GetFPS())));
 
 		if (true)
 		{
@@ -434,6 +434,7 @@ namespace Vertex {
 		if (!filepath.empty())
 		{
 			OpenScene(filepath);
+			m_ActiveScene->CreateEntity<ENTProp2DCircle>("Circle");
 		}
 	}
 

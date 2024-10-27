@@ -123,5 +123,24 @@ namespace Vertex {
 		stbi_image_free(tex);
 	}
 
+	Timestep Time::m_Timestep;
+	float Time::GetTime()
+	{
+		return glfwGetTime();
+	}
+	/*
+	double prevTime = 0.0;
+	double crntTime = 0.0;
+	double timeDiff;
+	uint32_t counter = 0;
+	*/
+
+	float Time::FPS;
+	
+	float Time::GetFPS()
+	{
+		return FPS;
+	}
+
 	// unsigned char* LoadTextureFromResource(int resourceID, const char* format, int* width, int* height, int* channels)
 }

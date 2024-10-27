@@ -267,6 +267,7 @@ namespace Vertex {
 		{
 			CopyEntity<ENTPropStaticSprite>(dynamic_cast<ENTPropStaticSprite*>(ent), newScene, true);
 			CopyEntity<ENTPropDynamicSprite>(dynamic_cast<ENTPropDynamicSprite*>(ent), newScene, true);
+			CopyEntity<ENTProp2DCircle>(dynamic_cast<ENTProp2DCircle*>(ent), newScene, true);
 			CopyEntity<ENTPointCamera2D>(dynamic_cast<ENTPointCamera2D*>(ent), newScene, true);
 			CopyEntity<ENTEnvStaticTilemap>(dynamic_cast<ENTEnvStaticTilemap*>(ent), newScene, true);
 		}

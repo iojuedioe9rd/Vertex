@@ -58,13 +58,6 @@ Entities:
       Colour: [1, 1, 1, 1]
       TexturePath: assets\textures\Player.png
       TilingFactor: 1
-  - Entity: 53e6qhfx-oaf-pbpp-6e90-8fdv5d1dmmr-hnn6xb9brekk8-msv0-pxlr-nh2d-c3o6xyqvccsb-3k7ep
-    Tag: Circle
-    EntityType: prop_2d_circle
-    Transform:
-      Translation: [0, 0, 0]
-      Size: [1, 1, 1]
-      Rotation: [0, 0, 0]
 ---
 Checksum
 ---

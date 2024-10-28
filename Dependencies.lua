@@ -9,3 +9,10 @@ IncludeDir["entt"] = "%{wks.location}/Engine/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/Engine/vendor/yaml-cpp/include"
 IncludeDir["Box2D"] = "%{wks.location}/Engine/vendor/Box2D/include"
 IncludeDir["imguizmo"] = "%{wks.location}/Engine/vendor/ImGuizmo"
+IncludeDir["mono"] = "%{wks.location}/Engine/vendor/mono/include"
+
+LibraryDir = {}
+LibraryDir["mono"] = "%{wks.location}/Engine/vendor/mono/lib/%{cfg.buildcfg}"
+
+Library = {}
+Library["mono"] = "%{LibraryDir.mono}/libmono-static-sgen.lib"

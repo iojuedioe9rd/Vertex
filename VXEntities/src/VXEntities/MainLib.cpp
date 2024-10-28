@@ -1,12 +1,13 @@
 #include "MainLib.h"
 #include "Vertex/Core/Logger.h"
 #include "unordered_map"
+#include "Scripting/ScriptEngine.h"
 
 std::unordered_map<std::string, Vertex::Scene*> Scenes;
 
 bool useEntities = false;
 
- 
+uint32_t flagsToUse = 0;
 
 bool VXEntities_INITEntities()
 {
@@ -23,8 +24,19 @@ bool VXEntities_INIT_Scene_Serializer()
 	return s;
 }
 
+bool VXEntities_INIT_Mono()
+{
+	bool s = true;
+
+	VX_CORE_ASSERT(useEntities, "Entities not init!");
+	Vertex::ScriptEngine::Init();
+	s = useEntities;
+	return s;
+}
+
 bool VXEntities_INIT(uint32_t flags)
 {
+	flagsToUse |= flags;
 	bool s = true;
 	if (flags & VXEntities_INIT_USE_ENTITIES)
 	{
@@ -42,16 +54,34 @@ bool VXEntities_INIT(uint32_t flags)
 			return s;
 		}
 	}
+	if (flags & VXEntities_INIT_USE_MONO)
+	{
+		s = VXEntities_INIT_Mono();
+		if (!s)
+		{
+			return s;
+		}
+	}
+}
+
+uint32_t VXEntities_GET_FLAGS()
+{
+	return flagsToUse;
 }
 
 bool VXEntities_FREE()
 {
-	if (useEntities)
+	if (flagsToUse & VXEntities_INIT_USE_ENTITIES)
 	{
-		for (auto& pair : Scenes) {
-			
-			
+		for (auto& e : Scenes)
+		{
+			Vertex::VXEntities_RemoveScene(e.second);
 		}
+	}
+
+	if (flagsToUse & VXEntities_INIT_USE_MONO)
+	{
+		Vertex::ScriptEngine::Shutdown();
 	}
 
 	return 1;

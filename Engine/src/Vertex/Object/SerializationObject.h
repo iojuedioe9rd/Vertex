@@ -33,41 +33,53 @@ namespace Vertex
 		void Add(std::string name, std::string data);
 
 		void Add(std::string name, bool data) {
-			fields[name] = data;
-			DataTypes[name] = SerializationObjectType::Bool;
+			m_Fields[name] = data;
+			m_DataTypes[name] = SerializationObjectType::Bool;
 		}
 
 		void Add(std::string name, double data) {
-			fields[name] = data;
-			DataTypes[name] = SerializationObjectType::Double;
+			m_Fields[name] = data;
+			m_DataTypes[name] = SerializationObjectType::Double;
 		}
 
 		template <typename T>
 		T Get(std::string name) const
 		{
-			auto it = fields.find(name);
-			if (it != fields.end())
+			auto it = m_Fields.find(name);
+			if (it != m_Fields.end())
 			{
 				return std::get<T>(it->second);
 			}
 			throw std::runtime_error("Field not found or wrong type");
 		}
 
+		bool HasField(std::string name) const
+		{
+			auto it = m_Fields.find(name);
+			if (it != m_Fields.end())
+			{
+				return true;
+			}
+			return false;
+		}
+
 		std::map<std::string, VariantType> GetFields()
 		{
-			return fields;
+			return m_Fields;
 		}
 
 		std::map<std::string, SerializationObjectType> GetDataTypes()
 		{
-			return DataTypes;
+			return m_DataTypes;
 		}
 
 		SerializationObjectType GetType(std::string name) const;
 
+		
+
 	private:
 		
-		std::map<std::string, VariantType> fields;  // Store data
-		std::map<std::string, SerializationObjectType> DataTypes;  // Store types
+		std::map<std::string, VariantType> m_Fields;  // Store data
+		std::map<std::string, SerializationObjectType> m_DataTypes;  // Store types
 	};
 }

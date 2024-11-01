@@ -115,7 +115,7 @@ namespace Vertex
 		m_LastFrameTime = time;
 
 		Time::m_Timestep = timestep;
-
+		//m_Window->SetVSync(false);
 		Time::FPS = GetFPS();
 
 		//VX_CORE_INFO("{0}", timestep.GetMilliseconds());

@@ -8,6 +8,7 @@
 
 #include "Entity.h"
 #include "Entities/point_camera_2d/point_camera_2d.h"
+#include "../Scripting/ScriptEngine.h"
 #include <glm/ext/matrix_transform.hpp>
 
 // Box2D
@@ -21,6 +22,26 @@
 #include "Entities/prop_static_sprite/prop_static_sprite.h"
 #include "../../VXEntities.h"
 
+#include "mono/jit/jit.h"
+#include <mono/metadata/assembly.h>
+#include <mono/metadata/metadata.h>
+#include <mono/metadata/debug-helpers.h>
+#include "mono/metadata/object.h"
+
+#define SPACE_CHAR ' '
+
+static bool has_space(const std::string str)
+{
+	for (char c : str)
+	{
+		if (c == SPACE_CHAR)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
 
 namespace Vertex {
 	static b2BodyType Rigidbody2DTypeToBox2DBody(ENTBaseRigidbody2D::BodyType bodyType)
@@ -94,7 +115,7 @@ namespace Vertex {
 		bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d->Type);
 		bodyDef.position.Set(rb2d->pos.x, rb2d->pos.y);
 
-		bodyDef.angle = rb2d->rotation.z;
+		bodyDef.angle = glm::radians(rb2d->rotation.z);
 
 		b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
 		body->SetFixedRotation(rb2d->FixedRotation);
@@ -107,6 +128,64 @@ namespace Vertex {
 
 	void Scene::OnRuntimeStart()
 	{
+		m_IsEditor = false;
+		MonoClass* RB2DClass = nullptr;
+		MonoClass* BC2DClass = nullptr;
+		if (VXEntities_GET_FLAGS() & VXEntities_INIT_USE_MONO)
+		{
+			ScriptEngine::OnRuntimeStart(this);
+			RB2DClass = ScriptEngine::GetMonoClassFromName(ScriptEngine::GetCoreAssemblyImage(), "Vertex", "ENTBaseRigidbody2D");
+			BC2DClass = ScriptEngine::GetMonoClassFromName(ScriptEngine::GetCoreAssemblyImage(), "Vertex", "ENTBaseBoxCollier2D");
+			for (Entity* ent : m_Entitys)
+			{
+				ScriptEngine::OnCreateEntity(ent, [&](ENTEnvScript* sc) {
+					
+
+					for (auto& obj : sc->obj.GetFields() )
+					{
+						if (has_space(obj.first))
+						{
+							Ref<ScriptInstance> Instance = ScriptEngine::GetEntityInstance(ent->GetID());
+							if (ScriptEngine::IsSubclassOf(Instance->m_ScriptClass->m_MonoClass, RB2DClass, false))
+							{
+								if (obj.first == "RB2D density")
+								{
+									MonoClassField* densityField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Density");
+									mono_field_set_value(Instance->m_Instance, densityField, &obj.second);
+								}
+
+								if (obj.first == "RB2D friction")
+								{
+									MonoClassField* frictionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Friction");
+									mono_field_set_value(Instance->m_Instance, frictionField, &obj.second);
+								}
+
+								if (obj.first == "RB2D restitution")
+								{
+									MonoClassField* restitutionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Restitution");
+									mono_field_set_value(Instance->m_Instance, restitutionField, &obj.second);
+								}
+
+								if (obj.first == "RB2D Restitution Threshold")
+								{
+									MonoClassField* restitutionThresholdField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "RestitutionThreshold");
+									mono_field_set_value(Instance->m_Instance, restitutionThresholdField, &obj.second);
+								}
+
+							}
+
+							
+						}
+					}
+					return true;
+				});
+			}
+
+			
+		}
+
+		
+
 		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
 
 		for (Entity* ent: m_Entitys)
@@ -127,13 +206,94 @@ namespace Vertex {
 
 				body->CreateFixture(&fixtureDef);
 			}
+
+			if (ent->GetEntName() == "env_script" && VXEntities_GET_FLAGS() & VXEntities_INIT_USE_MONO)
+			{
+				if (BC2DClass != nullptr)
+				{
+					MonoClass* bodyTypeEnumClass = mono_class_from_name(ScriptEngine::GetCoreAssemblyImage(), "Vertex", "ENTBaseRigidbody2D+BodyType");
+					MonoMethod* getBodyTypeMethod = mono_class_get_method_from_name(RB2DClass, "get_Type", 0);
+
+					Ref<ScriptInstance> Instance = ScriptEngine::GetEntityInstance(ent->GetID());
+
+					if (ScriptEngine::IsSubclassOf(Instance->m_ScriptClass->m_MonoClass, BC2DClass, false))
+					{
+						MonoClassField* bodyTypeField = mono_class_get_field_from_name(RB2DClass, "Type");
+						int32_t bodyTypeEnumValue;
+						mono_field_get_value(Instance->m_Instance, bodyTypeField, &bodyTypeEnumValue); // Pass the address of the variable
+						
+						MonoClassField* fixedRotationField = mono_class_get_field_from_name(RB2DClass, "FixedRotation");
+						bool FixedRotation;
+						mono_field_get_value(Instance->m_Instance, fixedRotationField, &FixedRotation); // Pass the address of the variable
+
+
+						VX_INFO("{0} {1}", bodyTypeEnumValue, FixedRotation);
+
+						b2BodyDef bodyDef;
+						bodyDef.type = Rigidbody2DTypeToBox2DBody((ENTBaseRigidbody2D::BodyType)bodyTypeEnumValue);
+						bodyDef.position.Set(ent->pos.x, ent->pos.y);
+
+						bodyDef.angle = ent->rotation.z;
+
+						b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
+						body->SetFixedRotation(FixedRotation);
+
+						
+						
+						MonoClassField* bodyPtrField = mono_class_get_field_from_name(RB2DClass, "bodyPtr");
+
+						
+
+						mono_field_set_value(Instance->m_Instance, bodyPtrField, (void*)(&body));
+
+
+
+						// Make Box 2d
+
+
+
+						b2PolygonShape boxShape;
+
+						boxShape.SetAsBox(0.5f * ent->size.x, 0.5f * ent->size.x);
+
+						b2FixtureDef fixtureDef;
+						fixtureDef.shape = &boxShape;
+
+						MonoClassField* densityField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Density");
+						mono_field_get_value(Instance->m_Instance, densityField, &fixtureDef.density); // Pass the address of the variable
+						
+						// Friction
+						MonoClassField* frictionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Friction");
+						mono_field_get_value(Instance->m_Instance, frictionField, &fixtureDef.friction); // Pass the address of the variable
+
+						// Restitution
+						MonoClassField* restitutionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Restitution");
+						mono_field_get_value(Instance->m_Instance, restitutionField, &fixtureDef.restitution); // Pass the address of the variable
+
+						// Restitution
+						MonoClassField* restitutionThresholdField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "RestitutionThreshold");
+						mono_field_get_value(Instance->m_Instance, restitutionThresholdField, &fixtureDef.restitutionThreshold); // Pass the address of the variable
+
+						body->CreateFixture(&fixtureDef);
+
+					}
+
+					
+				}
+			}
 		}
 	}
 
 	void Scene::OnRuntimeStop()
 	{
+		m_IsEditor = true;
 		delete m_PhysicsWorld;
 		m_PhysicsWorld = nullptr;
+
+		if (VXEntities_GET_FLAGS() & VXEntities_INIT_USE_MONO)
+		{
+			ScriptEngine::OnRuntimeStop();
+		}
 	}
 
 	bool Scene::GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform, ENTPointCamera2D** cam, bool usePrimaryCam)
@@ -270,6 +430,7 @@ namespace Vertex {
 			CopyEntity<ENTProp2DCircle>(dynamic_cast<ENTProp2DCircle*>(ent), newScene, true);
 			CopyEntity<ENTPointCamera2D>(dynamic_cast<ENTPointCamera2D*>(ent), newScene, true);
 			CopyEntity<ENTEnvStaticTilemap>(dynamic_cast<ENTEnvStaticTilemap*>(ent), newScene, true);
+			CopyEntity<ENTEnvScript>(dynamic_cast<ENTEnvScript*>(ent), newScene, true);
 		}
 
 		return newScene;

@@ -70,6 +70,8 @@ namespace Vertex {
 		m_SecondCamera->isPrimary = false;
 
 		
+
+		
 		square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
 		square.SetIsVisible(true);
 
@@ -434,7 +436,6 @@ namespace Vertex {
 		if (!filepath.empty())
 		{
 			OpenScene(filepath);
-			m_ActiveScene->CreateEntity<ENTProp2DCircle>("Circle");
 		}
 	}
 

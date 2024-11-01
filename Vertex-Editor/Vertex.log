@@ -1,9 +1,14 @@
-[11:29:37] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[11:29:38] [info] VERTEX: GLAD STATUS: 1
-[11:29:38] [info] VERTEX: OpenGL Info:
-[11:29:38] [info] VERTEX:   Vendor: NVIDIA Corporation
-[11:29:38] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[11:29:38] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[11:29:38] [warning] VERTEX: Value: (5, 2.5, 1)
-[11:29:38] [warning] VERTEX: Value: (5, 2.5, 1)
-[11:29:38] [error] VERTEX: Assertion 'false' failed at ScriptEngine.cpp:68
+[18:11:00] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[18:11:00] [info] VERTEX: GLAD STATUS: 1
+[18:11:00] [info] VERTEX: OpenGL Info:
+[18:11:00] [info] VERTEX:   Vendor: NVIDIA Corporation
+[18:11:00] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[18:11:00] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[18:11:01] [info] VERTEX: Registering Entities
+[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[18:11:01] [info] VERTEX: ~Registering Entities
+[18:11:08] [info] APP: 1 false

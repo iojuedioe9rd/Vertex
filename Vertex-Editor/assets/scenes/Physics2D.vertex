@@ -1,6 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: 6pb33s5a-xqb7-tcfq-scs-zp7irm9op3io-x093f72vq2l5h-fmp3-l8a3-y246-xac95cs27nnk-alaizy
+  - Entity: 6ny0-5z-1h-n-lkdzz-ssv5b-dp-f5-q9-4zhtf1-m4
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
@@ -20,7 +20,7 @@ Entities:
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1
-  - Entity: lvl28dk7-7fo2-ilsg-pxtt-cchl5qhzke-fxn5q89i44slb0-6qn-918-c5yk-ys57pfkhi0f-7s132
+  - Entity: 0ka2-5k-1m-dy-e2bzcz-ob0pys-4y-zf-lh-h0i4y-3qg
     Tag: Cam
     EntityType: point_camera_2d
     Transform:
@@ -37,7 +37,7 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: ohmbx0pg-svpm-rd3n-9124-reav8o8e8td-qs2y0rfly78fdt-6a16-lka-hote-k1ax2evznet-ezhadg
+  - Entity: vrhy-32-6-4r-rvdc26-nc6vdh7-2g-fv-bi-fzdaxb-sq7
     Tag: Sprite
     EntityType: prop_dynamic_sprite
     Transform:
@@ -58,7 +58,12 @@ Entities:
       Colour: [1, 1, 1, 1]
       TexturePath: assets\textures\Player.png
       TilingFactor: 1
----
-Checksum
----
-9406177292493116835
+  - Entity: py17-pq-5g-qh-o35ir-ztnfqp7-84-08-0v-mgi97i-k4m
+    Tag: Script
+    EntityType: env_script
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    EnvScript:
+      Classname: Sandbox.Player

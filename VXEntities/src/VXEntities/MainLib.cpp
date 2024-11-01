@@ -3,7 +3,7 @@
 #include "unordered_map"
 #include "Scripting/ScriptEngine.h"
 
-std::unordered_map<std::string, Vertex::Scene*> Scenes;
+std::unordered_map<std::string, Vertex::Scene*>* Scenes;
 
 bool useEntities = false;
 
@@ -12,7 +12,7 @@ uint32_t flagsToUse = 0;
 bool VXEntities_INITEntities()
 {
 	useEntities = true;
-	Scenes = std::unordered_map<std::string, Vertex::Scene*>();
+	Scenes = new std::unordered_map<std::string, Vertex::Scene*>();
 	return true;
 }
 
@@ -71,13 +71,17 @@ uint32_t VXEntities_GET_FLAGS()
 
 bool VXEntities_FREE()
 {
-	if (flagsToUse & VXEntities_INIT_USE_ENTITIES)
+	if (flagsToUse & VXEntities_INIT_USE_ENTITIES && Scenes->size() != 0)
 	{
-		for (auto& e : Scenes)
+		for (auto& e : *Scenes)
 		{
-			Vertex::VXEntities_RemoveScene(e.second);
+			
+			//Vertex::VXEntities_RemoveScene(e.second);
 		}
 	}
+
+	delete Scenes;
+	Scenes = nullptr;
 
 	if (flagsToUse & VXEntities_INIT_USE_MONO)
 	{
@@ -93,14 +97,14 @@ namespace Vertex
 	Scene* VXEntities_MakeOrGetScene(std::string name)
 	{
 		// Check if the scene already exists in the map
-		auto it = Scenes.find(name);
-		if (it != Scenes.end()) {
+		auto it = Scenes->find(name);
+		if (it != Scenes->end()) {
 			return it->second; // Return the existing scene
 		}
 
 		// If not, create a new scene
 		Scene* newScene = new Scene(name);
-		Scenes[name] = newScene; // Add it to the map
+		(*Scenes)[name] = newScene; // Add it to the map
 		return newScene;
 	}
 	bool VXEntities_RemoveScene(Scene* scene)
@@ -109,7 +113,7 @@ namespace Vertex
 
 		try
 		{
-			Scenes.erase(scene->name());
+			Scenes->erase(scene->name());
 			delete scene;
 			scene = nullptr;
 			return true;
@@ -125,8 +129,8 @@ namespace Vertex
 	{
 		try
 		{
-			Scene* scene = Scenes[name];
-			Scenes.erase(name);
+			Scene* scene = (*Scenes)[name];
+			Scenes->erase(name);
 			delete scene;
 			return true;
 		}

@@ -93,6 +93,11 @@ namespace Vertex {
 					m_Context->CreateEntity<ENTPropDynamicSprite>(tag);
 				}
 
+				if (type == "env_script")
+				{
+					m_Context->CreateEntity<ENTEnvScript>(tag);
+				}
+
 				if (type == "point_camera_2d")
 				{
 					ENTPointCamera2D* cam = &m_Context->CreateEntity<ENTPointCamera2D>(tag);
@@ -109,6 +114,14 @@ namespace Vertex {
 					m_SelectionContext = nullptr;
 				m_EntityToRemove = nullptr;
 			}
+		}
+
+		if (m_EntityToRemove)
+		{
+			m_Context->RemoveEntity(*m_EntityToRemove);
+			if (m_SelectionContext == m_EntityToRemove)
+				m_SelectionContext = nullptr;
+			m_EntityToRemove = nullptr;
 		}
 	}
 
@@ -143,8 +156,8 @@ namespace Vertex {
 	}
 
 #pragma region DrawEntity Code
-
-	void DrawBaseEntity(Entity* entity, Entity** m_EntityToRemove)
+	Entity* EntityToRemove = nullptr;
+	void DrawBaseEntity(Entity* entity)
 	{
 		
 		auto& tag = entity->name();
@@ -159,7 +172,7 @@ namespace Vertex {
 		ImGui::SameLine();
 		if (ImGuiLink::Button("Delete"))
 		{
-			*m_EntityToRemove = entity;
+			EntityToRemove = entity;
 		}
 
 		if (ImGuiLink::TreeNodeEx(entity->GetID() + "Transform", ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
@@ -354,10 +367,76 @@ namespace Vertex {
 		}
 	}
 
+	void DrawEnvScript(ENTEnvScript* script)
+	{
+		int ENTBaseRigidbody2DID = typeid(ENTBaseRigidbody2D).hash_code() + (int)script;
+		if (script->useRB2D && ImGuiLink::TreeNodeEx((void*)ENTBaseRigidbody2DID, ImGuiTreeNodeFlags_DefaultOpen, "Rigidbody 2D"))
+		{
+			if (!script->obj.HasField("RB2D density"))
+			{
+				script->obj.Add("RB2D density", 1.0f);
+			}
+
+			float density = script->obj.Get<float>("RB2D density");
+			if (ImGui::DragFloat("Density", &density, 0.01f, 0.0f, 1.0f)) 
+			{
+				script->obj.Add("RB2D density", density);
+			}
+
+			if (!script->obj.HasField("RB2D friction"))
+			{
+				script->obj.Add("RB2D friction", 0.5f);
+			}
+
+			float friction = script->obj.Get<float>("RB2D friction");
+			if (ImGui::DragFloat("Friction", &friction, 0.01f, 0.0f, 1.0f))
+			{
+				script->obj.Add("RB2D friction", friction);
+			}
+
+			if (!script->obj.HasField("RB2D restitution"))
+			{
+				script->obj.Add("RB2D restitution", 0.0f);
+			}
+
+			float restitution = script->obj.Get<float>("RB2D restitution");
+			if (ImGui::DragFloat("Restitution", &restitution, 0.01f, 0.0f, 1.0f))
+			{
+				script->obj.Add("RB2D restitution", restitution);
+			}
+
+			if (!script->obj.HasField("RB2D Restitution Threshold"))
+			{
+				script->obj.Add("RB2D Restitution Threshold", 0.5f);
+			}
+
+			float restitutionThreshold = script->obj.Get<float>("RB2D Restitution Threshold");
+			if (ImGui::DragFloat("Restitution Threshold", &restitutionThreshold, 0.01f, 0.0f, 1.0f))
+			{
+				script->obj.Add("RB2D Restitution Threshold", restitutionThreshold);
+			}
+
+			ImGuiLink::TreePop();
+		}
+
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTEnvScript).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Script"))
+		{
+			ImGui::Checkbox("Use Rigidbody 2D", &script->useRB2D);
+			ImGui::InputText("Class Name", script->classname.data(), 128);
+			ImGuiLink::TreePop();
+		}
+	}
+
 	void SceneHierarchyPanel::DrawEntity(Entity* entity)
 	{
 		if (entity == nullptr) return;
-		DrawBaseEntity(entity, &m_EntityToRemove);
+		DrawBaseEntity(entity);
+		if (EntityToRemove != nullptr)
+		{
+			m_EntityToRemove = EntityToRemove;
+			EntityToRemove = nullptr;
+			return;
+		}
 		if (entity->GetEntName() == "point_camera_2d") { DrawCameraProp((ENTPointCamera2D*)entity); }
 		if (entity->GetEntName() == "prop_static_sprite") { DrawStaticSpriteRendererProp((ENTPropStaticSprite*)entity); }
 		if (entity->GetEntName() == "prop_dynamic_sprite") { DrawStaticDynamicRendererProp((ENTPropDynamicSprite*)entity); }
@@ -369,6 +448,9 @@ namespace Vertex {
 		{
 			DrawRB2DImGui(rb2D);
 		}
+
+		if (entity->GetEntName() == "env_script") { DrawEnvScript((ENTEnvScript*)entity); }
+
 	}
 #pragma endregion
 

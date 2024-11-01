@@ -188,6 +188,17 @@ namespace Vertex {
 			out << YAML::EndMap;
 		}
 
+		if (entity->GetEntName() == "env_script")
+		{
+			ENTEnvScript* script = static_cast<ENTEnvScript*>(entity);
+			VX_CORE_ASSERT(script != nullptr, "script is null!");
+			out << YAML::Key << "EnvScript";
+			out << YAML::BeginMap;
+			out << YAML::Key << "Classname" << YAML::Value << script->classname;
+			out << YAML::EndMap;
+
+		}
+
 		if (entity->GetEntName() == "prop_dynamic_sprite")
 		{
 			ENTPropStaticSprite* sprite = static_cast<ENTPropStaticSprite*>(entity);
@@ -283,7 +294,7 @@ namespace Vertex {
 		// Output the checksum to the YAML as a new key-value pair (optional)
 		out << YAML::Key << "Checksum" << YAML::Value << checksum;
 		std::ofstream fout(filepath);
-		fout << out.c_str();
+		fout << yamlString;
 	}
 
 	
@@ -334,6 +345,10 @@ namespace Vertex {
 			if (entityType == "env_static_tilemap")
 			{
 				entity = &m_Scene->CreateEntity<ENTEnvStaticTilemap>(entityID);
+			}
+			if (entityType == "env_script")
+			{
+				entity = &m_Scene->CreateEntity<ENTEnvScript>(entityID);
 			}
 			if (entity) {
 				DeserializeEntity(entityNode, entity);
@@ -416,6 +431,20 @@ namespace Vertex {
 					sprite->texture = Texture2D::Create(propDynamicSpriteNode["TexturePath"].as<std::string>());
 				if (propDynamicSpriteNode["TilingFactor"])
 					sprite->tilingFactor = propDynamicSpriteNode["TilingFactor"].as<float>();
+			}
+		}
+
+		if (entity->GetEntName() == "env_script")
+		{
+			auto envScriptNode = node["EnvScript"];
+			ENTEnvScript* script = static_cast<ENTEnvScript*>(entity);
+
+			if (script && envScriptNode)
+			{
+				if (envScriptNode["Classname"])
+				{
+					script->classname = envScriptNode["Classname"].as<std::string>("");
+				}
 			}
 		}
 

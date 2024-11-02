@@ -3,10 +3,12 @@ import os
 import subprocess
 import platform
 
+from SetupSymlinks import SymlinksConfiguration as SymlinksRequirements
 from SetupPython import PythonConfiguration as PythonRequirements
 
 # Make sure everything we need for the setup is installed
 PythonRequirements.Validate()
+SymlinksRequirements.Validate()
 
 from SetupPremake import PremakeConfiguration as PremakeRequirements
 from SetupVulkan import VulkanConfiguration as VulkanRequirements
@@ -14,6 +16,7 @@ os.chdir('./../') # Change from devtools/scripts directory to root
 
 premakeInstalled = PremakeRequirements.Validate()
 VulkanRequirements.Validate()
+
 
 print("\nUpdating submodules...")
 subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
@@ -25,5 +28,5 @@ if (premakeInstalled):
 
     print("\nSetup completed!")
 else:
-    print("Hazel requires Premake to generate project files.")
+    print("Vertex requires Premake to generate project files.")
 

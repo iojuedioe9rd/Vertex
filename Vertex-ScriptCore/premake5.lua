@@ -3,8 +3,8 @@ project "Vertex-ScriptCore"
 	language "C#"
 	dotnetframework "4.7.2"
 	
-	targetdir ("%{wks.location}/Vertex-Editor/Resources/Scripts")
-	objdir ("%{wks.location}/Vertex-Editor/Resources/Scripts/Intermediates")
+	targetdir ("../Vertex-Editor/Resources/Scripts")
+	objdir ("../Vertex-Editor/Resources/Scripts/Intermediates")
 	
 	files 
 	{

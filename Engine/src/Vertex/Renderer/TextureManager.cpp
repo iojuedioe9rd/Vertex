@@ -23,6 +23,7 @@ namespace Vertex
 		}
 		Ref<Texture2D> tex = Texture2D::Create(filename);
 		m_TextureMap[filename] = tex;
+		return m_TextureMap[filename];
 	}
 
 }

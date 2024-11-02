@@ -27,6 +27,8 @@ namespace Vertex
 
             for (int i = 0; i < args.Length; i++)
             {
+                if(args[i] == null)
+                    strings[i] = "null";
                 strings[i] = args[i].ToString();
             }
 
@@ -39,6 +41,8 @@ namespace Vertex
 
             for (int i = 0; i < args.Length; i++)
             {
+                if (args[i] == null)
+                    strings[i] = "null";
                 strings[i] = args[i].ToString();
             }
 
@@ -51,6 +55,8 @@ namespace Vertex
 
             for (int i = 0; i < args.Length; i++)
             {
+                if (args[i] == null)
+                    strings[i] = "null";
                 strings[i] = args[i].ToString();
             }
 
@@ -63,6 +69,8 @@ namespace Vertex
 
             for (int i = 0; i < args.Length; i++)
             {
+                if (args[i] == null)
+                    strings[i] = "null";
                 strings[i] = args[i].ToString();
             }
 
@@ -75,6 +83,8 @@ namespace Vertex
 
             for (int i = 0; i < args.Length; i++)
             {
+                if (args[i] == null)
+                    strings[i] = "null";
                 strings[i] = args[i].ToString();
             }
 

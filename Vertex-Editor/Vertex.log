@@ -1,14 +1,2915 @@
-[18:11:00] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[18:11:00] [info] VERTEX: GLAD STATUS: 1
-[18:11:00] [info] VERTEX: OpenGL Info:
-[18:11:00] [info] VERTEX:   Vendor: NVIDIA Corporation
-[18:11:00] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[18:11:00] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[18:11:01] [info] VERTEX: Registering Entities
-[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
-[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
-[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
-[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
-[18:11:01] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
-[18:11:01] [info] VERTEX: ~Registering Entities
-[18:11:08] [info] APP: 1 false
+[10:43:02] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[10:43:03] [info] VERTEX: GLAD STATUS: 1
+[10:43:03] [info] VERTEX: OpenGL Info:
+[10:43:03] [info] VERTEX:   Vendor: NVIDIA Corporation
+[10:43:03] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[10:43:03] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[10:43:03] [info] VERTEX: Registering Entities
+[10:43:03] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[10:43:03] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[10:43:03] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[10:43:03] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[10:43:03] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[10:43:03] [info] VERTEX: ~Registering Entities
+[10:43:14] [info] VERTEX: Run 2
+[10:43:14] [info] APP: 1 false
+[10:43:14] [info] VERTEX: Pos
+[10:43:14] [info] VERTEX: (0, 0, 0)
+[10:43:14] [info] VERTEX: Size
+[10:43:14] [info] VERTEX: (1, 1, 1)
+[10:43:14] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (3.651686E-05, -2, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0001434602, -4, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0001617729, -4.021318, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0001916343, -4.04123, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0002683231, -4.081781, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0003625637, -4.124595, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0004627848, -4.164952, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0006299068, -4.22857, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0007603177, -4.274508, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0009020633, -4.321256, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.001159737, -4.404758, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.001774789, -4.62085, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.002026224, -4.706244, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.002637274, -4.921683, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.003825657, -5.389675, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.004159791, -5.517411, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.004589649, -5.678787, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.004832558, -5.766527, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.005107837, -5.862667, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.005487354, -5.992179, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.005887835, -6.12598, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.006391332, -6.291963, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.006862599, -6.444829, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.007179954, -6.545118, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.007578058, -6.668373, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.007931369, -6.775311, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.0082938, -6.882668, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.008628227, -6.979529, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:16] [info] VERTEX: Run
+[10:43:16] [info] VERTEX: Pos
+[10:43:16] [info] VERTEX: (0.008978146, -7.078758, 0)
+[10:43:16] [info] VERTEX: Size
+[10:43:16] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.009440588, -7.207868, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.009929598, -7.342455, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01044538, -7.482557, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01107367, -7.651714, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01147878, -7.758932, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01202823, -7.902647, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.0125935, -8.048839, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01318215, -8.199482, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01377989, -8.350885, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01439912, -8.506219, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01502783, -8.662447, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01568264, -8.82373, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01635189, -8.987173, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01703279, -9.152091, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01773998, -9.322059, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01845783, -9.493287, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.01919012, -9.666687, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02086103, -10.067, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02164576, -10.25375, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02276445, -10.51984, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02340369, -10.67044, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02419023, -10.85447, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479369, -10.98541, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.98535, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.98529, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.98524, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.9852, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.98517, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.98514, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.98512, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (0.02479379, -10.9851, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.06149606, -10.98519, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.1766555, -10.98518, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.3020733, -10.98517, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.3561985, -10.98517, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.474772, -10.81117, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.5837154, -10.65953, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.7519071, -10.79396, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-0.9317799, -10.87864, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.097927, -10.93488, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.244434, -10.9594, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.387153, -10.97292, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.518776, -10.97181, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.650111, -10.97341, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.781948, -10.97773, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-1.913159, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.05152, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.164277, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.288035, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.41179, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.531371, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.652434, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.770704, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-2.887434, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-3.003413, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-3.228525, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-3.31283, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:17] [info] VERTEX: (1, 1, 1)
+[10:43:17] [info] VERTEX: Run
+[10:43:17] [info] VERTEX: Pos
+[10:43:17] [info] VERTEX: (-3.390196, -10.98473, 0)
+[10:43:17] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-3.467592, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-3.665083, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-3.748998, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-3.839863, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-3.922937, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.012313, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.090242, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.182916, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.28192, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.392407, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.494915, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.600136, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.717912, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.834573, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-4.950071, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-5.050682, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-5.164023, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-5.296668, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.58683, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.696248, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.740694, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.782702, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.824716, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.86554, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:18] [info] VERTEX: Pos
+[10:43:18] [info] VERTEX: (-6.899719, -10.98473, 0)
+[10:43:18] [info] VERTEX: Size
+[10:43:18] [info] VERTEX: (1, 1, 1)
+[10:43:18] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-6.939565, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-6.974518, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.019295, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.041084, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.055876, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.077627, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.096192, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.110898, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.126392, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.143655, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.157809, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.169371, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.180562, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.192431, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.201052, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.207283, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.213549, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.218474, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.222043, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.224262, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225106, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225104, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:19] [info] VERTEX: Run
+[10:43:19] [info] VERTEX: Pos
+[10:43:19] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:19] [info] VERTEX: Size
+[10:43:19] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:20] [info] VERTEX: Run
+[10:43:20] [info] VERTEX: Pos
+[10:43:20] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:20] [info] VERTEX: Size
+[10:43:20] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:21] [info] VERTEX: Pos
+[10:43:21] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:21] [info] VERTEX: Size
+[10:43:21] [info] VERTEX: (1, 1, 1)
+[10:43:21] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:22] [info] VERTEX: Run
+[10:43:22] [info] VERTEX: Pos
+[10:43:22] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:22] [info] VERTEX: Size
+[10:43:22] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225102, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:23] [info] VERTEX: Pos
+[10:43:23] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:23] [info] VERTEX: Size
+[10:43:23] [info] VERTEX: (1, 1, 1)
+[10:43:23] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225103, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225105, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225105, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225105, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225105, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225105, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.225105, -10.98473, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.277944, -10.98516, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.239807, -10.98533, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:24] [info] VERTEX: Run
+[10:43:24] [info] VERTEX: Pos
+[10:43:24] [info] VERTEX: (-7.209725, -10.98539, 0)
+[10:43:24] [info] VERTEX: Size
+[10:43:24] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.185092, -10.98538, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.164437, -10.98523, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.169398, -10.98519, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171381, -10.98516, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171678, -10.98513, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171676, -10.98511, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98509, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98508, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98506, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98505, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98504, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98504, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98503, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98503, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98502, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98502, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98501, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98501, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98501, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98501, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98501, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.98501, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:25] [info] VERTEX: Run
+[10:43:25] [info] VERTEX: Pos
+[10:43:25] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:25] [info] VERTEX: Size
+[10:43:25] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:26] [info] VERTEX: Pos
+[10:43:26] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:26] [info] VERTEX: Size
+[10:43:26] [info] VERTEX: (1, 1, 1)
+[10:43:26] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run
+[10:43:27] [info] VERTEX: Pos
+[10:43:27] [info] VERTEX: (-7.171675, -10.985, 0)
+[10:43:27] [info] VERTEX: Size
+[10:43:27] [info] VERTEX: (1, 1, 1)
+[10:43:27] [info] VERTEX: Run

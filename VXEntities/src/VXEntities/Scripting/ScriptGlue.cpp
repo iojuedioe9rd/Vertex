@@ -38,11 +38,14 @@ namespace Vertex
 	}
 
 	// Texture2D_FromFilename
+
 	void Texture2D_FromFilename(MonoString* string)
 	{
+		static Ref<Texture2D>* Wat = nullptr;
 		const char* cStr = mono_string_to_utf8(string);
 		
-		TextureManager2D::GetOrMakeTextureFromFilename(std::string(cStr));
+		if (Wat) delete Wat;
+		Wat = &TextureManager2D::GetOrMakeTextureFromFilename(std::string(cStr));
 	}
 
 	// internal extern static void Renderer2D_DrawQuad(ref Vector3 pos, ref Vector3 size, string textureFilename, float tilingFactor = 1.0f, ref Colour tintColour = new Colour(1,1,1,1));
@@ -50,7 +53,7 @@ namespace Vertex
 	{
 		const char* cStr = mono_string_to_utf8(textureFilename);
 
-		Ref<Texture2D> tex = TextureManager2D::GetTextureFromFilename(std::string(cStr));
+		Ref<Texture2D> tex = TextureManager2D::GetOrMakeTextureFromFilename(std::string(cStr));
 
 		Renderer2D::DrawQuad(*pos, glm::vec2(size->x, size->y), tex, tilingFactor, *tintColour);
 	}

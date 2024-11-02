@@ -1,0 +1,9 @@
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Binaries\Sandbox.dll
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Binaries\Sandbox.pdb
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Binaries\Vertex-ScriptCore.dll
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Binaries\Vertex-ScriptCore.pdb
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Intermediates\Debug\Sandbox.csproj.AssemblyReference.cache
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Intermediates\Debug\Sandbox.csproj.CoreCompileInputs.cache
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Intermediates\Debug\Sandbox.csproj.Up2Date
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Intermediates\Debug\Sandbox.dll
+C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Sandbox\Assets\Scripts\Intermediates\Debug\Sandbox.pdb

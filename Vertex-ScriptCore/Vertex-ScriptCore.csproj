@@ -56,24 +56,24 @@
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Dist|x64' ">
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Player.cs" />
+    <Compile Include="Source\Vertex\Entities\CPPEntity.cs" />
     <Compile Include="Source\Vertex\Entities\base_box_collider_2d\ENTBaseBoxCollier2D.cs" />
     <Compile Include="Source\Vertex\Entities\base_rb2d\ENTBaseRigidbody2D.cs" />
-    <Compile Include="Source\Vertex\Entities\CPPEntity.cs" />
     <Compile Include="Source\Vertex\Entity.cs" />
     <Compile Include="Source\Vertex\Input.cs" />
     <Compile Include="Source\Vertex\InternalCalls.cs" />
+    <Compile Include="Source\Vertex\KeyCode.cs" />
     <Compile Include="Source\Vertex\Logger.cs" />
     <Compile Include="Source\Vertex\Object.cs" />
     <Compile Include="Source\Vertex\Renderer2D.cs" />
     <Compile Include="Source\Vertex\Texture.cs" />
     <Compile Include="Source\Vertex\Vectors\Colour.cs" />
-    <Compile Include="Source\Vertex\KeyCode.cs" />
     <Compile Include="Source\Vertex\Vectors\Vector2.cs" />
     <Compile Include="Source\Vertex\Vectors\Vector3.cs" />
     <Compile Include="Source\Vertex\Vectors\Vector4.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,6 +2,7 @@
 #include "Vertex/ImGui/ImGuiLink.h"
 #include <glm/gtc/type_ptr.hpp>
 #include "VXEntities.h"
+#include <VXEntities/Scripting/ScriptEngine.h>
 
 #define ImGuiTreeNodeFlags_Selected 1
 #define ImGuiTreeNodeFlags_OpenOnArrow 128
@@ -23,6 +24,7 @@ namespace Vertex {
 	SceneHierarchyPanel::SceneHierarchyPanel(Scene* scene)
 	{
 		SetContext(scene);
+		ScriptEngine::OnRuntimeStart(scene);
 	}
 
 	void SceneHierarchyPanel::SetContext(Scene* scene)
@@ -34,6 +36,7 @@ namespace Vertex {
 	char ent_type_buffer[256];
 	void SceneHierarchyPanel::OnImGuiRender()
 	{
+		
 		if (ImGuiLink::IsMouseDown(0) && ImGuiLink::IsWindowHovered())
 			m_SelectionContext = nullptr;
 
@@ -421,8 +424,40 @@ namespace Vertex {
 
 		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTEnvScript).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Script"))
 		{
+			bool scriptClassExists = ScriptEngine::EntityClassExists(script->classname);
+
 			ImGui::Checkbox("Use Rigidbody 2D", &script->useRB2D);
+
+			if (!scriptClassExists)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.2f, 0.3f, 1.0f));
+
 			ImGui::InputText("Class Name", script->classname.data(), 128);
+
+			if (!scriptClassExists)
+				ImGui::PopStyleColor();
+
+			Ref<ScriptInstance> scriptInstance = ScriptEngine::GetEntityScriptInstance(script->GetID());
+
+			
+
+			if (scriptInstance)
+			{
+				const auto& fields = scriptInstance->GetScriptClass()->GetFields();
+				for (const auto& [name, field] : fields)
+				{
+					if (field.Type == ScriptFieldType::Float)
+					{
+						float data = scriptInstance->GetFieldValue<float>(name);
+						if (ImGui::DragFloat(name.c_str(), &data))
+						{
+
+							scriptInstance->SetFieldValue(name, data);
+						}
+					}
+				}
+			}
+
+			
 			ImGuiLink::TreePop();
 		}
 	}

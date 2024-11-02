@@ -1,8 +1,8 @@
 VM start event not sent yet: dropping APPDOMAIN_CREATE
-[000000000000632C] Thread started, obj=000001BEB1740130, tls=000001BEAC044880.
+[0000000000002E98] Thread started, obj=0000021D40D60130, tls=0000021D3B6052F0.
 VM start event not sent yet: dropping THREAD_START
-[000000000000632C] Suspended.
-[000000000000632C] Resumed.
+[0000000000002E98] Suspended.
+[0000000000002E98] Resumed.
 VM start event not sent yet: dropping ASSEMBLY_LOAD
 VM start event not sent yet: dropping TYPE_LOAD
 VM start event not sent yet: dropping TYPE_LOAD
@@ -12,89 +12,13 @@ VM start event not sent yet: dropping TYPE_LOAD
 VM start event not sent yet: dropping TYPE_LOAD
 VM start event not sent yet: dropping TYPE_LOAD
 VM start event not sent yet: dropping TYPE_LOAD
+[0000000000000FBC] Thread started, obj=0000021D40D60278, tls=0000021D3B63F8D0.
 Debugger client is not connected: dropping VM_START
-[0000000000005A34] Thread started, obj=000001BEB1740278, tls=000001BEAC0841D0.
 VM start event not sent yet: dropping THREAD_START
-[0000000000005A34] Suspended.
-[0000000000005A34] Resumed.
-[dbg] Agent thread started, pid=0000000000003124
+[0000000000000FBC] Suspended.
+[0000000000000FBC] Resumed.
 VM start event not sent yet: dropping APPDOMAIN_CREATE
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping ASSEMBLY_LOAD
-VM start event not sent yet: dropping ASSEMBLY_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping EXCEPTION
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
-VM start event not sent yet: dropping TYPE_LOAD
+[dbg] Agent thread started, pid=0000000000008378
 VM start event not sent yet: dropping TYPE_LOAD
 VM start event not sent yet: dropping TYPE_LOAD
 VM start event not sent yet: dropping TYPE_LOAD

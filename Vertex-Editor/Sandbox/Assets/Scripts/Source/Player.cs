@@ -9,6 +9,8 @@ namespace Sandbox
 {
     public class Player : ENTBaseBoxCollier2D
     {
+        public float Speed = 100.0f;
+        public float Time = 0.0f;
 
         public Player(string uuid) : base(uuid)
         {
@@ -40,7 +42,7 @@ namespace Sandbox
 
         protected override void OnUpdate(float ts)
         {
-            throw new Exception("Test");
+            Time += ts;
 
             Logger.Info("Pos");
             Logger.Info(Pos);
@@ -49,7 +51,7 @@ namespace Sandbox
             Logger.Info(Size);
 
             base.OnUpdate(ts);
-            float speed = 100f * ts;
+            float speed = Speed * ts;
             Vector2 velocity = Vector2.Zero;
 
             if (Input.IsKeyDown(KeyCode.W))

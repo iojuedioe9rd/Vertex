@@ -102,6 +102,18 @@ namespace Vertex {
 	
 
 
+	Entity* Scene::FindEntityByName(std::string_view name)
+	{
+		for (Entity* ent : *this)
+		{
+			if (ent->name() == name)
+			{
+				return ent;
+			}
+		}
+		return nullptr;
+	}
+
 	bool Scene::RemoveEntity(Entity& entity)
 	{
 		m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());

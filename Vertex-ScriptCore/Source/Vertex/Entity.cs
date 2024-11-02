@@ -40,6 +40,16 @@ namespace Vertex
                 InternalCalls.Entity_SetTranslation(UUID, ref value);
             }
         }
+
+
+        public Entity FindEntityByName(string name)
+        {
+            string entityID = InternalCalls.Entity_FindEntityByName(name);
+            if (entityID == string.Empty)
+                return null;
+            return new Entity(entityID);
+        }
+
         public Vector3 Size = Vector3.One;
         public Vector3 Rotation { get; set; }
     }

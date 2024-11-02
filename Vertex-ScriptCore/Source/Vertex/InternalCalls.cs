@@ -57,6 +57,9 @@ namespace Vertex
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static void Entity_SetRotation(string entityID, ref Vector3 rotation);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static string Entity_FindEntityByName(string name);
+
         #endregion
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -84,5 +87,8 @@ namespace Vertex
         internal extern static string Object_GenerateUUID();
 
         #endregion
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static object GetScriptInstance(string entityID);
     }
 }

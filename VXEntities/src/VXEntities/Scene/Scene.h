@@ -40,7 +40,7 @@ namespace Vertex
 			m_Entitys.push_back(newEntity);
 			return *newEntity;
 		}
-
+		Entity* FindEntityByName(std::string_view name);
 		bool RemoveEntity(Entity& entity);
 
 		void OnRuntimeStart();

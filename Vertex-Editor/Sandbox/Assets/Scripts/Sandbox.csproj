@@ -21,7 +21,8 @@
     <OutputPath>Binaries\</OutputPath>
     <BaseIntermediateOutputPath>Intermediates\Debug\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -33,7 +34,8 @@
     <OutputPath>Binaries\</OutputPath>
     <BaseIntermediateOutputPath>Intermediates\Release\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -45,7 +47,8 @@
     <OutputPath>Binaries\</OutputPath>
     <BaseIntermediateOutputPath>Intermediates\Dist\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -56,6 +59,7 @@
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Dist|x64' ">
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Camera.cs" />
     <Compile Include="Source\Player.cs" />
   </ItemGroup>
   <ItemGroup>

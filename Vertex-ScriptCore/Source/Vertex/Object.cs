@@ -21,5 +21,11 @@ namespace Vertex
             this.UUID = UUID;
         }
 
+        public T As<T>() where T : Object, new()
+        {
+            object instance = InternalCalls.GetScriptInstance(UUID);
+            return instance as T;
+        }
+
     }
 }

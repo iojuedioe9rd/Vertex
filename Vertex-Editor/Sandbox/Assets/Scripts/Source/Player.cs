@@ -31,7 +31,7 @@ namespace Sandbox
         protected override void OnDraw()
         {
             base.OnDraw();
-            Logger.Info("Run");
+            //Logger.Info("Run");
             Renderer2D.DrawQuad(Pos, Size, "assets/textures/Player.png", 1.0f, new Colour(1, 1, 1, 1));
         }
 
@@ -44,11 +44,11 @@ namespace Sandbox
         {
             Time += ts;
 
-            Logger.Info("Pos");
-            Logger.Info(Pos);
+            //Logger.Info("Pos");
+            //Logger.Info(Pos);
 
-            Logger.Info("Size");
-            Logger.Info(Size);
+            //Logger.Info("Size");
+            //Logger.Info(Size);
 
             base.OnUpdate(ts);
             float speed = Speed * ts;

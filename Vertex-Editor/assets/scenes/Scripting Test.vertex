@@ -1,6 +1,6 @@
 Scene: Untitled
 Entities:
-  - Entity: bb4y-fs-7k-e0-2vct5-oiie0ba-fp-km-li-d8rhde-dr1
+  - Entity: opcm-70-6m-0m-hmrqzf-lckmi5z-3v-90-z2-hmhbgd-9b2
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
@@ -20,15 +20,15 @@ Entities:
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1
-  - Entity: h6g8-qc-et-02-4y4e69-pg4e4ym-4h-vn-t1-28898k-79f
-    Tag: Cam
+  - Entity: lmv-qn-8n-za-6higk-h6lsyp-8t-v3-sg-ak20a-rgo
+    Tag: Camera
     EntityType: point_camera_2d
     Transform:
-      Translation: [0, 4.30000019, 0]
+      Translation: [0, 4.30000019, 16.8999996]
       Size: [1, 1, 1]
       Rotation: [0, 0, 0]
     PointCamera2D:
-      ProjectionType: 1
+      ProjectionType: 0
       PerspectiveFOV: 0.785398185
       PerspectiveNear: 0.00999999978
       PerspectiveFar: 1000
@@ -37,8 +37,8 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: xg21-ba-ov-ag-i0ykrb-0smb14p-c-i-15-yzptdd-oyi
-    Tag: Script
+  - Entity: hd97-5o-ba-qo-kdoxze-fpcxr8v-yn-de-m2-2rlc8d-1z9
+    Tag: Player
     EntityType: env_script
     Transform:
       Translation: [0, 4.19999981, 0]

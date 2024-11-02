@@ -13,11 +13,20 @@ namespace Vertex
         public float Y;
         public float Z;
 
+        public Vector2 XY { get {  return new Vector2(X, Y); } }
+
         // Constructor
         public Vector3(float x, float y, float z)
         {
             X = x;
             Y = y;
+            Z = z;
+        }
+
+        public Vector3(Vector2 XY, float z)
+        {
+            X = XY.X;
+            Y = XY.Y;
             Z = z;
         }
 

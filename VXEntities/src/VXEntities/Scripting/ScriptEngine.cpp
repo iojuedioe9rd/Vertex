@@ -543,6 +543,12 @@ namespace Vertex {
 		return s_Data->CoreAssemblyImage;
 	}
 
+	MonoObject* ScriptEngine::GetManagedInstance(UUID uuid)
+	{
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(uuid) != s_Data->EntityInstances.end());
+		return s_Data->EntityInstances.at(uuid)->GetManagedObject();
+	}
+
 	MonoDomain* ScriptEngine::GetAppDomain()
 	{
 		return s_Data->AppDomain;

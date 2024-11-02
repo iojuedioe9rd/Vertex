@@ -32,6 +32,29 @@ namespace Vertex
 #define LOG_CRITICAL  (1 << 5)    // 0b100000 = 32
 
 
+	static MonoString* Entity_FindEntityByName(MonoString* name)
+	{
+		char* nameCStr = mono_string_to_utf8(name);
+		Scene* scene = ScriptEngine::GetSceneContext();
+		VX_CORE_ASSERT(scene);
+		Entity* entity = scene->FindEntityByName(nameCStr);
+		mono_free(nameCStr);
+		if (!entity)
+			return mono_string_empty(ScriptEngine::GetAppDomain());
+		char* id = entity->GetID().data();
+		char* newID = new char[std::strlen(id) + 1];
+
+		std::strcpy(newID, id);
+		return mono_string_new(ScriptEngine::GetAppDomain(), newID);
+	}
+
+	static MonoObject* GetScriptInstance(UUID entityID)
+	{
+		return ScriptEngine::GetManagedInstance(entityID);
+	}
+
+	
+
 	static bool Input_IsKeyDown(KeyCode keycode)
 	{
 		return Input::IsKeyPressed(keycode);
@@ -282,8 +305,11 @@ namespace Vertex
 		VX_ADD_INTERNAL_CALL(Texture2D_FromFilename);
 		VX_ADD_INTERNAL_CALL(Renderer2D_DrawQuadTex);
 
+		VX_ADD_INTERNAL_CALL(GetScriptInstance);
+
 		VX_ADD_INTERNAL_CALL(Entity_GetTranslation);
 		VX_ADD_INTERNAL_CALL(Entity_SetTranslation);
+		VX_ADD_INTERNAL_CALL(Entity_FindEntityByName);
 
 		VX_ADD_INTERNAL_CALL(Input_IsKeyDown);
 

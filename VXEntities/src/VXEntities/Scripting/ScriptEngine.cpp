@@ -5,6 +5,8 @@
 #include "mono/jit/jit.h"
 #include "mono/metadata/assembly.h"
 #include "mono/metadata/object.h"
+#include "mono/metadata/mono-debug.h"
+#include "mono/metadata/threads.h"
 #include "ScriptGlue.h"
 #include "../../VXEntities.h"
 
@@ -43,7 +45,7 @@ namespace Vertex {
 			return buffer;
 		}
 
-		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath)
+		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath, bool loadPDB = false)
 		{
 			if (!std::filesystem::exists(assemblyPath))
 			{
@@ -51,6 +53,8 @@ namespace Vertex {
 				VX_CORE_ASSERT(false, msg.c_str());
 				return nullptr;
 			}
+
+			
 
 			uint32_t fileSize = 0;
 			char* fileData = ReadBytes(assemblyPath, &fileSize);
@@ -66,6 +70,20 @@ namespace Vertex {
 				VX_CORE_ASSERT(false, msg.c_str());
 				// Log some error message using the errorMessage data
 				return nullptr;
+			}
+
+			if (loadPDB)
+			{
+				std::filesystem::path pdbPath = assemblyPath;
+				pdbPath.replace_extension(".pdb");
+				if (std::filesystem::exists(pdbPath))
+				{
+					uint32_t pdbFileSize = 0;
+					char* pdbFileData = ReadBytes(pdbPath, &pdbFileSize);
+					mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData, pdbFileSize);
+					VX_CORE_INFO("Loaded PDB {}", pdbPath.string().c_str());
+					delete[] pdbFileData;
+				}
 			}
 
 			std::string pathString = assemblyPath.string();
@@ -118,6 +136,8 @@ namespace Vertex {
 
 		ScriptClass EntityClass;
 
+		bool EnableDebugging = true;
+
 		std::unordered_map<std::string, Ref<ScriptClass>> EntityClasses;
 		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
 
@@ -130,6 +150,11 @@ namespace Vertex {
 	void ScriptEngine::Init()
 	{
 		s_Data = new ScriptEngineData();
+
+#ifdef VX_DIST
+		s_Data->EnableDebugging = false;
+#endif // VX_DIST
+
 
 		InitMono();
 		LoadAssembly("Resources/Scripts/Vertex-ScriptCore.dll");
@@ -185,11 +210,25 @@ namespace Vertex {
 	{
 		mono_set_assemblies_path("assets/mono/lib");
 
+		if (s_Data->EnableDebugging)
+		{
+			const char* argv[2] = {
+				"--debugger-agent=transport=dt_socket,address=127.0.0.1:2550,server=y,suspend=n,loglevel=3,logfile=MonoDebugger.log",
+				"--soft-breakpoints"
+			};
+			mono_jit_parse_options(2, (char**)argv);
+			mono_debug_init(MONO_DEBUG_FORMAT_MONO);
+		}
+
 		MonoDomain* rootDomain = mono_jit_init("VertexJITRuntime");
 		VX_CORE_ASSERT(rootDomain);
 
 		// Store the root domain pointer
 		s_Data->RootDomain = rootDomain;
+
+		if (s_Data->EnableDebugging)
+			mono_debug_domain_create(s_Data->RootDomain);
+		mono_thread_set_main(mono_thread_current());
 	}
 
 	void ScriptEngine::ShutdownMono()
@@ -206,7 +245,7 @@ namespace Vertex {
 	void ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
 	{
 		// Move this maybe
-		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath);
+		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		auto assemb = s_Data->AppAssembly;
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
 		auto assembi = s_Data->AppAssemblyImage;
@@ -220,7 +259,7 @@ namespace Vertex {
 		mono_domain_set(s_Data->AppDomain, true);
 
 		// Move this maybe
-		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath);
+		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
 		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
@@ -385,7 +424,42 @@ namespace Vertex {
 
 	MonoObject* ScriptClass::InvokeMethod(MonoObject* instance, MonoMethod* method, void** params)
 	{
-		return mono_runtime_invoke(method, instance, params, nullptr);
+		MonoObject* exception = nullptr;
+		MonoObject* result = mono_runtime_invoke(method, instance, params, &exception);
+
+
+		if (exception != nullptr) {
+			// Handle the exception, perhaps by printing or logging it
+			// Example: Retrieve exception message
+			MonoString* exceptionMessage = mono_object_to_string(exception, nullptr);
+			char* exceptionText = mono_string_to_utf8(exceptionMessage);
+#ifndef VX_DIST
+
+			if (exception != nullptr) {
+				// Handle the exception, perhaps by printing or logging it
+				// Example: Retrieve exception message
+				MonoString* exceptionMessage = mono_object_to_string(exception, nullptr);
+				char* exceptionText = mono_string_to_utf8(exceptionMessage);
+				VX_ASSERT(false, exceptionText);
+				mono_free(exceptionText);
+			}
+#else
+			if (exception != nullptr) {
+				// Handle the exception, perhaps by printing or logging it
+				// Example: Retrieve exception message
+				MonoString* exceptionMessage = mono_object_to_string(exception, nullptr);
+				char* exceptionText = mono_string_to_utf8(exceptionMessage);
+				VX_CRITICAL(exceptionText);
+				Application::Get().Close();
+				mono_free(exceptionText);
+		}
+#endif // !VX_DIST
+
+			mono_free(exceptionText);
+		}
+
+
+		return result;
 	}
 
 	ScriptInstance::ScriptInstance(Ref<ScriptClass> scriptClass, Entity* entity)

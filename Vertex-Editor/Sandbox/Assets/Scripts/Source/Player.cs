@@ -40,6 +40,7 @@ namespace Sandbox
 
         protected override void OnUpdate(float ts)
         {
+            throw new Exception("Test");
 
             Logger.Info("Pos");
             Logger.Info(Pos);

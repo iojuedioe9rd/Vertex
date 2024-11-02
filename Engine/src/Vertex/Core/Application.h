@@ -48,6 +48,8 @@ namespace Vertex
 
 		void OnEvent(Event* e);
 
+		void SubmitToMainThread(const std::function<void()>& function);
+
 		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
 	private:
 		ApplicationCommandLineArgs m_CommandLineArgs;
@@ -62,7 +64,10 @@ namespace Vertex
 		LayerStack* m_LayerStack = 0;
 		ImGuiWindows::ImGuiWindowStack* m_ImGuiWindowStack = 0;
 
-		
+		std::vector<std::function<void()>> m_MainThreadQueue;
+		std::mutex m_MainThreadQueueMutex;
+
+		void ExecuteMainThreadQueue();
 
 		
 

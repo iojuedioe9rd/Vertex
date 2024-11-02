@@ -1,3 +1,5 @@
+
+
 #include "ScriptEngine.h"
 
 #include "Vertex/Core/Base.h"
@@ -10,6 +12,12 @@
 #include "mono/metadata/tabledefs.h"
 #include "ScriptGlue.h"
 #include "../../VXEntities.h"
+
+#include "Vertex/Core/Buffer.h"
+#include "Vertex/Core/FileSystem.h"
+
+
+#include "Vertex/Core/Application.h"
 
 #include <fstream>
 
@@ -52,37 +60,6 @@ namespace Vertex {
 			return it->second;
 		}
 
-		
-
-		// TODO: move to FileSystem class
-		static char* ReadBytes(const std::filesystem::path& filepath, uint32_t* outSize)
-		{
-			std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
-
-			if (!stream)
-			{
-				// Failed to open the file
-				return nullptr;
-			}
-
-			std::streampos end = stream.tellg();
-			stream.seekg(0, std::ios::beg);
-			uint64_t size = end - stream.tellg();
-
-			if (size == 0)
-			{
-				// File is empty
-				return nullptr;
-			}
-
-			char* buffer = new char[size];
-			stream.read((char*)buffer, size);
-			stream.close();
-
-			*outSize = (uint32_t)size;
-			return buffer;
-		}
-
 		static MonoAssembly* LoadMonoAssembly(const std::filesystem::path& assemblyPath, bool loadPDB = false)
 		{
 			if (!std::filesystem::exists(assemblyPath))
@@ -94,12 +71,11 @@ namespace Vertex {
 
 			
 
-			uint32_t fileSize = 0;
-			char* fileData = ReadBytes(assemblyPath, &fileSize);
+			ScopedBuffer fileData = FileSystem::ReadFileBinary(assemblyPath);
 
 			// NOTE: We can't use this image for anything other than loading the assembly because this image doesn't have a reference to the assembly
 			MonoImageOpenStatus status;
-			MonoImage* image = mono_image_open_from_data_full(fileData, fileSize, 1, &status, 0);
+			MonoImage* image = mono_image_open_from_data_full(fileData.As<char>(), fileData.Size(), 1, &status, 0);
 
 			if (status != MONO_IMAGE_OK)
 			{
@@ -116,11 +92,9 @@ namespace Vertex {
 				pdbPath.replace_extension(".pdb");
 				if (std::filesystem::exists(pdbPath))
 				{
-					uint32_t pdbFileSize = 0;
-					char* pdbFileData = ReadBytes(pdbPath, &pdbFileSize);
-					mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData, pdbFileSize);
+					ScopedBuffer pdbFileData = FileSystem::ReadFileBinary(assemblyPath);
+					mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData.As<char>(), pdbFileData.Size());
 					VX_CORE_INFO("Loaded PDB {}", pdbPath.string().c_str());
-					delete[] pdbFileData;
 				}
 			}
 
@@ -135,9 +109,6 @@ namespace Vertex {
 				return nullptr;
 			}
 			mono_image_close(image);
-
-			// Don't forget to free the file data
-			delete[] fileData;
 
 			return assembly;
 		}
@@ -222,6 +193,9 @@ namespace Vertex {
 		MonoAssembly* AppAssembly = nullptr;
 		MonoImage* AppAssemblyImage = nullptr;
 
+		std::filesystem::path CoreAssemblyFilepath;
+		std::filesystem::path AppAssemblyFilepath;
+
 		ScriptClass EntityClass;
 
 		bool EnableDebugging = true;
@@ -235,6 +209,8 @@ namespace Vertex {
 	};
 
 	static ScriptEngineData* s_Data = nullptr;
+
+	
 
 	void ScriptEngine::Init()
 	{
@@ -318,27 +294,46 @@ namespace Vertex {
 		if (s_Data->EnableDebugging)
 			mono_debug_domain_create(s_Data->RootDomain);
 		mono_thread_set_main(mono_thread_current());
+
+		
 	}
 
 	void ScriptEngine::ShutdownMono()
 	{
-		// TODO: mono is a little confusing to shutdown, so maybe come back to this
+		mono_domain_set(mono_get_root_domain(), false);
 
-		// mono_domain_unload(s_Data->AppDomain);
+		mono_domain_unload(s_Data->AppDomain);
 		s_Data->AppDomain = nullptr;
 
-		// mono_jit_cleanup(s_Data->RootDomain);
+		mono_jit_cleanup(s_Data->RootDomain);
 		s_Data->RootDomain = nullptr;
 	}
 
 	void ScriptEngine::LoadAppAssembly(const std::filesystem::path& filepath)
 	{
 		// Move this maybe
+		s_Data->AppAssemblyFilepath = filepath;
 		s_Data->AppAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		auto assemb = s_Data->AppAssembly;
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
 		auto assembi = s_Data->AppAssemblyImage;
 		// Utils::PrintAssemblyTypes(s_Data->AppAssembly);
+
+		
+	}
+
+	void ScriptEngine::ReloadAssembly()
+	{
+		mono_domain_set(mono_get_root_domain(), false);
+		mono_domain_unload(s_Data->AppDomain);
+		LoadAssembly(s_Data->CoreAssemblyFilepath);
+		LoadAppAssembly(s_Data->AppAssemblyFilepath);
+		LoadAssemblyClasses();
+
+		ScriptGlue::RegisterComponents();
+
+		// Retrieve and instantiate class
+		s_Data->EntityClass = ScriptClass("Vertex", "Entity", true);
 	}
 
 	void ScriptEngine::LoadAssembly(const std::filesystem::path& filepath)
@@ -348,6 +343,7 @@ namespace Vertex {
 		mono_domain_set(s_Data->AppDomain, true);
 
 		// Move this maybe
+		s_Data->CoreAssemblyFilepath = filepath;
 		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
 		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);

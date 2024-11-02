@@ -12,6 +12,7 @@
 #include "resource.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <VXEntities/Scripting/ScriptEngine.h>
 
 namespace Vertex {
 
@@ -251,6 +252,13 @@ namespace Vertex {
 					OpenScene();
 				}
 				ImGuiLink::EndMenu();
+			}
+			if (ImGui::BeginMenu("Script"))
+			{
+				if (ImGui::MenuItem("Reload assembly", "Ctrl+R"))
+					ScriptEngine::ReloadAssembly();
+
+				ImGui::EndMenu();
 			}
 			ImGuiLink::EndMenuBar();
 		}

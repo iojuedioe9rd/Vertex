@@ -1,22 +1,41 @@
-[15:27:49] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[15:27:49] [info] VERTEX: GLAD STATUS: 1
-[15:27:49] [info] VERTEX: OpenGL Info:
-[15:27:49] [info] VERTEX:   Vendor: NVIDIA Corporation
-[15:27:49] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[15:27:49] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[15:27:50] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
-[15:27:50] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
-[15:27:50] [warning] VERTEX: Camera has 3 fields:
-[15:27:50] [error] VERTEX: Unknown type: Vertex.Entity
-[15:27:50] [warning] VERTEX:   OtherEntity (<Invalid>)
-[15:27:50] [warning] VERTEX:   DistanceFromPlayer (Float)
-[15:27:50] [warning] VERTEX: Player has 2 fields:
-[15:27:50] [warning] VERTEX:   Speed (Float)
-[15:27:50] [warning] VERTEX:   Time (Float)
-[15:27:50] [info] VERTEX: Registering Entities
-[15:27:50] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
-[15:27:50] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
-[15:27:50] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
-[15:27:50] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
-[15:27:50] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
-[15:27:50] [info] VERTEX: ~Registering Entities
+[16:29:55] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[16:29:55] [info] VERTEX: GLAD STATUS: 1
+[16:29:55] [info] VERTEX: OpenGL Info:
+[16:29:55] [info] VERTEX:   Vendor: NVIDIA Corporation
+[16:29:55] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[16:29:55] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[16:30:04] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
+[16:30:04] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
+[16:30:04] [warning] VERTEX: Camera has 3 fields:
+[16:30:04] [error] VERTEX: Unknown type: Vertex.Entity
+[16:30:04] [warning] VERTEX:   OtherEntity (<Invalid>)
+[16:30:04] [warning] VERTEX:   DistanceFromPlayer (Float)
+[16:30:04] [warning] VERTEX: Player has 2 fields:
+[16:30:04] [warning] VERTEX:   Speed (Float)
+[16:30:04] [warning] VERTEX:   Time (Float)
+[16:30:04] [info] VERTEX: Registering Entities
+[16:30:04] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[16:30:04] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[16:30:04] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[16:30:04] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[16:30:04] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[16:30:04] [info] VERTEX: ~Registering Entities
+[16:30:42] [info] VERTEX: Window Resized
+[16:30:44] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
+[16:30:44] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
+[16:30:44] [warning] VERTEX: Camera has 3 fields:
+[16:30:44] [error] VERTEX: Unknown type: Vertex.Entity
+[16:30:44] [warning] VERTEX:   OtherEntity (<Invalid>)
+[16:30:44] [warning] VERTEX:   DistanceFromPlayer (Float)
+[16:30:44] [warning] VERTEX: Player has 2 fields:
+[16:30:44] [warning] VERTEX:   Speed (Float)
+[16:30:44] [warning] VERTEX:   Time (Float)
+[16:30:44] [info] VERTEX: Registering Entities
+[16:30:44] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[16:30:44] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[16:30:44] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[16:30:44] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[16:30:44] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[16:30:44] [info] VERTEX: ~Registering Entities
+[16:30:47] [info] VERTEX: Run 2
+[16:30:47] [info] APP: 1 false

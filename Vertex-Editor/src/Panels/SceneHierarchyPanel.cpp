@@ -433,10 +433,11 @@ namespace Vertex {
 
 			ImGui::InputText("Class Name", script->classname.data(), 128);
 
+
 			if (!scriptClassExists)
 				ImGui::PopStyleColor();
 
-			
+			scriptClassExists = ScriptEngine::EntityClassExists(script->classname);
 
 			
 

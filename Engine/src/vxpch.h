@@ -5,6 +5,7 @@
 #include "Vertex/Debug/Instrumentor.h"
 #include "Vertex/CommandBuffer/CommandBuffer.h"
 #include "Vertex/Utils/Utils.h"
+#include "Vertex/Core/Buffer.h"
 
 #include <glm/glm.hpp>
 

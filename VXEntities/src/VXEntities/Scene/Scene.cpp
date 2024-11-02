@@ -128,6 +128,8 @@ namespace Vertex {
 
 	void Scene::OnRuntimeStart()
 	{
+		m_IsRunning = true;
+
 		m_IsEditor = false;
 		MonoClass* RB2DClass = nullptr;
 		MonoClass* BC2DClass = nullptr;
@@ -286,6 +288,8 @@ namespace Vertex {
 
 	void Scene::OnRuntimeStop()
 	{
+		m_IsRunning = false;
+
 		m_IsEditor = true;
 		delete m_PhysicsWorld;
 		m_PhysicsWorld = nullptr;

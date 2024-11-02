@@ -2,10 +2,12 @@
 #include <yaml-cpp/yaml.h>
 #include "Entity.h"
 #include "../../VXEntities.h"
+#include "../Scripting/ScriptEngine.h"
 
 extern "C" uint64_t CustomChecksumAsm(const char* data, uint64_t length, uint64_t initialSeed, uint64_t rotateAmount, uint64_t additiveFactor, uint64_t rotateCount);
 
 namespace YAML {
+
 	template<>
 	struct convert<glm::vec2>
 	{
@@ -73,6 +75,18 @@ namespace YAML {
 }
 
 namespace Vertex {
+#define WRITE_SCRIPT_FIELD(FieldType, Type)           \
+			case ScriptFieldType::FieldType:          \
+				out << scriptField.GetValue<Type>();  \
+				break
+
+#define READ_SCRIPT_FIELD(FieldType, Type)             \
+	case ScriptFieldType::FieldType:                   \
+	{                                                  \
+		Type data = scriptField["Data"].as<Type>();    \
+		fieldInstance.SetValue(data);                  \
+		break;                                         \
+	}
 
 	YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec2& v)
 	{
@@ -195,6 +209,56 @@ namespace Vertex {
 			out << YAML::Key << "EnvScript";
 			out << YAML::BeginMap;
 			out << YAML::Key << "Classname" << YAML::Value << script->classname;
+
+			// Fields
+			Ref<ScriptClass> entityClass = ScriptEngine::GetEntityClass(script->classname);
+			const auto& fields = entityClass->GetFields();
+			if (fields.size() > 0)
+			{
+				out << YAML::Key << "ScriptFields" << YAML::Value;
+				auto& entityFields = ScriptEngine::GetScriptFieldMap(entity);
+
+				out << YAML::BeginSeq;
+
+				for (const auto& [name, field] : fields)
+				{
+					if (entityFields.find(name) == entityFields.end())
+						continue;
+					out << YAML::BeginMap;
+
+					out << YAML::Key << "Name" << YAML::Value << name;
+					out << YAML::Key << "Type" << YAML::Value << Utils::ScriptFieldTypeToString(field.Type);
+
+					out << YAML::Key << "Data" << YAML::Value;
+					ScriptFieldInstance& scriptField = entityFields.at(name);
+
+					switch (field.Type)
+					{
+						WRITE_SCRIPT_FIELD(Float, float);
+						WRITE_SCRIPT_FIELD(Double, double);
+						WRITE_SCRIPT_FIELD(Bool, bool);
+						WRITE_SCRIPT_FIELD(Char, char);
+						WRITE_SCRIPT_FIELD(Byte, int8_t);
+						WRITE_SCRIPT_FIELD(Short, int16_t);
+						WRITE_SCRIPT_FIELD(Int, int32_t);
+						WRITE_SCRIPT_FIELD(Long, int64_t);
+						WRITE_SCRIPT_FIELD(UByte, uint8_t);
+						WRITE_SCRIPT_FIELD(UShort, uint16_t);
+						WRITE_SCRIPT_FIELD(UInt, uint32_t);
+						WRITE_SCRIPT_FIELD(ULong, uint64_t);
+						WRITE_SCRIPT_FIELD(Vector2, glm::vec2);
+						WRITE_SCRIPT_FIELD(Vector3, glm::vec3);
+						WRITE_SCRIPT_FIELD(Vector4, glm::vec4);
+						WRITE_SCRIPT_FIELD(Colour, glm::vec4);
+						//WRITE_SCRIPT_FIELD(Entity, UUID);
+					}
+
+					out << YAML::EndMap;
+				}
+
+				out << YAML::EndSeq;
+			}
+
 			out << YAML::EndMap;
 
 		}
@@ -444,6 +508,52 @@ namespace Vertex {
 				if (envScriptNode["Classname"])
 				{
 					script->classname = envScriptNode["Classname"].as<std::string>("");
+				}
+
+				auto scriptFields = envScriptNode["ScriptFields"];
+				if (scriptFields)
+				{
+					Ref<ScriptClass> entityClass = ScriptEngine::GetEntityClass(script->classname);
+					VX_CORE_ASSERT(entityClass);
+					const auto& fields = entityClass->GetFields();
+
+					auto& entityFields = ScriptEngine::GetScriptFieldMap(entity);
+
+					for (auto scriptField : scriptFields)
+					{
+						std::string name = scriptField["Name"].as<std::string>();
+						std::string typeString = scriptField["Type"].as<std::string>();
+						ScriptFieldType type = Utils::ScriptFieldTypeFromString(typeString);
+
+						ScriptFieldInstance& fieldInstance = entityFields[name];
+
+						// TODO: turn this assert into Hazelnut log warning
+						VX_CORE_ASSERT(fields.find(name) != fields.end());
+
+						if (fields.find(name) == fields.end())
+							continue;
+
+						switch (type)
+						{
+							READ_SCRIPT_FIELD(Float, float);
+							READ_SCRIPT_FIELD(Double, double);
+							READ_SCRIPT_FIELD(Bool, bool);
+							READ_SCRIPT_FIELD(Char, char);
+							READ_SCRIPT_FIELD(Byte, int8_t);
+							READ_SCRIPT_FIELD(Short, int16_t);
+							READ_SCRIPT_FIELD(Int, int32_t);
+							READ_SCRIPT_FIELD(Long, int64_t);
+							READ_SCRIPT_FIELD(UByte, uint8_t);
+							READ_SCRIPT_FIELD(UShort, uint16_t);
+							READ_SCRIPT_FIELD(UInt, uint32_t);
+							READ_SCRIPT_FIELD(ULong, uint64_t);
+							READ_SCRIPT_FIELD(Vector2, glm::vec2);
+							READ_SCRIPT_FIELD(Vector3, glm::vec3);
+							READ_SCRIPT_FIELD(Vector4, glm::vec4);
+							READ_SCRIPT_FIELD(Colour, glm::vec4);
+							//READ_SCRIPT_FIELD(Entity, UUID);
+						}
+					}
 				}
 			}
 		}

@@ -50,7 +50,8 @@ namespace Vertex {
 		{
 			auto sceneFilePath = commandLineArgs[1];
 			SceneSerializer serializer(&m_ActiveScene);
-			serializer.Deserialize(sceneFilePath);
+			OpenScene(sceneFilePath);
+			m_EditorScene = m_ActiveScene;
 		}
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
@@ -95,7 +96,10 @@ namespace Vertex {
 
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
-		
+		if (m_EditorScene == nullptr)
+		{
+
+		}
 		
 		
 		t += ts;
@@ -290,6 +294,9 @@ namespace Vertex {
 
 		m_ViewportFocused = ImGuiLink::IsWindowFocused();
 		m_ViewportHovered = ImGuiLink::IsWindowHovered();
+
+		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered);
+
 
 		glm::vec2 viewportPanelSize = ImGuiLink::GetContentRegionAvail();
 		m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);

@@ -52,31 +52,7 @@ namespace Vertex {
 			return it->second;
 		}
 
-		const char* ScriptFieldTypeToString(ScriptFieldType type)
-		{
-			switch (type)
-			{
-				case ScriptFieldType::Float:   return "Float";
-				case ScriptFieldType::Double:  return "Double";
-				case ScriptFieldType::Bool:    return "Bool";
-				case ScriptFieldType::Char:    return "Char";
-				case ScriptFieldType::Byte:    return "Byte";
-				case ScriptFieldType::Short:   return "Short";
-				case ScriptFieldType::Int:     return "Int";
-				case ScriptFieldType::Long:    return "Long";
-				case ScriptFieldType::UByte:   return "UByte";
-				case ScriptFieldType::UShort:  return "UShort";
-				case ScriptFieldType::UInt:    return "UInt";
-				case ScriptFieldType::ULong:   return "ULong";
-				case ScriptFieldType::Vector2: return "Vector2";
-				case ScriptFieldType::Vector3: return "Vector3";
-				case ScriptFieldType::Vector4: return "Vector4";
-				case ScriptFieldType::Colour: return "Colour";
-				case ScriptFieldType::Entity:  return "Entity";
-			}
-
-			return "<Invalid>";
-		}
+		
 
 		// TODO: move to FileSystem class
 		static char* ReadBytes(const std::filesystem::path& filepath, uint32_t* outSize)
@@ -183,7 +159,57 @@ namespace Vertex {
 			}
 		}
 
-	}
+		ScriptFieldType ScriptFieldTypeFromString(std::string_view fieldType)
+		{
+			if (fieldType == "None")    return ScriptFieldType::None;
+			if (fieldType == "Float")   return ScriptFieldType::Float;
+			if (fieldType == "Double")  return ScriptFieldType::Double;
+			if (fieldType == "Bool")    return ScriptFieldType::Bool;
+			if (fieldType == "Char")    return ScriptFieldType::Char;
+			if (fieldType == "Byte")    return ScriptFieldType::Byte;
+			if (fieldType == "Short")   return ScriptFieldType::Short;
+			if (fieldType == "Int")     return ScriptFieldType::Int;
+			if (fieldType == "Long")    return ScriptFieldType::Long;
+			if (fieldType == "UByte")   return ScriptFieldType::UByte;
+			if (fieldType == "UShort")  return ScriptFieldType::UShort;
+			if (fieldType == "UInt")    return ScriptFieldType::UInt;
+			if (fieldType == "ULong")   return ScriptFieldType::ULong;
+			if (fieldType == "Vector2") return ScriptFieldType::Vector2;
+			if (fieldType == "Vector3") return ScriptFieldType::Vector3;
+			if (fieldType == "Colour") return ScriptFieldType::Colour;
+			if (fieldType == "Vector4") return ScriptFieldType::Vector4;
+			if (fieldType == "Entity")  return ScriptFieldType::Entity;
+			VX_CORE_ASSERT(false, "Unknown ScriptFieldType");
+			return ScriptFieldType::None;
+		}
+
+		const char* ScriptFieldTypeToString(ScriptFieldType type)
+		{
+			switch (type)
+			{
+			case ScriptFieldType::Float:   return "Float";
+			case ScriptFieldType::Double:  return "Double";
+			case ScriptFieldType::Bool:    return "Bool";
+			case ScriptFieldType::Char:    return "Char";
+			case ScriptFieldType::Byte:    return "Byte";
+			case ScriptFieldType::Short:   return "Short";
+			case ScriptFieldType::Int:     return "Int";
+			case ScriptFieldType::Long:    return "Long";
+			case ScriptFieldType::UByte:   return "UByte";
+			case ScriptFieldType::UShort:  return "UShort";
+			case ScriptFieldType::UInt:    return "UInt";
+			case ScriptFieldType::ULong:   return "ULong";
+			case ScriptFieldType::Vector2: return "Vector2";
+			case ScriptFieldType::Vector3: return "Vector3";
+			case ScriptFieldType::Vector4: return "Vector4";
+			case ScriptFieldType::Colour: return "Colour";
+			case ScriptFieldType::Entity:  return "Entity";
+			}
+
+			return "<Invalid>";
+		}
+
+}
 
 	struct ScriptEngineData
 	{
@@ -202,6 +228,7 @@ namespace Vertex {
 
 		std::unordered_map<std::string, Ref<ScriptClass>> EntityClasses;
 		std::unordered_map<UUID, Ref<ScriptInstance>> EntityInstances;
+		std::unordered_map<UUID, ScriptFieldMap> EntityScriptFields;
 
 		// Runtime
 		Scene* SceneContext = nullptr;
@@ -342,8 +369,17 @@ namespace Vertex {
 		{
 			if (ScriptEngine::EntityClassExists(sc->classname))
 			{
+				UUID entityID = entity->GetID();
+
 				Ref<ScriptInstance> instance = CreateRef<ScriptInstance>(s_Data->EntityClasses[sc->classname], entity);
-				s_Data->EntityInstances[entity->GetID()] = instance;
+				s_Data->EntityInstances[entityID] = instance;
+				// Copy field values
+				if (s_Data->EntityScriptFields.find(entityID) != s_Data->EntityScriptFields.end())
+				{
+					const ScriptFieldMap& fieldMap = s_Data->EntityScriptFields.at(entityID);
+					for (const auto& [name, fieldInstance] : fieldMap)
+						instance->SetFieldValueInternal(name, fieldInstance.m_Buffer);
+				}
 				VX_CORE_ASSERT(func(sc));
 				instance->InvokeOnCreate();
 			}
@@ -409,9 +445,24 @@ namespace Vertex {
 		s_Data->EntityInstances.clear();
 	}
 
+	Ref<ScriptClass> ScriptEngine::GetEntityClass(const std::string& name)
+	{
+		if (s_Data->EntityClasses.find(name) == s_Data->EntityClasses.end())
+			return nullptr;
+
+		return s_Data->EntityClasses.at(name);
+	}
+
 	std::unordered_map<std::string, Ref<ScriptClass>> ScriptEngine::GetEntityClasses()
 	{
 		return s_Data->EntityClasses;
+	}
+
+	ScriptFieldMap& ScriptEngine::GetScriptFieldMap(Entity* entity)
+	{
+		VX_CORE_ASSERT(entity);
+		UUID entityID = entity->GetID();
+		return s_Data->EntityScriptFields[entityID];
 	}
 
 	Ref<ScriptInstance> ScriptEngine::GetEntityInstance(UUID uuid)

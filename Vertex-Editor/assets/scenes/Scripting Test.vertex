@@ -1,12 +1,12 @@
 Scene: Untitled
 Entities:
-  - Entity: bzaz-ea-sx-d5-6cmdqa-a80pl35-1x-a8-n5-if6e7h-fze
+  - Entity: bb4y-fs-7k-e0-2vct5-oiie0ba-fp-km-li-d8rhde-dr1
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, 0, 0]
       Size: [280.399994, 1, 1]
-      Rotation: [0, 0, 18.7999992]
+      Rotation: [0, 0, 0]
     BaseRigidbody2D:
       BodyType: Static
       FixedRotation: false
@@ -20,7 +20,7 @@ Entities:
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1
-  - Entity: nnzd-ah-0-k0-bni1t2-5s44p9n-8k-x8-0f-120lr8-c5h
+  - Entity: h6g8-qc-et-02-4y4e69-pg4e4ym-4h-vn-t1-28898k-79f
     Tag: Cam
     EntityType: point_camera_2d
     Transform:
@@ -37,7 +37,7 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: vo50-50-sl-dg-9r23s6-bze2qzx-2m-9f-xp-5ixig5-qx6
+  - Entity: xg21-ba-ov-ag-i0ykrb-0smb14p-c-i-15-yzptdd-oyi
     Tag: Script
     EntityType: env_script
     Transform:
@@ -46,23 +46,7 @@ Entities:
       Rotation: [0, 0, 0]
     EnvScript:
       Classname: Sandbox.Player
-  - Entity: 8rk1-2d-gy-lq-kt0pz6-y4svvh8-96-1r-9-daasmv-g3
-    Tag: lol
-    EntityType: prop_static_sprite
-    Transform:
-      Translation: [0, -2.4000001, 0]
-      Size: [280.399994, 1, 1]
-      Rotation: [0, 0, -10.6999998]
-    BaseRigidbody2D:
-      BodyType: Static
-      FixedRotation: false
-    BaseBoxCollier2D:
-      Offset: [0, 0]
-      Size: [0.5, 0.5]
-      Density: 1
-      Friction: 0.5
-      Restitution: 0
-      RestitutionThreshold: 0.5
-    PropStaticSprite:
-      Colour: [1, 1, 1, 1]
-      TilingFactor: 1
+      ScriptFields:
+        - Name: Speed
+          Type: Float
+          Data: 10

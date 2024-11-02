@@ -370,7 +370,7 @@ namespace Vertex {
 		}
 	}
 
-	void DrawEnvScript(ENTEnvScript* script)
+	void DrawEnvScript(ENTEnvScript* script, Scene* scene)
 	{
 		int ENTBaseRigidbody2DID = typeid(ENTBaseRigidbody2D).hash_code() + (int)script;
 		if (script->useRB2D && ImGuiLink::TreeNodeEx((void*)ENTBaseRigidbody2DID, ImGuiTreeNodeFlags_DefaultOpen, "Rigidbody 2D"))
@@ -436,22 +436,66 @@ namespace Vertex {
 			if (!scriptClassExists)
 				ImGui::PopStyleColor();
 
-			Ref<ScriptInstance> scriptInstance = ScriptEngine::GetEntityScriptInstance(script->GetID());
+			
 
 			
 
-			if (scriptInstance)
+			bool sceneRunning = scene->IsRunning();
+			if (sceneRunning)
 			{
-				const auto& fields = scriptInstance->GetScriptClass()->GetFields();
-				for (const auto& [name, field] : fields)
+				Ref<ScriptInstance> scriptInstance = ScriptEngine::GetEntityScriptInstance(script->GetID());
+				if (scriptInstance)
 				{
-					if (field.Type == ScriptFieldType::Float)
+					const auto& fields = scriptInstance->GetScriptClass()->GetFields();
+					for (const auto& [name, field] : fields)
 					{
-						float data = scriptInstance->GetFieldValue<float>(name);
-						if (ImGui::DragFloat(name.c_str(), &data))
+						if (field.Type == ScriptFieldType::Float)
 						{
+							float data = scriptInstance->GetFieldValue<float>(name);
+							if (ImGui::DragFloat(name.c_str(), &data))
+							{
+								scriptInstance->SetFieldValue(name, data);
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if (scriptClassExists)
+				{
+					Ref<ScriptClass> entityClass = ScriptEngine::GetEntityClass(script->classname);
+					const auto& fields = entityClass->GetFields();
 
-							scriptInstance->SetFieldValue(name, data);
+					auto& entityFields = ScriptEngine::GetScriptFieldMap(script);
+					for (const auto& [name, field] : fields)
+					{
+						// Field has been set in editor
+						if (entityFields.find(name) != entityFields.end())
+						{
+							ScriptFieldInstance& scriptField = entityFields.at(name);
+
+							// Display control to set it maybe
+							if (field.Type == ScriptFieldType::Float)
+							{
+								float data = scriptField.GetValue<float>();
+								if (ImGui::DragFloat(name.c_str(), &data))
+									scriptField.SetValue(data);
+							}
+						}
+						else
+						{
+							// Display control to set it maybe
+							if (field.Type == ScriptFieldType::Float)
+							{
+								float data = 0.0f;
+								if (ImGui::DragFloat(name.c_str(), &data))
+								{
+									ScriptFieldInstance& fieldInstance = entityFields[name];
+									fieldInstance.Field = field;
+									fieldInstance.SetValue(data);
+								}
+							}
 						}
 					}
 				}
@@ -484,7 +528,7 @@ namespace Vertex {
 			DrawRB2DImGui(rb2D);
 		}
 
-		if (entity->GetEntName() == "env_script") { DrawEnvScript((ENTEnvScript*)entity); }
+		if (entity->GetEntName() == "env_script") { DrawEnvScript((ENTEnvScript*)entity, m_Context); }
 
 	}
 #pragma endregion

@@ -57,6 +57,11 @@ namespace Vertex
 
 		static Scene* Copy(Scene* other, std::string& name);
 
+		bool IsRunning() const
+		{
+			return m_IsRunning;
+		}
+
 		void KillAllEntitys()
 		{
 			for (Entity* ent : m_Entitys)
@@ -83,6 +88,7 @@ namespace Vertex
 		std::string m_name;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 		bool m_IsEditor = true;
+		bool m_IsRunning = false;
 
 		b2World* m_PhysicsWorld = nullptr;
 		

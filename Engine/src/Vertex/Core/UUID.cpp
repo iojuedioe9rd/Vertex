@@ -16,7 +16,19 @@ UUID VERTEX_API get_uuid()
     for (int i = 0; i < 38; i++) {
         if (dash[i]) res += "-";
         res += v[dist(rng)];
-        res += v[dist(rng)];
     }
-    return res;
+
+
+    std::string res2;
+
+
+    for (char c : res)
+    {
+        if (c != 0)
+        {
+            res2 += c;
+        }
+    }
+
+    return res2;
 }

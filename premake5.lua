@@ -39,6 +39,7 @@ group ""
 
 group "Core"
 	include "Engine"
+	include "Vertex-ScriptCore"
 	include "VXEntities"
 	include "Vertex-Editor"
 group ""

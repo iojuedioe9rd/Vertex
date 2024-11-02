@@ -12,6 +12,7 @@
 #include "resource.h"
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <VXEntities/Scripting/ScriptEngine.h>
 
 namespace Vertex {
 
@@ -50,7 +51,8 @@ namespace Vertex {
 		{
 			auto sceneFilePath = commandLineArgs[1];
 			SceneSerializer serializer(&m_ActiveScene);
-			serializer.Deserialize(sceneFilePath);
+			OpenScene(sceneFilePath);
+			m_EditorScene = m_ActiveScene;
 		}
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
@@ -68,6 +70,8 @@ namespace Vertex {
 		m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
 		
 		m_SecondCamera->isPrimary = false;
+
+		
 
 		
 		square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
@@ -93,7 +97,10 @@ namespace Vertex {
 
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
-		
+		if (m_EditorScene == nullptr)
+		{
+
+		}
 		
 		
 		t += ts;
@@ -246,6 +253,13 @@ namespace Vertex {
 				}
 				ImGuiLink::EndMenu();
 			}
+			if (ImGui::BeginMenu("Script"))
+			{
+				if (ImGui::MenuItem("Reload assembly", "Ctrl+R"))
+					ScriptEngine::ReloadAssembly();
+
+				ImGui::EndMenu();
+			}
 			ImGuiLink::EndMenuBar();
 		}
 
@@ -288,6 +302,9 @@ namespace Vertex {
 
 		m_ViewportFocused = ImGuiLink::IsWindowFocused();
 		m_ViewportHovered = ImGuiLink::IsWindowHovered();
+
+		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered);
+
 
 		glm::vec2 viewportPanelSize = ImGuiLink::GetContentRegionAvail();
 		m_ActiveScene->OnViewportResize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
@@ -434,7 +451,6 @@ namespace Vertex {
 		if (!filepath.empty())
 		{
 			OpenScene(filepath);
-			m_ActiveScene->CreateEntity<ENTProp2DCircle>("Circle");
 		}
 	}
 

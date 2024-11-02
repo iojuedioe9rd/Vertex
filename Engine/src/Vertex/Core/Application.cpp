@@ -115,8 +115,10 @@ namespace Vertex
 		m_LastFrameTime = time;
 
 		Time::m_Timestep = timestep;
-
+		//m_Window->SetVSync(false);
 		Time::FPS = GetFPS();
+
+		ExecuteMainThreadQueue();
 
 		//VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		
@@ -146,7 +148,7 @@ namespace Vertex
 	void Application::OnEvent(Event* e)
 	{
 		VX_PROFILE_FUNCTION();
-		
+
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowClose)
 		{
 			m_Running = 0;
@@ -182,6 +184,22 @@ namespace Vertex
 
 		delete e;
 		
+	}
+
+	void Application::SubmitToMainThread(const std::function<void()>& function)
+	{
+		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
+		m_MainThreadQueue.emplace_back(function);
+	}
+
+	void Application::ExecuteMainThreadQueue()
+	{
+		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
+
+		for (auto& func : m_MainThreadQueue)
+			func();
+
+		m_MainThreadQueue.clear();
 	}
 
 

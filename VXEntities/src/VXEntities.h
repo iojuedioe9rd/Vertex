@@ -10,3 +10,4 @@
 #include "VXEntities/Scene/SceneSerializer.h"
 #include "VXEntities/Scene/Entities/prop_dynamic_sprite/prop_dynamic_sprite.h"
 #include "VXEntities/Scene/Entities/prop_2d_circle/prop_2d_circle.h"
+#include "VXEntities/Scene/Entities/env_script/env_script.h"

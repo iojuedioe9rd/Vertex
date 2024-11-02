@@ -1,0 +1,52 @@
+Scene: Untitled
+Entities:
+  - Entity: aqqf-ed-6t-8s-t3fna-pyqkafr-yl-72-ek-099ab3-lpo
+    Tag: Floor
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [280.399994, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, -24]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: e18p-as-x4-0s-l6202e-f1trf9-vc-93-0-xbh8s2-6y3
+    Tag: Camera
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 4.30000019, 16.8999996]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    PointCamera2D:
+      ProjectionType: 0
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: e22-71-bn-7e-i0oyq8-8kadfnh-es-5t-n-efzm4e-dih
+    Tag: Player
+    EntityType: env_script
+    Transform:
+      Translation: [0, 4.19999981, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    EnvScript:
+      Classname: Sandbox.Player
+      ScriptFields:
+        - Name: Speed
+          Type: Float
+          Data: 10

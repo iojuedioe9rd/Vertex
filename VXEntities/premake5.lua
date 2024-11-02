@@ -26,19 +26,28 @@ project "VXEntities"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.Box2D}"
-	
+		"%{IncludeDir.Box2D}",
+		"%{IncludeDir.filewatch}",
+		"%{IncludeDir.mono}"
     }
 	
 	links
 	{
 		"yaml-cpp",
 		"Engine",
-		"Box2D"
+		"Box2D",
+		"%{Library.mono}"
 	}
     
     filter "system:windows"
 		systemversion "latest"
+		links
+		{
+			"Ws2_32.lib",
+			"Winmm.lib",
+			"Version.lib",
+			"Bcrypt.lib",
+		}
 
 	filter "configurations:Debug"
 		defines "VX_DEBUG"

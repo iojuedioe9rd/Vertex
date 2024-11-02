@@ -125,6 +125,11 @@ namespace Vertex {
 			}
 		}
 
+		Scene* GetScene()
+		{
+			return m_Scene;
+		}
+
 		void DrawTime(Timestep& ts)
 		{
 			Draw(ts);

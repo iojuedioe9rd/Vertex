@@ -40,7 +40,7 @@ namespace Vertex
 			m_Entitys.push_back(newEntity);
 			return *newEntity;
 		}
-
+		Entity* FindEntityByName(std::string_view name);
 		bool RemoveEntity(Entity& entity);
 
 		void OnRuntimeStart();
@@ -53,7 +53,14 @@ namespace Vertex
 		void OnEvent(Event& e);
 		void OnViewportResize(uint32_t width, uint32_t height);
 
+		bool IsEditor() const { return m_IsEditor; }
+
 		static Scene* Copy(Scene* other, std::string& name);
+
+		bool IsRunning() const
+		{
+			return m_IsRunning;
+		}
 
 		void KillAllEntitys()
 		{
@@ -80,9 +87,11 @@ namespace Vertex
 		std::vector<Entity*> m_Entitys;
 		std::string m_name;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
+		bool m_IsEditor = true;
+		bool m_IsRunning = false;
 
 		b2World* m_PhysicsWorld = nullptr;
-
+		
 		friend class Entity;
 	};
 

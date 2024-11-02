@@ -2,6 +2,7 @@
 #include "Vertex/ImGui/ImGuiLink.h"
 #include <glm/gtc/type_ptr.hpp>
 #include "VXEntities.h"
+#include <VXEntities/Scripting/ScriptEngine.h>
 
 #define ImGuiTreeNodeFlags_Selected 1
 #define ImGuiTreeNodeFlags_OpenOnArrow 128
@@ -23,6 +24,7 @@ namespace Vertex {
 	SceneHierarchyPanel::SceneHierarchyPanel(Scene* scene)
 	{
 		SetContext(scene);
+		ScriptEngine::OnRuntimeStart(scene);
 	}
 
 	void SceneHierarchyPanel::SetContext(Scene* scene)
@@ -34,6 +36,7 @@ namespace Vertex {
 	char ent_type_buffer[256];
 	void SceneHierarchyPanel::OnImGuiRender()
 	{
+		
 		if (ImGuiLink::IsMouseDown(0) && ImGuiLink::IsWindowHovered())
 			m_SelectionContext = nullptr;
 
@@ -93,6 +96,11 @@ namespace Vertex {
 					m_Context->CreateEntity<ENTPropDynamicSprite>(tag);
 				}
 
+				if (type == "env_script")
+				{
+					m_Context->CreateEntity<ENTEnvScript>(tag);
+				}
+
 				if (type == "point_camera_2d")
 				{
 					ENTPointCamera2D* cam = &m_Context->CreateEntity<ENTPointCamera2D>(tag);
@@ -109,6 +117,14 @@ namespace Vertex {
 					m_SelectionContext = nullptr;
 				m_EntityToRemove = nullptr;
 			}
+		}
+
+		if (m_EntityToRemove)
+		{
+			m_Context->RemoveEntity(*m_EntityToRemove);
+			if (m_SelectionContext == m_EntityToRemove)
+				m_SelectionContext = nullptr;
+			m_EntityToRemove = nullptr;
 		}
 	}
 
@@ -143,8 +159,8 @@ namespace Vertex {
 	}
 
 #pragma region DrawEntity Code
-
-	void DrawBaseEntity(Entity* entity, Entity** m_EntityToRemove)
+	Entity* EntityToRemove = nullptr;
+	void DrawBaseEntity(Entity* entity)
 	{
 		
 		auto& tag = entity->name();
@@ -159,7 +175,7 @@ namespace Vertex {
 		ImGui::SameLine();
 		if (ImGuiLink::Button("Delete"))
 		{
-			*m_EntityToRemove = entity;
+			EntityToRemove = entity;
 		}
 
 		if (ImGuiLink::TreeNodeEx(entity->GetID() + "Transform", ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
@@ -354,10 +370,153 @@ namespace Vertex {
 		}
 	}
 
+	void DrawEnvScript(ENTEnvScript* script, Scene* scene)
+	{
+		int ENTBaseRigidbody2DID = typeid(ENTBaseRigidbody2D).hash_code() + (int)script;
+		if (script->useRB2D && ImGuiLink::TreeNodeEx((void*)ENTBaseRigidbody2DID, ImGuiTreeNodeFlags_DefaultOpen, "Rigidbody 2D"))
+		{
+			if (!script->obj.HasField("RB2D density"))
+			{
+				script->obj.Add("RB2D density", 1.0f);
+			}
+
+			float density = script->obj.Get<float>("RB2D density");
+			if (ImGui::DragFloat("Density", &density, 0.01f, 0.0f, 1.0f)) 
+			{
+				script->obj.Add("RB2D density", density);
+			}
+
+			if (!script->obj.HasField("RB2D friction"))
+			{
+				script->obj.Add("RB2D friction", 0.5f);
+			}
+
+			float friction = script->obj.Get<float>("RB2D friction");
+			if (ImGui::DragFloat("Friction", &friction, 0.01f, 0.0f, 1.0f))
+			{
+				script->obj.Add("RB2D friction", friction);
+			}
+
+			if (!script->obj.HasField("RB2D restitution"))
+			{
+				script->obj.Add("RB2D restitution", 0.0f);
+			}
+
+			float restitution = script->obj.Get<float>("RB2D restitution");
+			if (ImGui::DragFloat("Restitution", &restitution, 0.01f, 0.0f, 1.0f))
+			{
+				script->obj.Add("RB2D restitution", restitution);
+			}
+
+			if (!script->obj.HasField("RB2D Restitution Threshold"))
+			{
+				script->obj.Add("RB2D Restitution Threshold", 0.5f);
+			}
+
+			float restitutionThreshold = script->obj.Get<float>("RB2D Restitution Threshold");
+			if (ImGui::DragFloat("Restitution Threshold", &restitutionThreshold, 0.01f, 0.0f, 1.0f))
+			{
+				script->obj.Add("RB2D Restitution Threshold", restitutionThreshold);
+			}
+
+			ImGuiLink::TreePop();
+		}
+
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTEnvScript).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Script"))
+		{
+			bool scriptClassExists = ScriptEngine::EntityClassExists(script->classname);
+
+			ImGui::Checkbox("Use Rigidbody 2D", &script->useRB2D);
+
+			if (!scriptClassExists)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.2f, 0.3f, 1.0f));
+
+			ImGui::InputText("Class Name", script->classname.data(), 128);
+
+
+			if (!scriptClassExists)
+				ImGui::PopStyleColor();
+
+			scriptClassExists = ScriptEngine::EntityClassExists(script->classname);
+
+			
+
+			bool sceneRunning = scene->IsRunning();
+			if (sceneRunning)
+			{
+				Ref<ScriptInstance> scriptInstance = ScriptEngine::GetEntityScriptInstance(script->GetID());
+				if (scriptInstance)
+				{
+					const auto& fields = scriptInstance->GetScriptClass()->GetFields();
+					for (const auto& [name, field] : fields)
+					{
+						if (field.Type == ScriptFieldType::Float)
+						{
+							float data = scriptInstance->GetFieldValue<float>(name);
+							if (ImGui::DragFloat(name.c_str(), &data))
+							{
+								scriptInstance->SetFieldValue(name, data);
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if (scriptClassExists)
+				{
+					Ref<ScriptClass> entityClass = ScriptEngine::GetEntityClass(script->classname);
+					const auto& fields = entityClass->GetFields();
+
+					auto& entityFields = ScriptEngine::GetScriptFieldMap(script);
+					for (const auto& [name, field] : fields)
+					{
+						// Field has been set in editor
+						if (entityFields.find(name) != entityFields.end())
+						{
+							ScriptFieldInstance& scriptField = entityFields.at(name);
+
+							// Display control to set it maybe
+							if (field.Type == ScriptFieldType::Float)
+							{
+								float data = scriptField.GetValue<float>();
+								if (ImGui::DragFloat(name.c_str(), &data))
+									scriptField.SetValue(data);
+							}
+						}
+						else
+						{
+							// Display control to set it maybe
+							if (field.Type == ScriptFieldType::Float)
+							{
+								float data = 0.0f;
+								if (ImGui::DragFloat(name.c_str(), &data))
+								{
+									ScriptFieldInstance& fieldInstance = entityFields[name];
+									fieldInstance.Field = field;
+									fieldInstance.SetValue(data);
+								}
+							}
+						}
+					}
+				}
+			}
+
+			
+			ImGuiLink::TreePop();
+		}
+	}
+
 	void SceneHierarchyPanel::DrawEntity(Entity* entity)
 	{
 		if (entity == nullptr) return;
-		DrawBaseEntity(entity, &m_EntityToRemove);
+		DrawBaseEntity(entity);
+		if (EntityToRemove != nullptr)
+		{
+			m_EntityToRemove = EntityToRemove;
+			EntityToRemove = nullptr;
+			return;
+		}
 		if (entity->GetEntName() == "point_camera_2d") { DrawCameraProp((ENTPointCamera2D*)entity); }
 		if (entity->GetEntName() == "prop_static_sprite") { DrawStaticSpriteRendererProp((ENTPropStaticSprite*)entity); }
 		if (entity->GetEntName() == "prop_dynamic_sprite") { DrawStaticDynamicRendererProp((ENTPropDynamicSprite*)entity); }
@@ -369,6 +528,9 @@ namespace Vertex {
 		{
 			DrawRB2DImGui(rb2D);
 		}
+
+		if (entity->GetEntName() == "env_script") { DrawEnvScript((ENTEnvScript*)entity, m_Context); }
+
 	}
 #pragma endregion
 

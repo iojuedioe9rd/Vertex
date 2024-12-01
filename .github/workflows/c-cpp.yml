@@ -26,6 +26,7 @@ jobs:
 
     - name: Run Setup.bat script
       run: |
+        dir Engine/vendor
         cd scripts
         .\Setup.bat
 

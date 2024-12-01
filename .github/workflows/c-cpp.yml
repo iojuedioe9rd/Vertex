@@ -19,14 +19,7 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # Specify the Python version you need
-
-    - name: Install Premake
-      run: |
-        curl -L -o premake5.zip https://github.com/premake/premake-core/releases/latest/download/premake-5.0.0-windows.zip
-        tar -xf premake5.zip
-        move premake5.exe C:\premake5\premake5.exe
-        set PATH=C:\premake5;%PATH%
+        python-version: '3.x'  # Specify the Python version required for Setup.bat
 
     - name: Run Setup.bat script
       run: |

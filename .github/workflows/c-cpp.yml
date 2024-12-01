@@ -35,12 +35,12 @@ jobs:
 
     - name: Build solution with MSBuild (Debug)
       run: |
-        msbuild YourSolution.sln /p:Configuration=Debug
+        msbuild Vertex.sln /p:Configuration=Debug
 
     - name: Build solution with MSBuild (Release)
       run: |
-        msbuild YourSolution.sln /p:Configuration=Release
+        msbuild Vertex.sln /p:Configuration=Release
 
     - name: Build solution with MSBuild (Dist)
       run: |
-        msbuild YourSolution.sln /p:Configuration=Dist
+        msbuild Vertex.sln /p:Configuration=Dist

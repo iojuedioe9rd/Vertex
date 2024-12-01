@@ -1,6 +1,6 @@
 #include "vxpch.h"
 #include "FakeFS.h"
-
+#include <zlib.h>
 
 
 namespace Vertex
@@ -177,5 +177,75 @@ namespace Vertex
             VX_ERROR(std::string("Error reading RIFF file: ") + e.what());
             return false;
         }
+    }
+
+    std::vector<uint8_t> FakeFS::compressData(const std::vector<uint8_t>& data) {
+        uLongf compressedSize = compressBound(data.size());
+        std::vector<uint8_t> compressedData(compressedSize);
+
+        if (compress(compressedData.data(), &compressedSize, data.data(), data.size()) != Z_OK) {
+            throw std::runtime_error("Failed to compress data.");
+        }
+
+        compressedData.resize(compressedSize); // Adjust size to actual compressed data
+        return compressedData;
+    }
+
+    
+
+    std::vector<uint8_t> FakeFS::decompressData(const std::vector<uint8_t>& compressedData, uLongf originalSize) {
+        std::vector<uint8_t> decompressedData(originalSize);
+
+        if (uncompress(decompressedData.data(), &originalSize, compressedData.data(), compressedData.size()) != Z_OK) {
+            throw std::runtime_error("Failed to decompress data.");
+        }
+
+        return decompressedData;
+    }
+
+    std::vector<uint8_t> FakeFS::encrypt(const std::string& data) const {
+        std::vector<uint8_t> encrypted(data.begin(), data.end());
+        for (auto& byte : encrypted) {
+            byte ^= encryptionKey[0]; // Simple XOR encryption
+        }
+        return encrypted;
+    }
+
+    std::string FakeFS::decrypt(const std::vector<uint8_t>& data) const {
+        std::vector<uint8_t> decrypted = data;
+        for (auto& byte : decrypted) {
+            byte ^= encryptionKey[0]; // Simple XOR decryption
+        }
+        return std::string(decrypted.begin(), decrypted.end());
+    }
+
+    void FakeFS::writeRIFFHeader(std::ofstream& file) const {
+        // Example RIFF header
+        file.write("RIFF", 4);
+        uint32_t size = 0; // Placeholder for size
+        file.write(reinterpret_cast<const char*>(&size), 4);
+        file.write("FAKE", 4); // Format
+        file.write(reinterpret_cast<const char*>(&useCompression), 1); // Write useCompression flag
+    }
+
+    void FakeFS::writeRIFFChunk(std::ofstream& file, const std::string& chunkName, const std::vector<uint8_t>& data) const {
+        std::string chunkNamePadded = chunkName;
+        chunkNamePadded.resize(4, '\0'); // Ensure chunkName is exactly 4 bytes
+
+        file.write(chunkNamePadded.c_str(), 4); // Chunk name
+        uint32_t size = data.size();
+        file.write(reinterpret_cast<const char*>(&size), 4);
+        file.write(reinterpret_cast<const char*>(data.data()), size);
+
+        if (useChecksum) {
+            uint32_t checksum = customChecksum(data);
+            file.write(reinterpret_cast<const char*>(&checksum), 4);
+        }
+    }
+
+    unsigned long FakeFS::decryptSize(const std::vector<uint8_t>& compressedData) const {
+        unsigned long originalSize;
+        memcpy(&originalSize, compressedData.data(), sizeof(unsigned long));
+        return originalSize;
     }
 }

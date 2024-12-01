@@ -19,7 +19,7 @@ jobs:
     - name: Cache Premake Installation
       uses: actions/cache@v3
       with:
-        path: C:\Users\runneradmin\.premake5
+        path: C:\Program Files\premake
         key: premake5-${{ runner.os }}-${{ hashFiles('scripts/Setup.bat') }}
 
     - name: Install Premake (if not cached)

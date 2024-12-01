@@ -1,0 +1,50 @@
+name: Build with VS2022 and Premake
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Specify the Python version you need
+
+    - name: Install Premake
+      run: |
+        curl -L -o premake5.zip https://github.com/premake/premake-core/releases/latest/download/premake-5.0.0-windows.zip
+        tar -xf premake5.zip
+        move premake5.exe C:\premake5\premake5.exe
+        set PATH=C:\premake5;%PATH%
+
+    - name: Run Setup.bat script
+      run: |
+        cd scripts
+        .\Setup.bat
+
+    - name: Generate Visual Studio 2022 solution
+      run: |
+        premake5 vs2022
+
+    - name: Build solution with MSBuild (Debug)
+      run: |
+        msbuild YourSolution.sln /p:Configuration=Debug
+
+    - name: Build solution with MSBuild (Release)
+      run: |
+        msbuild YourSolution.sln /p:Configuration=Release
+
+    - name: Build solution with MSBuild (Dist)
+      run: |
+        msbuild YourSolution.sln /p:Configuration=Dist

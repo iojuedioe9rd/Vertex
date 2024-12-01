@@ -27,6 +27,7 @@ jobs:
     - name: Run Setup.bat script
       run: |
         dir Engine/vendor
+        dir Engine/vendor/Box2D
         cd scripts
         .\Setup.bat
 

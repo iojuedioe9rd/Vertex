@@ -19,15 +19,13 @@ jobs:
     - name: Install Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x'  # Specify the Python version required for Setup.bat
+        python-version: '3.x'
 
     - name: Install Premake
-      uses: Jarod42/install-premake5@v1  # This installs Premake5
+      uses: Jarod42/install-premake5@v1
 
     - name: Run Setup.bat script
       run: |
-        dir Engine/vendor
-        dir Engine/vendor/Box2D
         cd scripts
         .\Setup.bat
 
@@ -35,14 +33,17 @@ jobs:
       run: |
         premake5 vs2022
 
-    - name: Build solution with MSBuild (Debug)
+    - name: Locate and Build Solution (Debug)
       run: |
-        msbuild Vertex.sln /p:Configuration=Debug
+        FOR /F "tokens=*" %%i IN ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') DO SET msbuild=%%i
+        "%msbuild%" Vertex.sln /p:Configuration=Debug
 
-    - name: Build solution with MSBuild (Release)
+    - name: Locate and Build Solution (Release)
       run: |
-        msbuild Vertex.sln /p:Configuration=Release
+        FOR /F "tokens=*" %%i IN ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') DO SET msbuild=%%i
+        "%msbuild%" Vertex.sln /p:Configuration=Release
 
-    - name: Build solution with MSBuild (Dist)
+    - name: Locate and Build Solution (Dist)
       run: |
-        msbuild Vertex.sln /p:Configuration=Dist
+        FOR /F "tokens=*" %%i IN ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') DO SET msbuild=%%i
+        "%msbuild%" Vertex.sln /p:Configuration=Dist

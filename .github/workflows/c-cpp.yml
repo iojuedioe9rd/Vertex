@@ -44,6 +44,8 @@ jobs:
             # If Premake is not found, proceed with installation
             uses: Jarod42/install-premake5@v1
         }
+        # Add Premake to the PATH environment variable
+        echo "C:\\Program Files\\premake" >> $env:GITHUB_PATH
 
     - name: Run Setup.bat script
       run: |

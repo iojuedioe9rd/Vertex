@@ -16,14 +16,17 @@ if len(args) > 1:
         cla = True
 
 # Make sure everything we need for the setup is installed
-PythonRequirements.Validate(cla)
+if not cla:
+    PythonRequirements.Validate(cla)
 SymlinksRequirements.Validate()
 
 from SetupPremake import PremakeConfiguration as PremakeRequirements
 from SetupVulkan import VulkanConfiguration as VulkanRequirements
 os.chdir('./../') # Change from devtools/scripts directory to root
 
-premakeInstalled = PremakeRequirements.Validate(cla)
+premakeInstalled = True
+if not cla:
+    premakeInstalled = PremakeRequirements.CheckIfPremakeInstalled(cla)
 if not cla:
     VulkanRequirements.Validate()
 

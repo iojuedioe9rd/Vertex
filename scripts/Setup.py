@@ -9,6 +9,9 @@ from SetupPython import PythonConfiguration as PythonRequirements
 
 args = sys.argv
 
+print("\nUpdating submodules...")
+subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
+
 cla = False
 
 if len(args) > 1:
@@ -31,8 +34,7 @@ if not cla:
     VulkanRequirements.Validate()
 
 
-print("\nUpdating submodules...")
-subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
+
 
 if (premakeInstalled):
     if platform.system() == "Windows":

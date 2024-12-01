@@ -9,10 +9,11 @@ class PremakeConfiguration:
     premakeZipUrls = f"https://github.com/premake/premake-core/releases/download/v{premakeVersion}/premake-{premakeVersion}-windows.zip"
     premakeLicenseUrl = "https://raw.githubusercontent.com/premake/premake-core/master/LICENSE.txt"
     premakeDirectory = "./vendor/premake/bin"
+    cla = False
 
     @classmethod
-    def Validate(cls):
-        if (not cls.CheckIfPremakeInstalled()):
+    def Validate(cls, cla: bool):
+        if (not cls.CheckIfPremakeInstalled(cla)):
             print("Premake is not installed.")
             return False
 
@@ -20,16 +21,16 @@ class PremakeConfiguration:
         return True
 
     @classmethod
-    def CheckIfPremakeInstalled(cls):
+    def CheckIfPremakeInstalled(cls, cla: bool):
         premakeExe = Path(f"{cls.premakeDirectory}/premake5.exe");
         if (not premakeExe.exists()):
-            return cls.InstallPremake()
+            return cls.InstallPremake(cla)
 
         return True
 
     @classmethod
-    def InstallPremake(cls):
-        permissionGranted = False
+    def InstallPremake(cls, cla: bool):
+        permissionGranted = cla
         while not permissionGranted:
             reply = str(input("Premake not found. Would you like to download Premake {0:s}? [Y/N]: ".format(cls.premakeVersion))).lower().strip()[:1]
             if reply == 'n':

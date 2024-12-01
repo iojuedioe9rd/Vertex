@@ -1,11 +1,11 @@
 Scene: Untitled
 Entities:
-  - Entity: aqqf-ed-6t-8s-t3fna-pyqkafr-yl-72-ek-099ab3-lpo
+  - Entity: 7198-rx-tt-lv-a5d2le-3yaoch4-6q-gy-i3-ae00vv-234
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, 0, 0]
-      Size: [280.399994, 1, 1]
+      Size: [9.30000019, 1, 1]
       Rotation: [0, 0, 0]
     BaseRigidbody2D:
       BodyType: Static
@@ -18,9 +18,9 @@ Entities:
       Restitution: 0
       RestitutionThreshold: 0.5
     PropStaticSprite:
-      Colour: [1, 1, 1, 1]
-      TilingFactor: 1
-  - Entity: e18p-as-x4-0s-l6202e-f1trf9-vc-93-0-xbh8s2-6y3
+      Colour: [0.641869903, 0.67181468, 0.334610432, 1]
+      TilingFactor: 22.2999992
+  - Entity: lrps-nl-bh-m1-780g2-2k4kq6-ss-77-nm-7hk98-sg4
     Tag: Camera
     EntityType: point_camera_2d
     Transform:
@@ -37,7 +37,7 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: e22-71-bn-7e-i0oyq8-8kadfnh-es-5t-n-efzm4e-dih
+  - Entity: h54z-gr-zh-ar-q5eh6a-vmco5ca-36-10-11-8v5a0x-bb
     Tag: Player
     EntityType: env_script
     Transform:

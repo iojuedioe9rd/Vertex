@@ -4,12 +4,12 @@ import importlib.util as importlib_util
 
 class PythonConfiguration:
     @classmethod
-    def Validate(cls):
-        if not cls.__ValidatePython():
+    def Validate(cls, cla: bool):
+        if not cls.__ValidatePython() and not cla:
             return # cannot validate further
 
         for packageName in ["requests"]:
-            if not cls.__ValidatePackage(packageName):
+            if not cls.__ValidatePackage(packageName, cla):
                 return # cannot validate further
 
     @classmethod
@@ -24,14 +24,14 @@ class PythonConfiguration:
             return True
 
     @classmethod
-    def __ValidatePackage(cls, packageName):
+    def __ValidatePackage(cls, packageName, cla: bool):
         if importlib_util.find_spec(packageName) is None:
-            return cls.__InstallPackage(packageName)
+            return cls.__InstallPackage(packageName, cla)
         return True
 
     @classmethod
-    def __InstallPackage(cls, packageName):
-        permissionGranted = False
+    def __InstallPackage(cls, packageName, cla: bool):
+        permissionGranted = cla
         while not permissionGranted:
             reply = str(input("Would you like to install Python package '{0:s}'? [Y/N]: ".format(packageName))).lower().strip()[:1]
             if reply == 'n':

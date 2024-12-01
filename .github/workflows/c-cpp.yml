@@ -22,6 +22,14 @@ jobs:
         path: C:\Program Files\premake
         key: premake5-${{ runner.os }}-${{ hashFiles('scripts/Setup.bat') }}
 
+    - name: Cache bin-int
+      uses: actions/cache@v3
+      with:
+        path: bin-int
+        key: ${{ runner.os }}-bin-int-${{ hashFiles('bin-int/**/*.*') }}
+        restore-keys: ${{ runner.os }}-bin-int-
+        
+
     - name: Install Premake (if not cached)
       if: steps.cache.outputs.cache-hit != 'true'
       uses: Jarod42/install-premake5@v1

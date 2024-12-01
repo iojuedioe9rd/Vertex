@@ -7,8 +7,8 @@
 class Sandbox : public Vertex::Application
 {
 public:
-	Sandbox()
-		: Application("Sandbox")
+	Sandbox(ApplicationCommandLineArgs args)
+		: Application("Sandbox", 1600, 900, args)
 	{
 		VX_CORE_TRACE("Hi");
 		PushLayer(new Sandbox2D());
@@ -23,7 +23,7 @@ private:
 };
 
 
-Vertex::Application* Vertex::CreateApp()
+Vertex::Application* Vertex::CreateApp(ApplicationCommandLineArgs args)
 {
-	return new Sandbox();
+	return new Sandbox(args);
 }

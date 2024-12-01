@@ -38,15 +38,14 @@ jobs:
     - name: Build Solution (Debug x64)
       shell: cmd
       run: |
-        dir "C:\Program Files\Microsoft Visual Studio\2022"
-        "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Debug /p:Platform=x64
+        "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Enterprise\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Debug /p:Platform=x64
 
     - name: Build Solution (Release x64)
       shell: cmd
       run: |
-        "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Release /p:Platform=x64
+        "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Enterprise\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Release /p:Platform=x64
 
     - name: Build Solution (Dist x64)
       shell: cmd
       run: |
-        "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Dist /p:Platform=x64
+        "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Enterprise\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Dist /p:Platform=x64

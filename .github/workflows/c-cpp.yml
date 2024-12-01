@@ -16,12 +16,14 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v3
 
-    - name: Install Python
-      uses: actions/setup-python@v4
+    - name: Cache Premake Installation
+      uses: actions/cache@v3
       with:
-        python-version: '3.x'
+        path: C:\Users\runneradmin\.premake5
+        key: premake5-${{ runner.os }}-${{ hashFiles('scripts/Setup.bat') }}
 
-    - name: Install Premake
+    - name: Install Premake (if not cached)
+      if: steps.cache.outputs.cache-hit != 'true'
       uses: Jarod42/install-premake5@v1
 
     - name: Run Setup.bat script
@@ -34,16 +36,19 @@ jobs:
         premake5 vs2022
 
     - name: Locate and Build Solution (Debug)
+      shell: cmd
       run: |
-        FOR /F "tokens=*" %%i IN ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') DO SET msbuild=%%i
+        for /f "tokens=*" %i in ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') do set msbuild=%i
         "%msbuild%" Vertex.sln /p:Configuration=Debug
 
     - name: Locate and Build Solution (Release)
+      shell: cmd
       run: |
-        FOR /F "tokens=*" %%i IN ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') DO SET msbuild=%%i
+        for /f "tokens=*" %i in ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') do set msbuild=%i
         "%msbuild%" Vertex.sln /p:Configuration=Release
 
     - name: Locate and Build Solution (Dist)
+      shell: cmd
       run: |
-        FOR /F "tokens=*" %%i IN ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') DO SET msbuild=%%i
+        for /f "tokens=*" %i in ('"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') do set msbuild=%i
         "%msbuild%" Vertex.sln /p:Configuration=Dist

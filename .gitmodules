@@ -20,3 +20,6 @@
 	path = Engine/vendor/ImGuizmo
 	url = https://github.com/iojuedioe9rd/ImGuizmo
 
+[submodule "Engine/vendor/Box2D"]
+	path = Engine/vendor/Box2D
+	url = https://github.com/iojuedioe9rd/box2d

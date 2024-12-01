@@ -1,4 +1,4 @@
-name: Build with VS2022 and Premake
+name: Build with VS2022 Enterprise and Premake (x64)
 
 on:
   push:
@@ -16,18 +16,18 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v3
 
-    - name: Install Python
-      uses: actions/setup-python@v4
+    - name: Cache Premake Installation
+      uses: actions/cache@v3
       with:
-        python-version: '3.x'  # Specify the Python version required for Setup.bat
+        path: C:\Users\runneradmin\.premake5
+        key: premake5-${{ runner.os }}-${{ hashFiles('scripts/Setup.bat') }}
 
-    - name: Install Premake
-      uses: Jarod42/install-premake5@v1  # This installs Premake5
+    - name: Install Premake (if not cached)
+      if: steps.cache.outputs.cache-hit != 'true'
+      uses: Jarod42/install-premake5@v1
 
     - name: Run Setup.bat script
       run: |
-        dir Engine/vendor
-        dir Engine/vendor/Box2D
         cd scripts
         .\Setup.bat
 
@@ -35,14 +35,17 @@ jobs:
       run: |
         premake5 vs2022
 
-    - name: Build solution with MSBuild (Debug)
+    - name: Build Solution (Debug x64)
+      shell: cmd
       run: |
-        msbuild Vertex.sln /p:Configuration=Debug
+        "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Debug /p:Platform=x64
 
-    - name: Build solution with MSBuild (Release)
+    - name: Build Solution (Release x64)
+      shell: cmd
       run: |
-        msbuild Vertex.sln /p:Configuration=Release
+        "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Release /p:Platform=x64
 
-    - name: Build solution with MSBuild (Dist)
+    - name: Build Solution (Dist x64)
+      shell: cmd
       run: |
-        msbuild Vertex.sln /p:Configuration=Dist
+        "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" Vertex.sln /p:Configuration=Dist /p:Platform=x64

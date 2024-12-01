@@ -71,6 +71,9 @@ project "Engine"
 		
 		postbuildcommands
 		{
+			("{MKDIR} ../bin/" .. outputdir .. "/Sandbox"),
+			("{MKDIR} ../bin/" .. outputdir .. "/Vertex-Editor"),
+		
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Vertex-Editor")
 		}

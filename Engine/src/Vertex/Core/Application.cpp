@@ -6,7 +6,6 @@
 #include <glad/glad.h>
 #include "Vertex/Renderer/Renderer.h"
 #include <GLFW/glfw3.h>
-#include "Vertex/CustomFileFormat/FakeFS.h"
 
 static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 {

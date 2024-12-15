@@ -23,15 +23,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Install Premake (if not cached)
-      if: steps.cache.premake.cache-hit != 'true'
-      run: |
-        # Check if Premake is already installed in the folder
-        if (-Not (Test-Path -Path "C:\Program Files\premake\premake5.exe")) {
-            # If Premake is not found, proceed with installation
-            uses: Jarod42/install-premake5@v1
-        }
-        # Add Premake to the PATH environment variable
-        echo "C:\\Program Files\\premake" >> $env:GITHUB_PATH
+      uses: Jarod42/install-premake5@v1
 
     - name: Run Setup.bat script
       run: |

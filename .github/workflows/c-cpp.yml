@@ -22,20 +22,6 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v3
 
-    - name: Cache Premake Installation
-      uses: actions/cache@v3
-      id: premake
-      with:
-        path: C:\Program Files\premake
-        key: premake5-${{ runner.os }}-${{ hashFiles('scripts/Setup.bat') }}
-
-    - name: Cache bin-int
-      uses: actions/cache@v3
-      with:
-        path: bin-int
-        key: ${{ runner.os }}-bin-int-${{ hashFiles('bin-int/**/*.*') }}
-        restore-keys: ${{ runner.os }}-bin-int-
-
     - name: Install Premake (if not cached)
       if: steps.cache.premake.cache-hit != 'true'
       run: |

@@ -37,11 +37,12 @@ jobs:
         restore-keys: ${{ runner.os }}-bin-int-
 
     - name: Install Premake (if not cached)
-      if: steps.cache.premake.cache-hit != 'true'
+      if: steps.premake.cache-hit != 'true'
       run: |
-        # Check if Premake is already installed in the folder
+        # Check if Premake is already installed
         if (-Not (Test-Path -Path "C:\Program Files\premake\premake5.exe")) {
-            # If Premake is not found, proceed with installation
+            Write-Host "Installing Premake..."
+            # Install Premake using the official action
             uses: Jarod42/install-premake5@v1
         }
         # Add Premake to the PATH environment variable

@@ -45,7 +45,8 @@ project "Engine"
 		"vendor/miniaudio",
 		"%{IncludeDir.entt}",
 		"vendor/simple_ecs",
-		"%{IncludeDir.imguizmo}"
+		"%{IncludeDir.imguizmo}",
+		"%{IncludeDir.ffmpeg}"
 		
 	}
 	
@@ -56,7 +57,16 @@ project "Engine"
 		"imgui",
 		"zlib",
 		"Checksum",
-		"ImGuizmo"
+		"ImGuizmo",
+		
+		"%{Library.ffmpegAvcodec}",
+		"%{Library.ffmpegAvdevice}",
+		"%{Library.ffmpegAvfilter}",
+		"%{Library.ffmpegAvformat}",
+		"%{Library.ffmpegAvutil}",
+		"%{Library.ffmpegPostproc}",
+		"%{Library.ffmpegSwresample}",
+		"%{Library.ffmpegSwscale}",
 		
 	}
 	

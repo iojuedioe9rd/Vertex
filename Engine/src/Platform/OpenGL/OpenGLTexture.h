@@ -40,7 +40,7 @@ namespace Vertex {
 	{
 	public:
 		OpenGLTexture2DAnimated(uint32_t width, uint32_t height, uint16_t frames);
-		//OpenGLTexture2DAnimated(const std::string& path);
+		OpenGLTexture2DAnimated(const std::string& path);
 		//OpenGLTexture2DAnimated(int resID, const std::string& format);
 		virtual ~OpenGLTexture2DAnimated();
 

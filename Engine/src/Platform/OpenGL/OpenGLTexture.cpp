@@ -187,6 +187,10 @@ namespace Vertex
 		delete[] data;
 	}
 
+	OpenGLTexture2DAnimated::OpenGLTexture2DAnimated(const std::string& path)
+	{
+	}
+
 	OpenGLTexture2DAnimated::~OpenGLTexture2DAnimated()
 	{
 		glDeleteTextures(m_Frames, m_RendererIDs);

@@ -83,10 +83,10 @@ namespace Vertex {
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 		
-		test = Texture2DAnimated::Create(100, 100, 60);
+		test = Texture2DAnimated::Create(1000, 1000, 60);
 		test->SetFPS(2);
 		test->SetLooping(true);
-		test->SetSpeed(1);
+		test->SetSpeed(1.1f);
 
 
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
@@ -141,7 +141,7 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, test, 1.0f);
+					Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
 
 					Renderer2D::EndScene();
 

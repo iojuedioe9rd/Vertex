@@ -84,3 +84,33 @@ struct fmt::formatter<glm::vec3> {
 #define VX_WARN(...)          ::Vertex::Logger::GetClientLogger()->warn(__VA_ARGS__)
 #define VX_ERROR(...)         ::Vertex::Logger::GetClientLogger()->error(__VA_ARGS__)
 #define VX_CRITICAL(...)      ::Vertex::Logger::GetClientLogger()->critical(__VA_ARGS__)
+
+#ifdef VX_EXTRA_LOGGING
+#define VX_EXTRA_CORE_TRACE(...)    ::Vertex::Logger::GetCoreLogger()->trace(__VA_ARGS__)
+#define VX_EXTRA_CORE_INFO(...)     ::Vertex::Logger::GetCoreLogger()->info(__VA_ARGS__)
+#define VX_EXTRA_CORE_WARN(...)     ::Vertex::Logger::GetCoreLogger()->warn(__VA_ARGS__)
+#define VX_EXTRA_CORE_ERROR(...)    ::Vertex::Logger::GetCoreLogger()->error(__VA_ARGS__)
+#define VX_EXTRA_CORE_CRITICAL(...) ::Vertex::Logger::GetCoreLogger()->critical(__VA_ARGS__)
+
+// Client log macros
+#define VX_EXTRA_TRACE(...)         ::Vertex::Logger::GetClientLogger()->trace(__VA_ARGS__)
+#define VX_EXTRA_INFO(...)          ::Vertex::Logger::GetClientLogger()->info(__VA_ARGS__)
+#define VX_EXTRA_WARN(...)          ::Vertex::Logger::GetClientLogger()->warn(__VA_ARGS__)
+#define VX_EXTRA_ERROR(...)         ::Vertex::Logger::GetClientLogger()->error(__VA_ARGS__)
+#define VX_EXTRA_CRITICAL(...)      ::Vertex::Logger::GetClientLogger()->critical(__VA_ARGS__)
+
+
+#else
+#define VX_EXTRA_CORE_TRACE(...)    
+#define VX_EXTRA_CORE_INFO(...)     
+#define VX_EXTRA_CORE_WARN(...)     
+#define VX_EXTRA_CORE_ERROR(...)    
+#define VX_EXTRA_CORE_CRITICAL(...) 
+
+// Client log macros
+#define VX_EXTRA_TRACE(...)         
+#define VX_EXTRA_INFO(...)          
+#define VX_EXTRA_WARN(...)          
+#define VX_EXTRA_ERROR(...)         
+#define VX_EXTRA_CRITICAL(...)      
+#endif

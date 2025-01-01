@@ -7,6 +7,9 @@
 
 #include <glad/glad.h>
 
+#define TEST_DATA_RESOLUTION 100
+#define TEST_DATA_SIZE TEST_DATA_RESOLUTION * TEST_DATA_RESOLUTION * 3
+#define GET_TEST_DATA_INDEX(x, y, c) (y * TEST_DATA_RESOLUTION * 3 + x + c)
 namespace Vertex {
 
 	static uint8_t s_GLFWWindowCount = 0;
@@ -32,6 +35,9 @@ namespace Vertex {
 	void WindowsWindow::Init(const WindowProps& props)
 	{
 		VX_PROFILE_FUNCTION();
+
+		
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -146,6 +152,9 @@ namespace Vertex {
 			MouseMovedEvent* event = new MouseMovedEvent((float)xPos, (float)yPos);
 			data.EventCallback(event);
 		});
+
+
+		
 	}
 
 	void WindowsWindow::Shutdown()
@@ -165,6 +174,9 @@ namespace Vertex {
 	{
 		VX_PROFILE_FUNCTION();
 		glfwPollEvents();
+
+		
+
 		m_Context->SwapBuffers();
 	}
 

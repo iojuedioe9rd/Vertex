@@ -24,6 +24,9 @@ namespace Vertex {
 		bool IsVSync() const override;
 
 		virtual void* GetNativeWindow() const { return m_Window; }
+
+		uint8_t* test_data;
+		uint32_t tex_handle;
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();

@@ -83,6 +83,12 @@ namespace Vertex {
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
 		
+		test = Texture2DAnimated::Create(100, 100, 60);
+		test->SetFPS(2);
+		test->SetLooping(true);
+		test->SetSpeed(1);
+
+
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
 		OpenScene();
@@ -110,11 +116,11 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Update
-		
+		test->Update(ts.GetSeconds());
 
 		// Render
 		Renderer2D::ResetStats();
-		m_Framebuffer->Bind();
+		//m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
@@ -134,6 +140,9 @@ namespace Vertex {
 
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
+
+					Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, test, 1.0f);
+
 					Renderer2D::EndScene();
 
 					break;
@@ -189,7 +198,7 @@ namespace Vertex {
 		}
 		
 
-		m_Framebuffer->Unbind();
+		//m_Framebuffer->Unbind();
 	}
 
 	void EditorLayer::OnImGuiRender()
@@ -197,11 +206,11 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Note: Switch this to true to enable dockspace
-		static bool dockingEnabled = 1;
+		static bool dockingEnabled = 0;
 
 		ImGuiLink::Docking(dockingEnabled, [this] { DockSpaceCallback(); });
 
-		if (0)
+		if (1)
 		{
 			
 			ImGuiLink::Begin("Settings");
@@ -215,8 +224,8 @@ namespace Vertex {
 
 			ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-			uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-			ImGuiLink::Image((void*)textureID, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
+			uint32_t textureID = test->GetRendererID();
+			ImGuiLink::Image((void*)textureID, glm::vec2(100, 100), glm::vec2{0, 1}, glm::vec2{1, 0});
 
 			
 

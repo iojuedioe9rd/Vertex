@@ -46,5 +46,8 @@ void main()
 {
 	color = texture(u_Textures[v_TexIndex], v_TexCoord * v_TilingFactor) * v_Color;
 
+	if (color.a < 0.1)
+		discard;
+	
 	color2 = v_EntityID;
 }

@@ -22,3 +22,6 @@
 [submodule "Engine/vendor/yaml-cpp"]
 	path = Engine/vendor/yaml-cpp
 	url = https://github.com/iojuedioe9rd/yaml-cpp
+[submodule "Engine/vendor/msdf-atlas-gen"]
+	path = Engine/vendor/msdf-atlas-gen
+	url = https://github.com/iojuedioe9rd/msdf-atlas-gen

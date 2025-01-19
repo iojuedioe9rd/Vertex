@@ -4,3 +4,9 @@ C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\In
 C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Intermediates\Debug\Vertex-ScriptCore.pdb
 C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Vertex-ScriptCore.dll
 C:\Users\Jimmy\Desktop\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Vertex-ScriptCore.pdb
+E:\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Intermediates\Debug\Vertex-ScriptCore.csproj.AssemblyReference.cache
+E:\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Intermediates\Debug\Vertex-ScriptCore.csproj.CoreCompileInputs.cache
+E:\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Intermediates\Debug\Vertex-ScriptCore.dll
+E:\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Intermediates\Debug\Vertex-ScriptCore.pdb
+E:\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Vertex-ScriptCore.dll
+E:\Games_In_C++\11\Vertex\Vertex-Editor\Resources\Scripts\Vertex-ScriptCore.pdb

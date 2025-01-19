@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Sandbox
     {
         public float Speed = 100.0f;
         public float Time = 0.0f;
+        public float JumpTime = 0.0f;
 
         public Player(string uuid) : base(uuid)
         {
@@ -33,6 +35,9 @@ namespace Sandbox
             base.OnDraw();
             //Logger.Info("Run");
             Renderer2D.DrawQuad(Pos, Size, "assets/textures/Player.png", 1.0f, new Colour(1, 1, 1, 1));
+            Renderer2D.DrawQuad(Pos + new Vector3(1, -1, 0), new Vector3(1, JumpTime / 10, 1), new Colour(0, .6f, 0, 1));
+            Renderer2D.DrawQuad(Pos + new Vector3(1, 0 ,0) , new Vector3(1, 1, 1), new Colour(.4f, .4f, .4f, 1));
+            
         }
 
         protected override void OnPhysUpdate(float ts)
@@ -63,6 +68,17 @@ namespace Sandbox
                 velocity.X = -1.0f;
             else if (Input.IsKeyDown(KeyCode.D))
                 velocity.X = 1.0f;
+
+            if(Input.IsKeyDown(KeyCode.Space))
+            {
+                JumpTime += ts * 1.5f;
+            }
+
+            if (Velocity >= Vector2.Zero && Input.IsKeyUp(KeyCode.Space))
+            {
+                velocity.Y += JumpTime * 10;
+                JumpTime = 0.001f;
+            }
 
             velocity *= speed;
 

@@ -2,7 +2,8 @@ import os
 import shutil
 
 class SymlinksConfiguration:
-    Symlinks = {"../Engine/vendor/mono/lib/Release": "../Engine/vendor/mono/lib/Dist"}
+    Symlinks = {"../Engine/vendor/mono/lib/Release": "../Engine/vendor/mono/lib/Dist",
+                "../Engine/vendor/ffmpeg-cpp/lib/x64/Release": "../Engine/vendor/ffmpeg-cpp/lib/x64/Dist"}
 
     @classmethod
     def CheckLinks(cls):

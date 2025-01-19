@@ -79,6 +79,9 @@ namespace Vertex
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static void Rigidbody2D_SetTransform(ref IntPtr rigidbody2DID, ref Vector4 transform2D);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Rigidbody2D_GetVelocity(ref IntPtr rigidbody2DID, ref Vector4 transform2D);
+
         #endregion
 
         #region Object

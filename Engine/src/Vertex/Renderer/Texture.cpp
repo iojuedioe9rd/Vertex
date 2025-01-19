@@ -42,6 +42,7 @@ namespace Vertex
 		return nullptr;
 	}
 
+	/*
 	Ref<Texture2DAnimated> Texture2DAnimated::Create(uint32_t width, uint32_t height, uint16_t frames)
 	{
 		switch (Renderer::GetAPI())
@@ -53,6 +54,19 @@ namespace Vertex
 		VX_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
 	}
+
+	Ref<Texture2DAnimated> Texture2DAnimated::Create(const std::string& path)
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:    VX_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLTexture2DAnimated>(path);
+		}
+
+		VX_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
+	}
+	*/
 
 }
 

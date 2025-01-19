@@ -1,12 +1,12 @@
 Scene: Untitled
 Entities:
-  - Entity: bzaz-ea-sx-d5-6cmdqa-a80pl35-1x-a8-n5-if6e7h-fze
+  - Entity: ks6x-16-tk-4h-3b0v5o-ag5165l-v6-m5-fe-2oxb3i-4bi
     Tag: Floor
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, 0, 0]
       Size: [280.399994, 1, 1]
-      Rotation: [0, 0, 18.7999992]
+      Rotation: [0, 0, 0]
     BaseRigidbody2D:
       BodyType: Static
       FixedRotation: false
@@ -20,7 +20,7 @@ Entities:
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1
-  - Entity: nnzd-ah-0-k0-bni1t2-5s44p9n-8k-x8-0f-120lr8-c5h
+  - Entity: 7b1f-qh-zx-d8-osc54i-z13bdrp-t0-zi-b6-g7nnnb-nih
     Tag: Cam
     EntityType: point_camera_2d
     Transform:
@@ -37,7 +37,7 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: vo50-50-sl-dg-9r23s6-bze2qzx-2m-9f-xp-5ixig5-qx6
+  - Entity: t9ql-fh-01-p8-m628e-49d77cs-k4-i0-qs-75l71x-zao
     Tag: Script
     EntityType: env_script
     Transform:
@@ -46,13 +46,17 @@ Entities:
       Rotation: [0, 0, 0]
     EnvScript:
       Classname: Sandbox.Player
-  - Entity: 8rk1-2d-gy-lq-kt0pz6-y4svvh8-96-1r-9-daasmv-g3
+      ScriptFields:
+        - Name: Speed
+          Type: Float
+          Data: 10
+  - Entity: e2oe-k3-ah-86-m506i8-6cxxsv-o-6i-xv-y3at7l-l4t
     Tag: lol
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, -2.4000001, 0]
       Size: [280.399994, 1, 1]
-      Rotation: [0, 0, -10.6999998]
+      Rotation: [0, 0, 0]
     BaseRigidbody2D:
       BodyType: Static
       FixedRotation: false

@@ -40,7 +40,7 @@ namespace Vertex {
 	{
 	public:
 		OpenGLTexture2DAnimated(uint32_t width, uint32_t height, uint16_t frames);
-		//OpenGLTexture2DAnimated(const std::string& path);
+		OpenGLTexture2DAnimated(const std::string& path);
 		//OpenGLTexture2DAnimated(int resID, const std::string& format);
 		virtual ~OpenGLTexture2DAnimated();
 
@@ -81,7 +81,7 @@ namespace Vertex {
 
 		GLenum m_InternalFormat, m_DataFormat;
 		
-		const uint16_t m_Frames;
+		uint16_t m_Frames  = 1;
 		float m_FPS = 60;
 		uint16_t m_CurrentFrame = 0;
 		bool m_Looping = false;

@@ -1,139 +1,21 @@
-[16:17:39] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[16:17:39] [info] VERTEX: GLAD STATUS: 1
-[16:17:39] [info] VERTEX: OpenGL Info:
-[16:17:39] [info] VERTEX:   Vendor: NVIDIA Corporation
-[16:17:39] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[16:17:39] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[16:17:39] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
-[16:17:39] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
-[16:17:39] [warning] VERTEX: Player has 2 fields:
-[16:17:39] [warning] VERTEX:   Speed (Float)
-[16:17:39] [warning] VERTEX:   Time (Float)
-[16:17:39] [info] VERTEX: Registering Entities
-[16:17:39] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
-[16:17:39] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
-[16:17:39] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
-[16:17:39] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
-[16:17:39] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
-[16:17:39] [info] VERTEX: ~Registering Entities
-[16:17:39] [trace] VERTEX: Loading frame: 1
-[16:17:39] [trace] VERTEX: Loading frame: 2
-[16:17:39] [trace] VERTEX: Loading frame: 3
-[16:17:39] [trace] VERTEX: Loading frame: 4
-[16:17:39] [trace] VERTEX: Loading frame: 5
-[16:17:39] [trace] VERTEX: Loading frame: 6
-[16:17:39] [trace] VERTEX: Loading frame: 7
-[16:17:39] [trace] VERTEX: Loading frame: 8
-[16:17:39] [trace] VERTEX: Loading frame: 9
-[16:17:39] [trace] VERTEX: Loading frame: 10
-[16:17:39] [trace] VERTEX: Loading frame: 11
-[16:17:39] [trace] VERTEX: Loading frame: 12
-[16:17:39] [trace] VERTEX: Loading frame: 13
-[16:17:39] [trace] VERTEX: Loading frame: 14
-[16:17:39] [trace] VERTEX: Loading frame: 15
-[16:17:39] [trace] VERTEX: Loading frame: 16
-[16:17:39] [trace] VERTEX: Loading frame: 17
-[16:17:39] [trace] VERTEX: Loading frame: 18
-[16:17:39] [trace] VERTEX: Loading frame: 19
-[16:17:39] [trace] VERTEX: Loading frame: 20
-[16:17:39] [trace] VERTEX: Loading frame: 21
-[16:17:39] [trace] VERTEX: Loading frame: 22
-[16:17:39] [trace] VERTEX: Loading frame: 23
-[16:17:39] [trace] VERTEX: Loading frame: 24
-[16:17:39] [trace] VERTEX: Loading frame: 25
-[16:17:39] [trace] VERTEX: Loading frame: 26
-[16:17:39] [trace] VERTEX: Loading frame: 27
-[16:17:39] [trace] VERTEX: Loading frame: 28
-[16:17:39] [trace] VERTEX: Loading frame: 29
-[16:17:39] [trace] VERTEX: Loading frame: 30
-[16:17:39] [trace] VERTEX: Loading frame: 31
-[16:17:39] [trace] VERTEX: Loading frame: 32
-[16:17:39] [trace] VERTEX: Loading frame: 33
-[16:17:39] [trace] VERTEX: Loading frame: 34
-[16:17:39] [trace] VERTEX: Loading frame: 35
-[16:17:39] [trace] VERTEX: Loading frame: 36
-[16:17:39] [trace] VERTEX: Loading frame: 37
-[16:17:39] [trace] VERTEX: Loading frame: 38
-[16:17:39] [trace] VERTEX: Loading frame: 39
-[16:17:39] [trace] VERTEX: Loading frame: 40
-[16:17:39] [trace] VERTEX: Loading frame: 41
-[16:17:39] [trace] VERTEX: Loading frame: 42
-[16:17:39] [trace] VERTEX: Loading frame: 43
-[16:17:39] [trace] VERTEX: Loading frame: 44
-[16:17:39] [trace] VERTEX: Loading frame: 45
-[16:17:39] [trace] VERTEX: Loading frame: 46
-[16:17:39] [trace] VERTEX: Loading frame: 47
-[16:17:39] [trace] VERTEX: Loading frame: 48
-[16:17:39] [trace] VERTEX: Loading frame: 49
-[16:17:39] [trace] VERTEX: Loading frame: 50
-[16:17:39] [trace] VERTEX: Loading frame: 51
-[16:17:39] [trace] VERTEX: Loading frame: 52
-[16:17:39] [trace] VERTEX: Loading frame: 53
-[16:17:39] [trace] VERTEX: Loading frame: 54
-[16:17:39] [trace] VERTEX: Loading frame: 55
-[16:17:39] [trace] VERTEX: Loading frame: 56
-[16:17:39] [trace] VERTEX: Loading frame: 57
-[16:17:39] [trace] VERTEX: Loading frame: 58
-[16:17:39] [trace] VERTEX: Loading frame: 59
-[16:17:39] [trace] VERTEX: Loading frame: 60
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 1
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 2
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 3
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 4
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 5
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 6
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 7
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 8
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 9
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 10
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 11
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 12
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 13
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 14
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 15
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 16
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 17
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 18
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 19
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 20
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 21
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 22
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 23
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 24
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 25
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 26
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 27
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 28
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 29
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 30
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 31
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 32
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 33
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 34
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 35
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 36
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 37
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 38
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 39
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 40
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 41
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 42
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 43
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 44
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 45
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 46
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 47
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 48
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 49
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 50
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 51
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 52
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 53
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 54
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 55
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 56
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 57
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 58
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 59
-[16:17:39] [trace] VERTEX: Initializing texture for frame: 60
-[16:17:56] [info] VERTEX: Window Resized
+[21:46:47] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[21:46:47] [info] VERTEX: GLAD STATUS: 1
+[21:46:47] [info] VERTEX: OpenGL Info:
+[21:46:47] [info] VERTEX:   Vendor: NVIDIA Corporation
+[21:46:47] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[21:46:47] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[21:46:48] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
+[21:46:48] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
+[21:46:48] [warning] VERTEX: Player has 3 fields:
+[21:46:48] [warning] VERTEX:   Speed (Float)
+[21:46:48] [warning] VERTEX:   Time (Float)
+[21:46:48] [warning] VERTEX:   JumpTime (Float)
+[21:46:48] [info] VERTEX: Registering Entities
+[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[21:46:48] [info] VERTEX: ~Registering Entities
+[21:47:02] [info] VERTEX: Run 2
+[21:47:02] [info] APP: 1 false

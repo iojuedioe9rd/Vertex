@@ -57,6 +57,10 @@ namespace Vertex
         // Equality operators
         public static bool operator ==(Vector2 a, Vector2 b) => a.X == b.X && a.Y == b.Y;
         public static bool operator !=(Vector2 a, Vector2 b) => !(a == b);
+        public static bool operator >(Vector2 a, Vector2 b) => (a.X > b.X) && (a.Y > b.Y);
+        public static bool operator <(Vector2 a, Vector2 b) => (a.X < b.X) && (a.Y < b.Y);
+        public static bool operator <=(Vector2 a, Vector2 b) => (a.X <= b.X) && (a.Y <= b.Y);
+        public static bool operator >=(Vector2 a, Vector2 b) => (a.X >= b.X) && (a.Y >= b.Y);
 
         // Dot product
         public static float Dot(Vector2 a, Vector2 b) => a.X * b.X + a.Y * b.Y;

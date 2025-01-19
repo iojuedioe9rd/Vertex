@@ -123,7 +123,7 @@ namespace Vertex {
 				glDeleteShader(shader);
 
 				VX_CORE_ERROR("{0}", infoLog.data());
-				VX_CORE_ASSERT(false, "Shader compilation failure!");
+				VX_CORE_ASSERT(false, std::string("Shader compilation failure building shader! ") + std::to_string(glShaderIDIndex));
 				break;
 			}
 

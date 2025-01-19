@@ -380,7 +380,7 @@ namespace Vertex {
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
+		ImGui::Image((ImTextureID)m_Font->GetAtlasTexture()->GetRendererID(), { 512,512 }, { 0, 1 }, { 1, 0 });
 		ImGui::Text("FPS: %d", static_cast<int>(std::round(Time::GetFPS())));
 
 		if (true)

@@ -1,6 +1,7 @@
 #include "vxpch.h"
 #include "OpenGLTexture.h"
 #include "Vertex/Utils/PlatformUtils.h"
+#include <stb_image_write.h>
 
 #include "stb_image.h"
 
@@ -11,14 +12,43 @@
 #define READ_TEX_PIXEL(Y, X, FRAME, OFFSET, WIDTH, HEIGHT) \
     (y * HEIGHT * 3 + x * 3)
 
+#define FREE_2_BUTTER(A, B) \
+{\
+	free(A);\
+	free(B);\
+}\
 
 namespace Vertex 
 {
-	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-		: m_Width(width), m_Height(height)
+	namespace Utils {
+		static GLenum VertexImageFormatToGLDataFormat(ImageFormat format)
+		{
+			switch (format)
+			{
+			case ImageFormat::RGB8:  return GL_RGB;
+			case ImageFormat::RGBA8: return GL_RGBA;
+			}
+			VX_CORE_ASSERT(false);
+			return 0;
+		}
+
+		static GLenum VertexImageFormatToGLInternalFormat(ImageFormat format)
+		{
+			switch (format)
+			{
+			case ImageFormat::RGB8:  return GL_RGB8;
+			case ImageFormat::RGBA8: return GL_RGBA8;
+			}
+			VX_CORE_ASSERT(false);
+			return 0;
+		}
+	}
+
+	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification)
+		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
 	{
-		m_InternalFormat = GL_RGBA8;
-		m_DataFormat = GL_RGBA;
+		m_DataFormat = Utils::VertexImageFormatToGLDataFormat(m_Specification.Format);
+		m_InternalFormat = Utils::VertexImageFormatToGLInternalFormat(m_Specification.Format);
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
@@ -108,10 +138,68 @@ namespace Vertex
 		TextureUtils::kill_tex((tex_id*)data);
 	}
 
+	void OpenGLTexture2D::ToFile(std::filesystem::path filepath) const
+	{
+		// Determine bytes per pixel based on the data format
+		uint32_t bpp = (m_DataFormat == GL_RGBA) ? 4 : 3;
+		size_t dataSize = m_Width * m_Height * bpp;
+
+		// Allocate memory to store the texture data
+		uint8_t* data = (uint8_t*)malloc(dataSize);
+		VX_CORE_ASSERT(data, "Failed to allocate memory for texture data!");
+
+		// Retrieve texture data from OpenGL
+		glGetTextureImage(m_RendererID, 0, m_DataFormat, GL_UNSIGNED_BYTE, dataSize, data);
+
+		// Flip the texture vertically
+		uint8_t* flippedData = (uint8_t*)malloc(dataSize);
+		VX_CORE_ASSERT(flippedData, "Failed to allocate memory for flipped texture data!");
+
+		for (int row = 0; row < m_Height; ++row)
+		{
+			memcpy(flippedData + row * m_Width * bpp,
+				data + (m_Height - row - 1) * m_Width * bpp,
+				m_Width * bpp);
+		}
+
+		// Write the flipped image to a file using stb_image_write
+		bool success = false;
+		std::string extension = filepath.extension().string();
+
+		if (extension == ".png")
+		{
+			success = stbi_write_png(filepath.string().c_str(), m_Width, m_Height, bpp, flippedData, m_Width * bpp);
+		}
+		else if (extension == ".jpg" || extension == ".jpeg")
+		{
+			success = stbi_write_jpg(filepath.string().c_str(), m_Width, m_Height, bpp, flippedData, 90); // Quality: 90
+		}
+		else if (extension == ".bmp")
+		{
+			success = stbi_write_bmp(filepath.string().c_str(), m_Width, m_Height, bpp, flippedData);
+		}
+		else if (extension == ".tga")
+		{
+			success = stbi_write_tga(filepath.string().c_str(), m_Width, m_Height, bpp, flippedData);
+		}
+		else
+		{
+			FREE_2_BUTTER(data, flippedData);
+			VX_CORE_ASSERT(false, "Unsupported file format: " + extension);
+		}
+
+		// Free allocated memory
+		if(data != nullptr) { FREE_2_BUTTER(data, flippedData); }
+
+		VX_CORE_ASSERT(success, "Failed to write texture to file: " + filepath.string());
+	}
+
+
 	void OpenGLTexture2D::SetData(void* data, uint32_t size)
 	{
 		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
-		VX_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
+		uint32_t expectedSize = m_Width * m_Height * bpp;
+		VX_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!" + std::to_string(expectedSize));
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 

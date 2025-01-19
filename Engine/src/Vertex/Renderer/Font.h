@@ -1,5 +1,10 @@
 #pragma once
+
+
+#include <filesystem>
+
 #include "Vertex/Core/Base.h"
+#include "Vertex/Renderer/Texture.h"
 
 namespace msdfgen
 {
@@ -8,13 +13,18 @@ namespace msdfgen
 
 namespace Vertex
 {
+	struct MSDFData;
+
 	class VERTEX_API Font
 	{
 	public:
 		Font(const std::filesystem::path& font);
 		~Font();
 
+		Ref<Texture2D> GetAtlasTexture() const { return m_AtlasTexture; }
+
 	private:
-		msdfgen::FontHandle* m_FontHandle = nullptr;
+		MSDFData* m_Data;
+		Ref<Texture2D> m_AtlasTexture;
 	};
 }

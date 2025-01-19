@@ -59,14 +59,7 @@ project "Engine"
 		"Checksum",
 		"ImGuizmo",
 		
-		"%{Library.ffmpegAvcodec}",
-		"%{Library.ffmpegAvdevice}",
-		"%{Library.ffmpegAvfilter}",
-		"%{Library.ffmpegAvformat}",
-		"%{Library.ffmpegAvutil}",
-		"%{Library.ffmpegPostproc}",
-		"%{Library.ffmpegSwresample}",
-		"%{Library.ffmpegSwscale}",
+		
 		
 	}
 	
@@ -88,7 +81,7 @@ project "Engine"
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Vertex-Editor"),
 			
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
-			("{COPY} %{IncludeDir.ffmpeg}/../bin ../bin/" .. outputdir .. "/Vertex-Editor"),
+			
 		}
 
 		links

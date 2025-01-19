@@ -14,6 +14,7 @@
 #include <imgui_internal.h>
 #include <VXEntities/Scripting/ScriptEngine.h>
 #include <Vertex/Animation/AnimationLoader.h>
+#include <Vertex/Renderer/Font.h>
 
 
 
@@ -72,7 +73,9 @@ namespace Vertex {
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
+		m_EditorScene = VXEntities_MakeOrGetScene("EditorScene");
 
+		
 		auto commandLineArgs = Application::Get().GetCommandLineArgs();
 		if (commandLineArgs.Count > 1)
 		{
@@ -81,31 +84,36 @@ namespace Vertex {
 			OpenScene(sceneFilePath);
 			m_EditorScene = m_ActiveScene;
 		}
+		else
+		{
+			m_ActiveScene = m_EditorScene;
+			auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
+
+			m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
+
+			m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
+
+			m_CameraEntity->isPrimary = true;
+
+			m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
+
+			m_SecondCamera->isPrimary = false;
+
+
+
+
+			square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+			square.SetIsVisible(true);
+
+			m_SquareEntity = square;
+			m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+		}
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 		// Entity
 
-		auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
 		
-		m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
-		
-		m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
-		
-		m_CameraEntity->isPrimary = true;
-
-		m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
-		
-		m_SecondCamera->isPrimary = false;
-
-		
-
-		
-		square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
-		square.SetIsVisible(true);
-
-		m_SquareEntity = square;
-		m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
@@ -169,6 +177,8 @@ namespace Vertex {
 
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
+		m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
+
 		OpenScene();
 	}
 
@@ -185,6 +195,8 @@ namespace Vertex {
 		{
 
 		}
+
+		
 		
 		
 		t += ts;
@@ -542,13 +554,15 @@ namespace Vertex {
 		m_EditorScene = m_ActiveScene;
 	}
 
-	void EditorLayer::OpenScene()
+	bool EditorLayer::OpenScene()
 	{
 		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
 		if (!filepath.empty())
 		{
 			OpenScene(filepath);
+			return true;
 		}
+		return false;
 	}
 
 	void EditorLayer::SaveSceneAs()

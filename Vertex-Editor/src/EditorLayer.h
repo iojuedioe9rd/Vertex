@@ -10,6 +10,7 @@
 #include <VXEntities/Scene/EditorCamera.h>
 #include "Panels/ContentBrowserPanel.h"
 #include "Vertex/Renderer/Mesh.h"
+#include "Vertex/Renderer/Font.h"
 #include <filesystem>
 
 namespace Vertex {
@@ -31,7 +32,7 @@ namespace Vertex {
 	private:
 		bool OnKeyPressed(KeyPressedEvent& e);
 		void NewScene();
-		void OpenScene();
+		bool OpenScene();
 		void SaveSceneAs();
 		void OpenScene(const std::filesystem::path& path);
 		void SaveScene();
@@ -51,6 +52,7 @@ namespace Vertex {
 		OrthographicCameraController m_CameraController;
 
 		Ref<Mesh> m_testMesh;
+		Ref<Font> m_Font;
 		Ref<Shader> m_testShader;
 
 		// Temp
@@ -77,7 +79,7 @@ namespace Vertex {
 		glm::vec2 m_ViewportBounds[2];
 
 		Scene* m_ActiveScene;
-		Scene* m_EditorScene;
+		Scene* m_EditorScene = nullptr;
 		std::filesystem::path m_EditorScenePath;
 		ENTPropStaticSprite m_SquareEntity;
 

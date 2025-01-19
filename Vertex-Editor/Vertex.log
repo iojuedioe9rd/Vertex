@@ -1,21 +1,19 @@
-[21:46:47] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[21:46:47] [info] VERTEX: GLAD STATUS: 1
-[21:46:47] [info] VERTEX: OpenGL Info:
-[21:46:47] [info] VERTEX:   Vendor: NVIDIA Corporation
-[21:46:47] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[21:46:47] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
-[21:46:48] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
-[21:46:48] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
-[21:46:48] [warning] VERTEX: Player has 3 fields:
-[21:46:48] [warning] VERTEX:   Speed (Float)
-[21:46:48] [warning] VERTEX:   Time (Float)
-[21:46:48] [warning] VERTEX:   JumpTime (Float)
-[21:46:48] [info] VERTEX: Registering Entities
-[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
-[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
-[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
-[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
-[21:46:48] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
-[21:46:48] [info] VERTEX: ~Registering Entities
-[21:47:02] [info] VERTEX: Run 2
-[21:47:02] [info] APP: 1 false
+[16:28:01] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[16:28:01] [info] VERTEX: GLAD STATUS: 1
+[16:28:01] [info] VERTEX: OpenGL Info:
+[16:28:01] [info] VERTEX:   Vendor: NVIDIA Corporation
+[16:28:01] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[16:28:01] [info] VERTEX:   Version: 4.6.0 NVIDIA 560.94
+[16:28:02] [info] VERTEX: Loaded PDB Resources/Scripts/Vertex-ScriptCore.pdb
+[16:28:02] [info] VERTEX: Loaded PDB Sandbox/Assets/Scripts/Binaries/Sandbox.pdb
+[16:28:02] [warning] VERTEX: Player has 3 fields:
+[16:28:02] [warning] VERTEX:   Speed (Float)
+[16:28:02] [warning] VERTEX:   Time (Float)
+[16:28:02] [warning] VERTEX:   JumpTime (Float)
+[16:28:02] [info] VERTEX: Registering Entities
+[16:28:02] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[16:28:02] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[16:28:02] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[16:28:02] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[16:28:02] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[16:28:02] [info] VERTEX: ~Registering Entities

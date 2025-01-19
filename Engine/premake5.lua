@@ -46,7 +46,9 @@ project "Engine"
 		"%{IncludeDir.entt}",
 		"vendor/simple_ecs",
 		"%{IncludeDir.imguizmo}",
-		"%{IncludeDir.ffmpeg}"
+		"%{IncludeDir.ffmpeg}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}"
 		
 	}
 	

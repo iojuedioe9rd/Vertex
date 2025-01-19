@@ -12,6 +12,8 @@ IncludeDir["imguizmo"] = "%{wks.location}/Engine/vendor/ImGuizmo"
 IncludeDir["mono"] = "%{wks.location}/Engine/vendor/mono/include"
 IncludeDir["filewatch"] = "%{wks.location}/Engine/vendor/filewatch"
 IncludeDir["ffmpeg"] = "%{wks.location}/Engine/vendor/ffmpeg/include"
+IncludeDir["msdfgen"] = "%{wks.location}/Engine/vendor/msdf-atlas-gen/msdfgen"
+IncludeDir["msdf_atlas_gen"] = "%{wks.location}/Engine/vendor/msdf-atlas-gen/msdf-atlas-gen"
 
 LibraryDir = {}
 LibraryDir["mono"] = "%{wks.location}/Engine/vendor/mono/lib/%{cfg.buildcfg}"

@@ -58,6 +58,8 @@ project "Engine"
 		"zlib",
 		"Checksum",
 		"ImGuizmo",
+		"msdf-atlas-gen",
+		"msdfgen",
 		
 		"%{Library.ffmpegAvcodec}",
 		"%{Library.ffmpegAvdevice}",

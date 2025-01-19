@@ -1,56 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<!-- Created by , GNU Texinfo 7.1 -->
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>
-      NUT
-    </title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>FFmpeg documentation</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.min.css" />
+
+<meta name="description" content="NUT: ">
+<meta name="keywords" content="FFmpeg documentation : NUT: ">
+<meta name="Generator" content="texi2html 5.0">
+<!-- Created on July 17, 2019 by texi2html 5.0 -->
+<!--
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   </head>
   <body>
     <div class="container">
-      <h1>
-      NUT
-      </h1>
 
+<h1 class="titlefont">NUT</h1>
+<hr>
+<a name="SEC_Top"></a>
 
-
-<div class="top-level-extent" id="SEC_Top">
-
-<div class="element-contents" id="SEC_Contents">
-<h2 class="contents-heading">Table of Contents</h2>
+<a name="SEC_Contents"></a>
+<h1>Table of Contents</h1>
 
 <div class="contents">
 
-<ul class="toc-numbered-mark">
-  <li><a id="toc-Description" href="#Description">1 Description</a></li>
-  <li><a id="toc-Modes" href="#Modes">2 Modes</a>
-  <ul class="toc-numbered-mark">
-    <li><a id="toc-BROADCAST" href="#BROADCAST">2.1 BROADCAST</a></li>
-    <li><a id="toc-PIPE" href="#PIPE">2.2 PIPE</a></li>
+<ul class="no-bullet">
+  <li><a name="toc-Description" href="#Description">1 Description</a></li>
+  <li><a name="toc-Modes" href="#Modes">2 Modes</a>
+  <ul class="no-bullet">
+    <li><a name="toc-BROADCAST" href="#BROADCAST">2.1 BROADCAST</a></li>
+    <li><a name="toc-PIPE" href="#PIPE">2.2 PIPE</a></li>
   </ul></li>
-  <li><a id="toc-Container_002dspecific-codec-tags" href="#Container_002dspecific-codec-tags">3 Container-specific codec tags</a>
-  <ul class="toc-numbered-mark">
-    <li><a id="toc-Generic-raw-YUVA-formats" href="#Generic-raw-YUVA-formats">3.1 Generic raw YUVA formats</a></li>
-    <li><a id="toc-Raw-Audio" href="#Raw-Audio">3.2 Raw Audio</a></li>
-    <li><a id="toc-Subtitles" href="#Subtitles">3.3 Subtitles</a></li>
-    <li><a id="toc-Raw-Data" href="#Raw-Data">3.4 Raw Data</a></li>
-    <li><a id="toc-Codecs" href="#Codecs">3.5 Codecs</a></li>
-  </ul></li>
+  <li><a name="toc-Container_002dspecific-codec-tags" href="#Container_002dspecific-codec-tags">3 Container-specific codec tags</a>
+  <ul class="no-bullet">
+    <li><a name="toc-Generic-raw-YUVA-formats" href="#Generic-raw-YUVA-formats">3.1 Generic raw YUVA formats</a></li>
+    <li><a name="toc-Raw-Audio" href="#Raw-Audio">3.2 Raw Audio</a></li>
+    <li><a name="toc-Subtitles" href="#Subtitles">3.3 Subtitles</a></li>
+    <li><a name="toc-Raw-Data" href="#Raw-Data">3.4 Raw Data</a></li>
+    <li><a name="toc-Codecs" href="#Codecs">3.5 Codecs</a></li>
+  </ul>
+</li>
 </ul>
-</div>
 </div>
 
-<ul class="mini-toc">
-<li><a href="#Description" accesskey="1">Description</a></li>
-<li><a href="#Modes" accesskey="2">Modes</a></li>
-<li><a href="#Container_002dspecific-codec-tags" accesskey="3">Container-specific codec tags</a></li>
-</ul>
-<div class="chapter-level-extent" id="Description">
-<h2 class="chapter"><span>1 Description<a class="copiable-link" href="#Description"> &para;</a></span></h2>
+
+<hr size="6">
+<a name="Description"></a>
+<h1 class="chapter"><a href="nut.html#toc-Description">1 Description</a></h1>
 <p>NUT is a low overhead generic container format. It stores audio, video,
 subtitle and user-defined streams in a simple, yet efficient, way.
 </p>
@@ -61,51 +68,35 @@ and was finalized in 2008.
 In case of any differences between this text and the official specification,
 the official specification shall prevail.
 </p>
-</div>
-<div class="chapter-level-extent" id="Modes">
-<h2 class="chapter"><span>2 Modes<a class="copiable-link" href="#Modes"> &para;</a></span></h2>
+<a name="Modes"></a>
+<h1 class="chapter"><a href="nut.html#toc-Modes">2 Modes</a></h1>
 <p>NUT has some variants signaled by using the flags field in its main header.
 </p>
-<table class="multitable">
-<tbody><tr><td width="40%">BROADCAST</td><td width="40%">Extend the syncpoint to report the sender wallclock</td></tr>
+<table>
+<tr><td width="40%">BROADCAST</td><td width="40%">Extend the syncpoint to report the sender wallclock</td></tr>
 <tr><td width="40%">PIPE</td><td width="40%">Omit completely the syncpoint</td></tr>
-</tbody>
 </table>
 
-<ul class="mini-toc">
-<li><a href="#BROADCAST" accesskey="1">BROADCAST</a></li>
-<li><a href="#PIPE" accesskey="2">PIPE</a></li>
-</ul>
-<div class="section-level-extent" id="BROADCAST">
-<h3 class="section"><span>2.1 BROADCAST<a class="copiable-link" href="#BROADCAST"> &para;</a></span></h3>
+<a name="BROADCAST"></a>
+<h2 class="section"><a href="nut.html#toc-BROADCAST">2.1 BROADCAST</a></h2>
 
 <p>The BROADCAST variant provides a secondary time reference to facilitate
 detecting endpoint latency and network delays.
 It assumes all the endpoint clocks are synchronized.
 To be used in real-time scenarios.
 </p>
-</div>
-<div class="section-level-extent" id="PIPE">
-<h3 class="section"><span>2.2 PIPE<a class="copiable-link" href="#PIPE"> &para;</a></span></h3>
+<a name="PIPE"></a>
+<h2 class="section"><a href="nut.html#toc-PIPE">2.2 PIPE</a></h2>
 
 <p>The PIPE variant assumes NUT is used as non-seekable intermediate container,
 by not using syncpoint removes unneeded overhead and reduces the overall
 memory usage.
 </p>
-</div>
-</div>
-<div class="chapter-level-extent" id="Container_002dspecific-codec-tags">
-<h2 class="chapter"><span>3 Container-specific codec tags<a class="copiable-link" href="#Container_002dspecific-codec-tags"> &para;</a></span></h2>
+<a name="Container_002dspecific-codec-tags"></a>
+<h1 class="chapter"><a href="nut.html#toc-Container_002dspecific-codec-tags">3 Container-specific codec tags</a></h1>
 
-<ul class="mini-toc">
-<li><a href="#Generic-raw-YUVA-formats" accesskey="1">Generic raw YUVA formats</a></li>
-<li><a href="#Raw-Audio" accesskey="2">Raw Audio</a></li>
-<li><a href="#Subtitles" accesskey="3">Subtitles</a></li>
-<li><a href="#Raw-Data" accesskey="4">Raw Data</a></li>
-<li><a href="#Codecs" accesskey="5">Codecs</a></li>
-</ul>
-<div class="section-level-extent" id="Generic-raw-YUVA-formats">
-<h3 class="section"><span>3.1 Generic raw YUVA formats<a class="copiable-link" href="#Generic-raw-YUVA-formats"> &para;</a></span></h3>
+<a name="Generic-raw-YUVA-formats"></a>
+<h2 class="section"><a href="nut.html#toc-Generic-raw-YUVA-formats">3.1 Generic raw YUVA formats</a></h2>
 
 <p>Since many exotic planar YUVA pixel formats are not considered by
 the AVI/QuickTime FourCC lists, the following scheme is adopted for
@@ -126,16 +117,14 @@ width/height right to find the chroma width/height.
 <p>If the order of bytes is inverted, that means that each component has
 to be read big-endian.
 </p>
-</div>
-<div class="section-level-extent" id="Raw-Audio">
-<h3 class="section"><span>3.2 Raw Audio<a class="copiable-link" href="#Raw-Audio"> &para;</a></span></h3>
+<a name="Raw-Audio"></a>
+<h2 class="section"><a href="nut.html#toc-Raw-Audio">3.2 Raw Audio</a></h2>
 
-<table class="multitable">
-<tbody><tr><td width="40%">ALAW</td><td width="40%">A-LAW</td></tr>
+<table>
+<tr><td width="40%">ALAW</td><td width="40%">A-LAW</td></tr>
 <tr><td width="40%">ULAW</td><td width="40%">MU-LAW</td></tr>
 <tr><td width="40%">P&lt;type&gt;&lt;interleaving&gt;&lt;bits&gt;</td><td width="40%">little-endian PCM</td></tr>
 <tr><td width="40%">&lt;bits&gt;&lt;interleaving&gt;&lt;type&gt;P</td><td width="40%">big-endian PCM</td></tr>
-</tbody>
 </table>
 
 <p>&lt;type&gt; is S for signed integer, U for unsigned integer, F for IEEE float
@@ -143,36 +132,31 @@ to be read big-endian.
 &lt;bits&gt; is 8/16/24/32
 </p>
 <div class="example">
-<pre class="example-preformatted">PFD[32]   would for example be signed 32 bit little-endian IEEE float
+<pre class="example">PFD[32]   would for example be signed 32 bit little-endian IEEE float
 </pre></div>
 
-</div>
-<div class="section-level-extent" id="Subtitles">
-<h3 class="section"><span>3.3 Subtitles<a class="copiable-link" href="#Subtitles"> &para;</a></span></h3>
+<a name="Subtitles"></a>
+<h2 class="section"><a href="nut.html#toc-Subtitles">3.3 Subtitles</a></h2>
 
-<table class="multitable">
-<tbody><tr><td width="40%">UTF8</td><td width="40%">Raw UTF-8</td></tr>
+<table>
+<tr><td width="40%">UTF8</td><td width="40%">Raw UTF-8</td></tr>
 <tr><td width="40%">SSA[0]</td><td width="40%">SubStation Alpha</td></tr>
 <tr><td width="40%">DVDS</td><td width="40%">DVD subtitles</td></tr>
 <tr><td width="40%">DVBS</td><td width="40%">DVB subtitles</td></tr>
-</tbody>
 </table>
 
-</div>
-<div class="section-level-extent" id="Raw-Data">
-<h3 class="section"><span>3.4 Raw Data<a class="copiable-link" href="#Raw-Data"> &para;</a></span></h3>
+<a name="Raw-Data"></a>
+<h2 class="section"><a href="nut.html#toc-Raw-Data">3.4 Raw Data</a></h2>
 
-<table class="multitable">
-<tbody><tr><td width="40%">UTF8</td><td width="40%">Raw UTF-8</td></tr>
-</tbody>
+<table>
+<tr><td width="40%">UTF8</td><td width="40%">Raw UTF-8</td></tr>
 </table>
 
-</div>
-<div class="section-level-extent" id="Codecs">
-<h3 class="section"><span>3.5 Codecs<a class="copiable-link" href="#Codecs"> &para;</a></span></h3>
+<a name="Codecs"></a>
+<h2 class="section"><a href="nut.html#toc-Codecs">3.5 Codecs</a></h2>
 
-<table class="multitable">
-<tbody><tr><td width="40%">3IV1</td><td width="40%">non-compliant MPEG-4 generated by old 3ivx</td></tr>
+<table>
+<tr><td width="40%">3IV1</td><td width="40%">non-compliant MPEG-4 generated by old 3ivx</td></tr>
 <tr><td width="40%">ASV1</td><td width="40%">Asus Video</td></tr>
 <tr><td width="40%">ASV2</td><td width="40%">Asus Video 2</td></tr>
 <tr><td width="40%">CVID</td><td width="40%">Cinepak</td></tr>
@@ -227,15 +211,9 @@ to be read big-endian.
 <tr><td width="40%">WVC1</td><td width="40%">VC-1</td></tr>
 <tr><td width="40%">XVID</td><td width="40%">non-compliant MPEG-4 generated by old Xvid</td></tr>
 <tr><td width="40%">XVIX</td><td width="40%">non-compliant MPEG-4 generated by old Xvid with interlacing bug</td></tr>
-</tbody>
 </table>
 
-</div>
-</div>
-</div>
-      <p style="font-size: small;">
-        This document was generated using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.
-      </p>
     </div>
   </body>
 </html>
+

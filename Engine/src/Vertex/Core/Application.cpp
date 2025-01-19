@@ -7,6 +7,11 @@
 #include "Vertex/Renderer/Renderer.h"
 #include <GLFW/glfw3.h>
 
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
+	// Your fuzzing logic here
+	return 0;  // Return 0 if processed successfully
+}
+
 static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
 {
 	switch (type)
@@ -148,9 +153,16 @@ namespace Vertex
 	{
 		VX_PROFILE_FUNCTION();
 
+		
+
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowClose)
 		{
 			m_Running = 0;
+		}
+
+		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowMoved)
+		{
+			Update();
 		}
 
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowResize)

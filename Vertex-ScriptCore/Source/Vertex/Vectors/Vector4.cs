@@ -48,6 +48,15 @@ namespace Vertex
         public static Vector4 Zero => new Vector4(0, 0, 0, 0);
         public static Vector4 One => new Vector4(1, 1, 1, 1);
 
+        public Vector2 XY { get
+            {
+                return new Vector2(X, Y);
+            } set
+            {
+                X = value.X;
+                Y = value.Y;
+            } }
+
         // Addition and subtraction operators
         public static Vector4 operator +(Vector4 a, Vector4 b) => new Vector4(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.W + b.W);
         public static Vector4 operator -(Vector4 a, Vector4 b) => new Vector4(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);

@@ -27,8 +27,6 @@
 #include <errno.h>
 #include <stddef.h>
 
-#include "macros.h"
-
 /**
  * @addtogroup lavu_error
  *
@@ -79,7 +77,6 @@
 #define AVERROR_HTTP_UNAUTHORIZED  FFERRTAG(0xF8,'4','0','1')
 #define AVERROR_HTTP_FORBIDDEN     FFERRTAG(0xF8,'4','0','3')
 #define AVERROR_HTTP_NOT_FOUND     FFERRTAG(0xF8,'4','0','4')
-#define AVERROR_HTTP_TOO_MANY_REQUESTS FFERRTAG(0xF8,'4','2','9')
 #define AVERROR_HTTP_OTHER_4XX     FFERRTAG(0xF8,'4','X','X')
 #define AVERROR_HTTP_SERVER_ERROR  FFERRTAG(0xF8,'5','X','X')
 

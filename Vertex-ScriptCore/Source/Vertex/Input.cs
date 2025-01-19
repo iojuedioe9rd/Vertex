@@ -12,5 +12,10 @@ namespace Vertex
         {
             return InternalCalls.Input_IsKeyDown(keycode);
         }
+
+        public static bool IsKeyUp(KeyCode keycode)
+        {
+            return !IsKeyDown(keycode);
+        }
     }
 }

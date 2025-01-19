@@ -13,14 +13,41 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <VXEntities/Scripting/ScriptEngine.h>
+#include <Vertex/Animation/AnimationLoader.h>
+
+
 
 namespace Vertex {
+
+	// Vertices coordinates
+	MeshVertex vertices[] =
+	{ //               COORDINATES           /            COLORS          /           NORMALS         /       TEXTURE COORDINATES    //
+		MeshVertex{glm::vec3(-1.0f, 0.0f,  1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1), glm::vec2(0.0f, 0.0f)},
+		MeshVertex{glm::vec3(-1.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1), glm::vec2(0.0f, 1.0f)},
+		MeshVertex{glm::vec3(1.0f, 0.0f, -1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f, 1), glm::vec2(1.0f, 1.0f)},
+		MeshVertex{glm::vec3(1.0f, 0.0f,  1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0f, 1.0f, 1.0f ,1), glm::vec2(1.0f, 0.0f)}
+	};
+
+	// Indices for vertices order
+	uint32_t indices[] =
+	{
+		0, 1, 2,
+		0, 2, 3
+	};
+
 
 	extern const std::filesystem::path g_AssetPath;
 
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f), m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f })
 	{
+		
+
+		//test = Texture2DAnimated::Create("assets/textures/test.mp4");
+		//test->SetFPS(2);
+		//test->SetLooping(true);
+		//test->SetSpeed(1.1f);
+		VX_MAGIC_CALL();
 	}
 
 	void EditorLayer::OnAttach()
@@ -82,12 +109,63 @@ namespace Vertex {
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
+		std::vector <MeshVertex> verts(vertices, vertices + sizeof(vertices) / sizeof(MeshVertex));
+		std::vector <uint32_t> ind(indices, indices + sizeof(indices) / sizeof(uint32_t));
 		
-		test = Texture2DAnimated::Create(1000, 1000, 60);
-		test->SetFPS(2);
-		test->SetLooping(true);
-		test->SetSpeed(1.1f);
+		std::vector<Ref<MeshTexture2D>> textures;
 
+		m_testMesh.reset(new Mesh({
+			// Front face
+			{{-1.0f, -1.0f,  1.0f}, {0.0f,  0.0f,  1.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
+			{{ 1.0f, -1.0f,  1.0f}, {0.0f,  0.0f,  1.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
+			{{ 1.0f,  1.0f,  1.0f}, {0.0f,  0.0f,  1.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f}},
+			{{-1.0f,  1.0f,  1.0f}, {0.0f,  0.0f,  1.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {0.0f, 1.0f}},
+
+			// Back face
+			{{-1.0f, -1.0f, -1.0f}, {0.0f,  0.0f, -1.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
+			{{ 1.0f, -1.0f, -1.0f}, {0.0f,  0.0f, -1.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
+			{{ 1.0f,  1.0f, -1.0f}, {0.0f,  0.0f, -1.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {0.0f, 1.0f}},
+			{{-1.0f,  1.0f, -1.0f}, {0.0f,  0.0f, -1.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+
+			// Left face
+			{{-1.0f, -1.0f, -1.0f}, {-1.0f, 0.0f,  0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
+			{{-1.0f, -1.0f,  1.0f}, {-1.0f, 0.0f,  0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
+			{{-1.0f,  1.0f,  1.0f}, {-1.0f, 0.0f,  0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f}},
+			{{-1.0f,  1.0f, -1.0f}, {-1.0f, 0.0f,  0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+
+			// Right face
+			{{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f,  0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
+			{{ 1.0f,  1.0f, -1.0f}, {1.0f, 0.0f,  0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
+			{{ 1.0f,  1.0f,  1.0f}, {1.0f, 0.0f,  0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f}},
+			{{ 1.0f, -1.0f,  1.0f}, {1.0f, 0.0f,  0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {0.0f, 1.0f}},
+
+			// Top face
+			{{-1.0f,  1.0f, -1.0f}, {0.0f,  1.0f,  0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
+			{{-1.0f,  1.0f,  1.0f}, {0.0f,  1.0f,  0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
+			{{ 1.0f,  1.0f,  1.0f}, {0.0f,  1.0f,  0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f}},
+			{{ 1.0f,  1.0f, -1.0f}, {0.0f,  1.0f,  0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+
+			// Bottom face
+			{{-1.0f, -1.0f, -1.0f}, {0.0f, -1.0f,  0.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
+			{{ 1.0f, -1.0f, -1.0f}, {0.0f, -1.0f,  0.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}},
+			{{ 1.0f, -1.0f,  1.0f}, {0.0f, -1.0f,  0.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f}},
+			{{-1.0f, -1.0f,  1.0f}, {0.0f, -1.0f,  0.0f}, {1.0f, 1.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+			}, {
+				// Front face
+				0, 1, 2, 2, 3, 0,
+				// Back face
+				4, 5, 6, 6, 7, 4,
+				// Left face
+				8, 9, 10, 10, 11, 8,
+				// Right face
+				12, 13, 14, 14, 15, 12,
+				// Top face
+				16, 17, 18, 18, 19, 16,
+				// Bottom face
+				20, 21, 22, 22, 23, 20
+			}, textures));
+
+		m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
 
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
@@ -116,11 +194,11 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Update
-		test->Update(ts.GetSeconds());
+		//test->Update(ts.GetSeconds());
 
 		// Render
 		Renderer2D::ResetStats();
-		//m_Framebuffer->Bind();
+		m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
@@ -141,7 +219,7 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
+					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
 
 					Renderer2D::EndScene();
 
@@ -196,9 +274,19 @@ namespace Vertex {
 
 			Renderer2D::EndScene();
 		}
-		
 
-		//m_Framebuffer->Unbind();
+		RenderCommand::DisableDepthTesting();
+
+		m_testShader->Bind();
+		m_testShader->UploadUniformFloat4("lightColor", glm::vec4(1));
+		m_testShader->UploadUniformMat4("camMatrix", m_EditorCamera.GetViewMatrix());
+		m_testShader->UploadUniformMat4("model", glm::mat4(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
+		m_testMesh->Draw(m_testShader);
+
+		RenderCommand::EnableDepthTesting();
+
+
+		m_Framebuffer->Unbind();
 	}
 
 	void EditorLayer::OnImGuiRender()
@@ -206,11 +294,11 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 
 		// Note: Switch this to true to enable dockspace
-		static bool dockingEnabled = 0;
+		static bool dockingEnabled = 1;
 
 		ImGuiLink::Docking(dockingEnabled, [this] { DockSpaceCallback(); });
 
-		if (1)
+		if (0)
 		{
 			
 			ImGuiLink::Begin("Settings");
@@ -224,8 +312,8 @@ namespace Vertex {
 
 			ImGuiLink::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-			uint32_t textureID = test->GetRendererID();
-			ImGuiLink::Image((void*)textureID, glm::vec2(100, 100), glm::vec2{0, 1}, glm::vec2{1, 0});
+			//uint32_t textureID = test->GetRendererID();
+			//ImGuiLink::Image((void*)textureID, glm::vec2(100, 100), glm::vec2{0, 1}, glm::vec2{1, 0});
 
 			
 
@@ -327,7 +415,7 @@ namespace Vertex {
 		}
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
-		ImGuiLink::Image((void*)textureID, glm::vec2{ Application::Get().GetWindow().GetWidth(), Application::Get().GetWindow().GetHeight() }, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
+		ImGuiLink::Image((void*)textureID, glm::vec2{ viewportPanelSize.x, viewportPanelSize.y }, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
 
 		auto windowSize = ImGuiLink::GetWindowSize();
 		auto minBound = ImGuiLink::GetWindowPos();

@@ -257,12 +257,7 @@ const char *av_get_media_type_string(enum AVMediaType media_type);
  * Internal time base represented as fractional value
  */
 
-#ifdef __cplusplus
-/* ISO C++ forbids compound-literals. */
-#define AV_TIME_BASE_Q          av_make_q(1, AV_TIME_BASE)
-#else
 #define AV_TIME_BASE_Q          (AVRational){1, AV_TIME_BASE}
-#endif
 
 /**
  * @}
@@ -299,6 +294,7 @@ char av_get_picture_type_char(enum AVPictureType pict_type);
  */
 
 #include "common.h"
+#include "error.h"
 #include "rational.h"
 #include "version.h"
 #include "macros.h"
@@ -314,7 +310,6 @@ static inline void *av_x_if_null(const void *p, const void *x)
     return (void *)(intptr_t)(p ? p : x);
 }
 
-#if FF_API_OPT_INT_LIST
 /**
  * Compute the length of an integer list.
  *
@@ -323,7 +318,6 @@ static inline void *av_x_if_null(const void *p, const void *x)
  * @param list    pointer to the list
  * @return  length of the list, in elements, not counting the terminator
  */
-attribute_deprecated
 unsigned av_int_list_length_for_size(unsigned elsize,
                                      const void *list, uint64_t term) av_pure;
 
@@ -336,7 +330,13 @@ unsigned av_int_list_length_for_size(unsigned elsize,
  */
 #define av_int_list_length(list, term) \
     av_int_list_length_for_size(sizeof(*(list)), list, term)
-#endif
+
+/**
+ * Open a file using a UTF-8 filename.
+ * The API of this function matches POSIX fopen(), errors are returned through
+ * errno.
+ */
+FILE *av_fopen_utf8(const char *path, const char *mode);
 
 /**
  * Return the fractional representation of the internal time base.

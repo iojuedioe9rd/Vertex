@@ -6,6 +6,8 @@
 
 #include <glad/glad.h>
 
+#include "Vertex/Animation/AnimationLoader.h"
+
 #define READ_TEX_PIXEL(Y, X, FRAME, OFFSET, WIDTH, HEIGHT) \
     (y * HEIGHT * 3 + x * 3)
 
@@ -189,6 +191,19 @@ namespace Vertex
 
 	OpenGLTexture2DAnimated::OpenGLTexture2DAnimated(const std::string& path)
 	{
+		//m_InternalFormat = GL_RGB8;
+		//m_DataFormat = GL_RGB;
+
+		//Video m_Video;
+		//glm::ivec3 m_Info;
+		//AnimationLoader::video_reader_open(&m_Video, &m_Info, path.c_str());
+		
+		//m_Frames = m_Info.z;
+		//m_Width = m_Info.x;
+		//m_Height = m_Info.y;
+
+		//VX_INFO("Frames: {0}, Width: {1}, Height: {2}", m_Frames, m_Width, m_Height);
+
 	}
 
 	OpenGLTexture2DAnimated::~OpenGLTexture2DAnimated()

@@ -1,0 +1,32 @@
+﻿  demo.cpp
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,16): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'demo.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'demo.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,28): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'demo.cpp')
+  
+  GeneratedAudioSource.cpp
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,16): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'GeneratedAudioSource.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'GeneratedAudioSource.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,28): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'GeneratedAudioSource.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\demo\GeneratedAudioSource.cpp(40,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  GeneratedVideoSource.cpp
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,16): error C2143: syntax error: missing ';' before '*'
+  (compiling source file 'GeneratedVideoSource.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'GeneratedVideoSource.cpp')
+  
+C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h(31,28): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'GeneratedVideoSource.cpp')
+  
+  Generating Code...

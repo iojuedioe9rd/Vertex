@@ -34,9 +34,11 @@ namespace Vertex {
 	class VERTEX_API Texture2DAnimated : public Texture2D
 	{
 	public:
+		/*
 		static Ref<Texture2DAnimated> Create(uint32_t width, uint32_t height, uint16_t frames);
-		//static Ref<Texture2DAnimated> Create(const std::string& path);
+		static Ref<Texture2DAnimated> Create(const std::string& path);
 
+		*/
 		//static Ref<Texture2DAnimated> CreateWin(int resID, const std::string& format);
 
 		virtual void SetFPS(float fps) = 0;

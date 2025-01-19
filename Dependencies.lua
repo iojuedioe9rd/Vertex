@@ -16,6 +16,7 @@ IncludeDir["ffmpeg"] = "%{wks.location}/Engine/vendor/ffmpeg/include"
 LibraryDir = {}
 LibraryDir["mono"] = "%{wks.location}/Engine/vendor/mono/lib/%{cfg.buildcfg}"
 LibraryDir["ffmpeg"] = "%{wks.location}/Engine/vendor/ffmpeg/lib"
+LibraryDir["ffmpeg_cpp"] = "%{wks.location}/Engine/vendor/ffmpeg-cpp/lib/%{cfg.buildcfg}"
 
 Library = {}
 Library["mono"] = "%{LibraryDir.mono}/libmono-static-sgen.lib"

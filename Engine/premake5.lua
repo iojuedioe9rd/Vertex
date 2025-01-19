@@ -85,7 +85,10 @@ project "Engine"
 			("{MKDIR} ../bin/" .. outputdir .. "/Vertex-Editor"),
 		
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Vertex-Editor")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Vertex-Editor"),
+			
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
+			("{COPY} %{IncludeDir.ffmpeg}/../bin ../bin/" .. outputdir .. "/Vertex-Editor"),
 		}
 
 		links

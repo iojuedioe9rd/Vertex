@@ -1,0 +1,49 @@
+﻿  ffmpeg-cpp.vcxproj -> C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\lib\x64\Release\ffmpeg-cpp.lib
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\AudioFormatConverter.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\CodecDeducer.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\ConvertedAudioProcessor.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\ffmpeg.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\ffmpegcpp.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\FFmpegException.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\FrameContainer.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\OpenCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\std.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\VideoFormatConverter.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\AudioCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\Codec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\H264NVEncCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\H265NVEncCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\JPGCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\PNGCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\VideoCodec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Codecs\VP9Codec.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Demuxing\AudioInputStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Demuxing\InputStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Demuxing\StreamData.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Demuxing\VideoInputStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\AudioEncoder.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\AudioFilter.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\AudioFrameSink.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\Filter.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\FrameSink.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\FrameSinkStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\FrameWriter.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\OneInputFrameSink.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoEncoder.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFilterInput.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Frame Sinks\VideoFrameSink.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Info\AudioStreamInfo.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Info\ContainerInfo.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Info\VideoStreamInfo.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Muxing\AudioOutputStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Muxing\Muxer.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Muxing\OutputStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Muxing\VideoOutputStream.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\Demuxer.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\EncodedFileSource.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\InputSource.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\RawAudioDataSource.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\RawAudioFileSource.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\RawVideoDataSource.h
+  C:\Users\Jimmy\Downloads\ffmpeg-cpp-master\ffmpeg-cpp-master\source\ffmpeg-cpp\ffmpeg-cpp\Sources\RawVideoFileSource.h
+  47 File(s) copied

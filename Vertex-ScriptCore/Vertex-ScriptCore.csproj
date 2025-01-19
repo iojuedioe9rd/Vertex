@@ -21,7 +21,7 @@
     <OutputPath>..\Vertex-Editor\Resources\Scripts\</OutputPath>
     <BaseIntermediateOutputPath>..\Vertex-Editor\Resources\Scripts\Intermediates\Debug\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants>YAML_CPP_STATIC_DEFINE</DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -33,7 +33,7 @@
     <OutputPath>..\Vertex-Editor\Resources\Scripts\</OutputPath>
     <BaseIntermediateOutputPath>..\Vertex-Editor\Resources\Scripts\Intermediates\Release\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants>YAML_CPP_STATIC_DEFINE</DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -45,7 +45,7 @@
     <OutputPath>..\Vertex-Editor\Resources\Scripts\</OutputPath>
     <BaseIntermediateOutputPath>..\Vertex-Editor\Resources\Scripts\Intermediates\Dist\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <DefineConstants>YAML_CPP_STATIC_DEFINE</DefineConstants>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>

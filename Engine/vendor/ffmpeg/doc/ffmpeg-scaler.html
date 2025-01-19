@@ -1,207 +1,215 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<!-- Created by , GNU Texinfo 7.1 -->
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>
-      FFmpeg Scaler Documentation
-    </title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>FFmpeg documentation</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.min.css" />
+
+<meta name="description" content="FFmpeg Scaler Documentation: ">
+<meta name="keywords" content="FFmpeg documentation : FFmpeg Scaler ">
+<meta name="Generator" content="texi2html 5.0">
+<!-- Created on July 17, 2019 by texi2html 5.0 -->
+<!--
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   </head>
   <body>
     <div class="container">
-      <h1>
-      FFmpeg Scaler Documentation
-      </h1>
 
+<h1 class="titlefont">FFmpeg Scaler Documentation</h1>
+<hr>
+<a name="SEC_Top"></a>
 
-<div class="top-level-extent" id="SEC_Top">
-
-<div class="element-contents" id="SEC_Contents">
-<h2 class="contents-heading">Table of Contents</h2>
+<a name="SEC_Contents"></a>
+<h1>Table of Contents</h1>
 
 <div class="contents">
 
-<ul class="toc-numbered-mark">
-  <li><a id="toc-Description" href="#Description">1 Description</a></li>
-  <li><a id="toc-Scaler-Options" href="#Scaler-Options">2 Scaler Options</a></li>
-  <li><a id="toc-See-Also" href="#See-Also">3 See Also</a></li>
-  <li><a id="toc-Authors" href="#Authors">4 Authors</a></li>
+<ul class="no-bullet">
+  <li><a name="toc-Description" href="#Description">1 Description</a></li>
+  <li><a name="toc-Scaler-Options" href="#Scaler-Options">2 Scaler Options</a></li>
+  <li><a name="toc-See-Also" href="#See-Also">3 See Also</a></li>
+  <li><a name="toc-Authors" href="#Authors">4 Authors</a></li>
 </ul>
-</div>
 </div>
 
-<ul class="mini-toc">
-<li><a href="#Description" accesskey="1">Description</a></li>
-<li><a href="#Scaler-Options" accesskey="2">Scaler Options</a></li>
-<li><a href="#See-Also" accesskey="3">See Also</a></li>
-<li><a href="#Authors" accesskey="4">Authors</a></li>
-</ul>
-<div class="chapter-level-extent" id="Description">
-<h2 class="chapter"><span>1 Description<a class="copiable-link" href="#Description"> &para;</a></span></h2>
+
+<hr size="6">
+<a name="Description"></a>
+<h1 class="chapter"><a href="ffmpeg-scaler.html#toc-Description">1 Description</a></h1>
 
 <p>The FFmpeg rescaler provides a high-level interface to the libswscale
 library image conversion utilities. In particular it allows one to perform
 image rescaling and pixel format conversion.
 </p>
 
-<a class="anchor" id="scaler_005foptions"></a></div>
-<div class="chapter-level-extent" id="Scaler-Options">
-<h2 class="chapter"><span>2 Scaler Options<a class="copiable-link" href="#Scaler-Options"> &para;</a></span></h2>
+<p><a name="scaler_005foptions"></a>
+</p><a name="Scaler-Options"></a>
+<h1 class="chapter"><a href="ffmpeg-scaler.html#toc-Scaler-Options">2 Scaler Options</a></h1>
 
 <p>The video scaler supports the following named options.
 </p>
-<p>Options may be set by specifying -<var class="var">option</var> <var class="var">value</var> in the
+<p>Options may be set by specifying -<var>option</var> <var>value</var> in the
 FFmpeg tools, with a few API-only exceptions noted below.
 For programmatic use, they can be set explicitly in the
-<code class="code">SwsContext</code> options or through the <samp class="file">libavutil/opt.h</samp> API.
+<code>SwsContext</code> options or through the &lsquo;<tt>libavutil/opt.h</tt>&rsquo; API.
 </p>
-<dl class="table">
+<dl compact="compact">
 <dd>
-<a class="anchor" id="sws_005fflags"></a></dd>
-<dt><samp class="option">sws_flags</samp></dt>
+<p><a name="sws_005fflags"></a>
+</p></dd>
+<dt>&lsquo;<samp>sws_flags</samp>&rsquo;</dt>
 <dd><p>Set the scaler flags. This is also used to set the scaling
 algorithm. Only a single algorithm should be selected. Default
-value is &lsquo;<samp class="samp">bicubic</samp>&rsquo;.
+value is &lsquo;<samp>bicubic</samp>&rsquo;.
 </p>
 <p>It accepts the following values:
-</p><dl class="table">
-<dt>&lsquo;<samp class="samp">fast_bilinear</samp>&rsquo;</dt>
+</p><dl compact="compact">
+<dt>&lsquo;<samp>fast_bilinear</samp>&rsquo;</dt>
 <dd><p>Select fast bilinear scaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">bilinear</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>bilinear</samp>&rsquo;</dt>
 <dd><p>Select bilinear scaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">bicubic</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>bicubic</samp>&rsquo;</dt>
 <dd><p>Select bicubic scaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">experimental</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>experimental</samp>&rsquo;</dt>
 <dd><p>Select experimental scaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">neighbor</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>neighbor</samp>&rsquo;</dt>
 <dd><p>Select nearest neighbor rescaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">area</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>area</samp>&rsquo;</dt>
 <dd><p>Select averaging area rescaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">bicublin</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>bicublin</samp>&rsquo;</dt>
 <dd><p>Select bicubic scaling algorithm for the luma component, bilinear for
 chroma components.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">gauss</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>gauss</samp>&rsquo;</dt>
 <dd><p>Select Gaussian rescaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">sinc</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>sinc</samp>&rsquo;</dt>
 <dd><p>Select sinc rescaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">lanczos</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>lanczos</samp>&rsquo;</dt>
 <dd><p>Select Lanczos rescaling algorithm. The default width (alpha) is 3 and can be
-changed by setting <code class="code">param0</code>.
+changed by setting <code>param0</code>.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">spline</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>spline</samp>&rsquo;</dt>
 <dd><p>Select natural bicubic spline rescaling algorithm.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">print_info</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>print_info</samp>&rsquo;</dt>
 <dd><p>Enable printing/debug logging.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">accurate_rnd</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>accurate_rnd</samp>&rsquo;</dt>
 <dd><p>Enable accurate rounding.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">full_chroma_int</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>full_chroma_int</samp>&rsquo;</dt>
 <dd><p>Enable full chroma interpolation.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">full_chroma_inp</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>full_chroma_inp</samp>&rsquo;</dt>
 <dd><p>Select full chroma input.
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">bitexact</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>bitexact</samp>&rsquo;</dt>
 <dd><p>Enable bitexact output.
 </p></dd>
 </dl>
 
 </dd>
-<dt><samp class="option">srcw <var class="var">(API only)</var></samp></dt>
+<dt>&lsquo;<samp>srcw <var>(API only)</var></samp>&rsquo;</dt>
 <dd><p>Set source width.
 </p>
 </dd>
-<dt><samp class="option">srch <var class="var">(API only)</var></samp></dt>
+<dt>&lsquo;<samp>srch <var>(API only)</var></samp>&rsquo;</dt>
 <dd><p>Set source height.
 </p>
 </dd>
-<dt><samp class="option">dstw <var class="var">(API only)</var></samp></dt>
+<dt>&lsquo;<samp>dstw <var>(API only)</var></samp>&rsquo;</dt>
 <dd><p>Set destination width.
 </p>
 </dd>
-<dt><samp class="option">dsth <var class="var">(API only)</var></samp></dt>
+<dt>&lsquo;<samp>dsth <var>(API only)</var></samp>&rsquo;</dt>
 <dd><p>Set destination height.
 </p>
 </dd>
-<dt><samp class="option">src_format <var class="var">(API only)</var></samp></dt>
+<dt>&lsquo;<samp>src_format <var>(API only)</var></samp>&rsquo;</dt>
 <dd><p>Set source pixel format (must be expressed as an integer).
 </p>
 </dd>
-<dt><samp class="option">dst_format <var class="var">(API only)</var></samp></dt>
+<dt>&lsquo;<samp>dst_format <var>(API only)</var></samp>&rsquo;</dt>
 <dd><p>Set destination pixel format (must be expressed as an integer).
 </p>
 </dd>
-<dt><samp class="option">src_range <var class="var">(boolean)</var></samp></dt>
-<dd><p>If value is set to <code class="code">1</code>, indicates source is full range. Default value is
-<code class="code">0</code>, which indicates source is limited range.
+<dt>&lsquo;<samp>src_range <var>(boolean)</var></samp>&rsquo;</dt>
+<dd><p>If value is set to <code>1</code>, indicates source is full range. Default value is
+<code>0</code>, which indicates source is limited range.
 </p>
 </dd>
-<dt><samp class="option">dst_range <var class="var">(boolean)</var></samp></dt>
-<dd><p>If value is set to <code class="code">1</code>, enable full range for destination. Default value
-is <code class="code">0</code>, which enables limited range.
+<dt>&lsquo;<samp>dst_range <var>(boolean)</var></samp>&rsquo;</dt>
+<dd><p>If value is set to <code>1</code>, enable full range for destination. Default value
+is <code>0</code>, which enables limited range.
 </p>
-<a class="anchor" id="sws_005fparams"></a></dd>
-<dt><samp class="option">param0, param1</samp></dt>
+<p><a name="sws_005fparams"></a>
+</p></dd>
+<dt>&lsquo;<samp>param0, param1</samp>&rsquo;</dt>
 <dd><p>Set scaling algorithm parameters. The specified values are specific of
 some scaling algorithms and ignored by others. The specified values
 are floating point number values.
 </p>
 </dd>
-<dt><samp class="option">sws_dither</samp></dt>
+<dt>&lsquo;<samp>sws_dither</samp>&rsquo;</dt>
 <dd><p>Set the dithering algorithm. Accepts one of the following
-values. Default value is &lsquo;<samp class="samp">auto</samp>&rsquo;.
+values. Default value is &lsquo;<samp>auto</samp>&rsquo;.
 </p>
-<dl class="table">
-<dt>&lsquo;<samp class="samp">auto</samp>&rsquo;</dt>
+<dl compact="compact">
+<dt>&lsquo;<samp>auto</samp>&rsquo;</dt>
 <dd><p>automatic choice
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">none</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>none</samp>&rsquo;</dt>
 <dd><p>no dithering
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">bayer</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>bayer</samp>&rsquo;</dt>
 <dd><p>bayer dither
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">ed</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>ed</samp>&rsquo;</dt>
 <dd><p>error diffusion dither
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">a_dither</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>a_dither</samp>&rsquo;</dt>
 <dd><p>arithmetic dither, based using addition
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">x_dither</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>x_dither</samp>&rsquo;</dt>
 <dd><p>arithmetic dither, based using xor (more random/less apparent patterning that
 a_dither).
 </p>
@@ -209,20 +217,20 @@ a_dither).
 </dl>
 
 </dd>
-<dt><samp class="option">alphablend</samp></dt>
+<dt>&lsquo;<samp>alphablend</samp>&rsquo;</dt>
 <dd><p>Set the alpha blending to use when the input has alpha but the output does not.
-Default value is &lsquo;<samp class="samp">none</samp>&rsquo;.
+Default value is &lsquo;<samp>none</samp>&rsquo;.
 </p>
-<dl class="table">
-<dt>&lsquo;<samp class="samp">uniform_color</samp>&rsquo;</dt>
+<dl compact="compact">
+<dt>&lsquo;<samp>uniform_color</samp>&rsquo;</dt>
 <dd><p>Blend onto a uniform background color
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">checkerboard</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>checkerboard</samp>&rsquo;</dt>
 <dd><p>Blend onto a checkerboard
 </p>
 </dd>
-<dt>&lsquo;<samp class="samp">none</samp>&rsquo;</dt>
+<dt>&lsquo;<samp>none</samp>&rsquo;</dt>
 <dd><p>No blending
 </p>
 </dd>
@@ -232,34 +240,28 @@ Default value is &lsquo;<samp class="samp">none</samp>&rsquo;.
 </dl>
 
 
-</div>
-<div class="chapter-level-extent" id="See-Also">
-<h2 class="chapter"><span>3 See Also<a class="copiable-link" href="#See-Also"> &para;</a></span></h2>
+<a name="See-Also"></a>
+<h1 class="chapter"><a href="ffmpeg-scaler.html#toc-See-Also">3 See Also</a></h1>
 
-<p><a class="url" href="ffmpeg.html">ffmpeg</a>, <a class="url" href="ffplay.html">ffplay</a>, <a class="url" href="ffprobe.html">ffprobe</a>,
-<a class="url" href="libswscale.html">libswscale</a>
+<p><a href="ffmpeg.html">ffmpeg</a>, <a href="ffplay.html">ffplay</a>, <a href="ffprobe.html">ffprobe</a>,
+<a href="libswscale.html">libswscale</a>
 </p>
 
-</div>
-<div class="chapter-level-extent" id="Authors">
-<h2 class="chapter"><span>4 Authors<a class="copiable-link" href="#Authors"> &para;</a></span></h2>
+<a name="Authors"></a>
+<h1 class="chapter"><a href="ffmpeg-scaler.html#toc-Authors">4 Authors</a></h1>
 
 <p>The FFmpeg developers.
 </p>
 <p>For details about the authorship, see the Git history of the project
-(https://git.ffmpeg.org/ffmpeg), e.g. by typing the command
-<code class="command">git log</code> in the FFmpeg source directory, or browsing the
-online repository at <a class="url" href="https://git.ffmpeg.org/ffmpeg">https://git.ffmpeg.org/ffmpeg</a>.
+(git://source.ffmpeg.org/ffmpeg), e.g. by typing the command
+<code>git log</code> in the FFmpeg source directory, or browsing the
+online repository at <a href="http://source.ffmpeg.org">http://source.ffmpeg.org</a>.
 </p>
 <p>Maintainers for the specific components are listed in the file
-<samp class="file">MAINTAINERS</samp> in the source code tree.
+&lsquo;<tt>MAINTAINERS</tt>&rsquo; in the source code tree.
 </p>
 
-</div>
-</div>
-      <p style="font-size: small;">
-        This document was generated using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.
-      </p>
     </div>
   </body>
 </html>
+

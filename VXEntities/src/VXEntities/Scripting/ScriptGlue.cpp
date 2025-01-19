@@ -214,6 +214,15 @@ namespace Vertex
 		transform2D->w = glm::degrees((*body)->GetAngle());
 	}
 
+	static void Rigidbody2D_GetVelocity(b2Body** body, glm::vec4* transform2D)
+	{
+		const auto& position = (*body)->GetLinearVelocity();
+
+		transform2D->x = position.x;
+		transform2D->y = position.y;
+		transform2D->w = glm::degrees((*body)->GetAngle());
+	}
+
 	static void Rigidbody2D_SetTransform(b2Body** body, glm::vec4* transform2D)
 	{
 		(*body)->SetTransform(b2Vec2(transform2D->x, transform2D->y), glm::radians(transform2D->w));
@@ -317,6 +326,7 @@ namespace Vertex
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_ApplyLinearImpulseToCenter);
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_GetTransform);
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_SetTransform);
+		VX_ADD_INTERNAL_CALL(Rigidbody2D_GetVelocity);
 
 		VX_ADD_INTERNAL_CALL(Object_GenerateUUID);
 	}

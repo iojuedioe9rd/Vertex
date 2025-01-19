@@ -9,6 +9,7 @@
 #include <Vertex/Events/Event.h>
 #include <VXEntities/Scene/EditorCamera.h>
 #include "Panels/ContentBrowserPanel.h"
+#include "Vertex/Renderer/Mesh.h"
 #include <filesystem>
 
 namespace Vertex {
@@ -48,6 +49,9 @@ namespace Vertex {
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
 		OrthographicCameraController m_CameraController;
+
+		Ref<Mesh> m_testMesh;
+		Ref<Shader> m_testShader;
 
 		// Temp
 		Ref<VertexArray> m_SquareVA;

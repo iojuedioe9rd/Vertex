@@ -14,6 +14,16 @@ namespace Vertex
 
         private IntPtr bodyPtr = IntPtr.Zero;
         
+        public Vector2 Velocity
+        {
+            get
+            {
+                Vector4 outV = new Vector4();
+                InternalCalls.Rigidbody2D_GetVelocity(ref bodyPtr, ref outV);
+                return outV.XY;
+            }
+        }
+
 
         public ENTBaseRigidbody2D(string uuid) : base(uuid)
         {

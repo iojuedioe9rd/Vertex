@@ -81,7 +81,7 @@ namespace Vertex {
 
 		GLenum m_InternalFormat, m_DataFormat;
 		
-		const uint16_t m_Frames;
+		uint16_t m_Frames  = 1;
 		float m_FPS = 60;
 		uint16_t m_CurrentFrame = 0;
 		bool m_Looping = false;

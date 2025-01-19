@@ -214,6 +214,8 @@ namespace Vertex {
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
+		
+
 		m_Framebuffer->ClearAttachment(1, -1);
 
 		Ref<Camera> camera;
@@ -231,9 +233,12 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
+					Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), glm::vec4(1.0f));
 
+					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
+					RenderCommand::DisableDepthTesting();
 					Renderer2D::EndScene();
+					RenderCommand::EnableDepthTesting();
 
 					break;
 				}
@@ -283,7 +288,11 @@ namespace Vertex {
 				}
 			}
 
+			
+			Renderer2D::EndScene();
 
+			Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
+			Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), glm::vec4(1.0f));
 			Renderer2D::EndScene();
 		}
 

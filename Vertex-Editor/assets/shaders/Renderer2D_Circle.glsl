@@ -20,6 +20,7 @@ out flat int v_EntityID;
 
 void main()
 {
+
 	v_LocalPosition = a_LocalPosition;
 	v_Color = a_Color;
 	v_Thickness = a_Thickness;

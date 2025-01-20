@@ -37,6 +37,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-bin-int-
 
+    - name: Prepare Vulkan SDK
+    uses: humbletim/setup-vulkan-sdk@v1.2.0
+    with:
+      vulkan-query-version: 1.3.216.0
+      vulkan-components: Vulkan-Headers, Vulkan-Loader, Glslang, SPIRV-Cross, SPIRV-Tools, SPIRV-Reflect, SPIRV-Headers
+      vulkan-use-cache: true
+
     - name: Install Premake (if not cached)
       if: steps.premake.outputs.cache-hit != 'true'
       uses: Jarod42/install-premake5@v1

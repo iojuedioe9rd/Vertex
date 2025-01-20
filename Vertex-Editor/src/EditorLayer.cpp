@@ -173,13 +173,13 @@ namespace Vertex {
 				20, 21, 22, 22, 23, 20
 			}, textures));
 
-		m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
+		//m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
 
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
-		m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
+		//m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
 
-		OpenScene();
+		OpenScene("assets/scenes/Physics2D.vertex");
 	}
 
 	float t = 0.0f;
@@ -233,7 +233,10 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), glm::vec4(1.0f));
+					Renderer2D::TextParams textParams;
+					textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+
+					Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
 
 					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
 					RenderCommand::DisableDepthTesting();
@@ -270,6 +273,7 @@ namespace Vertex {
 			if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 			{
 				int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+				if (pixelData == -1) return;
 				m_HoveredEntity = nullptr;
 				for (Entity* ent : *m_ActiveScene)
 				{
@@ -292,17 +296,20 @@ namespace Vertex {
 			Renderer2D::EndScene();
 
 			Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
-			Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), glm::vec4(1.0f));
+			Renderer2D::TextParams textParams;
+			textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+
+			Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
 			Renderer2D::EndScene();
 		}
 
 		RenderCommand::DisableDepthTesting();
 
-		m_testShader->Bind();
-		m_testShader->UploadUniformFloat4("lightColor", glm::vec4(1));
-		m_testShader->UploadUniformMat4("camMatrix", m_EditorCamera.GetViewMatrix());
-		m_testShader->UploadUniformMat4("model", glm::mat4(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
-		m_testMesh->Draw(m_testShader);
+		//m_testShader->Bind();
+		//m_testShader->UploadUniformFloat4("lightColor", glm::vec4(1));
+		//m_testShader->UploadUniformMat4("camMatrix", m_EditorCamera.GetViewMatrix());
+		//m_testShader->UploadUniformMat4("model", glm::mat4(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
+		//m_testMesh->Draw(m_testShader);
 
 		RenderCommand::EnableDepthTesting();
 
@@ -389,7 +396,7 @@ namespace Vertex {
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-		ImGui::Image((ImTextureID)m_Font->GetAtlasTexture()->GetRendererID(), { 512,512 }, { 0, 1 }, { 1, 0 });
+		ImGui::Image((ImTextureID)Font::GetDefault()->GetAtlasTexture()->GetRendererID(), {512,512}, {0, 1}, {1, 0});
 		ImGui::Text("FPS: %d", static_cast<int>(std::round(Time::GetFPS())));
 
 		if (true)

@@ -1,3 +1,5 @@
+VULKAN_SDK = os.getenv("VULKAN_SDK")
+
 IncludeDir = {}
 IncludeDir["spdlog"] = "%{wks.location}/Engine/vendor/spdlog/include"
 IncludeDir["GLFW"] = "%{wks.location}/Engine/vendor/GLFW/include"
@@ -14,10 +16,13 @@ IncludeDir["filewatch"] = "%{wks.location}/Engine/vendor/filewatch"
 IncludeDir["ffmpeg"] = "%{wks.location}/Engine/vendor/ffmpeg/include"
 IncludeDir["msdfgen"] = "%{wks.location}/Engine/vendor/msdf-atlas-gen/msdfgen"
 IncludeDir["msdf_atlas_gen"] = "%{wks.location}/Engine/vendor/msdf-atlas-gen/msdf-atlas-gen"
+IncludeDir["SPIRV_Cross"] = "%{wks.location}/Engine/vendor/SPIRV-Cross"
+IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 
 LibraryDir = {}
 LibraryDir["mono"] = "%{wks.location}/Engine/vendor/mono/lib/%{cfg.buildcfg}"
 LibraryDir["ffmpeg"] = "%{wks.location}/Engine/vendor/ffmpeg/lib"
+LibraryDir["VulkanSDK"] = "%{VULKAN_SDK}/Lib"
 LibraryDir["ffmpeg_cpp"] = "%{wks.location}/Engine/vendor/ffmpeg-cpp/lib/%{cfg.buildcfg}"
 
 Library = {}
@@ -33,3 +38,15 @@ Library["ffmpegPostproc"] = "%{LibraryDir.ffmpeg}/postproc.lib"
 
 Library["ffmpegSwresample"] = "%{LibraryDir.ffmpeg}/swresample.lib"
 Library["ffmpegSwscale"] = "%{LibraryDir.ffmpeg}/swscale.lib"
+
+Library["Vulkan"] = "%{LibraryDir.VulkanSDK}/vulkan-1.lib"
+Library["VulkanUtils"] = "%{LibraryDir.VulkanSDK}/VkLayer_utils.lib"
+
+Library["ShaderC_Debug"] = "%{LibraryDir.VulkanSDK}/shaderc_sharedd.lib"
+Library["SPIRV_Cross_Debug"] = "%{LibraryDir.VulkanSDK}/spirv-cross-cored.lib"
+Library["SPIRV_Cross_GLSL_Debug"] = "%{LibraryDir.VulkanSDK}/spirv-cross-glsld.lib"
+Library["SPIRV_Tools_Debug"] = "%{LibraryDir.VulkanSDK}/SPIRV-Toolsd.lib"
+
+Library["ShaderC_Release"] = "%{LibraryDir.VulkanSDK}/shaderc_shared.lib"
+Library["SPIRV_Cross_Release"] = "%{LibraryDir.VulkanSDK}/spirv-cross-core.lib"
+Library["SPIRV_Cross_GLSL_Release"] = "%{LibraryDir.VulkanSDK}/spirv-cross-glsl.lib"

@@ -27,11 +27,11 @@ namespace Vertex
 
 		if (texture)
 		{
-			Renderer2D::DrawMatrix(mat, texture, tilingFactor, colour, id);
+			Renderer2D::DrawQuad(mat, texture, tilingFactor, colour, id);
 		}
 		else
 		{
-			Renderer2D::DrawMatrix(mat, colour, id);
+			Renderer2D::DrawQuad(mat, colour, id);
 		}
 
 	}

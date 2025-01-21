@@ -1,7 +1,8 @@
 Scene: Untitled
 Entities:
-  - Entity: ks6x-16-tk-4h-3b0v5o-ag5165l-v6-m5-fe-2oxb3i-4bi
+  - Entity: t5o-pk-a-r3-nfx320-4nvaky4-0o-dx-xm-eb09ma-qre
     Tag: Floor
+    IntID: 14581472320597378355
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, 0, 0]
@@ -20,8 +21,9 @@ Entities:
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1
-  - Entity: 7b1f-qh-zx-d8-osc54i-z13bdrp-t0-zi-b6-g7nnnb-nih
+  - Entity: o4xs-oi-80-lo-chkeq-9rznsr-94-op-hl-3egxsp-935
     Tag: Cam
+    IntID: 12996046433856257756
     EntityType: point_camera_2d
     Transform:
       Translation: [0, 4.30000019, 0]
@@ -37,8 +39,9 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: t9ql-fh-01-p8-m628e-49d77cs-k4-i0-qs-75l71x-zao
+  - Entity: 6e81-h0-o3-5d-ithdqt-0zps36m-b3-9h-xl-tzq535-n13
     Tag: Script
+    IntID: 6460611368926981458
     EntityType: env_script
     Transform:
       Translation: [0, 4.19999981, 0]
@@ -50,8 +53,9 @@ Entities:
         - Name: Speed
           Type: Float
           Data: 10
-  - Entity: e2oe-k3-ah-86-m506i8-6cxxsv-o-6i-xv-y3at7l-l4t
+  - Entity: oabt-iz-x0-c4-1tf8e7-kntini-x9-e6-q4-hy7ohv-03
     Tag: lol
+    IntID: 421511196564883140
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, -2.4000001, 0]
@@ -70,3 +74,25 @@ Entities:
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1
+  - Entity: 6c7v-gl-i6-7a-vs0rlq-ytx27n2-48-4v-ay-blixn0-hfi
+    Tag: Circle
+    IntID: 14968130451047524200
+    EntityType: prop_2d_circle
+    Transform:
+      Translation: [0, 1.39999998, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    Prop2DCircle:
+      Colour: [0.72941184, 1, 0, 1]
+      Thickness: 0.300000012
+      Fade: 0.115999997

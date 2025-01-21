@@ -8,6 +8,7 @@ namespace Vertex {
 	{
 	private:
 		UUID m_id;
+		IntUUID m_intUUID;
 
 	public:
 		bool operator==(const Object& other) const {
@@ -16,10 +17,11 @@ namespace Vertex {
 
 		Object();
 		UUID GetID();
+		IntUUID GetIntID();
 		void Destroy();
 		void RegenID();
 		void SetID(UUID id);
-
+		void SetID(IntUUID intUUID);
 	private:
 		
 		friend class SceneSerializer;

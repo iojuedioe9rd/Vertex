@@ -3,6 +3,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "VXEntities.h"
 #include <VXEntities/Scripting/ScriptEngine.h>
+#include <VXEntities/Scene/Entities/prop_text/prop_text.h>
 
 #define ImGuiTreeNodeFlags_Selected 1
 #define ImGuiTreeNodeFlags_OpenOnArrow 128
@@ -105,6 +106,16 @@ namespace Vertex {
 				{
 					ENTPointCamera2D* cam = &m_Context->CreateEntity<ENTPointCamera2D>(tag);
 					cam->isPrimary = false;
+				}
+
+				if (type == "prop_2d_circle")
+				{
+					m_Context->CreateEntity<ENTProp2DCircle>(tag);
+				}
+
+				if (type == "prop_text_2d")
+				{
+					m_Context->CreateEntity<ENTPropText2D>(tag);
 				}
 			}
 
@@ -326,6 +337,32 @@ namespace Vertex {
 		}
 	}
 
+	void DrawProp2DCircleImGui(ENTProp2DCircle* ent)
+	{
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTProp2DCircle).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Prop 2D Circle"))
+		{
+			ImGui::ColorEdit4("Color", glm::value_ptr(ent->colour));
+			ImGui::DragFloat("Thickness", &ent->Thickness, 0.025f, 0.0f, 1.0f);
+			ImGui::DragFloat("Fade", &ent->Fade, 0.00025f, 0.0f, 1.0f);
+			ImGuiLink::TreePop();
+		}
+	}
+
+	void DrawPropText2DImGui(ENTPropText2D* ent)
+	{
+		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTPropText2D).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Prop Text 2D"))
+		{
+			if (ImGui::InputTextMultiline("Text String", ent->imgui_text_data, 255))
+			{
+				ent->text = std::string(ent->imgui_text_data);
+			}
+			ImGui::ColorEdit4("Color", glm::value_ptr(ent->textParams.Color));
+			ImGui::DragFloat("Kerning", &ent->textParams.Kerning, 0.025f);
+			ImGui::DragFloat("Line Spacing", &ent->textParams.LineSpacing, 0.025f);
+			ImGuiLink::TreePop();
+		}
+	}
+
 	void DrawBoxCollider2DImGui(ENTBaseBoxCollier2D* ent)
 	{
 		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTBaseBoxCollier2D).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Box Collider 2D"))
@@ -530,6 +567,10 @@ namespace Vertex {
 		}
 
 		if (entity->GetEntName() == "env_script") { DrawEnvScript((ENTEnvScript*)entity, m_Context); }
+
+		if (entity->GetEntName() == "prop_2d_circle") { DrawProp2DCircleImGui((ENTProp2DCircle*)entity); }
+
+		if (entity->GetEntName() == "prop_text_2d") { DrawPropText2DImGui((ENTPropText2D*)entity); }
 
 	}
 #pragma endregion

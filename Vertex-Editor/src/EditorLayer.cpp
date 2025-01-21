@@ -253,6 +253,13 @@ namespace Vertex {
 					{
 						Renderer2D::BeginScene(cam->GetProjection(), p_cam);
 						m_ActiveScene->OnUpdateRuntime(ts);
+						Renderer2D::TextParams textParams;
+						textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+
+						Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+
+						Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
+
 						Renderer2D::EndScene();
 					}
 					
@@ -283,7 +290,7 @@ namespace Vertex {
 						id += c;
 					}
 
-					if (id == pixelData)
+					if (ent->GetIntID() == pixelData)
 					{
 						VX_INFO("m_HoveredEntity is ", ent->name().c_str());
 						m_HoveredEntity = ent;
@@ -296,10 +303,8 @@ namespace Vertex {
 			Renderer2D::EndScene();
 
 			Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
-			Renderer2D::TextParams textParams;
-			textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
-
-			Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+			
+			
 			Renderer2D::EndScene();
 		}
 
@@ -410,7 +415,7 @@ namespace Vertex {
 			ImGuiLink::Separator();
 
 		}
-		ImGuiLink::ColorEdit3("Camera Transform", glm::value_ptr(m_CameraEntity->pos));
+		//ImGuiLink::ColorEdit3("Camera Transform", glm::value_ptr(m_CameraEntity->pos));
 
 		if (ImGuiLink::Checkbox("Camera A", &m_PrimaryCamera))
 		{
@@ -597,6 +602,7 @@ namespace Vertex {
 			OnSceneStop();
 
 		NewScene();
+
 		SceneSerializer serializer(&m_EditorScene);
 		if(serializer.Deserialize(path.string()));
 		{
@@ -606,6 +612,7 @@ namespace Vertex {
 			m_ActiveScene = m_EditorScene;
 			m_EditorScenePath = path;
 		}
+		m_EditorScene->CreateEntity< ENTProp2DCircle>("Circle");
 	}
 
 	void EditorLayer::SaveScene()

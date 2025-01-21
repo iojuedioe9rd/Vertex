@@ -10,6 +10,14 @@
 #include "Vertex/Object/SerializationObject.h"
 #include "SceneSerializer.h"
 
+
+
+#define VX_ENT_GET_ENT_NAME_DEF(ent_name) \
+virtual std::string GetEntName()  override\
+{\
+	return #ent_name;\
+}\
+
 namespace Vertex {
 
 
@@ -22,6 +30,8 @@ namespace Vertex {
 		{
 			m_name = name;
 			m_Scene = scene;
+
+			
 		}
 		Entity(const Entity& other) = default;
 

@@ -14,6 +14,7 @@
 #include <imgui_internal.h>
 #include <VXEntities/Scripting/ScriptEngine.h>
 #include <Vertex/Animation/AnimationLoader.h>
+#include <Vertex/Renderer/Font.h>
 
 
 
@@ -72,7 +73,9 @@ namespace Vertex {
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
+		m_EditorScene = VXEntities_MakeOrGetScene("EditorScene");
 
+		
 		auto commandLineArgs = Application::Get().GetCommandLineArgs();
 		if (commandLineArgs.Count > 1)
 		{
@@ -81,31 +84,36 @@ namespace Vertex {
 			OpenScene(sceneFilePath);
 			m_EditorScene = m_ActiveScene;
 		}
+		else
+		{
+			m_ActiveScene = m_EditorScene;
+			auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
+
+			m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
+
+			m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
+
+			m_CameraEntity->isPrimary = true;
+
+			m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
+
+			m_SecondCamera->isPrimary = false;
+
+
+
+
+			square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+			square.SetIsVisible(true);
+
+			m_SquareEntity = square;
+			m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+		}
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 		// Entity
 
-		auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
 		
-		m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
-		
-		m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
-		
-		m_CameraEntity->isPrimary = true;
-
-		m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
-		
-		m_SecondCamera->isPrimary = false;
-
-		
-
-		
-		square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
-		square.SetIsVisible(true);
-
-		m_SquareEntity = square;
-		m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
@@ -165,11 +173,13 @@ namespace Vertex {
 				20, 21, 22, 22, 23, 20
 			}, textures));
 
-		m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
+		//m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
 
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
-		OpenScene();
+		//m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
+
+		OpenScene("assets/scenes/Physics2D.vertex");
 	}
 
 	float t = 0.0f;
@@ -185,6 +195,8 @@ namespace Vertex {
 		{
 
 		}
+
+		
 		
 		
 		t += ts;
@@ -201,6 +213,8 @@ namespace Vertex {
 		m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
+
+		
 
 		m_Framebuffer->ClearAttachment(1, -1);
 
@@ -219,9 +233,15 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
+					Renderer2D::TextParams textParams;
+					textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
 
+					Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+
+					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
+					RenderCommand::DisableDepthTesting();
 					Renderer2D::EndScene();
+					RenderCommand::EnableDepthTesting();
 
 					break;
 				}
@@ -233,6 +253,13 @@ namespace Vertex {
 					{
 						Renderer2D::BeginScene(cam->GetProjection(), p_cam);
 						m_ActiveScene->OnUpdateRuntime(ts);
+						Renderer2D::TextParams textParams;
+						textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+
+						Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+
+						Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
+
 						Renderer2D::EndScene();
 					}
 					
@@ -253,6 +280,7 @@ namespace Vertex {
 			if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 			{
 				int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+				if (pixelData == -1) return;
 				m_HoveredEntity = nullptr;
 				for (Entity* ent : *m_ActiveScene)
 				{
@@ -262,7 +290,7 @@ namespace Vertex {
 						id += c;
 					}
 
-					if (id == pixelData)
+					if (ent->GetIntID() == pixelData)
 					{
 						VX_INFO("m_HoveredEntity is ", ent->name().c_str());
 						m_HoveredEntity = ent;
@@ -271,17 +299,22 @@ namespace Vertex {
 				}
 			}
 
+			
+			Renderer2D::EndScene();
 
+			Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
+			
+			
 			Renderer2D::EndScene();
 		}
 
 		RenderCommand::DisableDepthTesting();
 
-		m_testShader->Bind();
-		m_testShader->UploadUniformFloat4("lightColor", glm::vec4(1));
-		m_testShader->UploadUniformMat4("camMatrix", m_EditorCamera.GetViewMatrix());
-		m_testShader->UploadUniformMat4("model", glm::mat4(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
-		m_testMesh->Draw(m_testShader);
+		//m_testShader->Bind();
+		//m_testShader->UploadUniformFloat4("lightColor", glm::vec4(1));
+		//m_testShader->UploadUniformMat4("camMatrix", m_EditorCamera.GetViewMatrix());
+		//m_testShader->UploadUniformMat4("model", glm::mat4(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
+		//m_testMesh->Draw(m_testShader);
 
 		RenderCommand::EnableDepthTesting();
 
@@ -368,7 +401,7 @@ namespace Vertex {
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
+		ImGui::Image((ImTextureID)Font::GetDefault()->GetAtlasTexture()->GetRendererID(), {512,512}, {0, 1}, {1, 0});
 		ImGui::Text("FPS: %d", static_cast<int>(std::round(Time::GetFPS())));
 
 		if (true)
@@ -382,7 +415,7 @@ namespace Vertex {
 			ImGuiLink::Separator();
 
 		}
-		ImGuiLink::ColorEdit3("Camera Transform", glm::value_ptr(m_CameraEntity->pos));
+		//ImGuiLink::ColorEdit3("Camera Transform", glm::value_ptr(m_CameraEntity->pos));
 
 		if (ImGuiLink::Checkbox("Camera A", &m_PrimaryCamera))
 		{
@@ -542,13 +575,15 @@ namespace Vertex {
 		m_EditorScene = m_ActiveScene;
 	}
 
-	void EditorLayer::OpenScene()
+	bool EditorLayer::OpenScene()
 	{
 		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
 		if (!filepath.empty())
 		{
 			OpenScene(filepath);
+			return true;
 		}
+		return false;
 	}
 
 	void EditorLayer::SaveSceneAs()
@@ -567,6 +602,7 @@ namespace Vertex {
 			OnSceneStop();
 
 		NewScene();
+
 		SceneSerializer serializer(&m_EditorScene);
 		if(serializer.Deserialize(path.string()));
 		{
@@ -576,6 +612,7 @@ namespace Vertex {
 			m_ActiveScene = m_EditorScene;
 			m_EditorScenePath = path;
 		}
+		m_EditorScene->CreateEntity< ENTProp2DCircle>("Circle");
 	}
 
 	void EditorLayer::SaveScene()

@@ -5,14 +5,14 @@
 
 namespace Vertex {
 
-	class ENTProp2DCircle : public Entity
+	class ENTProp2DCircle : public ENTBaseBoxCollier2D
 	{
 	public:
 		ENTProp2DCircle()
 		{
 
 		}
-		ENTProp2DCircle(std::string name, Scene* scene) : Entity(name, scene)
+		ENTProp2DCircle(std::string name, Scene* scene) : ENTBaseBoxCollier2D(name, scene)
 		{
 
 		}

@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 
 #include "Entity.h"
+#include "Entities/Entities.h"
 #include "Entities/point_camera_2d/point_camera_2d.h"
 #include "../Scripting/ScriptEngine.h"
 #include <glm/ext/matrix_transform.hpp>
@@ -415,7 +416,7 @@ namespace Vertex {
 	template<typename EntityType>
 	static void CopyEntity(EntityType* ent, Scene* scene, bool haveSameUUID)
 	{
-		if (!dynamic_cast<Entity*>(ent) || !dynamic_cast<EntityType*>(ent))
+		if (!dynamic_cast<Entity*>(ent))
 		{
 			return;
 		}
@@ -429,7 +430,22 @@ namespace Vertex {
 				newEnt->SetID(ent->GetID());
 			}
 		}
-		
+	}
+
+	template<typename... ENT>
+	static void CopyEntity(Scene* other, Scene* newScene)
+	{
+		(void(std::for_each(other->begin(), other->end(), [&](Entity* ent) {
+			CopyEntity(dynamic_cast<ENT*>(ent), newScene, true);
+			})), ...);
+	}
+
+	template<typename... ENT>
+	static void CopyEntityWithGroup(Scene* other, Scene* newScene, EntityGroup<ENT...>)
+	{
+		VX_CORE_INFO("Registering Entities");
+		CopyEntity<ENT...>(other, newScene);
+		VX_CORE_INFO("~Registering Entities");
 	}
 
 	Scene* Scene::Copy(Scene* other, std::string& name)
@@ -439,17 +455,9 @@ namespace Vertex {
 		newScene->m_ViewportWidth = other->m_ViewportWidth;
 		newScene->m_ViewportHeight = other->m_ViewportHeight;
 
-		for (Entity* ent: *other)
-		{
-			CopyEntity<ENTPropStaticSprite>(dynamic_cast<ENTPropStaticSprite*>(ent), newScene, true);
-			CopyEntity<ENTPropDynamicSprite>(dynamic_cast<ENTPropDynamicSprite*>(ent), newScene, true);
-			CopyEntity<ENTProp2DCircle>(dynamic_cast<ENTProp2DCircle*>(ent), newScene, true);
-			CopyEntity<ENTPointCamera2D>(dynamic_cast<ENTPointCamera2D*>(ent), newScene, true);
-			CopyEntity<ENTEnvStaticTilemap>(dynamic_cast<ENTEnvStaticTilemap*>(ent), newScene, true);
-			CopyEntity<ENTEnvScript>(dynamic_cast<ENTEnvScript*>(ent), newScene, true);
-		}
+		CopyEntityWithGroup(other, newScene, AllEntities{});
 
 		return newScene;
+        
 	}
-
-}
+};

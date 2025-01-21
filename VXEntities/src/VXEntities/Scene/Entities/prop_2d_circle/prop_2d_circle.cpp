@@ -14,14 +14,10 @@ namespace Vertex
 
 	void ENTProp2DCircle::Draw(Timestep& ts)
 	{
-		int id = 0;
-		for (char c : GetID())
-		{
-			id += c;
-		}
+		
 		glm::mat4 mat = Math::ComposeTransform(pos, size, rotation);
 
-		Renderer2D::DrawCircle(mat, colour, Thickness, Fade, id);
+		Renderer2D::DrawCircle(mat, colour, Thickness, Fade, GetIntID());
 		
 	}
 }

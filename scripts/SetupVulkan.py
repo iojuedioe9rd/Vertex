@@ -15,26 +15,27 @@ class VulkanConfiguration:
 
     @classmethod
     def Validate(cls):
-        if (not cls.CheckVulkanSDK()):
+        if not cls.CheckVulkanSDK():
             print("Vulkan SDK not installed correctly.")
             return
             
-        if (not cls.CheckVulkanSDKDebugLibs()):
+        if not cls.CheckVulkanSDKDebugLibs():
             print("\nNo Vulkan SDK debug libs found. Install Vulkan SDK with debug libs.")
             print("(see docs.hazelengine.com/GettingStarted for more info).")
             print("Debug configuration disabled.")
+    
 
     @classmethod
     def CheckVulkanSDK(cls):
         vulkanSDK = os.environ.get("VULKAN_SDK")
-        if (vulkanSDK is None):
+        if vulkanSDK is None:
             print("\nYou don't have the Vulkan SDK installed!")
             cls.__InstallVulkanSDK()
             return False
         else:
             print(f"\nLocated Vulkan SDK at {vulkanSDK}")
 
-        if (cls.requiredVulkanVersion not in vulkanSDK):
+        if cls.requiredVulkanVersion not in vulkanSDK:
             print(f"You don't have the correct Vulkan SDK version! (Engine requires {cls.requiredVulkanVersion})")
             cls.__InstallVulkanSDK()
             return False
@@ -51,7 +52,7 @@ class VulkanConfiguration:
                 return
             permissionGranted = (reply == 'y')
 
-        vulkanInstallURL = f"https://sdk.lunarg.com/sdk/download/{cls.installVulkanVersion}/windows/VulkanSDK-{cls.installVulkanVersion}-Installer.exe"
+        vulkanInstallURL = f"https://web.archive.org/web/20221227084016/https://sdk.lunarg.com/sdk/download/1.3.216.0/windows/VulkanSDK-1.3.216.0-Installer.exe"
         vulkanPath = f"{cls.vulkanDirectory}/VulkanSDK-{cls.installVulkanVersion}-Installer.exe"
         print("Downloading {0:s} to {1:s}".format(vulkanInstallURL, vulkanPath))
         Utils.DownloadFile(vulkanInstallURL, vulkanPath)

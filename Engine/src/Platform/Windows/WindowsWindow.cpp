@@ -153,6 +153,15 @@ namespace Vertex {
 			data.EventCallback(event);
 		});
 
+		glfwSetDropCallback(m_Window, [](GLFWwindow* window, int pathCount, const char* paths[])
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			std::vector<std::filesystem::path> filepaths(pathCount);
+			for (int i = 0; i < pathCount; i++)
+				filepaths[i] = paths[i];
+			WindowDropEvent* event = new WindowDropEvent(std::move(filepaths));
+			data.EventCallback(event);
+		});
 
 		
 	}

@@ -6,6 +6,7 @@
 #include "prop_dynamic_sprite/prop_dynamic_sprite.h"
 #include "prop_2d_circle/prop_2d_circle.h"
 #include "env_script/env_script.h"
+#include "prop_text/prop_text.h"
 
 namespace Vertex
 {
@@ -17,5 +18,5 @@ namespace Vertex
 	using AllEntities =
 		EntityGroup<ENTPropDynamicSprite,
 		ENTPropStaticSprite, ENTEnvStaticTilemap, ENTEnvScript,
-		ENTPointCamera2D>;
+		ENTPointCamera2D, ENTProp2DCircle, ENTPropText2D>;
 }

@@ -46,7 +46,10 @@ project "Engine"
 		"%{IncludeDir.entt}",
 		"vendor/simple_ecs",
 		"%{IncludeDir.imguizmo}",
-		"%{IncludeDir.ffmpeg}"
+		"%{IncludeDir.ffmpeg}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}",
+		"%{IncludeDir.VulkanSDK}"
 		
 	}
 	
@@ -58,6 +61,8 @@ project "Engine"
 		"zlib",
 		"Checksum",
 		"ImGuizmo",
+		"msdf-atlas-gen",
+		"msdfgen",
 		
 		
 		
@@ -96,9 +101,11 @@ project "Engine"
 
 		links
 		{
-			
+			"%{Library.ShaderC_Debug}",
+			"%{Library.SPIRV_Cross_Debug}",
+			"%{Library.SPIRV_Cross_GLSL_Debug}"
 		}
-
+		
 	filter "configurations:Release"
 		defines "VX_RELEASE"
 		runtime "Release"
@@ -107,17 +114,21 @@ project "Engine"
 
 		links
 		{
-
+			"%{Library.ShaderC_Release}",
+			"%{Library.SPIRV_Cross_Release}",
+			"%{Library.SPIRV_Cross_GLSL_Release}"
 		}
 
 	filter "configurations:Dist"
 		defines "VX_DIST"
 		runtime "Release"
 		symbols "off"
-		optimize "full"
+		optimize "speed"
 
 		links
 		{
-			
+			"%{Library.ShaderC_Release}",
+			"%{Library.SPIRV_Cross_Release}",
+			"%{Library.SPIRV_Cross_GLSL_Release}"
 		}
 	

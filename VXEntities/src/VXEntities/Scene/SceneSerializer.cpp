@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "../../VXEntities.h"
 #include "../Scripting/ScriptEngine.h"
+#include "Entities/prop_text/prop_text.h"
 
 extern "C" uint64_t CustomChecksumAsm(const char* data, uint64_t length, uint64_t initialSeed, uint64_t rotateAmount, uint64_t additiveFactor, uint64_t rotateCount);
 
@@ -154,6 +155,7 @@ namespace Vertex {
 		out << YAML::Key << "Entity" << YAML::Value << sanitizeID(entity->GetID());
 
 		out << YAML::Key << "Tag" << YAML::Value << entity->name();
+		out << YAML::Key << "IntID" << YAML::Value << entity->GetIntID().operator uint64_t();
 		out << YAML::Key << "EntityType" << YAML::Value << entity->GetEntName();
 
 		out << YAML::Key << "Transform";
@@ -187,6 +189,27 @@ namespace Vertex {
 			out << YAML::Key << "RestitutionThreshold" << YAML::Value << bc2d->RestitutionThreshold;
 
 			out << YAML::EndMap; // Base Box Collier2D
+		}
+
+		if (auto pt2d = dynamic_cast<ENTPropText*>(entity))
+		{
+			out << YAML::Key << "ENTPropText";
+			out << YAML::BeginMap; // ENT Prop Text
+
+			out << YAML::Key << "Text" << YAML::Value << pt2d->text;
+			//glm::vec4 Color{ 1.0f };
+			//float Kerning = 0.0f;
+			//float LineSpacing = 0.0f;
+			out << YAML::Key << "TextParams";
+			out << YAML::BeginMap; // TextParams
+
+			out << YAML::Key << "Color" << YAML::Value << pt2d->textParams.Color;
+			out << YAML::Key << "Kerning" << YAML::Value << pt2d->textParams.Kerning;
+			out << YAML::Key << "LineSpacing" << YAML::Value << pt2d->textParams.LineSpacing;
+
+			out << YAML::EndMap; // TextParams
+
+			out << YAML::EndMap; // ENT Prop Text
 		}
 
 		if (entity->GetEntName() == "prop_static_sprite")
@@ -320,6 +343,18 @@ namespace Vertex {
 			out << YAML::EndMap;
 		}
 
+		if (entity->GetEntName() == "prop_2d_circle")
+		{
+			ENTProp2DCircle* circle = static_cast<ENTProp2DCircle*>(entity);
+			VX_CORE_ASSERT(circle != nullptr, "circle is null!");
+			out << YAML::Key << "Prop2DCircle";
+			out << YAML::BeginMap;
+			out << YAML::Key << "Colour" << YAML::Value << circle->colour;
+			out << YAML::Key << "Thickness" << YAML::Value << circle->Thickness;
+			out << YAML::Key << "Fade" << YAML::Value << circle->Fade;
+			out << YAML::EndMap;
+		}
+
 		out << YAML::EndMap; // Entity
 
 		
@@ -397,6 +432,14 @@ namespace Vertex {
 			{
 				entity = &m_Scene->CreateEntity<ENTPropStaticSprite>(entityID);
 			}
+			if (entityType == "prop_2d_circle")
+			{
+				entity = &m_Scene->CreateEntity<ENTProp2DCircle>(entityID);
+			}
+			if (entityType == "prop_text_2d")
+			{
+				entity = &m_Scene->CreateEntity<ENTPropText2D>(entityID);
+			}
 			if (entityType == "prop_dynamic_sprite")
 			{
 				entity = &m_Scene->CreateEntity<ENTPropDynamicSprite>(entityID);
@@ -429,6 +472,10 @@ namespace Vertex {
 		
 		std::string tag = node["Tag"].as<std::string>();
 		
+		if (node["IntID"])
+		{
+			entity->SetID(node["IntID"].as<uint64_t>());
+		}
 
 		if (node["Transform"]) {
 			auto transformNode = node["Transform"];
@@ -443,6 +490,50 @@ namespace Vertex {
 			if (transformNode["Rotation"]) {
 				glm::vec3 rotation = transformNode["Rotation"].as<glm::vec3>();
 				entity->rotation = rotation; // Assuming you have a rotation attribute
+			}
+		}
+
+		/*if (auto pt2d = dynamic_cast<ENTPropText*>(entity))
+		{
+			out << YAML::Key << "ENTPropText";
+			out << YAML::BeginMap; // ENT Prop Text
+
+			out << YAML::Key << "Text" << YAML::Value << pt2d->text;
+			//glm::vec4 Color{ 1.0f };
+			//float Kerning = 0.0f;
+			//float LineSpacing = 0.0f;
+			out << YAML::Key << "TextParams";
+			out << YAML::BeginMap; // TextParams
+
+			out << YAML::Key << "Color" << YAML::Value << pt2d->textParams.Color;
+			out << YAML::Key << "Kerning" << YAML::Value << pt2d->textParams.Kerning;
+			out << YAML::Key << "LineSpacing" << YAML::Value << pt2d->textParams.LineSpacing;
+
+			out << YAML::EndMap; // TextParams
+
+			out << YAML::EndMap; // ENT Prop Text
+		}*/
+
+		if (auto pt = dynamic_cast<ENTPropText*>(entity))
+		{
+			auto ptNode = node["ENTPropText"];
+
+			if (ptNode)
+			{
+				pt->text = node["Text"].as<std::string>();
+
+				auto TextParamsNode = ptNode["TextParams"];
+
+				if (TextParamsNode)
+				{
+					//out << YAML::Key << "Color" << YAML::Value << pt2d->textParams.Color;
+					//out << YAML::Key << "Kerning" << YAML::Value << pt2d->textParams.Kerning;
+					//out << YAML::Key << "LineSpacing" << YAML::Value << pt2d->textParams.LineSpacing;
+
+					pt->textParams.Color = TextParamsNode["Color"].as<glm::vec4>();
+					pt->textParams.Kerning = TextParamsNode["Kerning"].as<float>();
+					pt->textParams.LineSpacing = TextParamsNode["LineSpacing"].as<float>();
+				}
 			}
 		}
 
@@ -473,7 +564,22 @@ namespace Vertex {
 		}
 
 		// Deserialization for specific entity types
-		if (entity->GetEntName() == "prop_static_sprite") {
+		if (entity->GetEntName() == "prop_2d_circle") {
+			auto prop2DCircle = node["Prop2DCircle"];
+			ENTProp2DCircle* circle = static_cast<ENTProp2DCircle*>(entity);
+			if (prop2DCircle && prop2DCircle["Colour"]) {
+				circle->colour = prop2DCircle["Colour"].as<glm::vec4>(); // Assuming colour is a glm::vec4
+			}
+			if (prop2DCircle && prop2DCircle["Thickness"]) {
+				circle->Thickness = prop2DCircle["Thickness"].as<float>(); // Assuming colour is a glm::vec4
+			}
+			if (prop2DCircle && prop2DCircle["Fade"]) {
+				circle->Fade = prop2DCircle["Fade"].as<float>(); // Assuming colour is a glm::vec4
+			}
+		}
+
+		if (entity->GetEntName() == "prop_static_sprite")
+		{
 			auto propStaticSpriteNode = node["PropStaticSprite"];
 			ENTPropStaticSprite* sprite = static_cast<ENTPropStaticSprite*>(entity);
 			if (propStaticSpriteNode && propStaticSpriteNode["Colour"]) {
@@ -484,7 +590,6 @@ namespace Vertex {
 			if (propStaticSpriteNode && propStaticSpriteNode["TilingFactor"])
 				sprite->tilingFactor = propStaticSpriteNode["TilingFactor"].as<float>();
 		}
-
 
 		if (entity->GetEntName() == "prop_dynamic_sprite") {
 			auto propDynamicSpriteNode = node["PropDynamicSprite"];

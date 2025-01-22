@@ -41,7 +41,7 @@ namespace Vertex {
         spec.Format = ImageFormat::RGB8;
         spec.GenerateMips = true;  // Enable mipmaps for better scaling
         Ref<Texture2D> texture = Texture2D::Create(spec);
-        texture->SetData((void*)bitmap.pixels, bitmap.width * bitmap.height * N);
+        texture->SetData(new Buffer((void*)bitmap.pixels, bitmap.width * bitmap.height * 3));
         texture->ToFile("test.png");  // Optionally save the atlas as a file
         return texture;
     }

@@ -256,7 +256,7 @@ namespace Vertex {
 						Renderer2D::TextParams textParams;
 						textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
 
-						Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+						Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f * sin(Time::GetTime())), textParams);
 
 						Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
 

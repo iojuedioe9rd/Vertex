@@ -44,42 +44,7 @@ namespace Vertex
 		}
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification)
-		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
-	{
-		// Set data format and internal format based on the specification
-		m_DataFormat = Utils::VertexImageFormatToGLDataFormat(m_Specification.Format);
-		m_InternalFormat = Utils::VertexImageFormatToGLInternalFormat(m_Specification.Format);
-
-		// Create the texture object
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-
-		// Allocate storage for the texture with a specified internal format
-		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
-
-		// Set texture filtering (linear for minification, nearest for magnification)
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);  // GL_LINEAR_MIPMAP_LINEAR if mipmaps are used
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		// Set texture wrapping modes
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-		// If mipmaps are to be used, generate them now
-		if (m_Specification.GenerateMips) {
-			glGenerateTextureMipmap(m_RendererID);
-		}
-
-		// Optional: set pixel storage mode (if necessary)
-		// glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Example if needed
-
-		// Error checking: optional for development mode
-		GLenum err = glGetError();
-		if (err != GL_NO_ERROR) {
-			// Handle error (you can log or throw exceptions as needed)
-			VX_CORE_ERROR("OpenGL Error during texture creation: {0}", err);
-		}
-	}
+	
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 		: m_Path(path), m_Name(path)
@@ -118,6 +83,32 @@ namespace Vertex
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 
 		stbi_image_free(data);
+	}
+
+	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification, Buffer* data)
+		:m_Width(specification.Width), m_Height(specification.Height)
+	{
+		VX_PROFILE_FUNCTION();
+
+		m_Specification = specification;
+
+		m_Width = specification.Width;
+		m_Height = specification.Height;
+
+		m_InternalFormat = Utils::VertexImageFormatToGLInternalFormat(m_Specification.Format);
+		m_DataFormat = Utils::VertexImageFormatToGLDataFormat(m_Specification.Format);
+
+		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
+
+		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		if (data)
+			SetData(data);
 	}
 
 	OpenGLTexture2D::OpenGLTexture2D(int resID, const std::string& format) :
@@ -222,6 +213,14 @@ namespace Vertex
 		uint32_t expectedSize = m_Width * m_Height * bpp;
 		VX_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!" + std::to_string(expectedSize));
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
+	}
+
+	void OpenGLTexture2D::SetData(Buffer* data)
+	{
+		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+		uint32_t expectedSize = m_Width * m_Height * bpp;
+		VX_CORE_ASSERT(data->Size == m_Width * m_Height * bpp, "Data must be entire texture! " + std::to_string(expectedSize));
+		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data->Data);
 	}
 
 	OpenGLTexture2D::~OpenGLTexture2D()

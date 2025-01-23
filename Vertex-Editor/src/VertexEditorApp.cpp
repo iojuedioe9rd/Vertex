@@ -1,6 +1,5 @@
 #include <Vertex.h>
 #include <Vertex/Core/EntryPoint.h>
-#include "VXEntities.h"
 #include "EditorLayer.h"
 
 namespace Vertex {
@@ -11,13 +10,13 @@ namespace Vertex {
 		VertexEditor(ApplicationCommandLineArgs args)
 			: Application("Vertex Editor", 1600, 900, args)
 		{
-			VXEntities_INIT(VXEntities_INIT_USE_EVERYTHING);
+			
 			PushLayer(new EditorLayer());
 		}
 
 		~VertexEditor()
 		{
-			VXEntities_FREE();
+			
 		}
 	};
 

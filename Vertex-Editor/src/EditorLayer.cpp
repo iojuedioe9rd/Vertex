@@ -8,15 +8,15 @@
 #include "Vertex/Utils/Utils.h"
 #include "Vertex/ImGui/ImGuizmoLink.h"
 #include "Vertex/Math/Math.h"
-#include <VXEntities/Scene/EditorCamera.h>
+#include <Vertex/Scene/EditorCamera.h>
 #include "resource.h"
 #include <imgui.h>
 #include <imgui_internal.h>
-#include <VXEntities/Scripting/ScriptEngine.h>
+#include <Vertex/Scripting/ScriptEngine.h>
 #include <Vertex/Animation/AnimationLoader.h>
 #include <Vertex/Renderer/Font.h>
 #include <Vertex/AssetManager/AssetManager.h>
-#include <VXEntities/Scripting/ScriptGlue.h>
+#include <Vertex/Scripting/ScriptGlue.h>
 
 
 
@@ -97,8 +97,8 @@ namespace Vertex {
 
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
-		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
-		m_EditorScene = VXEntities_MakeOrGetScene("EditorScene");
+		m_ActiveScene = new Scene("ActiveScene");
+		m_EditorScene = new Scene("EditorScene");
 
 		
 		auto commandLineArgs = Application::Get().GetCommandLineArgs();
@@ -599,8 +599,8 @@ namespace Vertex {
 	void EditorLayer::NewScene()
 	{
 		
-		VXEntities_RemoveScene(m_ActiveScene);
-		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
+		delete m_ActiveScene;
+		m_ActiveScene = new Scene("ActiveScene");
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierarchyPanel->SetContext(m_ActiveScene);
 		m_EditorScene = m_ActiveScene;
@@ -675,7 +675,7 @@ namespace Vertex {
 		m_SceneState = SceneState::Edit;
 
 		m_ActiveScene->OnRuntimeStop();
-		VXEntities_RemoveScene(m_ActiveScene);
+		delete m_ActiveScene;
 		m_ActiveScene = m_EditorScene;
 
 		m_SceneHierarchyPanel->SetContext(m_ActiveScene);

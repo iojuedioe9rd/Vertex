@@ -29,7 +29,6 @@ project "Vertex-Editor"
 	links
 	{
 		"Engine",
-		"VXEntities",
 		"ImGui"
 	}
 	

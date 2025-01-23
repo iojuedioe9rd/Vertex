@@ -1,9 +1,9 @@
 #include "SceneHierarchyPanel.h"
 #include "Vertex/ImGui/ImGuiLink.h"
 #include <glm/gtc/type_ptr.hpp>
-#include "VXEntities.h"
-#include <VXEntities/Scripting/ScriptEngine.h>
-#include <VXEntities/Scene/Entities/prop_text/prop_text.h>
+#include "Vertex/Scene/Entities/Entities.h"
+#include <Vertex/Scripting/ScriptEngine.h>
+#include <Vertex/Scene/Entities/prop_text/prop_text.h>
 
 
 #define ImGuiTreeNodeFlags_Selected 1

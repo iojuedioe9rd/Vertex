@@ -5,6 +5,7 @@
 #include "ErrorBox.h"
 #include <glad/glad.h>
 #include "Vertex/Renderer/Renderer.h"
+#include "Vertex/Scripting/ScriptEngine.h"
 #include <GLFW/glfw3.h>
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
@@ -51,6 +52,9 @@ namespace Vertex
 		
 		
 		VX_PROFILE_FUNCTION();
+
+
+
 		m_LayerStack = new LayerStack();
 		m_CommandBufferPool = new CommandBufferPool();
 		m_ImGuiWindowStack = new ImGuiWindowStack();
@@ -61,6 +65,7 @@ namespace Vertex
 		app = this;
 
 		Renderer::Init();
+		ScriptEngine::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -158,8 +163,10 @@ namespace Vertex
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowClose)
 		{
 			m_Running = 0;
+			return;
 		}
-
+		
+		
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowMoved)
 		{
 			Update();

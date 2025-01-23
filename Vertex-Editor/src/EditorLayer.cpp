@@ -106,7 +106,7 @@ namespace Vertex {
 		{
 			auto sceneFilePath = commandLineArgs[1];
 			SceneSerializer serializer(&m_ActiveScene);
-			OpenScene(sceneFilePath);
+			OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(sceneFilePath));
 			m_EditorScene = m_ActiveScene;
 		}
 		else
@@ -207,8 +207,8 @@ namespace Vertex {
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
 		//m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
-
-		OpenScene("assets/scenes/Physics2D.vertex");
+		//((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex")
+		OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex"));
 	}
 
 	float t = 0.0f;
@@ -494,8 +494,8 @@ namespace Vertex {
 		{
 			if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
-				const wchar_t* path = (const wchar_t*)payload->Data;
-				OpenScene(std::filesystem::path(g_AssetPath) / path);
+				AssetHandle handle = *(AssetHandle*)payload->Data;
+				OpenScene(handle);
 			}
 			ImGuiLink::EndDragDropTarget();
 		}
@@ -611,7 +611,8 @@ namespace Vertex {
 		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
 		if (!filepath.empty())
 		{
-			OpenScene(filepath);
+			
+			OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(filepath));
 			return true;
 		}
 		return false;
@@ -627,23 +628,29 @@ namespace Vertex {
 		}
 	}
 
-	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	void EditorLayer::OpenScene(AssetHandle handle)
 	{
 		if (m_SceneState != SceneState::Edit)
 			OnSceneStop();
 
 		NewScene();
 
-		SceneSerializer serializer(&m_EditorScene);
-		if(serializer.Deserialize(path.string()));
-		{
-			m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_SceneHierarchyPanel->SetContext(m_EditorScene);
+		Scene* readOnlyScene = (Scene*)(void*)(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->GetAsset(handle).get());
+		Scene* newScene = Scene::Copy(readOnlyScene, std::string("ActiveScene"));
 
-			m_ActiveScene = m_EditorScene;
-			m_EditorScenePath = path;
-		}
-		m_EditorScene->CreateEntity< ENTProp2DCircle>("Circle");
+		//SceneSerializer serializer(&m_EditorScene);
+		//if(serializer.Deserialize(path.string()));
+		//{
+		//	m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		//	m_SceneHierarchyPanel->SetContext(m_EditorScene);
+//
+	//		m_ActiveScene = m_EditorScene;
+	//		m_EditorScenePath = path;
+	//	}
+		m_EditorScene = newScene;
+		m_SceneHierarchyPanel->SetContext(m_EditorScene);
+
+		m_ActiveScene = m_EditorScene;
 	}
 
 	void EditorLayer::SaveScene()

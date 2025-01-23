@@ -7,6 +7,31 @@
 
 namespace Vertex
 {
+	static std::map<std::filesystem::path, AssetType> s_AssetExtensionMap = {
+		{ ".vertex", AssetType::Scene },
+		{ ".png", AssetType::Texture2D },
+		{ ".jpg", AssetType::Texture2D },
+		{ ".jpeg", AssetType::Texture2D }
+	};
+	static AssetType GetAssetTypeFromFileExtension(const std::filesystem::path& extension)
+	{
+		if (s_AssetExtensionMap.find(extension) == s_AssetExtensionMap.end())
+		{
+			VX_CORE_WARN("Could not find AssetType for {}", extension.generic_string().c_str());
+			return AssetType::None;
+		}
+		return s_AssetExtensionMap.at(extension);
+	}
+
+
+	AssetType EditorAssetManager::GetAssetType(AssetHandle handle) const
+	{
+		if (!IsAssetHandleValid(handle))
+			return AssetType::None;
+
+		return m_AssetRegistry.at(handle).Type;
+	}
+
 	YAML::Emitter& operator<<(YAML::Emitter& out, const std::string_view& v)
 	{
 		out << std::string(v.data(), v.size());
@@ -46,11 +71,13 @@ namespace Vertex
 		AssetHandle handle; // generate new handle
 		AssetMetadata metadata;
 		metadata.FilePath = filepath;
-		metadata.Type = AssetType::Texture2D; // TODO: grab this from extension and try to load
+		metadata.Type = GetAssetTypeFromFileExtension(filepath.extension());
+		VX_CORE_ASSERT(metadata.Type != AssetType::None);
 		Ref<Asset> asset = AssetImporter::ImportAsset(handle, metadata);
 		asset->Handle = handle;
 		if (asset)
 		{
+			asset->Handle = handle;
 			m_LoadedAssets[handle] = asset;
 			m_AssetRegistry[handle] = metadata;
 			SerializeAssetRegistry();
@@ -87,6 +114,12 @@ namespace Vertex
 	bool EditorAssetManager::DeserializeAssetRegistry()
 	{
 		
+		if(!std::filesystem::exists(AssetRegistryPath))
+		{
+			VX_CORE_ERROR("File doesn't exist!");
+			return false;
+		}
+
 		YAML::Node data;
 		try
 		{
@@ -126,7 +159,12 @@ namespace Vertex
 		this->AssetRegistryPath = AssetRegistryPath;
 	}
 
-	Ref<Asset> EditorAssetManager::GetAsset(AssetHandle handle) const
+	const std::filesystem::path& EditorAssetManager::GetFilePath(AssetHandle handle) const
+	{
+		return GetMetadata(handle).FilePath;
+	}
+
+	Ref<Asset> EditorAssetManager::GetAsset(AssetHandle handle)
 	{
 		// 1. check if handle is valid
 		if (!IsAssetHandleValid(handle))
@@ -142,11 +180,14 @@ namespace Vertex
 			// load asset
 			const AssetMetadata& metadata = GetMetadata(handle);
 			asset = AssetImporter::ImportAsset(handle, metadata);
+			asset->Handle = handle;
 			if (!asset)
 			{
 				// import failed
 				VX_CORE_ERROR("EditorAssetManager::GetAsset - asset import failed!");
 			}
+
+			m_LoadedAssets[handle] = asset;
 		}
 		// 3. return asset
 		return asset;

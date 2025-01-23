@@ -1,12 +1,19 @@
 #include "vxpch.h"
 #include "AssetImporter.h"
 #include "TextureImporter.h"
+#include "SceneImporter.h"
+
 #include <map>
 namespace Vertex {
 
 	using AssetImportFunction = std::function<Ref<Asset>(AssetHandle, const AssetMetadata&)>;
 	static std::map<AssetType, AssetImportFunction> s_AssetImportFunctions = {
-		{ AssetType::Texture2D, TextureImporter::ImportTexture2D }
+	{ AssetType::Texture2D, [](AssetHandle handle, const AssetMetadata& metadata) {
+		return TextureImporter::ImportTexture2D(handle, metadata);
+	}},
+	{ AssetType::Scene, [](AssetHandle handle, const AssetMetadata& metadata) {
+		return SceneImporter::ImportScene(handle, metadata);
+	}}
 	};
 
 	Ref<Asset> AssetImporter::ImportAsset(AssetHandle handle, const AssetMetadata& metadata)

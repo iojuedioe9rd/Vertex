@@ -12,9 +12,11 @@ namespace Vertex
 	{
 	public:
 		virtual AssetHandle GetAssetHandle(const std::filesystem::path& filepath) const = 0;
-		virtual Ref<Asset> GetAsset(AssetHandle handle) const = 0;
+		virtual Ref<Asset> GetAsset(AssetHandle handle) = 0;
 		virtual bool IsAssetHandleValid(AssetHandle handle) const = 0;
 		virtual bool IsAssetLoaded(AssetHandle handle) const = 0;
+
+		virtual AssetType GetAssetType(AssetHandle handle) const = 0;
 
 	private:
 

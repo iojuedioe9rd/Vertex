@@ -39,7 +39,7 @@ namespace Vertex {
 		void NewScene();
 		bool OpenScene();
 		void SaveSceneAs();
-		void OpenScene(const std::filesystem::path& path);
+		void OpenScene(AssetHandle handle);
 		void SaveScene();
 
 		void SerializeScene(Scene* scene, const std::filesystem::path& path);

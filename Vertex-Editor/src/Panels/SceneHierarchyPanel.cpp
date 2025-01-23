@@ -3,7 +3,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Vertex/Scene/Entities/Entities.h"
 #include <Vertex/Scripting/ScriptEngine.h>
+#include <Vertex/AssetManager/AssetManager.h>
 #include <Vertex/Scene/Entities/prop_text/prop_text.h>
+#include <Vertex/AssetManager/EditorAssetManager.h>
+
 
 
 #define ImGuiTreeNodeFlags_Selected 1
@@ -263,37 +266,69 @@ namespace Vertex {
 		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTPropDynamicSprite).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer"))
 		{
 
-			ImGuiLink::ColorEdit4("Color", glm::value_ptr(entity->colour));
+			
 
 
-			ImGuiLink::Button("Texture", glm::vec2(100.0f, 0.0f));
-			if (ImGuiLink::BeginDragDropTarget())
+			ImGui::ColorEdit4("Color", glm::value_ptr(entity->colour));
+
+			std::string label = "None";
+			bool isTextureValid = false;
+
+			EditorAssetManager* AssetManager = ((EditorAssetManager*)(void*)g_AssetManagerBase.get());
+
+			if (entity->texture!= 0)
 			{
-				if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+				if (AssetManager->IsAssetHandleValid(entity->texture->Handle)
+					&& AssetManager->GetAssetType(entity->texture->Handle) == AssetType::Texture2D)
 				{
-					const wchar_t* path = (const wchar_t*)payload->Data;
-					std::filesystem::path texturePath = std::filesystem::path(g_AssetPath) / path;
-					std::string extension = texturePath.extension().string();
+					const AssetMetadata& metadata = AssetManager->GetMetadata(entity->texture->Handle);
+					label = metadata.FilePath.filename().string();
+					isTextureValid = true;
+				}
+				else
+				{
+					label = "Invalid";
+				}
+			}
 
-					bool isValidExtension = false;
+			ImVec2 buttonLabelSize = ImGui::CalcTextSize(label.c_str());
+			buttonLabelSize.x += 20.0f;
+			float buttonLabelWidth = glm::max<float>(100.0f, buttonLabelSize.x);
 
-					for (int i = 0; i < NUM_TEXTURE_EXTENSIONS; ++i) {
-						if (extension == texturesFileExtensions[i]) {
-							isValidExtension = true;
-							break;
-						}
-					}
-
-					if (isValidExtension)
+			ImGui::Button(label.c_str(), ImVec2(buttonLabelWidth, 0.0f));
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+				{
+					AssetHandle handle = *(AssetHandle*)payload->Data;
+					if (AssetManager->GetAssetType(handle) == AssetType::Texture2D)
 					{
-						entity->texture = Texture2D::Create(texturePath.string());
+						entity->texture = std::dynamic_pointer_cast<Texture2D>(AssetManager->GetAsset(handle));
+					}
+					else
+					{
+						VX_CORE_WARN("Wrong asset type!");
 					}
 
 				}
-				ImGuiLink::EndDragDropTarget();
+				ImGui::EndDragDropTarget();
 			}
-			ImGuiLink::DragFloat("Tiling Factor", &entity->tilingFactor, 0.1f, 0.0f, 100.0f);
 
+			if (isTextureValid)
+			{
+				ImGui::SameLine();
+				ImVec2 xLabelSize = ImGui::CalcTextSize("X");
+				float buttonSize = xLabelSize.y + ImGui::GetStyle().FramePadding.y * 2.0f;
+				if (ImGui::Button("X", ImVec2(buttonSize, buttonSize)))
+				{
+					entity->texture.reset();
+				}
+			}
+
+			ImGui::SameLine();
+			ImGui::Text("Texture");
+
+			ImGui::DragFloat("Tiling Factor", &entity->tilingFactor, 0.1f, 0.0f, 100.0f);
 			ImGuiLink::TreePop();
 		}
 	}
@@ -303,36 +338,66 @@ namespace Vertex {
 		if (ImGuiLink::TreeNodeEx((void*)typeid(ENTPropStaticSprite).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer"))
 		{
 			
-			ImGuiLink::ColorEdit4("Color", glm::value_ptr(entity->colour));
+			ImGui::ColorEdit4("Color", glm::value_ptr(entity->colour));
 
+			std::string label = "None";
+			bool isTextureValid = false;
 
-			ImGuiLink::Button("Texture", glm::vec2(100.0f, 0.0f));
-			if (ImGuiLink::BeginDragDropTarget())
+			EditorAssetManager* AssetManager = ((EditorAssetManager*)(void*)g_AssetManagerBase.get());
+
+			if (entity->texture != 0)
 			{
-				if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+				if (AssetManager->IsAssetHandleValid(entity->texture->Handle)
+					&& AssetManager->GetAssetType(entity->texture->Handle) == AssetType::Texture2D)
 				{
-					const wchar_t* path = (const wchar_t*)payload->Data;
-					std::filesystem::path texturePath = std::filesystem::path(g_AssetPath) / path;
-					std::string extension = texturePath.extension().string();
-					
-					bool isValidExtension = false;
+					const AssetMetadata& metadata = AssetManager->GetMetadata(entity->texture->Handle);
+					label = metadata.FilePath.filename().string();
+					isTextureValid = true;
+				}
+				else
+				{
+					label = "Invalid";
+				}
+			}
 
-					for (int i = 0; i < NUM_TEXTURE_EXTENSIONS; ++i) {
-						if (extension == texturesFileExtensions[i]) {
-							isValidExtension = true;
-							break;
-						}
-					}
+			ImVec2 buttonLabelSize = ImGui::CalcTextSize(label.c_str());
+			buttonLabelSize.x += 20.0f;
+			float buttonLabelWidth = glm::max<float>(100.0f, buttonLabelSize.x);
 
-					if (isValidExtension)
+			ImGui::Button(label.c_str(), ImVec2(buttonLabelWidth, 0.0f));
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+				{
+					AssetHandle handle = *(AssetHandle*)payload->Data;
+					if (AssetManager->GetAssetType(handle) == AssetType::Texture2D)
 					{
-						entity->texture = Texture2D::Create(texturePath.string());
+						entity->texture = std::dynamic_pointer_cast<Texture2D>(AssetManager->GetAsset(handle));
+					}
+					else
+					{
+						VX_CORE_WARN("Wrong asset type!");
 					}
 
 				}
-				ImGuiLink::EndDragDropTarget();
+				ImGui::EndDragDropTarget();
 			}
-			ImGuiLink::DragFloat("Tiling Factor", &entity->tilingFactor, 0.1f, 0.0f, 100.0f);
+
+			if (isTextureValid)
+			{
+				ImGui::SameLine();
+				ImVec2 xLabelSize = ImGui::CalcTextSize("X");
+				float buttonSize = xLabelSize.y + ImGui::GetStyle().FramePadding.y * 2.0f;
+				if (ImGui::Button("X", ImVec2(buttonSize, buttonSize)))
+				{
+					entity->texture.reset();
+				}
+			}
+
+			ImGui::SameLine();
+			ImGui::Text("Texture");
+
+			ImGui::DragFloat("Tiling Factor", &entity->tilingFactor, 0.1f, 0.0f, 100.0f);
 
 			ImGuiLink::TreePop();
 		}

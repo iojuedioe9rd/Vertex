@@ -6,6 +6,7 @@
 #include <Vertex/Renderer/Camera.h>
 #include <Vertex/Events/Event.h>
 #include "EditorCamera.h"
+#include <Vertex/AssetManager/Asset.h>
 
 class b2World;
 
@@ -14,7 +15,7 @@ namespace Vertex
 	class ENTPointCamera2D;
 	class Entity;
 	
-	class VERTEX_API Scene
+	class VERTEX_API Scene : public Asset
 	{
 	public:
 		Scene(std::string name);
@@ -24,6 +25,8 @@ namespace Vertex
 		{
 			return m_name;
 		}
+
+		virtual AssetType GetType() const { return AssetType::Scene; }
 
 		template <typename T>
 		T& CreateEntity(const std::string& name)

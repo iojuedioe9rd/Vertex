@@ -13,6 +13,10 @@ namespace Vertex
 		Texture2D
 	};
 
+	std::string_view VERTEX_API AssetTypeToString(AssetType type);
+	AssetType VERTEX_API AssetTypeFromString(std::string_view assetType);
+
+
 	class VERTEX_API Asset: public Object
 	{
 	public:

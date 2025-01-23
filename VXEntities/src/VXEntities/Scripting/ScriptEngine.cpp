@@ -150,6 +150,7 @@ namespace Vertex {
 			if (fieldType == "Colour") return ScriptFieldType::Colour;
 			if (fieldType == "Vector4") return ScriptFieldType::Vector4;
 			if (fieldType == "Entity")  return ScriptFieldType::Entity;
+			if (fieldType == "CppEntity")  return ScriptFieldType::CppEntity;
 			VX_CORE_ASSERT(false, "Unknown ScriptFieldType");
 			return ScriptFieldType::None;
 		}
@@ -175,6 +176,7 @@ namespace Vertex {
 			case ScriptFieldType::Vector4: return "Vector4";
 			case ScriptFieldType::Colour: return "Colour";
 			case ScriptFieldType::Entity:  return "Entity";
+			case ScriptFieldType::CppEntity:  return "CppEntity";
 			}
 
 			return "<Invalid>";
@@ -374,8 +376,15 @@ namespace Vertex {
 				{
 					const ScriptFieldMap& fieldMap = s_Data->EntityScriptFields.at(entityID);
 					for (const auto& [name, fieldInstance] : fieldMap)
+					{
+						
+
 						instance->SetFieldValueInternal(name, fieldInstance.m_Buffer);
+					}
+						
 				}
+
+
 				VX_CORE_ASSERT(func(sc));
 				instance->InvokeOnCreate();
 			}

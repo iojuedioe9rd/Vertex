@@ -1,0 +1,19 @@
+AssetRegistry:
+  - Handle: 2099086983676569237
+    FilePath: Resources/Icons/StopButton.png
+    Type: AssetType::Texture2D
+  - Handle: 3314178792995643680
+    FilePath: Resources/Icons/ContentBrowser/FileIcon.png
+    Type: AssetType::Texture2D
+  - Handle: 5717141283310816088
+    FilePath: assets/textures/Checkerboard.png
+    Type: AssetType::Texture2D
+  - Handle: 9999888580713581258
+    FilePath: assets/textures/Player.png
+    Type: AssetType::Texture2D
+  - Handle: 13216832057015852373
+    FilePath: Resources/Icons/ContentBrowser/DirectoryIcon.png
+    Type: AssetType::Texture2D
+  - Handle: 17566585864951265459
+    FilePath: Resources/Icons/PlayButton.png
+    Type: AssetType::Texture2D

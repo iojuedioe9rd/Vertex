@@ -12,8 +12,13 @@
 #include "Vertex/Renderer/Mesh.h"
 #include "Vertex/Renderer/Font.h"
 #include <filesystem>
+#include <Vertex/AssetManager/EditorAssetManager.h>
+
+
 
 namespace Vertex {
+
+
 
 	class EditorLayer : public Layer
 	{
@@ -46,6 +51,7 @@ namespace Vertex {
 		void UI_Toolbar();
 	private:
 
+		
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
@@ -90,8 +96,8 @@ namespace Vertex {
 		int m_GizmoType = -1;
 
 		// Panels
-		SceneHierarchyPanel m_SceneHierarchyPanel;
-		ContentBrowserPanel m_ContentBrowserPanel;
+		SceneHierarchyPanel* m_SceneHierarchyPanel;
+		ContentBrowserPanel* m_ContentBrowserPanel;
 
 		enum class SceneState
 		{

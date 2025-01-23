@@ -18,6 +18,8 @@
 #include "Vertex/Renderer/TextureManager.h"
 #include "../Scene/Entities/Entities.h"
 
+
+
 namespace Vertex
 {
 	
@@ -30,6 +32,9 @@ namespace Vertex
 #define LOG_WARN      (1 << 3)    // 0b001000 = 8
 #define LOG_ERROR     (1 << 4)    // 0b010000 = 16
 #define LOG_CRITICAL  (1 << 5)    // 0b100000 = 32
+
+	AssetHandle(*getAsset_funk)(std::filesystem::path);
+	AssetManagerBase*(*getAssetMan_funk)();
 
 
 	static MonoString* Entity_FindEntityByName(MonoString* name)
@@ -74,9 +79,13 @@ namespace Vertex
 	// internal extern static void Renderer2D_DrawQuad(ref Vector3 pos, ref Vector3 size, string textureFilename, float tilingFactor = 1.0f, ref Colour tintColour = new Colour(1,1,1,1));
 	void Renderer2D_DrawQuadTex(glm::vec3* pos, glm::vec3* size, MonoString* textureFilename, float tilingFactor, glm::vec4* tintColour)
 	{
+		
+
 		const char* cStr = mono_string_to_utf8(textureFilename);
 
-		Ref<Texture2D> tex = TextureManager2D::GetOrMakeTextureFromFilename(std::string(cStr));
+		AssetHandle Handle = getAsset_funk(cStr);
+
+		Ref<Texture2D> tex = std::dynamic_pointer_cast<Texture2D>(getAssetMan_funk()->GetAsset(Handle));
 
 		Renderer2D::DrawQuad(*pos, glm::vec2(size->x, size->y), tex, tilingFactor, *tintColour);
 	}
@@ -329,6 +338,12 @@ namespace Vertex
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_GetVelocity);
 
 		VX_ADD_INTERNAL_CALL(Object_GenerateUUID);
+	}
+
+	void ScriptGlue::SetupGetingAssets(AssetHandle(*getAsset)(std::filesystem::path), AssetManagerBase*(*getAssetMan)())
+	{
+		getAsset_funk = getAsset;
+		getAssetMan_funk = getAssetMan;
 	}
 
 }

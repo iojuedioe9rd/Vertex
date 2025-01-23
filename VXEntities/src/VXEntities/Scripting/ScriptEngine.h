@@ -27,7 +27,7 @@ namespace Vertex {
 		Bool, Char, Byte, Short, Int, Long,
 		UByte, UShort, UInt, ULong,
 		Vector2, Vector3, Vector4, Colour,
-		Entity
+		Entity, CppEntity
 	};
 	struct ScriptField
 	{

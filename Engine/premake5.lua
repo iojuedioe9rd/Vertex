@@ -49,7 +49,8 @@ project "Engine"
 		"%{IncludeDir.ffmpeg}",
 		"%{IncludeDir.msdfgen}",
 		"%{IncludeDir.msdf_atlas_gen}",
-		"%{IncludeDir.VulkanSDK}"
+		"%{IncludeDir.VulkanSDK}",
+		"%{IncludeDir.yaml_cpp}"
 		
 	}
 	
@@ -63,7 +64,7 @@ project "Engine"
 		"ImGuizmo",
 		"msdf-atlas-gen",
 		"msdfgen",
-		
+		"yaml-cpp"
 		
 		
 	}

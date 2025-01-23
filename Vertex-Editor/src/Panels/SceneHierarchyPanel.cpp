@@ -5,6 +5,7 @@
 #include <VXEntities/Scripting/ScriptEngine.h>
 #include <VXEntities/Scene/Entities/prop_text/prop_text.h>
 
+
 #define ImGuiTreeNodeFlags_Selected 1
 #define ImGuiTreeNodeFlags_OpenOnArrow 128
 #define ImGuiTreeNodeFlags_DefaultOpen 32

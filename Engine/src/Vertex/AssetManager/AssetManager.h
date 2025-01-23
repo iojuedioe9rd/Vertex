@@ -1,16 +1,11 @@
 #pragma once
+
 #include <Vertex/Core/Base.h>
+#include "Asset.h"
+#include "AssetManagerBase.h"
 
 namespace Vertex
 {
-	class VERTEX_API AssetManager
-	{
-	public:
-		
-
-	private:
-
-	};
-
-	
+    // Always declare the variable as extern
+    inline Ref<AssetManagerBase> g_AssetManagerBase = Ref<AssetManagerBase>();
 }

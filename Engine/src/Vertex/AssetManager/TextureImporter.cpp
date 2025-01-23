@@ -5,18 +5,22 @@
 namespace Vertex {
 	Ref<Texture2D> TextureImporter::ImportTexture2D(AssetHandle handle, const AssetMetadata& metadata)
 	{
+		return TextureImporter::LoadTexture2D(std::filesystem::current_path() / metadata.FilePath);
+	}
+	Ref<Texture2D> TextureImporter::LoadTexture2D(const std::filesystem::path& path)
+	{
 		VX_PROFILE_FUNCTION();
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		Buffer* data = new Buffer();
 		{
 			VX_PROFILE_SCOPE("stbi_load - TextureImporter::ImportTexture2D");
-			std::string pathStr = metadata.FilePath.string();
+			std::string pathStr = path.string();
 			data->Data = stbi_load(pathStr.c_str(), &width, &height, &channels, 0);
 		}
 		if (data->Data == nullptr)
 		{
-			VX_CORE_ERROR("TextureImporter::ImportTexture2D - Could not load texture from filepath: {}", metadata.FilePath.string());
+			VX_CORE_ERROR("TextureImporter::ImportTexture2D - Could not load texture from filepath: {}", path.string());
 			return nullptr;
 		}
 		// TODO: think about this

@@ -5,13 +5,14 @@
 #include <map>
 #include <set>
 #include <filesystem>
+#include "ThumbnailCache.h"
 
 namespace Vertex {
 
 	class ContentBrowserPanel
 	{
 	public:
-		ContentBrowserPanel();
+		ContentBrowserPanel(std::filesystem::path path);
 
 		void OnImGuiRender();
 	private:
@@ -19,6 +20,8 @@ namespace Vertex {
 	private:
 		std::filesystem::path m_BaseDirectory;
 		std::filesystem::path m_CurrentDirectory;
+
+		Ref<ThumbnailCache> m_ThumbnailCache;
 
 		Ref<Texture2D> m_DirectoryIcon;
 		Ref<Texture2D> m_FileIcon;

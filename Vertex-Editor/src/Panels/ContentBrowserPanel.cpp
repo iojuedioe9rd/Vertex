@@ -22,8 +22,8 @@ namespace Vertex
 	// TODO: Once we have projects, change this
 	extern  const std::filesystem::path g_AssetPath = "assets";
 
-	ContentBrowserPanel::ContentBrowserPanel()
-		: m_CurrentDirectory(g_AssetPath), m_BaseDirectory(g_AssetPath)
+	ContentBrowserPanel::ContentBrowserPanel(std::filesystem::path path)
+		: m_CurrentDirectory(g_AssetPath), m_BaseDirectory(g_AssetPath), m_ThumbnailCache(CreateRef<ThumbnailCache>(path))
 	{
 
 		m_TreeNodes.push_back(TreeNode(".", 0));
@@ -33,7 +33,7 @@ namespace Vertex
 
 		RefreshAssetTree();
 
-		m_Mode = Mode::FileSystem;
+		m_Mode = Mode::Asset;
 	}
 
 	void ContentBrowserPanel::OnImGuiRender()
@@ -108,6 +108,8 @@ namespace Vertex
 					{
 						VX_CORE_ASSERT(false, "Not implemented");
 					}
+					
+
 					ImGui::EndPopup();
 				}
 
@@ -141,15 +143,25 @@ namespace Vertex
 				std::string filenameString = path.filename().string();
 
 				ImGui::PushID(filenameString.c_str());
-				Ref<Texture2D> icon = directoryEntry.is_directory() ? m_DirectoryIcon : m_FileIcon;
+
+				// TODO THUMBNAIL
+				auto relativePath = std::filesystem::relative(path);
+				Ref<Texture2D> thumbnail = m_DirectoryIcon;
+				if (!directoryEntry.is_directory())
+				{
+					thumbnail = m_ThumbnailCache->GetOrCreateThumbnail(relativePath);
+					if (!thumbnail)
+						thumbnail = m_FileIcon;
+				}
+				
 				ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-				ImGui::ImageButton((ImTextureID)icon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+				ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
 
 				if (ImGui::BeginPopupContextItem())
 				{
 					if (ImGui::MenuItem("Import"))
 					{
-						auto relativePath = std::filesystem::relative(path);
+						
 						((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(relativePath);
 						RefreshAssetTree();
 					}

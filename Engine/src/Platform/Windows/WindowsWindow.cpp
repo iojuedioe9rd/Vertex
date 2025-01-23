@@ -4,6 +4,7 @@
 #include <Vertex/Events/ApplicationEvent.h>
 #include "Platform/OpenGL/OpenGLContext.h"
 #include <Vertex/Events/MouseEvent.h>
+#include "Vertex/Renderer/RendererAPI.h"
 
 #include <glad/glad.h>
 
@@ -56,7 +57,17 @@ namespace Vertex {
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		s_GLFWWindowCount++;
 		glfwMakeContextCurrent(m_Window);
-		m_Context = new OpenGLContext(m_Window);
+
+		switch (RendererAPI::GetAPI())
+		{
+			case RendererAPI::API::OpenGL:
+				m_Context = new OpenGLContext(m_Window);
+				break;
+			case RendererAPI::API::None:
+				VX_CORE_ASSERT(false, "RendererAPI::None is currently not supported!")
+				break;
+		}
+
 		m_Context->Init();
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);

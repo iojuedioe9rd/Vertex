@@ -61,7 +61,7 @@ namespace Vertex {
 		m_AssetManager->DeserializeAssetRegistry();
 
 		m_SceneHierarchyPanel = new SceneHierarchyPanel();
-		m_ContentBrowserPanel = new ContentBrowserPanel();
+		m_ContentBrowserPanel = new ContentBrowserPanel("assets/cache");
 
 		ScriptGlue::SetupGetingAssets(getAsset, getAssetMan);
 
@@ -262,10 +262,10 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					Renderer2D::TextParams textParams;
-					textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+					//Renderer2D::TextParams textParams;
+					//textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
 
-					Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+					//Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
 
 					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
 					RenderCommand::DisableDepthTesting();
@@ -282,14 +282,14 @@ namespace Vertex {
 					{
 						Renderer2D::BeginScene(cam->GetProjection(), p_cam);
 						m_ActiveScene->OnUpdateRuntime(ts);
-						Renderer2D::TextParams textParams;
-						textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+						//Renderer2D::TextParams textParams;
+						//textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
 
 						
 
-						Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1), textParams);
+						//Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1), textParams);
 
-						Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
+						//Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
 
 						Renderer2D::EndScene();
 					}
@@ -362,7 +362,7 @@ namespace Vertex {
 
 		ImGuiLink::Docking(dockingEnabled, [this] { DockSpaceCallback(); });
 
-		if (0)
+		if (!dockingEnabled)
 		{
 			
 			ImGuiLink::Begin("Settings");

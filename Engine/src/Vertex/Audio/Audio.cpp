@@ -9,7 +9,7 @@
 namespace Vertex
 {
 
-	Audio* Audio::Create(const char* filepath, bool loop)
+	Audio* Audio::Create(std::filesystem::path filepath, bool loop)
 	{
 #ifdef VX_PLATFORM_WINDOWS
 		return new WindowsAudio(filepath, loop);

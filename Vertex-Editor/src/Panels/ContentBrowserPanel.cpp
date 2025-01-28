@@ -38,6 +38,8 @@ namespace Vertex
 
 	void ContentBrowserPanel::OnImGuiRender()
 	{
+		
+
 		ImGui::Begin("Content Browser");
 
 		const char* label = m_Mode == Mode::Asset ? "Asset" : "File";
@@ -93,14 +95,30 @@ namespace Vertex
 
 			for (const auto& [item, treeNodeIndex] : node->Children)
 			{
-				bool isDirectory = std::filesystem::is_directory("assets" / item);
+				bool isDirectory = std::filesystem::is_directory(currentDir / item);
 
 				std::string itemStr = item.generic_string();
 
 				ImGui::PushID(itemStr.c_str());
 				Ref<Texture2D> icon = isDirectory ? m_DirectoryIcon : m_FileIcon;
+
+				if (!isDirectory)
+				{
+					icon = nullptr;
+					if (!icon)
+					{
+						icon = m_FileIcon;
+					}
+				}
+
+				
+
 				ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-				ImGui::ImageButton((ImTextureID)icon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+				if (ImGui::ImageButton((ImTextureID)icon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 }) && !isDirectory && item.extension() == ".wav")
+				{
+					AudioManager::GetAudioFromFileName(currentDir / item, false)->Play();
+					VX_INFO("Playing sound: {0}", item.generic_string());
+				}
 
 				if (ImGui::BeginPopupContextItem())
 				{
@@ -155,7 +173,9 @@ namespace Vertex
 				}
 				
 				ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-				ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 });
+				
+				glm::vec2 size = glm::vec2(thumbnail->GetWidth(), thumbnail->GetHeight());
+				ImGui::ImageButton((ImTextureID)thumbnail->GetRendererID(), { thumbnailSize * glm::normalize(size).x, thumbnailSize * glm::normalize(size).y }, { 0, 1 }, { 1, 0 });
 
 				if (ImGui::BeginPopupContextItem())
 				{

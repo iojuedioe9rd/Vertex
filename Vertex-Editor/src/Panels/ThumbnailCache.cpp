@@ -38,6 +38,8 @@ namespace Vertex
 		if (!texture)
 			return nullptr;
 
+		texture->Resize(255, 255, true);
+
 		auto& cachedImage = m_CachedImages[assetPath];
 		cachedImage.Timestamp = timestamp;
 		cachedImage.Image = texture;

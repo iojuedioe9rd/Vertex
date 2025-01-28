@@ -9,6 +9,8 @@ namespace Vertex {
 	}
 	Ref<Texture2D> TextureImporter::LoadTexture2D(const std::filesystem::path& path)
 	{
+		
+
 		VX_PROFILE_FUNCTION();
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);

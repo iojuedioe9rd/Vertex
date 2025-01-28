@@ -2,6 +2,7 @@
 #include "AssetImporter.h"
 #include "TextureImporter.h"
 #include "SceneImporter.h"
+#include "AudioImporter.h"
 
 #include <map>
 namespace Vertex {
@@ -13,6 +14,9 @@ namespace Vertex {
 	}},
 	{ AssetType::Scene, [](AssetHandle handle, const AssetMetadata& metadata) {
 		return SceneImporter::ImportScene(handle, metadata);
+	}},
+	{ AssetType::Audio, [](AssetHandle handle, const AssetMetadata& metadata) {
+		return AudioImporter::ImportAudio(handle, metadata);
 	}}
 	};
 

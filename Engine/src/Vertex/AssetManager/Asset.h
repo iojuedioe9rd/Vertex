@@ -10,7 +10,8 @@ namespace Vertex
 	{
 		None = 0,
 		Scene,
-		Texture2D
+		Texture2D,
+		Audio,
 	};
 
 	std::string_view VERTEX_API AssetTypeToString(AssetType type);

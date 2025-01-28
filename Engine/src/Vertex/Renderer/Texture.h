@@ -56,6 +56,8 @@ namespace Vertex {
 		static Ref<Texture2D> CreateWin(int resID, const std::string& format);
 		static AssetType GetStaticType() { return AssetType::Texture2D; }
 		virtual AssetType GetType() const { return GetStaticType(); }
+
+		virtual void Resize(uint32_t newWidth, uint32_t newHeight, bool aspect_ratio = 0) = 0;
 	};
 
 	class VERTEX_API Texture2DAnimated : public Texture2D

@@ -52,5 +52,11 @@ namespace Vertex
 
         public Vector3 Size = Vector3.One;
         public Vector3 Rotation { get; set; }
+
+        public T As<T>() where T : Entity, new()
+        {
+            object instance = InternalCalls.GetScriptInstance(UUID);
+            return instance as T;
+        }
     }
 }

@@ -98,6 +98,9 @@ project "Engine"
 			"Winmm.lib",
 			"Version.lib",
 			"Bcrypt.lib",
+			"d3d12.lib",
+			"dxgi.lib",
+			"d3dcompiler.lib"
 		}
 		
 	filter "configurations:Debug"

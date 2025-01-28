@@ -14,9 +14,15 @@ AssetRegistry:
   - Handle: 10190858570006511628
     FilePath: assets/textures/Player.png
     Type: AssetType::Texture2D
+  - Handle: 10736350068812820700
+    FilePath: assets/textures/Player16K.png
+    Type: AssetType::Texture2D
   - Handle: 11058595842515328458
     FilePath: assets/textures/Checkerboard.png
     Type: AssetType::Texture2D
+  - Handle: 11140818739465938016
+    FilePath: assets/music/idk.wav
+    Type: AssetType::Audio
   - Handle: 11667063466720132758
     FilePath: Resources/Icons/PlayButton.png
     Type: AssetType::Texture2D

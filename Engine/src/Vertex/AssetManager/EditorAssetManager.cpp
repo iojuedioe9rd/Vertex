@@ -11,7 +11,10 @@ namespace Vertex
 		{ ".vertex", AssetType::Scene },
 		{ ".png", AssetType::Texture2D },
 		{ ".jpg", AssetType::Texture2D },
-		{ ".jpeg", AssetType::Texture2D }
+		{ ".jpeg", AssetType::Texture2D },
+		{ ".wav", AssetType::Audio },
+		{ ".mp3", AssetType::Audio },
+		{ ".ogg", AssetType::Audio }
 	};
 	static AssetType GetAssetTypeFromFileExtension(const std::filesystem::path& extension)
 	{

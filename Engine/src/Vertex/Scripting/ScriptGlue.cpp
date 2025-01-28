@@ -19,6 +19,7 @@
 
 #include "Vertex/Renderer/TextureManager.h"
 #include "../Scene/Entities/Entities.h"
+#include <Vertex/Audio/Audio.h>
 
 
 
@@ -206,6 +207,80 @@ namespace Vertex
 		return str;
 	}
 
+	//[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	//	internal extern static UInt64 Audio_CreateSound(string filename, bool looped);
+
+	uint64_t Audio_CreateSound(MonoString* filename, bool looped)
+	{
+		const char* cStr = mono_string_to_utf8(filename);
+		AssetHandle Handle = getAsset_funk(cStr);
+		//return AudioManager::GetAudioFromFileName(std::filesystem::path(cStr), looped)->GetID();
+		return Handle;
+	}
+
+	//[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	//	internal extern static void Audio_PlaySound(UInt64 soundID);
+	void Audio_PlaySound(uint64_t soundID)
+	{
+		AssetHandle Handle = soundID;
+		Ref<Audio> audio = std::dynamic_pointer_cast<Audio>(getAssetMan_funk()->GetAsset(Handle));
+		audio->Play();
+		//return AudioManager::GetAudioFromFileName(std::filesystem::path(cStr), looped)->GetID();
+		
+	}
+
+	//[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	//	internal extern static void Audio_StopSound(UInt64 soundID);
+
+	void Audio_StopSound(uint64_t soundID)
+	{
+		AssetHandle Handle = soundID;
+		Ref<Audio> audio = std::dynamic_pointer_cast<Audio>(getAssetMan_funk()->GetAsset(Handle));
+		audio->Stop();
+		//return AudioManager::GetAudioFromFileName(std::filesystem::path(cStr), looped)->GetID();
+
+	}
+
+	//[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	//	internal extern static void Audio_SetSoundVolume(UInt64 soundID, float volume);
+	void Audio_SetSoundVolume(uint64_t soundID, float volume)
+	{
+		AssetHandle Handle = soundID;
+		Ref<Audio> audio = std::dynamic_pointer_cast<Audio>(getAssetMan_funk()->GetAsset(Handle));
+		//audio->SetVolume(volume);
+		//return AudioManager::GetAudioFromFileName(std::filesystem::path(cStr), looped)->GetID();
+
+	}
+
+	//[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	//	internal extern static void Audio_SetSoundLooped(UInt64 soundID, bool looped);
+	void Audio_SetSoundLooped(uint64_t soundID, bool looped)
+	{
+		AssetHandle Handle = soundID;
+		Ref<Audio> audio = std::dynamic_pointer_cast<Audio>(getAssetMan_funk()->GetAsset(Handle));
+		//audio->SetLooped(looped);
+		//return AudioManager::GetAudioFromFileName(std::filesystem::path(cStr), looped)->GetID();
+
+	}
+
+	//[MethodImplAttribute(MethodImplOptions.InternalCall)]
+	//	internal extern static void Audio_SetSoundPitch(UInt64 soundID, float pitch);
+	void Audio_SetSoundPitch(uint64_t soundID, float pitch)
+	{
+		AssetHandle Handle = soundID;
+		Ref<Audio> audio = std::dynamic_pointer_cast<Audio>(getAssetMan_funk()->GetAsset(Handle));
+		//audio->SetPitch(pitch);
+		//return AudioManager::GetAudioFromFileName(std::filesystem::path(cStr), looped)->GetID();
+
+	}
+
+
+	static uint64_t Object_GenerateIntUUID()
+	{
+		IntUUID uuid = IntUUID();
+		return uuid;
+	}
+
 	static void Rigidbody2D_ApplyLinearImpulse(b2Body** body, glm::vec2* impulse, glm::vec2* point, bool wake)
 	{
 		(*body)->ApplyLinearImpulse(b2Vec2(impulse->x, impulse->y), b2Vec2(point->x, point->y), wake);
@@ -340,6 +415,15 @@ namespace Vertex
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_GetVelocity);
 
 		VX_ADD_INTERNAL_CALL(Object_GenerateUUID);
+		VX_ADD_INTERNAL_CALL(Object_GenerateIntUUID);
+
+		VX_ADD_INTERNAL_CALL(Audio_CreateSound);
+		VX_ADD_INTERNAL_CALL(Audio_PlaySound);
+		VX_ADD_INTERNAL_CALL(Audio_StopSound);
+		VX_ADD_INTERNAL_CALL(Audio_SetSoundVolume);
+		VX_ADD_INTERNAL_CALL(Audio_SetSoundLooped);
+		VX_ADD_INTERNAL_CALL(Audio_SetSoundPitch);
+
 	}
 
 	void ScriptGlue::SetupGetingAssets(AssetHandle(*getAsset)(std::filesystem::path), AssetManagerBase*(*getAssetMan)())

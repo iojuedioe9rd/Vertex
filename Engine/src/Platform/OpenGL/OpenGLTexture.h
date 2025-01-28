@@ -29,6 +29,7 @@ namespace Vertex {
 		virtual void SetData(void* data, uint32_t size) override;
 		virtual void SetData(Buffer* data) override;
 
+		virtual void Resize(uint32_t newWidth, uint32_t newHeight, bool aspect_ratio = 0) override;
 
 		virtual void Bind(uint32_t slot = 0) const override;
 

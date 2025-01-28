@@ -1,9 +1,12 @@
 #pragma once
 
 #include "Asset.h"
+#include "Vertex/Renderer/Texture.h"
 #include "AssetMetadata.h"
 
-#include "Vertex/Renderer/Texture.h"
+
+
+
 namespace Vertex {
 	class VERTEX_API TextureImporter
 	{

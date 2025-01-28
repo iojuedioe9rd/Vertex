@@ -49,8 +49,10 @@ project "Engine"
 		"%{IncludeDir.ffmpeg}",
 		"%{IncludeDir.msdfgen}",
 		"%{IncludeDir.msdf_atlas_gen}",
-		"%{IncludeDir.VulkanSDK}"
-		
+		"%{IncludeDir.VulkanSDK}",
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.Box2D}",
+		"%{IncludeDir.mono}"
 	}
 	
 	links {
@@ -63,8 +65,9 @@ project "Engine"
 		"ImGuizmo",
 		"msdf-atlas-gen",
 		"msdfgen",
-		
-		
+		"yaml-cpp",
+		"Box2D",
+		"%{Library.mono}"
 		
 	}
 	
@@ -91,7 +94,13 @@ project "Engine"
 
 		links
 		{
-			"winmm"
+			"Ws2_32.lib",
+			"Winmm.lib",
+			"Version.lib",
+			"Bcrypt.lib",
+			"d3d12.lib",
+			"dxgi.lib",
+			"d3dcompiler.lib"
 		}
 		
 	filter "configurations:Debug"

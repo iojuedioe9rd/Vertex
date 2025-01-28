@@ -8,17 +8,21 @@
 #include "Vertex/Utils/Utils.h"
 #include "Vertex/ImGui/ImGuizmoLink.h"
 #include "Vertex/Math/Math.h"
-#include <VXEntities/Scene/EditorCamera.h>
+#include <Vertex/Scene/EditorCamera.h>
 #include "resource.h"
 #include <imgui.h>
 #include <imgui_internal.h>
-#include <VXEntities/Scripting/ScriptEngine.h>
+#include <Vertex/Scripting/ScriptEngine.h>
 #include <Vertex/Animation/AnimationLoader.h>
 #include <Vertex/Renderer/Font.h>
+#include <Vertex/AssetManager/AssetManager.h>
+#include <Vertex/Scripting/ScriptGlue.h>
 
 
 
 namespace Vertex {
+
+	Ref< EditorAssetManager> m_AssetManager;
 
 	// Vertices coordinates
 	MeshVertex vertices[] =
@@ -39,10 +43,27 @@ namespace Vertex {
 
 	extern const std::filesystem::path g_AssetPath;
 
+	AssetHandle getAsset(std::filesystem::path path)
+	{
+		return m_AssetManager->ImportAsset(path);
+	}
+
+	AssetManagerBase* getAssetMan()
+	{
+		return g_AssetManagerBase.get();
+	}
+
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f), m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f })
 	{
-		
+		m_AssetManager.reset(new EditorAssetManager("assets/AssetRegistry.vertexAssetRegistry"));
+		g_AssetManagerBase = m_AssetManager;
+		m_AssetManager->DeserializeAssetRegistry();
+
+		m_SceneHierarchyPanel = new SceneHierarchyPanel();
+		m_ContentBrowserPanel = new ContentBrowserPanel("assets/cache");
+
+		ScriptGlue::SetupGetingAssets(getAsset, getAssetMan);
 
 		//test = Texture2DAnimated::Create("assets/textures/test.mp4");
 		//test->SetFPS(2);
@@ -54,10 +75,14 @@ namespace Vertex {
 	void EditorLayer::OnAttach()
 	{
 		VX_PROFILE_FUNCTION();
-
-		m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
-		m_IconPlay = Texture2D::CreateWin(IDB_PNG4, "PNG");
-		m_IconStop = Texture2D::CreateWin(IDB_PNG5, "PNG");
+		
+		
+		//m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+        m_CheckerboardTexture = GET_Texture2D_AssetManager("assets/textures/Checkerboard.png");
+		// Resources/Icons/PlayButton.png
+		m_IconPlay = GET_Texture2D_AssetManager("Resources/Icons/PlayButton.png");
+		// Resources/Icons/StopButton.png
+		m_IconStop = GET_Texture2D_AssetManager("Resources/Icons/StopButton.png");
 
 		FramebufferSpecification fbSpec;
 		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
@@ -72,8 +97,8 @@ namespace Vertex {
 
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
-		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
-		m_EditorScene = VXEntities_MakeOrGetScene("EditorScene");
+		m_ActiveScene = new Scene("ActiveScene");
+		m_EditorScene = new Scene("EditorScene");
 
 		
 		auto commandLineArgs = Application::Get().GetCommandLineArgs();
@@ -81,7 +106,7 @@ namespace Vertex {
 		{
 			auto sceneFilePath = commandLineArgs[1];
 			SceneSerializer serializer(&m_ActiveScene);
-			OpenScene(sceneFilePath);
+			OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(sceneFilePath));
 			m_EditorScene = m_ActiveScene;
 		}
 		else
@@ -115,7 +140,7 @@ namespace Vertex {
 
 		
 
-		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel->SetContext(m_ActiveScene);
 
 		std::vector <MeshVertex> verts(vertices, vertices + sizeof(vertices) / sizeof(MeshVertex));
 		std::vector <uint32_t> ind(indices, indices + sizeof(indices) / sizeof(uint32_t));
@@ -171,15 +196,19 @@ namespace Vertex {
 				16, 17, 18, 18, 19, 16,
 				// Bottom face
 				20, 21, 22, 22, 23, 20
-			}, textures));
+		}, textures));
 
 		//m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
+
+		
+		
+
 
 		GImGui = (ImGuiContext*)ImGuiLink::GetContext();
 
 		//m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
-
-		OpenScene("assets/scenes/Physics2D.vertex");
+		//((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex")
+		OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex"));
 	}
 
 	float t = 0.0f;
@@ -233,10 +262,10 @@ namespace Vertex {
 					Renderer2D::BeginScene(m_EditorCamera.GetViewProjection());
 					m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
-					Renderer2D::TextParams textParams;
-					textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+					//Renderer2D::TextParams textParams;
+					//textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
 
-					Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+					//Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
 
 					//Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 1000.0f, 1000.0f }, test, 1.0f);
 					RenderCommand::DisableDepthTesting();
@@ -253,12 +282,14 @@ namespace Vertex {
 					{
 						Renderer2D::BeginScene(cam->GetProjection(), p_cam);
 						m_ActiveScene->OnUpdateRuntime(ts);
-						Renderer2D::TextParams textParams;
-						textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
+						//Renderer2D::TextParams textParams;
+						//textParams.Color = glm::vec4(1, 1, 1, 1);  // Set color, or any other parameters you need
 
-						Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1.0f), textParams);
+						
 
-						Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
+						//Renderer2D::DrawString("Hello, World!", Font::GetDefault(), glm::mat4(1), textParams);
+
+						//Renderer2D::DrawCircle(glm::mat4(2.0f), textParams.Color);
 
 						Renderer2D::EndScene();
 					}
@@ -331,7 +362,7 @@ namespace Vertex {
 
 		ImGuiLink::Docking(dockingEnabled, [this] { DockSpaceCallback(); });
 
-		if (0)
+		if (!dockingEnabled)
 		{
 			
 			ImGuiLink::Begin("Settings");
@@ -463,13 +494,13 @@ namespace Vertex {
 		{
 			if (const ImGuiLink::ImGuiPayload* payload = ImGuiLink::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
 			{
-				const wchar_t* path = (const wchar_t*)payload->Data;
-				OpenScene(std::filesystem::path(g_AssetPath) / path);
+				AssetHandle handle = *(AssetHandle*)payload->Data;
+				OpenScene(handle);
 			}
 			ImGuiLink::EndDragDropTarget();
 		}
 
-		Entity* selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+		Entity* selectedEntity = m_SceneHierarchyPanel->GetSelectedEntity();
 		if (selectedEntity != nullptr && m_GizmoType != -1)
 		{
 			ImGuizmoLink::SetOrthographic(false);
@@ -510,8 +541,8 @@ namespace Vertex {
 		ImGuiLink::End();
 		ImGuiLink::PopStyleVar();
 
-		m_SceneHierarchyPanel.OnImGuiRender();
-		m_ContentBrowserPanel.OnImGuiRender();
+		m_SceneHierarchyPanel->OnImGuiRender();
+		m_ContentBrowserPanel->OnImGuiRender();
 
 		UI_Toolbar();
 		
@@ -568,10 +599,10 @@ namespace Vertex {
 	void EditorLayer::NewScene()
 	{
 		
-		VXEntities_RemoveScene(m_ActiveScene);
-		m_ActiveScene = VXEntities_MakeOrGetScene("ActiveScene");
+		delete m_ActiveScene;
+		m_ActiveScene = new Scene("ActiveScene");
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel->SetContext(m_ActiveScene);
 		m_EditorScene = m_ActiveScene;
 	}
 
@@ -580,7 +611,8 @@ namespace Vertex {
 		std::string filepath = FileDialogs::OpenFile("Vertex Scene (*.vertex)\0*.vertex\0");
 		if (!filepath.empty())
 		{
-			OpenScene(filepath);
+			
+			OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(filepath));
 			return true;
 		}
 		return false;
@@ -596,23 +628,29 @@ namespace Vertex {
 		}
 	}
 
-	void EditorLayer::OpenScene(const std::filesystem::path& path)
+	void EditorLayer::OpenScene(AssetHandle handle)
 	{
 		if (m_SceneState != SceneState::Edit)
 			OnSceneStop();
 
 		NewScene();
 
-		SceneSerializer serializer(&m_EditorScene);
-		if(serializer.Deserialize(path.string()));
-		{
-			m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_SceneHierarchyPanel.SetContext(m_EditorScene);
+		Scene* readOnlyScene = (Scene*)(void*)(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->GetAsset(handle).get());
+		Scene* newScene = Scene::Copy(readOnlyScene, std::string("ActiveScene"));
 
-			m_ActiveScene = m_EditorScene;
-			m_EditorScenePath = path;
-		}
-		m_EditorScene->CreateEntity< ENTProp2DCircle>("Circle");
+		//SceneSerializer serializer(&m_EditorScene);
+		//if(serializer.Deserialize(path.string()));
+		//{
+		//	m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		//	m_SceneHierarchyPanel->SetContext(m_EditorScene);
+//
+	//		m_ActiveScene = m_EditorScene;
+	//		m_EditorScenePath = path;
+	//	}
+		m_EditorScene = newScene;
+		m_SceneHierarchyPanel->SetContext(m_EditorScene);
+
+		m_ActiveScene = m_EditorScene;
 	}
 
 	void EditorLayer::SaveScene()
@@ -636,7 +674,7 @@ namespace Vertex {
 		m_ActiveScene = Scene::Copy(m_EditorScene, std::string("Runtime"));
 		m_ActiveScene->OnRuntimeStart();
 
-		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel->SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnSceneStop()
@@ -644,10 +682,10 @@ namespace Vertex {
 		m_SceneState = SceneState::Edit;
 
 		m_ActiveScene->OnRuntimeStop();
-		VXEntities_RemoveScene(m_ActiveScene);
+		delete m_ActiveScene;
 		m_ActiveScene = m_EditorScene;
 
-		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel->SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::UI_Toolbar()

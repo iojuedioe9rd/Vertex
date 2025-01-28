@@ -44,42 +44,18 @@ namespace Vertex
 		}
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification)
-		: m_Specification(specification), m_Width(m_Specification.Width), m_Height(m_Specification.Height)
-	{
-		// Set data format and internal format based on the specification
-		m_DataFormat = Utils::VertexImageFormatToGLDataFormat(m_Specification.Format);
-		m_InternalFormat = Utils::VertexImageFormatToGLInternalFormat(m_Specification.Format);
-
-		// Create the texture object
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-
-		// Allocate storage for the texture with a specified internal format
-		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
-
-		// Set texture filtering (linear for minification, nearest for magnification)
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);  // GL_LINEAR_MIPMAP_LINEAR if mipmaps are used
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		// Set texture wrapping modes
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-		// If mipmaps are to be used, generate them now
-		if (m_Specification.GenerateMips) {
-			glGenerateTextureMipmap(m_RendererID);
-		}
-
-		// Optional: set pixel storage mode (if necessary)
-		// glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Example if needed
-
-		// Error checking: optional for development mode
-		GLenum err = glGetError();
-		if (err != GL_NO_ERROR) {
-			// Handle error (you can log or throw exceptions as needed)
-			VX_CORE_ERROR("OpenGL Error during texture creation: {0}", err);
-		}
-	}
+#define NEW_GL_TEX(tex, InternalFormat, Width, Height, DataFormat) \
+    glCreateTextures(GL_TEXTURE_2D, 1, &tex); \
+	glBindTexture(GL_TEXTURE_2D, tex); \
+	glTexImage2D(GL_TEXTURE_2D, 0, InternalFormat, Width, Height, 0, DataFormat, GL_UNSIGNED_BYTE, nullptr);\
+\
+	glTextureParameteri(tex, GL_TEXTURE_MIN_FILTER, GL_LINEAR);\
+	glTextureParameteri(tex, GL_TEXTURE_MAG_FILTER, GL_NEAREST);\
+\
+	glTextureParameteri(tex, GL_TEXTURE_WRAP_S, GL_REPEAT);\
+	glTextureParameteri(tex, GL_TEXTURE_WRAP_T, GL_REPEAT) \
+	\
+	
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
 		: m_Path(path), m_Name(path)
@@ -106,18 +82,30 @@ namespace Vertex
 
 		VX_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
 
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
-
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat);
 
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 
 		stbi_image_free(data);
+	}
+
+	OpenGLTexture2D::OpenGLTexture2D(const TextureSpecification& specification, Buffer* data)
+		:m_Width(specification.Width), m_Height(specification.Height)
+	{
+		VX_PROFILE_FUNCTION();
+
+		m_Specification = specification;
+
+		m_Width = specification.Width;
+		m_Height = specification.Height;
+
+		m_InternalFormat = Utils::VertexImageFormatToGLInternalFormat(m_Specification.Format);
+		m_DataFormat = Utils::VertexImageFormatToGLDataFormat(m_Specification.Format);
+
+		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat);
+
+		if (data)
+			SetData(data);
 	}
 
 	OpenGLTexture2D::OpenGLTexture2D(int resID, const std::string& format) :
@@ -145,14 +133,7 @@ namespace Vertex
 
 		VX_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
 
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-		glTextureStorage2D(m_RendererID, 1, m_InternalFormat, m_Width, m_Height);
-
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat);
 
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 
@@ -223,6 +204,120 @@ namespace Vertex
 		VX_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!" + std::to_string(expectedSize));
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
+
+	void OpenGLTexture2D::SetData(Buffer* data)
+	{
+		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+		uint32_t expectedSize = m_Width * m_Height * bpp;
+		VX_CORE_ASSERT(data->Size == m_Width * m_Height * bpp, "Data must be entire texture! " + std::to_string(expectedSize));
+		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data->Data);
+	}
+
+	void OpenGLTexture2D::Resize(uint32_t newWidth, uint32_t newHeight, bool aspect_ratio)
+	{
+		// Check if size is changing
+		if (newWidth == m_Width && newHeight == m_Height) {
+			std::cout << "Texture size is already the same, no resize needed." << std::endl;
+			return;
+		}
+
+		glm::ivec2 size = glm::ivec2{ newWidth, newHeight };
+
+		if (aspect_ratio) {
+			if (m_Width != 0 && m_Height != 0) {
+				float currentAspectRatio = static_cast<float>(m_Width) / static_cast<float>(m_Height);
+
+				// Scale the new size to fit inside the target size, maintaining the aspect ratio
+				if (static_cast<float>(newWidth) / newHeight > currentAspectRatio) {
+					// Fit to height
+					size.y = newHeight;
+					size.x = static_cast<int>(newHeight * currentAspectRatio);
+				}
+				else {
+					// Fit to width
+					size.x = newWidth;
+					size.y = static_cast<int>(newWidth / currentAspectRatio);
+				}
+			}
+		}
+
+		// Ensure new size is valid
+		if (newWidth == 0 || newHeight == 0) {
+			std::cerr << "Invalid texture size: " << newWidth << "x" << newHeight << std::endl;
+			return;
+		}
+
+		// Update the texture size
+		newWidth = static_cast<uint32_t>(size.x);
+		newHeight = static_cast<uint32_t>(size.y);
+
+		std::cout << "Resizing texture to: " << newWidth << "x" << newHeight << std::endl;
+
+		uint32_t newTex2D;
+		NEW_GL_TEX(newTex2D, m_InternalFormat, newWidth, newHeight, m_DataFormat);
+
+		// Check for any OpenGL errors before framebuffer generation
+		GLenum err = glGetError();
+		if (err != GL_NO_ERROR) {
+			std::cerr << "OpenGL error before glGenFramebuffers: " << std::endl;
+		}
+
+		GLuint fboIds[2]{ 0 };
+
+		// Ensure no framebuffers are bound before generating new ones
+		glBindFramebuffer(GL_FRAMEBUFFER, 0); // Unbind any active framebuffer
+
+		glGenFramebuffers(2, fboIds);
+
+		// Check if there were any OpenGL errors after generating framebuffers
+		err = glGetError();
+		if (err != GL_NO_ERROR) {
+			std::cerr << "OpenGL error after glGenFramebuffers: " << std::endl;
+			return;
+		}
+
+		std::cout << "Generated framebuffers with IDs: " << fboIds[0] << " and " << fboIds[1] << std::endl;
+
+		// Attach the old texture to the read framebuffer
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, fboIds[0]);
+		glFramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_RendererID, 0);
+
+		// Attach the new texture to the draw framebuffer
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fboIds[1]);
+		glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, newTex2D, 0);
+
+		// Perform the blit operation to center the texture
+		int xOffset = (newWidth - size.x) / 2;
+		int yOffset = (newHeight - size.y) / 2;
+		glBlitFramebuffer(0, 0, m_Width, m_Height, xOffset, yOffset, xOffset + size.x, yOffset + size.y, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+		// Check if there were any OpenGL errors during the blit operation
+		err = glGetError();
+		if (err != GL_NO_ERROR) {
+			
+		}
+
+		std::cout << "Blit completed." << std::endl;
+
+		// Clean up the old texture and framebuffer
+		glDeleteTextures(1, &m_RendererID);
+		glDeleteFramebuffers(2, fboIds);
+
+		// Update the texture reference and size
+		m_RendererID = newTex2D;
+		m_Width = newWidth;
+		m_Height = newHeight;
+
+		m_Specification.Width = newWidth;
+		m_Specification.Height = newHeight;
+
+		std::cout << "Texture resized successfully." << std::endl;
+	}
+
+
+
+
+
 
 	OpenGLTexture2D::~OpenGLTexture2D()
 	{

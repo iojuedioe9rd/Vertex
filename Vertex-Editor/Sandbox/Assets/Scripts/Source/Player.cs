@@ -14,6 +14,8 @@ namespace Sandbox
         public float Time = 0.0f;
         public float JumpTime = 0.0f;
 
+        public Audio audio = new Audio("assets/music/idk.wav", true);
+
         public Player(string uuid) : base(uuid)
         {
         }
@@ -27,6 +29,8 @@ namespace Sandbox
             Logger.Info("Run 2");
             Type = BodyType.Dynamic;
             base.OnCreate();
+
+            audio.Play();
 
         }
 

@@ -3,17 +3,22 @@
 #include <Vertex/Core/OrthographicCameraController.h>
 #include <Vertex/Renderer/Framebuffer.h>
 #include <Vertex/Renderer/Texture.h>
-#include "VXEntities.h"
+#include "Vertex/Scene/Entities/Entities.h"
 #include "Panels/SceneHierarchyPanel.h"
 #include <Vertex/Events/KeyEvent.h>
 #include <Vertex/Events/Event.h>
-#include <VXEntities/Scene/EditorCamera.h>
+#include <Vertex/Scene/EditorCamera.h>
 #include "Panels/ContentBrowserPanel.h"
 #include "Vertex/Renderer/Mesh.h"
 #include "Vertex/Renderer/Font.h"
 #include <filesystem>
+#include <Vertex/AssetManager/EditorAssetManager.h>
+
+
 
 namespace Vertex {
+
+
 
 	class EditorLayer : public Layer
 	{
@@ -34,7 +39,7 @@ namespace Vertex {
 		void NewScene();
 		bool OpenScene();
 		void SaveSceneAs();
-		void OpenScene(const std::filesystem::path& path);
+		void OpenScene(AssetHandle handle);
 		void SaveScene();
 
 		void SerializeScene(Scene* scene, const std::filesystem::path& path);
@@ -46,6 +51,7 @@ namespace Vertex {
 		void UI_Toolbar();
 	private:
 
+		
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
@@ -90,8 +96,8 @@ namespace Vertex {
 		int m_GizmoType = -1;
 
 		// Panels
-		SceneHierarchyPanel m_SceneHierarchyPanel;
-		ContentBrowserPanel m_ContentBrowserPanel;
+		SceneHierarchyPanel* m_SceneHierarchyPanel;
+		ContentBrowserPanel* m_ContentBrowserPanel;
 
 		enum class SceneState
 		{

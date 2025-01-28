@@ -89,9 +89,38 @@ namespace Vertex
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static string Object_GenerateUUID();
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static UInt64 Object_GenerateIntUUID();
+
+        #endregion
+
+        #region Audio
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static UInt64 Audio_CreateSound(string filename, bool looped);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Audio_PlaySound(UInt64 soundID);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Audio_StopSound(UInt64 soundID);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Audio_SetSoundVolume(UInt64 soundID, float volume);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Audio_SetSoundLooped(UInt64 soundID, bool looped);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Audio_SetSoundPitch(UInt64 soundID, float pitch);
+
+
+
+
         #endregion
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static object GetScriptInstance(string entityID);
+
+        
     }
 }

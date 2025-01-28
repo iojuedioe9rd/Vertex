@@ -2,7 +2,9 @@
 
 #include <string>
 
+#include "Vertex/AssetManager/Asset.h"
 #include "Vertex/Core/Base.h"
+#include "Vertex/Core/Buffer.h"
 
 namespace Vertex {
 
@@ -22,7 +24,7 @@ namespace Vertex {
 		bool GenerateMips = true;
 	};
 
-	class VERTEX_API Texture
+	class VERTEX_API Texture : public Asset
 	{
 	public:
 		virtual uint32_t GetWidth() const = 0;
@@ -34,6 +36,7 @@ namespace Vertex {
 		virtual const std::string& GetPath() const = 0;
 
 		virtual void SetData(void* data, uint32_t size) = 0;
+		virtual void SetData(Buffer* data) = 0;
 
 		virtual void Bind(uint32_t slot = 0) const = 0;
 
@@ -46,10 +49,15 @@ namespace Vertex {
 
 		virtual void ToFile(std::filesystem::path filepath) const = 0;
 
-		static Ref<Texture2D> Create(const TextureSpecification& specification);
+		
 		static Ref<Texture2D> Create(const std::string& path);
+		static Ref<Texture2D> Create(const TextureSpecification& specification, Buffer* data = nullptr);
 
 		static Ref<Texture2D> CreateWin(int resID, const std::string& format);
+		static AssetType GetStaticType() { return AssetType::Texture2D; }
+		virtual AssetType GetType() const { return GetStaticType(); }
+
+		virtual void Resize(uint32_t newWidth, uint32_t newHeight, bool aspect_ratio = 0) = 0;
 	};
 
 	class VERTEX_API Texture2DAnimated : public Texture2D

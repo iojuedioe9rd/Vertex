@@ -11,6 +11,8 @@
 
 bool isInit = 0;
 
+uint16_t Vertex::WindowsAudio::s_RefCount = 0;
+
 
 ma_engine engine;
 
@@ -18,11 +20,11 @@ namespace Vertex {
 
 
 
-	WindowsAudio::WindowsAudio(const char* filepath, bool loop)
+	WindowsAudio::WindowsAudio(std::filesystem::path filepath, bool loop)
 		: m_filepath(filepath), m_loop(loop)
 	{
 		
-		if (!isInit)
+		if (s_RefCount == 0)
 		{
 			ma_result result = ma_engine_init(NULL, &engine);
 			if (result != MA_SUCCESS) {
@@ -31,13 +33,14 @@ namespace Vertex {
 
 			
 
-			isInit = 1;
+			
 		}
-
+		s_RefCount++;
 		{
+			
 			ma_result result;
 
-			result = ma_sound_init_from_file(&engine, m_filepath, 0, NULL, NULL, &m_sound);
+			result = ma_sound_init_from_file(&engine, m_filepath.generic_string().c_str(), 0, NULL, NULL, &m_sound);
 
 			if (result != MA_SUCCESS) {
 				VX_CORE_ASSERT(0, "AUDIO ERORR!");
@@ -47,15 +50,23 @@ namespace Vertex {
 
 	}
 
+	
+
 	WindowsAudio::~WindowsAudio()
 	{
+		s_RefCount--;
 		ma_sound_uninit(&m_sound);
+
+		if (s_RefCount == 0)
+		{
+			ma_engine_uninit(&engine);
+		}
 	}
 
 	void WindowsAudio::Play()
 	{
 		
-		VX_CORE_INFO("Playing Audio: {0}", m_filepath);
+		VX_CORE_INFO("Playing Audio: {0}", m_filepath.generic_string().c_str());
 
 		
 
@@ -64,6 +75,7 @@ namespace Vertex {
 
 	void WindowsAudio::Stop()
 	{
+		ma_sound_stop(&m_sound);
 	}
 
 }

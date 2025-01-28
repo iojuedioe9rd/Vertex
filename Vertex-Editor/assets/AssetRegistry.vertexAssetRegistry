@@ -1,0 +1,37 @@
+AssetRegistry:
+  - Handle: 2256841378216630278
+    FilePath: assets/scenes/Map 1.vertex
+    Type: AssetType::Scene
+  - Handle: 7348931252228293333
+    FilePath: assets/scenes/Example.vertex
+    Type: AssetType::Scene
+  - Handle: 7926837743478694378
+    FilePath: Resources/Icons/ContentBrowser/FileIcon.png
+    Type: AssetType::Texture2D
+  - Handle: 9589584025894344374
+    FilePath: assets/scenes/Physics2D.vertex
+    Type: AssetType::Scene
+  - Handle: 10190858570006511628
+    FilePath: assets/textures/Player.png
+    Type: AssetType::Texture2D
+  - Handle: 10736350068812820700
+    FilePath: assets/textures/Player16K.png
+    Type: AssetType::Texture2D
+  - Handle: 11058595842515328458
+    FilePath: assets/textures/Checkerboard.png
+    Type: AssetType::Texture2D
+  - Handle: 11140818739465938016
+    FilePath: assets/music/idk.wav
+    Type: AssetType::Audio
+  - Handle: 11667063466720132758
+    FilePath: Resources/Icons/PlayButton.png
+    Type: AssetType::Texture2D
+  - Handle: 12686941162834639214
+    FilePath: E:/Games_In_C++/11/Vertex/Vertex-Editor/assets/scenes/Example.vertex
+    Type: AssetType::Scene
+  - Handle: 12865700962839472594
+    FilePath: Resources/Icons/StopButton.png
+    Type: AssetType::Texture2D
+  - Handle: 12919244949126054593
+    FilePath: Resources/Icons/ContentBrowser/DirectoryIcon.png
+    Type: AssetType::Texture2D

@@ -2,7 +2,7 @@
 
 #include "Vertex/Core/Base.h"
 #include "Vertex/Core/Logger.h"
-#include "VXEntities.h"
+#include "Vertex/Scene/Entities/Entities.h"
 
 namespace Vertex {
 	

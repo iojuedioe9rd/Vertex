@@ -5,7 +5,7 @@ namespace Vertex
 {
 	struct AudioManagerData
 	{
-		std::map<const char*, Audio*> AudioDictionary;
+		std::map<const std::filesystem::path, Audio*> AudioDictionary;
 	};
 
 	static AudioManagerData* s_Data;
@@ -14,6 +14,7 @@ namespace Vertex
 
 	bool AudioManager::Init()
 	{
+		if (s_main != nullptr) { return true; }
 		s_Data = new AudioManagerData();
 		bool v = true;
 
@@ -21,9 +22,14 @@ namespace Vertex
 
 		return v;
 	}
-	Audio* AudioManager::GetAudioFromFileName(const char* fileName, bool looping)
+	Audio* AudioManager::GetAudioFromFileName(const std::filesystem::path& fileName, bool looping)
 	{
 		Audio* audio = nullptr;
+
+		if (s_main == nullptr)
+		{
+			AudioManager::Init();
+		}
 
 		if (s_Data->AudioDictionary[fileName] != nullptr)
 		{
@@ -40,7 +46,7 @@ namespace Vertex
 		return audio;
 	}
 
-	void AudioManager::AddAudioFromObj(const char* fileName, Audio* obj)
+	void AudioManager::AddAudioFromObj(const std::filesystem::path& fileName, Audio* obj)
 	{
 		if (s_Data->AudioDictionary[fileName] != nullptr)
 		{

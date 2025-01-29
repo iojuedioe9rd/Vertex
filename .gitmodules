@@ -28,3 +28,6 @@
 [submodule "Engine/vendor/SPIRV-Cross"]
 	path = Engine/vendor/SPIRV-Cross
 	url = https://github.com/iojuedioe9rd/SPIRV-Cross
+[submodule "Engine/vendor/VertexAudio"]
+	path = Engine/vendor/VertexAudio
+	url = https://github.com/iojuedioe9rd/Vertex-Audio

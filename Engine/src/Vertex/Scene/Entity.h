@@ -10,6 +10,7 @@
 #include "Vertex/Object/SerializationObject.h"
 #include "SceneSerializer.h"
 #include "Vertex/AssetManager/AssetManager.h"
+#include "Vertex/Scene/Behaviour.h"
 
 
 
@@ -37,7 +38,6 @@ namespace Vertex {
 			m_name = name;
 			m_Scene = scene;
 
-			
 		}
 		Entity(const Entity& other) = default;
 
@@ -76,6 +76,16 @@ namespace Vertex {
 			return *child;
 		}
 
+		
+		Behaviour* AddBehaviour(const std::string& name)
+		{
+			Behaviour* behaviour = Behaviour::CreateBehaviour(name, this);
+			behaviour->OnCreate();
+
+			m_Behaviours.push_back(behaviour);
+
+			return behaviour;
+		}
 
 
 		bool removeChild(Entity& child)
@@ -136,6 +146,10 @@ namespace Vertex {
 		void UpdateTime(Timestep& ts)
 		{
 			Update(ts);
+			for (size_t i = 0; i < m_Behaviours.size(); i++)
+			{
+				m_Behaviours[i]->OnUpdate(ts);
+			}
 
 			for (Entity* ent : m_children)
 			{
@@ -159,6 +173,10 @@ namespace Vertex {
 			try
 			{
 				Draw(ts);
+				for (size_t i = 0; i < m_Behaviours.size(); i++)
+				{
+					m_Behaviours[i]->OnDraw();
+				}
 
 				for (Entity* ent : m_children)
 				{
@@ -188,6 +206,11 @@ namespace Vertex {
 			for (Entity* ent : m_children)
 			{
 				ent->PhysUpdateTime(ts);
+			}
+
+			for (size_t i = 0; i < m_Behaviours.size(); i++)
+			{
+				m_Behaviours[i]->OnPhysUpdate(ts);
 			}
 		}
 
@@ -220,6 +243,15 @@ namespace Vertex {
 			obj.Set("Transform_Translation", SerializationType::Vector3, pos);
 			obj.Set("Transform_Size", SerializationType::Vector3, size);
 			obj.Set("Transform_Rotation", SerializationType::Vector3, rotation);
+
+			SerializationObjectArray BehavioursArray = SerializationObjectArray();
+			for (size_t i = 0; i < m_Behaviours.size(); i++)
+			{
+				BehavioursArray.Add(m_Behaviours[i]->Serialize());
+			}
+
+			obj.Set("Behaviours", SerializationType::SerializationObjectArray, BehavioursArray);
+
 			return obj;
 		}
 
@@ -230,6 +262,21 @@ namespace Vertex {
 			pos = obj.Get<glm::vec3>("Transform_Translation", SerializationType::Vector3);
 			size = obj.Get<glm::vec3>("Transform_Size", SerializationType::Vector3); // Updated for glm::vec3
 			rotation = obj.Get<glm::vec3>("Transform_Rotation", SerializationType::Vector3); // Handle rotation as glm::vec3
+
+			SerializationObjectArray BehavioursArray = obj.Get<SerializationObjectArray>("Behaviours", SerializationType::SerializationObjectArray);
+			std::vector<SerializationObject> BehavioursArrayRawData = BehavioursArray.GetAll();
+
+			for (size_t i = 0; i < BehavioursArrayRawData.size(); i++)
+			{
+				SerializationObject Data = BehavioursArrayRawData[i];
+				Behaviour* behaviour = AddBehaviour(Data.Get<std::string>("BehaviourType", SerializationType::String));
+				behaviour->SetID(Data.Get<std::string>("Behaviour", SerializationType::String));
+				behaviour->DeSerialize(Data);
+
+				m_Behaviours.push_back(behaviour);
+			}
+
+
 			return true;
 		}
 
@@ -250,7 +297,7 @@ namespace Vertex {
 		
 		bool m_isVisible = true;
 
-
+		std::vector<Behaviour*> m_Behaviours;
 		
 
 		friend class Scene;

@@ -92,7 +92,9 @@ namespace Vertex {
 				std::string type = std::string(ent_type_buffer);
 
 				// EZ way to create entities
-				m_Context->CreateEntity(type, tag);
+				m_SelectionContext = m_Context->CreateEntity(type, tag);
+				m_SelectionContext->AddBehaviour("move_to_pos_and_back");
+
 			}
 
 			ImGuiLink::End();

@@ -374,6 +374,9 @@ namespace Vertex {
 
 		if (m_PhysicsWorld != nullptr)
 		{
+
+
+
 			const int32_t velocityIterations = 6 * 2;
 			const int32_t positionIterations = 2 * 2;
 			m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);

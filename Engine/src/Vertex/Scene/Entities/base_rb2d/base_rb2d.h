@@ -24,6 +24,7 @@ namespace Vertex
 		~ENTBaseRigidbody2D();
 
 		virtual void PhysUpdate(Timestep& ts) override;
+		virtual void Update(Timestep& ts) override;
 		
 		virtual SerializationObject Serialize() override
 		{

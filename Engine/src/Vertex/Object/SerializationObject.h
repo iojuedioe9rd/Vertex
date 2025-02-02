@@ -33,9 +33,11 @@ namespace Vertex
 		Vector3Int = 17,
 		Vector4Int = 18,
 		Colour = 19,
-		SerializationObject = 20
-
+		SerializationObject = 20,
+		SerializationObjectArray = 21
 	};
+
+	
 
 	class VERTEX_API SerializationObject : public Object
 	{
@@ -127,5 +129,52 @@ namespace Vertex
 	public:
 
 		
+	};
+
+	class VERTEX_API SerializationObjectArray : public Object
+	{
+	public:
+		SerializationObjectArray() = default;
+		SerializationObjectArray(const SerializationObjectArray& other) = default;
+		SerializationObjectArray(std::vector<SerializationObject> data)
+			: m_data(data)
+		{
+		}
+		std::vector<SerializationObject> GetAll() const
+		{
+			return m_data;
+		}
+		void Add(SerializationObject data)
+		{
+			m_data.push_back(data);
+		}
+		void Remove(SerializationObject data)
+		{
+			for (auto it = m_data.begin(); it != m_data.end(); it++)
+			{
+				if (*it == data)
+				{
+					m_data.erase(it);
+					return;
+				}
+			}
+		}
+		bool Contains(SerializationObject data) const
+		{
+			for (auto& d : m_data)
+			{
+				if (d == data)
+					return true;
+			}
+			return false;
+		}
+
+		int Size() const
+		{
+			return m_data.size();
+		}
+
+	private:
+		std::vector<SerializationObject> m_data;
 	};
 }

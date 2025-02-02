@@ -26,6 +26,7 @@ SerializationType StringToSerializationType(const std::string& typeStr) {
 	if (typeStr == "Vector4Int") return SerializationType::Vector4Int;
 	if (typeStr == "Colour") return SerializationType::Colour;
 	if (typeStr == "SerializationObject") return SerializationType::SerializationObject;
+	if (typeStr == "SerializationObjectArray") return SerializationType::SerializationObjectArray;
 	throw std::runtime_error("Unknown serialization type: " + typeStr);
 }
 
@@ -219,6 +220,7 @@ namespace YAML {
 					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector4Int, glm::ivec4, d);
 					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Colour, glm::vec4, d);
 					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, SerializationObject, Vertex::SerializationObject, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, SerializationObjectArray, Vertex::SerializationObjectArray, d);
 				default:
 					throw std::runtime_error("Unsupported type during encoding");
 				}
@@ -258,9 +260,36 @@ namespace YAML {
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector4Int, glm::ivec4, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Colour, glm::vec4, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObject, Vertex::SerializationObject, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObjectArray, Vertex::SerializationObjectArray, rhs, name);
 				default:
 					throw std::runtime_error("Unsupported type during decoding: " + typeStr);
 				}
+			}
+			return true;
+		}
+	};
+
+	template <>
+	struct convert<::Vertex::SerializationObjectArray> {
+		// Note: The encode function must take a const reference.
+		static Node encode(const ::Vertex::SerializationObjectArray& rhs) {
+			Node node;
+			node["Size"] = rhs.Size();
+			
+			for (size_t i = 0; i < rhs.Size(); i++)
+			{
+				node["E" + std::to_string(i)] = rhs.GetAll()[i];
+			}
+
+			return node;
+		}
+		static bool decode(const Node& node, ::Vertex::SerializationObjectArray& rhs) {
+			if (!node.IsMap())
+				return false;
+			int size = node["Size"].as<int>();
+			for (int i = 0; i < size; i++)
+			{
+				rhs.Add(node["E" + std::to_string(i)].as<::Vertex::SerializationObject>());
 			}
 			return true;
 		}
@@ -425,7 +454,7 @@ namespace Vertex {
 			out << YAML::EndMap; // ENT Prop Text
 		}
 
-		if (!IS_ENGINE_ENT(entity))
+		if (true)
 		{
 			out << YAML::Key << "CustomEntity";
 			out << YAML::BeginMap; // Custom Entity
@@ -889,7 +918,7 @@ namespace Vertex {
 			}
 		}
 
-		if (!IS_ENGINE_ENT(entity))
+		if (true)
 		{
 			auto customEntityNode = node["CustomEntity"];
 			if (customEntityNode)

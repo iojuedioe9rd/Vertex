@@ -11,7 +11,50 @@
 
 extern "C" uint64_t CustomChecksumAsm(const char* data, uint64_t length, uint64_t initialSeed, uint64_t rotateAmount, uint64_t additiveFactor, uint64_t rotateCount);
 
+// Assume you have a helper function to convert a string back to your enum:
+SerializationType StringToSerializationType(const std::string& typeStr) {
+	if (typeStr == "Bool") return SerializationType::Bool;
+	if (typeStr == "Int") return SerializationType::Int;
+	if (typeStr == "Float") return SerializationType::Float;
+	if (typeStr == "Double") return SerializationType::Double;
+	if (typeStr == "String") return SerializationType::String;
+	if (typeStr == "Vector2") return SerializationType::Vector2;
+	if (typeStr == "Vector3") return SerializationType::Vector3;
+	if (typeStr == "Vector4") return SerializationType::Vector4;
+	if (typeStr == "Vector2Int") return SerializationType::Vector2Int;
+	if (typeStr == "Vector3Int") return SerializationType::Vector3Int;
+	if (typeStr == "Vector4Int") return SerializationType::Vector4Int;
+	if (typeStr == "Colour") return SerializationType::Colour;
+	if (typeStr == "SerializationObject") return SerializationType::SerializationObject;
+	throw std::runtime_error("Unknown serialization type: " + typeStr);
+}
+
+
 namespace YAML {
+
+#define WRITE_SERIALIZED_OBJECT_FIELD(Node, FieldType, Type, SerializationData)  \
+    case SerializationType::FieldType: {                                         \
+        Node["Type"] = #FieldType;                                               \
+        if(SerializationData.value.type() == typeid(Type)) {                      \
+            Node["Data"] = std::any_cast<Type>(SerializationData.value);          \
+        } else {                                                                 \
+            throw std::runtime_error("Invalid type in SerializationData");       \
+        }                                                                        \
+        break;                                                                   \
+    }
+
+	// Macro to read a field from a YAML node and set it in the SerializationObject.
+// Node: the YAML node containing the data (i.e. dataValueNode)
+// FieldType: the name of the field as defined in your SerializationType enum (e.g. Bool, Int, etc.)
+// Type: the C++ type to convert the YAML value to (e.g. bool, int, glm::vec2, etc.)
+// SerializationObject: the target object (rhs) on which to call Set
+// Name: the field name (a std::string) that was read from the YAML node
+#define READ_SERIALIZED_OBJECT_FIELD(Node, FieldType, Type, SerializationObject, Name)  \
+    case SerializationType::FieldType: {                                              \
+        Type value = Node.as<Type>();                                                 \
+        SerializationObject.Set(Name, SerializationType::FieldType, value);           \
+        break;                                                                        \
+    }
 
 	template<>
 	struct convert<glm::vec2>
@@ -77,6 +120,151 @@ namespace YAML {
 			return true;
 		}
 	};
+
+	template<>
+	struct convert<glm::ivec2>
+	{
+		static Node encode(const glm::ivec2& rhs)
+		{
+			Node node;
+			node.push_back(rhs.x);
+			node.push_back(rhs.y);
+			node.SetStyle(EmitterStyle::Flow);
+			return node;
+		}
+		static bool decode(const Node& node, glm::ivec2& rhs)
+		{
+			if (!node.IsSequence() || node.size() != 2)
+				return false;
+			rhs.x = node[0].as<int>();
+			rhs.y = node[1].as<int>();
+			return true;
+		}
+	};
+	template<>
+	struct convert<glm::ivec3>
+	{
+		static Node encode(const glm::ivec3& rhs)
+		{
+			Node node;
+			node.push_back(rhs.x);
+			node.push_back(rhs.y);
+			node.push_back(rhs.z);
+			return node;
+		}
+		static bool decode(const Node& node, glm::ivec3& rhs)
+		{
+			if (!node.IsSequence() || node.size() != 3)
+				return false;
+			rhs.x = node[0].as<int>();
+			rhs.y = node[1].as<int>();
+			rhs.z = node[2].as<int>();
+			return true;
+		}
+	};
+	template<>
+	struct convert<glm::ivec4>
+	{
+		static Node encode(const glm::ivec4& rhs)
+		{
+			Node node;
+			node.push_back(rhs.x);
+			node.push_back(rhs.y);
+			node.push_back(rhs.z);
+			node.push_back(rhs.w);
+			return node;
+		}
+		static bool decode(const Node& node, glm::ivec4& rhs)
+		{
+			if (!node.IsSequence() || node.size() != 4)
+				return false;
+			rhs.x = node[0].as<int>();
+			rhs.y = node[1].as<int>();
+			rhs.z = node[2].as<int>();
+			rhs.w = node[3].as<int>();
+			return true;
+		}
+	};
+
+
+
+	template <>
+	struct convert<::Vertex::SerializationObject> {
+		// Note: The encode function must take a const reference.
+		static Node encode(const ::Vertex::SerializationObject& rhs) {
+			Node node;
+			std::vector<::Vertex::SerializationObject::SerializationData> data = rhs.GetAll();
+			for (const auto& d : data) {
+				Node dataNode;
+				dataNode["Name"] = d.name;
+				
+				switch (d.type) {
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Bool, bool, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Int8, int8_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Int16, int16_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Int32, int32_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Int64, int64_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Uint8, uint8_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Uint16, uint16_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Uint32, uint32_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Uint64, uint64_t, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Float, float, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Double, double, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, String, std::string, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector2, glm::vec2, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector3, glm::vec3, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector4, glm::vec4, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector2Int, glm::ivec2, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector3Int, glm::ivec3, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Vector4Int, glm::ivec4, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, Colour, glm::vec4, d);
+					WRITE_SERIALIZED_OBJECT_FIELD(dataNode, SerializationObject, Vertex::SerializationObject, d);
+				default:
+					throw std::runtime_error("Unsupported type during encoding");
+				}
+				node.push_back(dataNode);
+			}
+			return node;
+		}
+
+		static bool decode(const Node& node, ::Vertex::SerializationObject& rhs) {
+			if (!node.IsSequence())
+				return false;
+			for (std::size_t i = 0; i < node.size(); ++i) {
+				const Node& dataNode = node[i];
+				std::string name;
+				std::string typeStr;
+				try {
+					name = dataNode["Name"].as<std::string>();
+					typeStr = dataNode["Type"].as<std::string>();
+				}
+				catch (const YAML::Exception& e) {
+					throw std::runtime_error("Failed to read Name or Type: " + std::string(e.what()));
+				}
+				SerializationType type = StringToSerializationType(typeStr);
+				const Node& dataValueNode = dataNode["Data"];
+				switch (type) {
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Bool, bool, rhs, name);
+
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int, int, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Float, float, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Double, double, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, String, std::string, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector2, glm::vec2, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector3, glm::vec3, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector4, glm::vec4, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector2Int, glm::ivec2, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector3Int, glm::ivec3, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Vector4Int, glm::ivec4, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Colour, glm::vec4, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObject, Vertex::SerializationObject, rhs, name);
+				default:
+					throw std::runtime_error("Unsupported type during decoding: " + typeStr);
+				}
+			}
+			return true;
+		}
+	};
 }
 
 namespace Vertex {
@@ -92,6 +280,8 @@ namespace Vertex {
 		fieldInstance.SetValue(data);                  \
 		break;                                         \
 	}
+
+
 
 	YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec2& v)
 	{
@@ -111,6 +301,14 @@ namespace Vertex {
 	{
 		out << YAML::Flow;
 		out << YAML::BeginSeq << v.x << v.y << v.z << v.w << YAML::EndSeq;
+		return out;
+	}
+
+	inline YAML::Emitter& operator<<(YAML::Emitter& out, const Vertex::SerializationObject& ser) {
+		// Convert the object into a YAML::Node using your existing conversion
+		YAML::Node node = YAML::convert<Vertex::SerializationObject>::encode(ser);
+		// Dump the node to a string and stream it.
+		out << node;
 		return out;
 	}
 
@@ -151,6 +349,17 @@ namespace Vertex {
 		}
 		return sanitized;
 	}
+
+#define IS_ENGINE_ENT(ent) \
+(\
+	ent->GetEntName() == "prop_static_sprite" ||\
+	ent->GetEntName() == "env_script" ||\
+	ent->GetEntName() == "prop_dynamic_sprite" ||\
+	ent->GetEntName() == "point_camera_2d" ||\
+	ent->GetEntName() == "env_static_tilemap" ||\
+	ent->GetEntName() == "prop_2d_circle"\
+)\
+
 
 	void SceneSerializer::SerializeEntity(YAML::Emitter& out, Entity* entity)
 	{
@@ -214,6 +423,16 @@ namespace Vertex {
 			out << YAML::EndMap; // TextParams
 
 			out << YAML::EndMap; // ENT Prop Text
+		}
+
+		if (!IS_ENGINE_ENT(entity))
+		{
+			out << YAML::Key << "CustomEntity";
+			out << YAML::BeginMap; // Custom Entity
+
+			out << YAML::Key << "Fields"  << entity->Serialize();
+
+			out << YAML::EndMap; // Custom Entity
 		}
 
 		if (entity->GetEntName() == "prop_static_sprite")
@@ -432,35 +651,7 @@ namespace Vertex {
 			//EntityType
 
 			Entity* entity = nullptr; // Assume CreateEntity creates the entity
-			if (entityType == "prop_static_sprite")
-			{
-				entity = &m_Scene->CreateEntity<ENTPropStaticSprite>(entityID);
-			}
-			if (entityType == "prop_2d_circle")
-			{
-				entity = &m_Scene->CreateEntity<ENTProp2DCircle>(entityID);
-			}
-			if (entityType == "prop_text_2d")
-			{
-				entity = &m_Scene->CreateEntity<ENTPropText2D>(entityID);
-			}
-			if (entityType == "prop_dynamic_sprite")
-			{
-				entity = &m_Scene->CreateEntity<ENTPropDynamicSprite>(entityID);
-			}
-			if (entityType == "point_camera_2d")
-			{
-				entity = &m_Scene->CreateEntity<ENTPointCamera2D>(entityID);
-				
-			}
-			if (entityType == "env_static_tilemap")
-			{
-				entity = &m_Scene->CreateEntity<ENTEnvStaticTilemap>(entityID);
-			}
-			if (entityType == "env_script")
-			{
-				entity = &m_Scene->CreateEntity<ENTEnvScript>(entityID);
-			}
+			entity = m_Scene->CreateEntity(entityType, entityID);
 			if (entity) {
 				DeserializeEntity(entityNode, entity);
 			}
@@ -468,6 +659,8 @@ namespace Vertex {
 				VX_CORE_ASSERT(false, "Failed to create entity from ID");
 			}
 		}
+
+		m_Scene->OnPostDeserialize();
 
 		return true;
 	}
@@ -518,13 +711,14 @@ namespace Vertex {
 			out << YAML::EndMap; // ENT Prop Text
 		}*/
 
+
 		if (auto pt = dynamic_cast<ENTPropText*>(entity))
 		{
 			auto ptNode = node["ENTPropText"];
 
 			if (ptNode)
 			{
-				pt->text = node["Text"].as<std::string>();
+				pt->text = ptNode["Text"].as<std::string>();
 
 				auto TextParamsNode = ptNode["TextParams"];
 
@@ -692,6 +886,15 @@ namespace Vertex {
 				glm::vec4 colour = tileNode["Colour"].as<glm::vec4>();
 
 				tilemap->AddTile(pos, NULL, colour);
+			}
+		}
+
+		if (!IS_ENGINE_ENT(entity))
+		{
+			auto customEntityNode = node["CustomEntity"];
+			if (customEntityNode)
+			{
+				entity->DeSerialize(customEntityNode["Fields"].as<SerializationObject>());
 			}
 		}
 	}

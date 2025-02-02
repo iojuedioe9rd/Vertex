@@ -35,6 +35,29 @@ namespace Vertex
 		bool called = 0;
 		std::string classname;
 		SerializationObject obj;
+
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = Entity::Serialize();
+			obj.Set("Use Rigidbody 2D", SerializationType::Bool, useRB2D);
+			obj.Set("Classname", SerializationType::String, classname);
+			obj.Set("Script Object", SerializationType::SerializationObject, this->obj);
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			Entity::DeSerialize(obj);
+			useRB2D = obj.Get<bool>("Use Rigidbody 2D", SerializationType::Bool);
+			classname = obj.Get<std::string>("Classname", SerializationType::String);
+
+			if (obj.Contains("Script Object"))
+			{
+				this->obj = obj.Get<SerializationObject>("Script Object", SerializationType::SerializationObject);
+			}
+
+			return true;
+		}
 	private:
 		
 	};

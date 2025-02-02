@@ -2,6 +2,7 @@
 
 #include "Vertex/AssetManager/TextureImporter.h"
 #include <chrono>
+#include <Vertex/Core/Random.h>
 
 
 namespace Vertex
@@ -38,7 +39,7 @@ namespace Vertex
 		if (!texture)
 			return nullptr;
 
-		texture->Resize(255, 255, true);
+		texture->Resize(255 * (Random::Float() * 2.55f), 255 * (Random::Float() * 2.55f), true);
 
 		auto& cachedImage = m_CachedImages[assetPath];
 		cachedImage.Timestamp = timestamp;

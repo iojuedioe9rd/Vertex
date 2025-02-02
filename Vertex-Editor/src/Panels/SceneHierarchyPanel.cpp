@@ -91,36 +91,8 @@ namespace Vertex {
 				std::string tag = std::string(ent_name_buffer);
 				std::string type = std::string(ent_type_buffer);
 
-				if (type == "prop_static_sprite")
-				{
-					m_Context->CreateEntity<ENTPropStaticSprite>(tag);
-				}                       
-
-				if (type == "prop_dynamic_sprite")
-				{
-					m_Context->CreateEntity<ENTPropDynamicSprite>(tag);
-				}
-
-				if (type == "env_script")
-				{
-					m_Context->CreateEntity<ENTEnvScript>(tag);
-				}
-
-				if (type == "point_camera_2d")
-				{
-					ENTPointCamera2D* cam = &m_Context->CreateEntity<ENTPointCamera2D>(tag);
-					cam->isPrimary = false;
-				}
-
-				if (type == "prop_2d_circle")
-				{
-					m_Context->CreateEntity<ENTProp2DCircle>(tag);
-				}
-
-				if (type == "prop_text_2d")
-				{
-					m_Context->CreateEntity<ENTPropText2D>(tag);
-				}
+				// EZ way to create entities
+				m_Context->CreateEntity(type, tag);
 			}
 
 			ImGuiLink::End();
@@ -274,7 +246,7 @@ namespace Vertex {
 			std::string label = "None";
 			bool isTextureValid = false;
 
-			EditorAssetManager* AssetManager = ((EditorAssetManager*)(void*)g_AssetManagerBase.get());
+			EditorAssetManager* AssetManager = ((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get());
 
 			if (entity->texture!= 0)
 			{
@@ -343,7 +315,7 @@ namespace Vertex {
 			std::string label = "None";
 			bool isTextureValid = false;
 
-			EditorAssetManager* AssetManager = ((EditorAssetManager*)(void*)g_AssetManagerBase.get());
+			EditorAssetManager* AssetManager = ((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get());
 
 			if (entity->texture != 0)
 			{
@@ -478,48 +450,48 @@ namespace Vertex {
 		int ENTBaseRigidbody2DID = typeid(ENTBaseRigidbody2D).hash_code() + (int)script;
 		if (script->useRB2D && ImGuiLink::TreeNodeEx((void*)ENTBaseRigidbody2DID, ImGuiTreeNodeFlags_DefaultOpen, "Rigidbody 2D"))
 		{
-			if (!script->obj.HasField("RB2D density"))
+			if (!script->obj.Contains("RB2D density"))
 			{
-				script->obj.Add("RB2D density", 1.0f);
+				script->obj.Set("RB2D density", SerializationType::Float, 1.0f);
 			}
 
-			float density = script->obj.Get<float>("RB2D density");
+			float density = script->obj.Get<float>("RB2D density", SerializationType::Float);
 			if (ImGui::DragFloat("Density", &density, 0.01f, 0.0f, 1.0f)) 
 			{
-				script->obj.Add("RB2D density", density);
+				script->obj.Set("RB2D density", SerializationType::Float, density);
 			}
 
-			if (!script->obj.HasField("RB2D friction"))
+			if (!script->obj.Contains("RB2D friction"))
 			{
-				script->obj.Add("RB2D friction", 0.5f);
+				script->obj.Set("RB2D friction", SerializationType::Float, 0.5f);
 			}
 
-			float friction = script->obj.Get<float>("RB2D friction");
+			float friction = script->obj.Get<float>("RB2D friction", SerializationType::Float);
 			if (ImGui::DragFloat("Friction", &friction, 0.01f, 0.0f, 1.0f))
 			{
-				script->obj.Add("RB2D friction", friction);
+				script->obj.Set("RB2D friction", SerializationType::Float, friction);
 			}
 
-			if (!script->obj.HasField("RB2D restitution"))
+			if (!script->obj.Contains("RB2D restitution"))
 			{
-				script->obj.Add("RB2D restitution", 0.0f);
+				script->obj.Set("RB2D restitution", SerializationType::Float, 0.0f);
 			}
 
-			float restitution = script->obj.Get<float>("RB2D restitution");
+			float restitution = script->obj.Get<float>("RB2D restitution", SerializationType::Float);
 			if (ImGui::DragFloat("Restitution", &restitution, 0.01f, 0.0f, 1.0f))
 			{
-				script->obj.Add("RB2D restitution", restitution);
+				script->obj.Set("RB2D restitution", SerializationType::Float, restitution);
 			}
 
-			if (!script->obj.HasField("RB2D Restitution Threshold"))
+			if (!script->obj.Contains("RB2D Restitution Threshold"))
 			{
-				script->obj.Add("RB2D Restitution Threshold", 0.5f);
+				script->obj.Set("RB2D Restitution Threshold", SerializationType::Float, 0.5f);
 			}
 
-			float restitutionThreshold = script->obj.Get<float>("RB2D Restitution Threshold");
+			float restitutionThreshold = script->obj.Get<float>("RB2D Restitution Threshold", SerializationType::Float);
 			if (ImGui::DragFloat("Restitution Threshold", &restitutionThreshold, 0.01f, 0.0f, 1.0f))
 			{
-				script->obj.Add("RB2D Restitution Threshold", restitutionThreshold);
+				script->obj.Set("RB2D Restitution Threshold", SerializationType::Float, restitutionThreshold);
 			}
 
 			ImGuiLink::TreePop();

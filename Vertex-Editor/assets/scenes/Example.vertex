@@ -1,7 +1,8 @@
 Scene: Untitled
 Entities:
-  - Entity: qhq5qslx-isb5-6xoy-xcc9-0aatgobi1fxs-gohf15pmq33f1f-7nhz-s1mk-34xt-0igvfbbqnnnc-dfyqaa
+  - Entity: msqk-b8-pn-as-bfsdak-81xeyr7-g4-99-v9-pogplx-m2p
     Tag: Green Square
+    IntID: 4473985207640595341
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, 0, 0]
@@ -19,8 +20,10 @@ Entities:
       RestitutionThreshold: 0.5
     PropStaticSprite:
       Colour: [0, 1, 0, 1]
-  - Entity: lky36r7b-dm-v30h-2x72-zz6gdlo5s9ls-v259t6zc669m3a-yeg5-9fxz-d9oa-bigzsc530228-pmo454
+      TilingFactor: 1
+  - Entity: 2f1a-vp-7f-pm-fsvqat-qph7cy0-lt-nt-nq-ma0kgm-ocb
     Tag: Tilemap
+    IntID: 15864997980286816299
     EntityType: env_static_tilemap
     Transform:
       Translation: [0, 0, 0]
@@ -28,10 +31,11 @@ Entities:
       Rotation: [0, 0, 0]
     EnvStaticTilemap:
       Tiles:
-        - Pos: [1, 5, 0]
-          Colour: [0.200000003, 0.300000012, 0.800000012, 1]
-  - Entity: a6hnm7bx-vlh1-89z-ny5y-me5gg99hmmr-00q41ovhdyigy-pes1-8gk0-5ht0-35me7s76bbq-zc6aod
+        - Pos: [0, 0, 0]
+          Colour: [0, 0, 0, 0]
+  - Entity: gqx-23-zz-qx-85n5bx-qyhplr-ci-7s-6d-4cn5sc-hc8
     Tag: Camera Entity
+    IntID: 2541325202086738093
     EntityType: point_camera_2d
     Transform:
       Translation: [0, 0, 0]
@@ -47,8 +51,9 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: igp7bpzt-spdx-qe8f-svet-ibefg990l9v7-6e2vnho86ln0f1-yiok-5yr6-0fpd-h9eamodbosk2-4n4hv5
+  - Entity: q59-v0-mm-y2-35ohkv-ttfgvst-if-ll-de-4bf2n-fs7
     Tag: Clip-Space Entity
+    IntID: 12600706144687226408
     EntityType: point_camera_2d
     Transform:
       Translation: [0, 0, 0]
@@ -62,9 +67,51 @@ Entities:
       OrthographicSize: 10
       OrthographicNear: -1
       OrthographicFar: 1
-      Primary: false
+      Primary: true
       FixedAspectRatio: false
----
-Checksum
----
-16051397662320746525
+  - Entity: fvf-f9-de-af-a7d9xy-155xh32-dr-3i-9g-3a696g-m4i
+    Tag: name
+    IntID: 16220140325551750533
+    EntityType: prop_text_2d
+    Transform:
+      Translation: [0, 1.10000002, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    ENTPropText:
+      Text: Hello! =D
+      TextParams:
+        Color: [1, 1, 1, 1]
+        Kerning: 0
+        LineSpacing: 0
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: fvf-f9-de-af-a7d9xy-155xh32-dr-3i-9g-3a696g-m4i
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_text_2d
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 1.10000002
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Text
+          Type: String
+          Data: Hello! =D

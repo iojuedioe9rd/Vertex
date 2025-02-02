@@ -15,6 +15,29 @@ namespace Vertex {
 			glm::i32vec2 pos = glm::i32vec2();
 			glm::vec4 colour = glm::vec4(1,1,1,1);
 			Ref<Texture2D> tex = nullptr;
+
+			SerializationObject Serialize()
+			{
+				SerializationObject obj = SerializationObject();
+				obj.Set("Position", SerializationType::Vector2, pos);
+				obj.Set("Colour", SerializationType::Vector4, colour);
+				if (tex)
+				{
+					obj.Set("TextureHandle", SerializationType::Uint64, tex->Handle.operator uint64_t());
+				}
+				return obj;
+			}
+
+			void DeSerialize(SerializationObject obj)
+			{
+				pos = obj.Get<glm::i32vec2>("Position", SerializationType::Vector2);
+				colour = obj.Get<glm::vec4>("Colour", SerializationType::Vector4);
+				if (obj.Contains("TextureHandle"))
+				{
+					uint64_t handle = obj.Get<uint64_t>("TextureHandle", SerializationType::Uint64);
+					tex = std::dynamic_pointer_cast<Texture2D>(AssetManager::GetAsset(handle));
+				}
+			}
 		};
 
 		ENTEnvStaticTilemap()
@@ -55,6 +78,38 @@ namespace Vertex {
 		std::vector<Tile> GetTiles()
 		{
 			return Tiles;
+		}
+
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = Entity::Serialize();
+			
+
+			int i = -1;
+			for (Tile& tile : Tiles)
+			{
+				i++;
+				obj.Set("Tile" + std::to_string(i), SerializationType::SerializationObject, tile.Serialize());
+			}
+
+			obj.Set("TileCount", SerializationType::Int, i + 1);
+			
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			Entity::DeSerialize(obj);
+			
+			for (int i = 0; i < obj.Get<int>("TileCount", SerializationType::Int); i++)
+			{
+				SerializationObject obj = obj.Get<SerializationObject>("Tile" + std::to_string(i), SerializationType::SerializationObject);
+				Tile tile{};
+				tile.DeSerialize(obj);
+				Tiles.push_back(tile);
+			}
+			
+			return true;
 		}
 
 	private:

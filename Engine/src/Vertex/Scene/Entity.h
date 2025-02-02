@@ -9,6 +9,7 @@
 #include <glm/glm.hpp>
 #include "Vertex/Object/SerializationObject.h"
 #include "SceneSerializer.h"
+#include "Vertex/AssetManager/AssetManager.h"
 
 
 
@@ -18,9 +19,14 @@ virtual std::string GetEntName()  override\
 	return #ent_name;\
 }\
 
+// Macro to simplify entity registration
+#define ENT_REGISTER_ENTITY(entityClass, entityName) \
+    namespace { static EntityRegistrar<entityClass> entityClass##_##entityName##_registrar(#entityName); }
+
+
 namespace Vertex {
 
-
+	class Scene;
 
 	class VERTEX_API Entity : public Object
 	{
@@ -34,6 +40,8 @@ namespace Vertex {
 			
 		}
 		Entity(const Entity& other) = default;
+
+		
 
 		glm::vec3 pos = glm::vec3(0, 0, 0);
 		glm::vec3 size = glm::vec3(1,1,1);
@@ -142,12 +150,26 @@ namespace Vertex {
 
 		void DrawTime(Timestep& ts)
 		{
-			Draw(ts);
-
-			for (Entity* ent : m_children)
+			if (this == nullptr || this == (Entity*)0xFFFFFFFFFFFFFFEF || this == (Entity*)0x0000019b651c64d0)
 			{
-				ent->DrawTime(ts);
+
+				return;
 			}
+
+			try
+			{
+				Draw(ts);
+
+				for (Entity* ent : m_children)
+				{
+					ent->DrawTime(ts);
+				}
+			}
+			catch (const std::exception& ex)
+			{
+				VX_INFO("Error: {0}", ex.what());
+			}
+			
 		}
 		void EventTime(Event& e)
 		{
@@ -160,35 +182,54 @@ namespace Vertex {
 		
 		}
 
+		void PhysUpdateTime(Timestep& ts)
+		{
+			PhysUpdate(ts);
+			for (Entity* ent : m_children)
+			{
+				ent->PhysUpdateTime(ts);
+			}
+		}
+
 #pragma endregion
 
 		virtual void Update(Timestep& ts) = NULL;
-		virtual void EventH(Event& e)     = NULL;
+		virtual void EventH(Event& e)
+		{
+
+		}
 		virtual void Draw(Timestep& ts)   = NULL;
 		virtual std::string GetEntName()  =	NULL;
 		virtual void PhysUpdate(Timestep& ts)
 		{
 
 		}
+
+
+		virtual void PostDeserialize()
+		{
+
+		}
 		virtual SerializationObject Serialize()
 		{
 			SerializationObject obj = SerializationObject();
-			obj.Add("Entity", GetID());
-			obj.Add("Tag", name());
-			obj.Add("EntityType", GetEntName());
-			obj.Add("Transform_Translation", pos);
-			obj.Add("Transform_Size", size);
-			obj.Add("Transform_Rotation", rotation);
+			obj.Set<UUID>("Entity", SerializationType::String, GetID());
+
+			obj.Set("Tag", SerializationType::String, name());
+			obj.Set("EntityType", SerializationType::String, GetEntName());
+			obj.Set("Transform_Translation", SerializationType::Vector3, pos);
+			obj.Set("Transform_Size", SerializationType::Vector3, size);
+			obj.Set("Transform_Rotation", SerializationType::Vector3, rotation);
 			return obj;
 		}
 
 		virtual bool DeSerialize(SerializationObject obj)
 		{
-			SetID(obj.Get<std::string>("Entity"));
-			m_name = obj.Get<std::string>("Tag");
-			pos = obj.Get<glm::vec3>("Transform_Translation");
-			size = obj.Get<glm::vec3>("Transform_Size"); // Updated for glm::vec3
-			rotation = obj.Get<glm::vec3>("Transform_Rotation"); // Handle rotation as glm::vec3
+			SetID(obj.Get<std::string>("Entity", SerializationType::String));
+			m_name = obj.Get<std::string>("Tag", SerializationType::String);
+			pos = obj.Get<glm::vec3>("Transform_Translation", SerializationType::Vector3);
+			size = obj.Get<glm::vec3>("Transform_Size", SerializationType::Vector3); // Updated for glm::vec3
+			rotation = obj.Get<glm::vec3>("Transform_Rotation", SerializationType::Vector3); // Handle rotation as glm::vec3
 			return true;
 		}
 
@@ -214,6 +255,41 @@ namespace Vertex {
 
 		friend class Scene;
 		
+	};
+
+	class VERTEX_API EntityFactory {
+	public:
+		using EntityCreateFunc = std::function<Entity*(const std::string&, Scene*)>;
+
+		static std::unordered_map<std::string, EntityCreateFunc>& GetRegistry() {
+			static std::unordered_map<std::string, EntityCreateFunc> registry;
+			return registry;
+		}
+
+		template<typename T>
+		static void Register(const std::string& name) {
+			GetRegistry()[name] = [](const std::string& entityName, Scene* scene) {
+				return new T(entityName, scene);
+
+				};
+		}
+
+		static Entity* CreateEntity(const std::string& name, const std::string& entityName, Scene* scene) {
+			auto it = GetRegistry().find(name);
+			if (it != GetRegistry().end()) {
+				return it->second(entityName, scene);
+			}
+			return nullptr;
+		}
+	};
+
+
+	template<typename T>
+	class EntityRegistrar {
+	public:
+		EntityRegistrar(const std::string& name) {
+			EntityFactory::Register<T>(name);
+		}
 	};
 }
 

@@ -51,7 +51,31 @@ namespace Vertex {
 
 		bool FixedAspectRatio = false;
 
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = Entity::Serialize();
+			
+			obj.Set("IsPrimary", SerializationType::Bool, isPrimary);
+			obj.Set("FixedAspectRatio", SerializationType::Bool, FixedAspectRatio);
 
+			SerializationObject camObj = camera->Serialize();
+			obj.Set("Camera", SerializationType::SerializationObject, camObj);
+
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			Entity::DeSerialize(obj);
+			
+			obj.Set("IsPrimary", SerializationType::Bool, isPrimary);
+			obj.Set("FixedAspectRatio", SerializationType::Bool, FixedAspectRatio);
+
+			SerializationObject camObj = obj.Get<SerializationObject>("Camera", SerializationType::SerializationObject);
+			camera->DeSerialize(camObj);
+
+			return true;
+		}
 	private:
 
 	};

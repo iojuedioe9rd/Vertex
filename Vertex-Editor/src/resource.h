@@ -4,9 +4,9 @@
 //
 
 #define GET_Texture2D_AssetManager(filepath)\
- std::dynamic_pointer_cast<Texture2D>(g_AssetManagerBase->GetAsset(\
+ std::dynamic_pointer_cast<Texture2D>(AssetManager::GetAsset(\
 	std::dynamic_pointer_cast<EditorAssetManager>(\
-	g_AssetManagerBase) \
+	AssetManager::GetAssetManager()) \
 	->ImportAsset(filepath)))\
 \
 

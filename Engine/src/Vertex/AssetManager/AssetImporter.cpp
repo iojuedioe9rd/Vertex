@@ -3,6 +3,7 @@
 #include "TextureImporter.h"
 #include "SceneImporter.h"
 #include "AudioImporter.h"
+#include "FontImporter.h"
 
 #include <map>
 namespace Vertex {
@@ -17,6 +18,9 @@ namespace Vertex {
 	}},
 	{ AssetType::Audio, [](AssetHandle handle, const AssetMetadata& metadata) {
 		return AudioImporter::ImportAudio(handle, metadata);
+	}},
+	{ AssetType::Font, [](AssetHandle handle, const AssetMetadata& metadata) {
+		return FontImporter::ImportFont(handle, metadata);
 	}}
 	};
 

@@ -4,8 +4,13 @@
 #include "Vertex/Renderer/Renderer2D.h"
 #include "Vertex/Math/Math.h"
 
+
+
 namespace Vertex
 {
+
+	ENT_REGISTER_ENTITY(ENTPropStaticSprite, prop_static_sprite);
+	
 	ENTPropStaticSprite::~ENTPropStaticSprite()
 	{
 	}
@@ -37,4 +42,5 @@ namespace Vertex
 		}
 		
 	}
+	
 }

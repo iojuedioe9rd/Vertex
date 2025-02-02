@@ -25,6 +25,21 @@ namespace Vertex
 
 		virtual void PhysUpdate(Timestep& ts) override;
 		
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = Entity::Serialize();
+			obj.Set("RB2DType", SerializationType::Int, (int)Type);
+			obj.Set("RB2DFixedRotation", SerializationType::Bool, FixedRotation);
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			Entity::DeSerialize(obj);
+			Type = (BodyType)obj.Get<int>("RB2DType", SerializationType::Int);
+			FixedRotation = obj.Get<bool>("RB2DFixedRotation", SerializationType::Bool);
+			return true;
+		}
 
 	protected:
 		void* RuntimeBody = nullptr;

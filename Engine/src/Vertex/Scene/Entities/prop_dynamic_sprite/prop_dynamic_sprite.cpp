@@ -37,4 +37,6 @@ namespace Vertex
 		}
 
 	}
+
+	ENT_REGISTER_ENTITY(ENTPropDynamicSprite, prop_dynamic_sprite);
 }

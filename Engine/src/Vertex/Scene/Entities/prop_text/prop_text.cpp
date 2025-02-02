@@ -35,5 +35,7 @@ namespace Vertex
 		Renderer2D::DrawString(text, font, mat, textParams, GetIntID());
 
 	}
+
+	ENT_REGISTER_ENTITY(ENTPropText2D, prop_text_2d);
 	
 }

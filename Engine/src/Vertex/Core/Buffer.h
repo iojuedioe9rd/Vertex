@@ -3,6 +3,11 @@
 #include <stdint.h>
 #include <cstring>
 
+
+#include <Vertex/CustomAlloc/custom_alloc.h>
+
+
+
 namespace Vertex
 {
 	// Non-owning raw buffer class

@@ -105,6 +105,13 @@ namespace Vertex {
 	
 
 
+	Entity* Scene::CreateEntity(const std::string& ent_name, const std::string& name)
+	{
+		Entity* ent = EntityFactory::CreateEntity(ent_name, name, (Scene*)this);
+		m_Entitys.push_back(ent);
+		return ent;
+	}
+
 	Entity* Scene::FindEntityByName(std::string_view name)
 	{
 		for (Entity* ent : *this)
@@ -141,6 +148,8 @@ namespace Vertex {
 
 
 
+	
+
 	void Scene::OnRuntimeStart()
 	{
 		m_IsRunning = true;
@@ -159,35 +168,35 @@ namespace Vertex {
 				ScriptEngine::OnCreateEntity(ent, [&](ENTEnvScript* sc) {
 					
 
-					for (auto& obj : sc->obj.GetFields() )
+					for (auto& obj : sc->obj.GetAll() )
 					{
-						if (has_space(obj.first))
+						if (has_space(obj.name))
 						{
 							Ref<ScriptInstance> Instance = ScriptEngine::GetEntityInstance(ent->GetID());
 							if (ScriptEngine::IsSubclassOf(Instance->m_ScriptClass->m_MonoClass, RB2DClass, false))
 							{
-								if (obj.first == "RB2D density")
+								if (obj.name == "RB2D density")
 								{
 									MonoClassField* densityField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Density");
-									mono_field_set_value(Instance->m_Instance, densityField, &obj.second);
+									mono_field_set_value(Instance->m_Instance, densityField, &obj.value);
 								}
 
-								if (obj.first == "RB2D friction")
+								if (obj.name == "RB2D friction")
 								{
 									MonoClassField* frictionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Friction");
-									mono_field_set_value(Instance->m_Instance, frictionField, &obj.second);
+									mono_field_set_value(Instance->m_Instance, frictionField, &obj.value);
 								}
 
-								if (obj.first == "RB2D restitution")
+								if (obj.name == "RB2D restitution")
 								{
 									MonoClassField* restitutionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Restitution");
-									mono_field_set_value(Instance->m_Instance, restitutionField, &obj.second);
+									mono_field_set_value(Instance->m_Instance, restitutionField, &obj.value);
 								}
 
-								if (obj.first == "RB2D Restitution Threshold")
+								if (obj.name == "RB2D Restitution Threshold")
 								{
 									MonoClassField* restitutionThresholdField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "RestitutionThreshold");
-									mono_field_set_value(Instance->m_Instance, restitutionThresholdField, &obj.second);
+									mono_field_set_value(Instance->m_Instance, restitutionThresholdField, &obj.value);
 								}
 
 							}
@@ -388,6 +397,14 @@ namespace Vertex {
 		}
 	}
 
+	void Scene::OnPostDeserialize()
+	{
+		for (Entity* ent : m_Entitys)
+		{
+			ent->PostDeserialize();
+		}
+	}
+
 	void Scene::OnEvent(Event& e)
 	{
 		for (Entity* ent : m_Entitys)
@@ -458,7 +475,18 @@ namespace Vertex {
 		newScene->m_ViewportWidth = other->m_ViewportWidth;
 		newScene->m_ViewportHeight = other->m_ViewportHeight;
 
-		CopyEntityWithGroup(other, newScene, AllEntities{});
+		for (Entity* entity : other->m_Entitys)
+		{
+			if (entity == nullptr || entity == (Entity*)0xdddddddddddddddd) continue;
+
+			std::string entityType = entity->GetEntName();
+			std::string entityName = entity->name();
+
+			Entity* newEntity = newScene->CreateEntity(entityType, entityName);
+			newEntity->SetID(entity->GetID());
+			newEntity->SetID(entity->GetIntID());
+			newEntity->DeSerialize(entity->Serialize());
+		}
 
 		return newScene;
         

@@ -94,9 +94,9 @@ namespace Vertex {
 				pdbPath.replace_extension(".pdb");
 				if (std::filesystem::exists(pdbPath))
 				{
-					ScopedBuffer pdbFileData = FileSystem::ReadFileBinary(assemblyPath);
-					mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData.As<char>(), pdbFileData.Size());
-					VX_CORE_INFO("Loaded PDB {}", pdbPath.string().c_str());
+					//ScopedBuffer pdbFileData = FileSystem::ReadFileBinary(assemblyPath);
+					//mono_debug_open_image_from_memory(image, (const mono_byte*)pdbFileData.As<char>(), pdbFileData.Size());
+					//VX_CORE_INFO("Loaded PDB {}", pdbPath.string().c_str());
 				}
 			}
 

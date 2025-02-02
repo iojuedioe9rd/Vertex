@@ -61,4 +61,6 @@ namespace Vertex
 
 		return false;
 	}
+
+	ENT_REGISTER_ENTITY(ENTEnvStaticTilemap, env_static_tilemap);
 }

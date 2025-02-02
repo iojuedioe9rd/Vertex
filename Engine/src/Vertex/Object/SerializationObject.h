@@ -1,85 +1,131 @@
 #pragma once
 #include "Vertex/Core/Base.h"
+#include "Vertex/Object/Object.h"
 #include <map>
 #include <variant>
 #include <glm/glm.hpp>
+#include <any>
+#include <vector>
 
 namespace Vertex
 {
-	class VERTEX_API SerializationObject
+	enum class VERTEX_API SerializationType : uint8_t
+	{
+		None = 0,
+		Bool = 1,
+		Int8 = 2,
+		Int16 = 3,
+		Int32 = 4,
+		Int64 = 5,
+		Int = Int32,
+		Uint8 = 6,
+		Uint16 = 7,
+		Uint32 = 8,
+		Uint64 = 9,
+		Uint = Uint32,
+		Float = 10,
+		Double = 11,
+		String = 12,
+		Vector2 = 13,
+		Vector3 = 14,
+		Vector4 = 15,
+		Vector2Int = 16,
+		Vector3Int = 17,
+		Vector4Int = 18,
+		Colour = 19,
+		SerializationObject = 20
+
+	};
+
+	class VERTEX_API SerializationObject : public Object
 	{
 	public:
-		using VariantType = std::variant<int, glm::vec2, glm::vec3, glm::vec4, float, std::string, bool, double>;
-		enum class VERTEX_API SerializationObjectType : int32_t
+		
+		
+
+		struct VERTEX_API SerializationData
 		{
-			Int = BIT(0),
-			Vec2 = BIT(1),
-			Vec3 = BIT(2),
-			Vec4 = BIT(3),
-			Float = BIT(4),
-			String = BIT(5),
-			Bool = BIT(6),
-			Double = BIT(7),
+			std::string name;
+			SerializationType type;
+			std::any value;
 		};
-
+		
 		SerializationObject() = default;
-		~SerializationObject() = default;
-
-		void Add(std::string name, int data);
-		void Add(std::string name, glm::vec2 data);
-		void Add(std::string name, glm::vec3 data);
-		void Add(std::string name, glm::vec4 data);
-		void Add(std::string name, float data);
-		void Add(std::string name, std::string data);
-
-		void Add(std::string name, bool data) {
-			m_Fields[name] = data;
-			m_DataTypes[name] = SerializationObjectType::Bool;
-		}
-
-		void Add(std::string name, double data) {
-			m_Fields[name] = data;
-			m_DataTypes[name] = SerializationObjectType::Double;
-		}
-
-		template <typename T>
-		T Get(std::string name) const
+		SerializationObject(const SerializationObject& other) = default;
+		
+		SerializationData Get(std::string name)
 		{
-			auto it = m_Fields.find(name);
-			if (it != m_Fields.end())
+			for (auto& data : m_data)
 			{
-				return std::get<T>(it->second);
+				if (data.name == name)
+				{
+					return data;
+				}
 			}
-			throw std::runtime_error("Field not found or wrong type");
+			return SerializationData{"", SerializationType::None, 0};
 		}
 
-		bool HasField(std::string name) const
+		std::vector< SerializationData> GetAll() const
 		{
-			auto it = m_Fields.find(name);
-			if (it != m_Fields.end())
+			return m_data;
+		}
+
+		template<typename T>
+		void Set(std::string name, SerializationType type, T value)
+		{
+			for (auto& data : m_data)
 			{
-				return true;
+				if (data.name == name)
+				{
+					data.value = value;
+					return;
+				}
+			}
+			m_data.push_back({ name, type, value });
+		}
+
+		bool Remove(std::string name)
+		{
+			for (auto it = m_data.begin(); it != m_data.end(); it++)
+			{
+				if (it->name == name)
+				{
+					m_data.erase(it);
+					return true;
+				}
 			}
 			return false;
 		}
 
-		std::map<std::string, VariantType> GetFields()
+		bool Contains(std::string name)
 		{
-			return m_Fields;
+			for (auto& data : m_data)
+			{
+				if (data.name == name)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
-		std::map<std::string, SerializationObjectType> GetDataTypes()
+		template<typename T>
+		T Get(std::string name, SerializationType type)
 		{
-			return m_DataTypes;
+			for (auto& data : m_data)
+			{
+				if (data.name == name && data.type == type)
+				{
+					return std::any_cast<T>(data.value);
+				}
+			}
+			return T();
 		}
-
-		SerializationObjectType GetType(std::string name) const;
-
-		
-
 	private:
+		std::vector< SerializationData> m_data;
 		
-		std::map<std::string, VariantType> m_Fields;  // Store data
-		std::map<std::string, SerializationObjectType> m_DataTypes;  // Store types
+	public:
+
+		
 	};
 }

@@ -30,6 +30,29 @@ namespace Vertex
 		float Restitution = 0.0f;
 		float RestitutionThreshold = 0.5f;
 
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = ENTBaseRigidbody2D::Serialize();
+			obj.Set("Density", SerializationType::Float, Density);
+			obj.Set("Friction", SerializationType::Float, Friction);
+			obj.Set("Restitution", SerializationType::Float, Restitution);
+			obj.Set("RestitutionThreshold", SerializationType::Float, RestitutionThreshold);
+			obj.Set("Offset", SerializationType::Vector2, Offset);
+			obj.Set("Size", SerializationType::Vector2, Size);
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			ENTBaseRigidbody2D::DeSerialize(obj);
+			Density = obj.Get<float>("Density", SerializationType::Float);
+			Friction = obj.Get<float>("Friction", SerializationType::Float);
+			Restitution = obj.Get<float>("Restitution", SerializationType::Float);
+			RestitutionThreshold = obj.Get<float>("RestitutionThreshold", SerializationType::Float);
+			Offset = obj.Get<glm::vec2>("Offset", SerializationType::Vector2);
+			Size = obj.Get<glm::vec2>("Size", SerializationType::Vector2);
+			return true;
+		}
 
 	protected:
 		void* RuntimeFixture = nullptr;

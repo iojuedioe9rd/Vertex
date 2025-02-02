@@ -1,11 +1,13 @@
 #pragma once
+
+#define VX_BUILD_PCH 1
+
 #include "Vertex/Core/PlatformDetection.h"
 #include "Vertex/Core/Base.h"
 #include "Vertex/Core/Logger.h"
 #include "Vertex/Debug/Instrumentor.h"
 #include "Vertex/CommandBuffer/CommandBuffer.h"
 #include "Vertex/Utils/Utils.h"
-#include "Vertex/Core/Buffer.h"
 
 #include <glm/glm.hpp>
 

@@ -12,6 +12,7 @@ namespace Vertex
 		Scene,
 		Texture2D,
 		Audio,
+		Font
 	};
 
 	std::string_view VERTEX_API AssetTypeToString(AssetType type);

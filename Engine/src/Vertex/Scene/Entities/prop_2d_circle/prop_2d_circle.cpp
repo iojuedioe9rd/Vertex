@@ -22,4 +22,6 @@ namespace Vertex
 		Renderer2D::DrawCircle(mat, colour, Thickness, Fade, GetIntID());
 		
 	}
+
+	ENT_REGISTER_ENTITY(ENTProp2DCircle, prop_2d_circle);
 }

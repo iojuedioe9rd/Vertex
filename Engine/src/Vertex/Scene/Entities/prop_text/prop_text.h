@@ -3,6 +3,7 @@
 #include <Vertex/Renderer/Font.h>
 #include <Vertex/Renderer/Renderer2D.h>
 
+
 namespace Vertex
 {
 	class VERTEX_API ENTPropText : public Entity
@@ -10,7 +11,7 @@ namespace Vertex
 	public:
 		ENTPropText()
 		{
-
+			
 		}
 		ENTPropText(std::string name, Scene* scene) : Entity(name, scene)
 		{
@@ -22,6 +23,23 @@ namespace Vertex
 
 		~ENTPropText();
 
+
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = Entity::Serialize();
+			
+			obj.Set("Text", SerializationType::String, text);
+
+
+
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			Entity::DeSerialize(obj);
+			return true;
+		}
 	public:
 		std::string text = "";
 		Ref<Font> font = Font::GetDefault();
@@ -38,6 +56,10 @@ namespace Vertex
 		ENTPropText2D(std::string name, Scene* scene) : ENTPropText(name, scene)
 		{
 			imgui_text_data = (char*)malloc(255);
+			for (size_t i = 0; i < 255; i++)
+			{
+				imgui_text_data[i] = '\0';
+			}
 		}
 		~ENTPropText2D();
 

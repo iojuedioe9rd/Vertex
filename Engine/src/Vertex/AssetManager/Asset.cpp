@@ -11,6 +11,7 @@ namespace Vertex
 		case AssetType::Scene:     return "AssetType::Scene";
 		case AssetType::Texture2D: return "AssetType::Texture2D";
 		case AssetType::Audio: return "AssetType::Audio";
+		case AssetType::Font: return "AssetType::Font";
 		}
 		return "AssetType::<Invalid>";
 	}
@@ -21,6 +22,7 @@ namespace Vertex
 		if (assetType == "AssetType::Scene")     return AssetType::Scene;
 		if (assetType == "AssetType::Texture2D") return AssetType::Texture2D;
 		if (assetType == "AssetType::Audio") return AssetType::Audio;
+		if (assetType == "AssetType::Font") return AssetType::Font;
 		return AssetType::None;
 	}
 }

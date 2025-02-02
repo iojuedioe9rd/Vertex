@@ -26,4 +26,6 @@ namespace Vertex
 	{
 		ScriptEngine::OnPhysUpdateEntity(this, ts);
 	}
+
+	ENT_REGISTER_ENTITY(ENTEnvScript, env_script);
 }

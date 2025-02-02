@@ -32,6 +32,27 @@ namespace Vertex {
 		glm::vec4 colour = glm::vec4(1, 1, 1, 1);
 		float Thickness = 1.0f;
 		float Fade = 0.005f;
+
+		virtual SerializationObject Serialize() override
+		{
+			SerializationObject obj = ENTBaseBoxCollier2D::Serialize();
+			obj.Set("Colour", SerializationType::Vector4, colour);
+			obj.Set("Thickness", SerializationType::Float, Thickness);
+			obj.Set("Fade", SerializationType::Float, Fade);
+			
+
+			return obj;
+		}
+
+		virtual bool DeSerialize(SerializationObject obj) override
+		{
+			ENTBaseBoxCollier2D::DeSerialize(obj);
+			colour = obj.Get<glm::vec4>("Colour", SerializationType::Vector4);
+			Thickness = obj.Get<float>("Thickness", SerializationType::Float);
+			Fade = obj.Get<float>("Fade", SerializationType::Float);
+
+			return true;
+		}
 	private:
 
 	};

@@ -182,7 +182,7 @@ namespace Vertex
 					if (ImGui::MenuItem("Import"))
 					{
 						
-						((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(relativePath);
+						((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->ImportAsset(relativePath);
 						RefreshAssetTree();
 					}
 					ImGui::EndPopup();
@@ -258,7 +258,7 @@ namespace Vertex
 
 	void ContentBrowserPanel::RefreshAssetTree()
 	{
-		const auto& assetRegistry = ((EditorAssetManager*)(void*)g_AssetManagerBase.get())->GetAssetRegistry();
+		const auto& assetRegistry = ((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->GetAssetRegistry();
 		for (const auto& [handle, metadata] : assetRegistry)
 		{
 			uint32_t currentNodeIndex = 0;

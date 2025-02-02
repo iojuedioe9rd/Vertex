@@ -23,6 +23,7 @@
 namespace Vertex {
 
 	Ref< EditorAssetManager> m_AssetManager;
+	
 
 	// Vertices coordinates
 	MeshVertex vertices[] =
@@ -50,14 +51,14 @@ namespace Vertex {
 
 	AssetManagerBase* getAssetMan()
 	{
-		return g_AssetManagerBase.get();
+		return m_AssetManager.get();
 	}
 
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f), m_SquareColor({ 0.2f, 0.3f, 0.8f, 1.0f })
 	{
 		m_AssetManager.reset(new EditorAssetManager("assets/AssetRegistry.vertexAssetRegistry"));
-		g_AssetManagerBase = m_AssetManager;
+		AssetManager::SetAssetManager(m_AssetManager);
 		m_AssetManager->DeserializeAssetRegistry();
 
 		m_SceneHierarchyPanel = new SceneHierarchyPanel();
@@ -106,14 +107,15 @@ namespace Vertex {
 		{
 			auto sceneFilePath = commandLineArgs[1];
 			SceneSerializer serializer(&m_ActiveScene);
-			OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(sceneFilePath));
+			//OpenScene(((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->ImportAsset(sceneFilePath));
 			m_EditorScene = m_ActiveScene;
 		}
 		else
 		{
 			m_ActiveScene = m_EditorScene;
-			auto& square = m_ActiveScene->CreateEntity<ENTPropStaticSprite>("Green Square");
-
+			
+            auto squareEntity = dynamic_cast<ENTPropStaticSprite*>(m_ActiveScene->CreateEntity("prop_static_sprite", "Green Square"));
+            
 			m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
 
 			m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
@@ -127,11 +129,10 @@ namespace Vertex {
 
 
 
-			square.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
-			square.SetIsVisible(true);
+			squareEntity->colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+			squareEntity->SetIsVisible(true);
 
-			m_SquareEntity = square;
-			m_SquareEntity.colour = glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f };
+			
 		}
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
@@ -208,7 +209,7 @@ namespace Vertex {
 
 		//m_Font.reset(new Font("assets/fonts/opensans/OpenSans-Regular.ttf"));
 		//((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex")
-		OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex"));
+		//OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset("assets/scenes/Physics2D.vertex"));
 	}
 
 	float t = 0.0f;
@@ -612,7 +613,7 @@ namespace Vertex {
 		if (!filepath.empty())
 		{
 			
-			OpenScene(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->ImportAsset(filepath));
+			OpenScene(((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->ImportAsset(filepath));
 			return true;
 		}
 		return false;
@@ -635,7 +636,7 @@ namespace Vertex {
 
 		NewScene();
 
-		Scene* readOnlyScene = (Scene*)(void*)(((EditorAssetManager*)(void*)g_AssetManagerBase.get())->GetAsset(handle).get());
+		Scene* readOnlyScene = (Scene*)(void*)(((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->GetAsset(handle).get());
 		Scene* newScene = Scene::Copy(readOnlyScene, std::string("ActiveScene"));
 
 		//SceneSerializer serializer(&m_EditorScene);

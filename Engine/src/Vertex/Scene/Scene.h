@@ -14,6 +14,7 @@ namespace Vertex
 {
 	class ENTPointCamera2D;
 	class Entity;
+	class EntityFactory;
 	
 	class VERTEX_API Scene : public Asset
 	{
@@ -36,6 +37,10 @@ namespace Vertex
 			return *entity;
 		}
 
+		
+		Entity* CreateEntity(const std::string& ent_name, const std::string& name);
+		
+
 		template <typename T>
 		T& CreateEntity(T& entity)
 		{
@@ -43,16 +48,22 @@ namespace Vertex
 			m_Entitys.push_back(newEntity);
 			return *newEntity;
 		}
+
+		
+		
 		Entity* FindEntityByName(std::string_view name);
 		bool RemoveEntity(Entity& entity);
 
 		void OnRuntimeStart();
 		void OnRuntimeStop();
 
+		
+
 		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, ENTPointCamera2D** cam = nullptr, bool usePrimaryCam = true);
 		void OnUpdate(Timestep ts);
 		void OnUpdateRuntime(Timestep ts);
 		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
+		void OnPostDeserialize();
 		void OnEvent(Event& e);
 		void OnViewportResize(uint32_t width, uint32_t height);
 
@@ -86,6 +97,11 @@ namespace Vertex
 		std::vector<Entity*>::const_iterator end()	const { return m_Entitys.end(); }
 		std::vector<Entity*>::const_reverse_iterator rbegin() const { return m_Entitys.rbegin(); }
 		std::vector<Entity*>::const_reverse_iterator rend() const { return m_Entitys.rend(); }
+
+		void AddEntityINTERNAL(Entity* entity)
+		{
+			m_Entitys.push_back(entity);
+		}
 	private:
 		std::vector<Entity*> m_Entitys;
 		std::string m_name;
@@ -96,6 +112,7 @@ namespace Vertex
 		b2World* m_PhysicsWorld = nullptr;
 		
 		friend class Entity;
+		friend class EntityFactory;
 	};
 
 }

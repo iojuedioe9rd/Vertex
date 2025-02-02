@@ -1,4 +1,7 @@
 AssetRegistry:
+  - Handle: 2210688739382215615
+    FilePath: E:/Games_In_C++/11/Vertex/Vertex-Editor/assets/scenes/Map 1.vertex
+    Type: AssetType::Scene
   - Handle: 2256841378216630278
     FilePath: assets/scenes/Map 1.vertex
     Type: AssetType::Scene

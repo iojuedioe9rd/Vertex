@@ -38,10 +38,10 @@ namespace Vertex {
         TextureSpecification spec;
         spec.Width = bitmap.width;
         spec.Height = bitmap.height;
-        spec.Format = ImageFormat::RGB8;
+        spec.Format = ImageFormat::RGBA8;
         spec.GenerateMips = true;  // Enable mipmaps for better scaling
         Ref<Texture2D> texture = Texture2D::Create(spec);
-        texture->SetData(new Buffer((void*)bitmap.pixels, bitmap.width * bitmap.height * 3));
+        texture->SetData(new Buffer((void*)bitmap.pixels, bitmap.width * bitmap.height * 4));
         texture->ToFile("test.png");  // Optionally save the atlas as a file
         return texture;
     }
@@ -118,11 +118,13 @@ namespace Vertex {
         }
 
         // Create and cache atlas with improved parameters for better text rendering
-        m_AtlasTexture = CreateAndCacheAtlas<uint8_t, float, 3, msdf_atlas::msdfGenerator>("Test", static_cast<float>(emSize), m_Data->Glyphs, m_Data->FontGeometry, width, height);
+        m_AtlasTexture = CreateAndCacheAtlas<uint8_t, float, 4, msdf_atlas::mtsdfGenerator>("Test", static_cast<float>(emSize), m_Data->Glyphs, m_Data->FontGeometry, width, height);
 
         msdfgen::destroyFont(font);
         msdfgen::deinitializeFreetype(ft);
     }
+
+
 
     Ref<Font> Font::GetDefault()
     {

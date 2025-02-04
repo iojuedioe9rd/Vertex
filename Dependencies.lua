@@ -16,6 +16,7 @@ IncludeDir["filewatch"] = "%{wks.location}/Engine/vendor/filewatch"
 IncludeDir["ffmpeg"] = "%{wks.location}/Engine/vendor/ffmpeg/include"
 IncludeDir["msdfgen"] = "%{wks.location}/Engine/vendor/msdf-atlas-gen/msdfgen"
 IncludeDir["msdf_atlas_gen"] = "%{wks.location}/Engine/vendor/msdf-atlas-gen/msdf-atlas-gen"
+IncludeDir["lua"] = "%{wks.location}/Engine/vendor/lua"
 IncludeDir["SPIRV_Cross"] = "%{wks.location}/Engine/vendor/SPIRV-Cross"
 IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 

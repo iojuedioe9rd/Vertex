@@ -35,6 +35,7 @@ include "Engine/vendor/glad"
 include "Engine/vendor/imgui"
 include "Engine/vendor/checksum"
 include "Engine/vendor/msdf-atlas-gen"
+include "Engine/vendor/lua"
 group ""
 
 

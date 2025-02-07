@@ -136,7 +136,7 @@ static inline void sse2_memset(void* ptr, size_t size) {
     while (size--) *p++ = 0;
 }
 
-static inline void xop_memcpy(void* dst, const void* src, size_t size) {
+static inline void* xop_memcpy(void* dst, const void* src, size_t size) {
     __m128i* d = (__m128i*)dst;
     const __m128i* s = (const __m128i*)src;
 
@@ -145,11 +145,11 @@ static inline void xop_memcpy(void* dst, const void* src, size_t size) {
         _mm_store_si128(d++, _mm_load_si128(s++));
         size -= 32;
     }
-    std::memcpy(d, s, size);
+    return std::memcpy(d, s, size);
 }
 
 // FMA3 optimized memory copy (if supported)
-static inline void fma3_memcpy(void* dst, const void* src, size_t size) {
+static inline void* fma3_memcpy(void* dst, const void* src, size_t size) {
     __m128i* d = (__m128i*)dst;
     const __m128i* s = (const __m128i*)src;
 
@@ -164,11 +164,11 @@ static inline void fma3_memcpy(void* dst, const void* src, size_t size) {
         _mm_store_si128(d++, _mm_load_si128(s++));
         size -= 16;
     }
-    std::memcpy(d, s, size);
+    return std::memcpy(d, s, size);
 }
 
 // SSE4 optimized memory copy
-static inline void sse4_memcpy(void* dst, const void* src, size_t size) {
+static inline void* sse4_memcpy(void* dst, const void* src, size_t size) {
     __m128i* d = (__m128i*)dst;
     const __m128i* s = (const __m128i*)src;
 
@@ -183,11 +183,11 @@ static inline void sse4_memcpy(void* dst, const void* src, size_t size) {
         _mm_store_si128(d++, _mm_load_si128(s++));
         size -= 16;
     }
-    std::memcpy(d, s, size);
+    return std::memcpy(d, s, size);
 }
 
 // SSE2 optimized memory copy
-static inline void sse2_memcpy(void* dst, const void* src, size_t size) {
+static inline void* sse2_memcpy(void* dst, const void* src, size_t size) {
     __m128i* d = (__m128i*)dst;
     const __m128i* s = (const __m128i*)src;
 
@@ -195,7 +195,7 @@ static inline void sse2_memcpy(void* dst, const void* src, size_t size) {
         _mm_store_si128(d++, _mm_load_si128(s++));
         size -= 16;
     }
-    std::memcpy(d, s, size);
+    return std::memcpy(d, s, size);
 }
 
 // Logging utility
@@ -349,6 +349,18 @@ void custom_allocator_print_stats()
 	//std::cout << "  Total allocated: " << global_allocated.load() << " bytes" << std::endl;
 	//std::cout << "  Peak allocated: " << global_peak_allocated.load() << " bytes" << std::endl;
 	//std::cout << "  Active threads: " << std::thread::hardware_concurrency() << std::endl;
+}
+
+void* custom_memcpy(void* _Dst, void const* _Src, size_t _Size, const char* file, int line)
+{
+    if (has_fma3)
+        return fma3_memcpy(_Dst, _Src, _Size);
+    else if (has_sse4)
+        return sse4_memcpy(_Dst, _Src, _Size);
+    else if (has_xop)
+        return xop_memcpy(_Dst, _Src, _Size);
+    else
+        return sse2_memcpy(_Dst, _Src, _Size);
 }
 
 // Ensure cleanup runs at thread exit

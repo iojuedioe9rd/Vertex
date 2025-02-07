@@ -30,7 +30,7 @@ namespace Vertex {
 
 			void DeSerialize(SerializationObject obj)
 			{
-				pos = obj.Get<glm::i32vec2>("Position", SerializationType::Vector2);
+				pos = obj.Get<glm::i32vec2>("Position", SerializationType::Vector2Int);
 				colour = obj.Get<glm::vec4>("Colour", SerializationType::Vector4);
 				if (obj.Contains("TextureHandle"))
 				{

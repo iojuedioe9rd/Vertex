@@ -25,9 +25,12 @@ namespace Vertex
 
 		glm::vec3 gotoPos = glm::vec3(0, 0, 0);
 
-		virtual SerializationObject Serialize() override
+		virtual void ImGuiDrawProperties() override;
+		
+
+		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{
-			SerializationObject obj = Behaviour::Serialize();
+			SerializationObject obj = Behaviour::Serialize(isInSerializer);
 			
 			obj.Set("speed", SerializationType::Float, speed);
 			obj.Set("gotoPos", SerializationType::Vector3, gotoPos);
@@ -37,9 +40,9 @@ namespace Vertex
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false) override
 		{
-			Behaviour::DeSerialize(obj);
+			Behaviour::DeSerialize(obj, isInSerializer);
 
 			speed = obj.Get<float>("speed", SerializationType::Float);
 			gotoPos = obj.Get<glm::vec3>("gotoPos", SerializationType::Vector3);

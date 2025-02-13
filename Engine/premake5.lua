@@ -9,6 +9,7 @@ project "Engine"
 
 	pchheader "vxpch.h"
 	pchsource "src/vxpch.cpp"
+
 	
 	files
 	{
@@ -52,7 +53,12 @@ project "Engine"
 		"%{IncludeDir.VulkanSDK}",
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.Box2D}",
-		"%{IncludeDir.mono}"
+		"%{IncludeDir.mono}",
+		"%{IncludeDir.lua}",
+		"%{IncludeDir.rttr}",
+		"%{IncludeDir.luawrapper}",
+		"%{IncludeDir.boost}",
+		"%{IncludeDir.sol2}"
 	}
 	
 	links {
@@ -67,7 +73,9 @@ project "Engine"
 		"msdfgen",
 		"yaml-cpp",
 		"Box2D",
-		"%{Library.mono}"
+		"%{Library.mono}",
+		"lua",
+		"rttr"
 		
 	}
 	

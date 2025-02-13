@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 #include "Vertex/Renderer/Renderer.h"
 #include "Vertex/Scripting/ScriptEngine.h"
+#include "Vertex/Lua/LuaScripting.h"
 #include <GLFW/glfw3.h>
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
@@ -66,6 +67,7 @@ namespace Vertex
 
 		Renderer::Init();
 		ScriptEngine::Init();
+		LuaScripting::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

@@ -1,4 +1,10 @@
 #pragma once
+#include <filesystem>
+
+namespace std
+{
+	namespace fs = filesystem;
+}
 
 #include "Vertex/Core/PlatformDetection.h"
 #include <memory>

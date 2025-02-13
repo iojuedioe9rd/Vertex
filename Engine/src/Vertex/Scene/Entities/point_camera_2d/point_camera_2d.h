@@ -51,9 +51,9 @@ namespace Vertex {
 
 		bool FixedAspectRatio = false;
 
-		virtual SerializationObject Serialize() override
+		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{
-			SerializationObject obj = Entity::Serialize();
+			SerializationObject obj = Entity::Serialize(isInSerializer);
 			
 			obj.Set("IsPrimary", SerializationType::Bool, isPrimary);
 			obj.Set("FixedAspectRatio", SerializationType::Bool, FixedAspectRatio);
@@ -64,9 +64,9 @@ namespace Vertex {
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false) override
 		{
-			Entity::DeSerialize(obj);
+			Entity::DeSerialize(obj, isInSerializer);
 			
 			obj.Set("IsPrimary", SerializationType::Bool, isPrimary);
 			obj.Set("FixedAspectRatio", SerializationType::Bool, FixedAspectRatio);

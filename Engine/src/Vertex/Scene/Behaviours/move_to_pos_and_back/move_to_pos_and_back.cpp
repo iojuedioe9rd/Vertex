@@ -1,5 +1,7 @@
 #include "vxpch.h"
 #include "move_to_pos_and_back.h"
+#include <imgui.h>
+#include <Vertex/ImGui/ImGuiLink.h>
 
 
 static glm::vec3 MoveTowards(const glm::vec3& current, const glm::vec3& target, float maxDistanceDelta) {
@@ -37,6 +39,23 @@ namespace Vertex
 		{
 			m_Entity->pos = MoveTowards(m_Entity->pos, m_InitialPosition, speed * ts);
 		}
+	}
+	void BEHAVIOURMoveToPosAndBack::ImGuiDrawProperties()
+	{
+		if (ImGui::TreeNodeEx((m_Entity->GetID() + "Moving Platform").c_str(), ImGuiTreeNodeFlags_DefaultOpen, "Moving Platform"))
+		{
+			ImGuiLink::DrawVec3Control("Goto Pos", gotoPos);
+			ImGuiLink::DragFloat("Speed", &speed);
+			ImGuiLink::TreePop();
+		}
+
+		//char buffer[256];
+		//memset(buffer, 0, sizeof(buffer));
+		//strcpy_s(buffer, sizeof(buffer), tag.c_str());
+		//if (ImGuiLink::InputText("Tag", buffer, sizeof(buffer)))
+		//{
+		//	tag = std::string(buffer);
+		//}
 	}
 }
 

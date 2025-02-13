@@ -193,7 +193,7 @@ namespace Vertex
 		// Free allocated memory
 		if(data != nullptr) { FREE_2_BUTTER(data, flippedData); }
 
-		VX_CORE_ASSERT(success, "Failed to write texture to file: " + filepath.string());
+		//VX_CORE_ASSERT(success, "Failed to write texture to file: " + filepath.string());
 	}
 
 

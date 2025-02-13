@@ -10,11 +10,47 @@
 #include "Entities/prop_text/prop_text.h"
 
 extern "C" uint64_t CustomChecksumAsm(const char* data, uint64_t length, uint64_t initialSeed, uint64_t rotateAmount, uint64_t additiveFactor, uint64_t rotateCount);
-
+/*
+enum class VERTEX_API SerializationType : uint8_t
+{
+	None = 0,
+	Bool = 1,
+	Int8 = 2,
+	Int16 = 3,
+	Int32 = 4,
+	Int64 = 5,
+	Int = Int32,
+	Uint8 = 6,
+	Uint16 = 7,
+	Uint32 = 8,
+	Uint64 = 9,
+	Uint = Uint32,
+	Float = 10,
+	Double = 11,
+	String = 12,
+	Vector2 = 13,
+	Vector3 = 14,
+	Vector4 = 15,
+	Vector2Int = 16,
+	Vector3Int = 17,
+	Vector4Int = 18,
+	Colour = 19,
+	SerializationObject = 20,
+	SerializationObjectArray = 21
+};
+*/
 // Assume you have a helper function to convert a string back to your enum:
 SerializationType StringToSerializationType(const std::string& typeStr) {
 	if (typeStr == "Bool") return SerializationType::Bool;
 	if (typeStr == "Int") return SerializationType::Int;
+	if (typeStr == "Int8") return SerializationType::Int8;
+	if (typeStr == "Int16") return SerializationType::Int16;
+	if (typeStr == "Int32") return SerializationType::Int32;
+	if (typeStr == "Int64") return SerializationType::Int32;
+	if (typeStr == "Uint8") return SerializationType::Uint8;
+	if (typeStr == "Uint16") return SerializationType::Uint8;
+	if (typeStr == "Uint32") return SerializationType::Uint8;
+	if (typeStr == "Uint64") return SerializationType::Uint8;
 	if (typeStr == "Float") return SerializationType::Float;
 	if (typeStr == "Double") return SerializationType::Double;
 	if (typeStr == "String") return SerializationType::String;
@@ -248,7 +284,14 @@ namespace YAML {
 				switch (type) {
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Bool, bool, rhs, name);
 
-					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int, int, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int8, int8_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int16, int16_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int32, int32_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int64, int32_t, rhs, name);
+					//READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint8, uint8_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint16, uint16_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint32, uint32_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint64, uint64_t, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Float, float, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Double, double, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, String, std::string, rhs, name);
@@ -262,7 +305,7 @@ namespace YAML {
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObject, Vertex::SerializationObject, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObjectArray, Vertex::SerializationObjectArray, rhs, name);
 				default:
-					throw std::runtime_error("Unsupported type during decoding: " + typeStr);
+					VX_CORE_INFO("rtdrt");
 				}
 			}
 			return true;

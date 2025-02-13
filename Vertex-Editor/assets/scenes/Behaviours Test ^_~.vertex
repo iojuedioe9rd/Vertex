@@ -78,15 +78,18 @@ Entities:
         - Name: Colour
           Type: Vector4
           Data:
-            - 0
             - 1
-            - 0
+            - 1
+            - 1
             - 1
         - Name: TilingFactor
           Type: Float
           Data: 1
+        - Name: TextureHandle
+          Type: Uint64
+          Data: 10190858570006511628
     PropStaticSprite:
-      Colour: [0, 1, 0, 1]
+      Colour: [1, 1, 1, 1]
       TilingFactor: 1
   - Entity: 6ro4-fq-0b-ct-5h7mnc-2qcmobf-5l-ee-rt-5s728-edm
     Tag: Tilemap
@@ -141,11 +144,25 @@ Entities:
                 - 0
                 - 0
                 - 0
+        - Name: Tile1
+          Type: SerializationObject
+          Data:
+            - Name: Position
+              Type: Vector2
+            - Name: Colour
+              Type: Vector4
+              Data:
+                - 0
+                - 0
+                - 0
+                - 0
         - Name: TileCount
           Type: Int32
-          Data: 1
+          Data: 2
     EnvStaticTilemap:
       Tiles:
+        - Pos: [0, 0, 0]
+          Colour: [0, 0, 0, 0]
         - Pos: [0, 0, 0]
           Colour: [0, 0, 0, 0]
   - Entity: 8256-l8-44-th-ls2cz4-36rz8zp-5s-mr-hy-4i24l7-ecl
@@ -221,7 +238,7 @@ Entities:
               Data: 1
             - Name: AspectRatio
               Type: Float
-              Data: 1.52533782
+              Data: 1.7447108
     PointCamera2D:
       ProjectionType: 1
       PerspectiveFOV: 0.785398185
@@ -305,7 +322,7 @@ Entities:
               Data: 1
             - Name: AspectRatio
               Type: Float
-              Data: 1.52533782
+              Data: 1.7447108
     PointCamera2D:
       ProjectionType: 1
       PerspectiveFOV: 0.785398185
@@ -321,7 +338,7 @@ Entities:
     IntID: 7263950927158424859
     EntityType: prop_static_sprite
     Transform:
-      Translation: [19.1000004, 0, 0]
+      Translation: [24.1000004, 0, 0]
       Size: [1, 1, 1]
       Rotation: [0, 0, 0]
     BaseRigidbody2D:
@@ -348,7 +365,7 @@ Entities:
         - Name: Transform_Translation
           Type: Vector3
           Data:
-            - 19.1000004
+            - 24.1000004
             - 0
             - 0
         - Name: Transform_Size
@@ -366,8 +383,83 @@ Entities:
         - Name: Behaviours
           Type: SerializationObjectArray
           Data:
-            Size: 1
+            Size: 4
             E0:
+              - Name: Behaviour
+                Type: String
+                Data: 66ns-p-zi-x0-a4a2oc-e4q8sv-fr-m2-i5-d8gd-ymx
+              - Name: BehaviourType
+                Type: String
+                Data: move_to_pos_and_back
+              - Name: speed
+                Type: Float
+                Data: 1
+              - Name: gotoPos
+                Type: Vector3
+                Data:
+                  - 0
+                  - 0
+                  - 0
+              - Name: m_InitialPosition
+                Type: Vector3
+                Data:
+                  - 0
+                  - 0
+                  - 0
+              - Name: m_Dir
+                Type: Bool
+                Data: false
+            E1:
+              - Name: Behaviour
+                Type: String
+                Data: 66ns-p-zi-x0-a4a2oc-e4q8sv-fr-m2-i5-d8gd-ymx
+              - Name: BehaviourType
+                Type: String
+                Data: move_to_pos_and_back
+              - Name: speed
+                Type: Float
+                Data: 1
+              - Name: gotoPos
+                Type: Vector3
+                Data:
+                  - 0
+                  - 0
+                  - 0
+              - Name: m_InitialPosition
+                Type: Vector3
+                Data:
+                  - 0
+                  - 0
+                  - 0
+              - Name: m_Dir
+                Type: Bool
+                Data: false
+            E2:
+              - Name: Behaviour
+                Type: String
+                Data: 66ns-p-zi-x0-a4a2oc-e4q8sv-fr-m2-i5-d8gd-ymx
+              - Name: BehaviourType
+                Type: String
+                Data: move_to_pos_and_back
+              - Name: speed
+                Type: Float
+                Data: 1
+              - Name: gotoPos
+                Type: Vector3
+                Data:
+                  - 0
+                  - 0
+                  - 0
+              - Name: m_InitialPosition
+                Type: Vector3
+                Data:
+                  - 0
+                  - 0
+                  - 0
+              - Name: m_Dir
+                Type: Bool
+                Data: false
+            E3:
               - Name: Behaviour
                 Type: String
                 Data: 66ns-p-zi-x0-a4a2oc-e4q8sv-fr-m2-i5-d8gd-ymx
@@ -426,9 +518,6 @@ Entities:
         - Name: TilingFactor
           Type: Float
           Data: 1
-        - Name: TextureHandle
-          Type: Uint64
-          Data: 10190858570006511628
     PropStaticSprite:
       Colour: [1, 1, 1, 1]
       TilingFactor: 1

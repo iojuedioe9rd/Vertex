@@ -30,7 +30,7 @@ namespace Vertex {
 
 			void DeSerialize(SerializationObject obj)
 			{
-				pos = obj.Get<glm::i32vec2>("Position", SerializationType::Vector2);
+				pos = obj.Get<glm::i32vec2>("Position", SerializationType::Vector2Int);
 				colour = obj.Get<glm::vec4>("Colour", SerializationType::Vector4);
 				if (obj.Contains("TextureHandle"))
 				{
@@ -80,9 +80,9 @@ namespace Vertex {
 			return Tiles;
 		}
 
-		virtual SerializationObject Serialize() override
+		virtual SerializationObject Serialize(bool isInSerializer = 0) override
 		{
-			SerializationObject obj = Entity::Serialize();
+			SerializationObject obj = Entity::Serialize(isInSerializer);
 			
 
 			int i = -1;
@@ -97,9 +97,9 @@ namespace Vertex {
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = 0) override
 		{
-			Entity::DeSerialize(obj);
+			Entity::DeSerialize(obj, isInSerializer);
 			
 			for (int i = 0; i < obj.Get<int>("TileCount", SerializationType::Int); i++)
 			{

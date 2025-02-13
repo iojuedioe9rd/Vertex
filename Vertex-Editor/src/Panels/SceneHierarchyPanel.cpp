@@ -93,7 +93,7 @@ namespace Vertex {
 
 				// EZ way to create entities
 				m_SelectionContext = m_Context->CreateEntity(type, tag);
-				m_SelectionContext->AddBehaviour("move_to_pos_and_back");
+				m_SelectionContext->AddBehaviour("lua_script");
 
 			}
 
@@ -175,6 +175,12 @@ namespace Vertex {
 			
 			ImGuiLink::DrawVec3Control("Size", entity->size, 1.0f);
 			
+			ImGuiLink::TreePop();
+		}
+
+		if (entity->GetBehaviour() && ImGuiLink::TreeNodeEx(entity->GetID() + "Behaviours", ImGuiTreeNodeFlags_DefaultOpen, "Behaviours"))
+		{
+			entity->GetBehaviour()->ImGuiDrawProperties();
 			ImGuiLink::TreePop();
 		}
 	}

@@ -24,7 +24,7 @@ namespace Vertex
 		~ENTPropText();
 
 
-		virtual SerializationObject Serialize() override
+		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{
 			SerializationObject obj = Entity::Serialize();
 			
@@ -35,9 +35,12 @@ namespace Vertex
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false) override
 		{
 			Entity::DeSerialize(obj);
+
+			text = obj.Get<std::string>("Text", SerializationType::String);
+
 			return true;
 		}
 	public:

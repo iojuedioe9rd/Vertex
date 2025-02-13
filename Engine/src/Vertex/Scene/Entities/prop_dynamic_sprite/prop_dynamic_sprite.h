@@ -33,9 +33,9 @@ namespace Vertex {
 		Ref<Texture2D> texture;
 		float tilingFactor = 1.0f;
 
-		virtual SerializationObject Serialize() override
+		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{
-			SerializationObject obj = ENTBaseBoxCollier2D::Serialize();
+			SerializationObject obj = ENTBaseBoxCollier2D::Serialize(isInSerializer);
 			obj.Set("Colour", SerializationType::Vector4, colour);
 			obj.Set("TilingFactor", SerializationType::Float, tilingFactor);
 			if (texture)
@@ -46,9 +46,9 @@ namespace Vertex {
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false) override
 		{
-			ENTBaseBoxCollier2D::DeSerialize(obj);
+			ENTBaseBoxCollier2D::DeSerialize(obj, isInSerializer);
 			colour = obj.Get<glm::vec4>("Colour", SerializationType::Vector4);
 			tilingFactor = obj.Get<float>("TilingFactor", SerializationType::Float);
 			if (obj.Contains("TextureHandle"))

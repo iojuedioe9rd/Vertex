@@ -14,6 +14,7 @@ namespace Vertex
 {
 	class ENTPointCamera2D;
 	class Entity;
+	class Behaviour;
 	class EntityFactory;
 	
 	class VERTEX_API Scene : public Asset
@@ -32,6 +33,7 @@ namespace Vertex
 		template <typename T>
 		T& CreateEntity(const std::string& name)
 		{
+			//std::lock_guard<std::mutex> lock(m_EntityMutex);
 			T* entity = new T(name, this);
 			m_Entitys.push_back(entity);
 			return *entity;
@@ -44,6 +46,7 @@ namespace Vertex
 		template <typename T>
 		T& CreateEntity(T& entity)
 		{
+			std::lock_guard<std::mutex> lock(m_EntityMutex);
 			T* newEntity = new T(entity);
 			m_Entitys.push_back(newEntity);
 			return *newEntity;
@@ -103,7 +106,13 @@ namespace Vertex
 			m_Entitys.push_back(entity);
 		}
 	private:
+		std::mutex m_EntityMutex;
+		void gc_thread();
+
 		std::vector<Entity*> m_Entitys;
+		std::vector<Entity*> m_EntitysToRemove;
+		std::vector<Behaviour*> m_BehavioursToRemove;
+
 		std::string m_name;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 		bool m_IsEditor = true;

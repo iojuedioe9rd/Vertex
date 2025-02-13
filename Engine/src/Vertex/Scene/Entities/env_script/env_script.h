@@ -36,18 +36,18 @@ namespace Vertex
 		std::string classname;
 		SerializationObject obj;
 
-		virtual SerializationObject Serialize() override
+		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{
-			SerializationObject obj = Entity::Serialize();
+			SerializationObject obj = Entity::Serialize(isInSerializer);
 			obj.Set("Use Rigidbody 2D", SerializationType::Bool, useRB2D);
 			obj.Set("Classname", SerializationType::String, classname);
 			obj.Set("Script Object", SerializationType::SerializationObject, this->obj);
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false) override
 		{
-			Entity::DeSerialize(obj);
+			Entity::DeSerialize(obj, isInSerializer);
 			useRB2D = obj.Get<bool>("Use Rigidbody 2D", SerializationType::Bool);
 			classname = obj.Get<std::string>("Classname", SerializationType::String);
 

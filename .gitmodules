@@ -28,6 +28,15 @@
 [submodule "Engine/vendor/SPIRV-Cross"]
 	path = Engine/vendor/SPIRV-Cross
 	url = https://github.com/iojuedioe9rd/SPIRV-Cross
+[submodule "Engine/vendor/rttr"]
+	path = Engine/vendor/rttr
+	url = https://github.com/iojuedioe9rd/rttr
+[submodule "Engine/vendor/sol2"]
+	path = Engine/vendor/sol2
+	url = https://github.com/iojuedioe9rd/sol2
+[submodule "Engine/vendor/boost"]
+	path = Engine/vendor/boost
+	url = https://github.com/boostorg/boost
 [submodule "Engine/vendor/lua"]
 	path = Engine/vendor/lua
 	url = https://github.com/iojuedioe9rd/lua

@@ -1,0 +1,342 @@
+Scene: Untitled
+Entities:
+  - Entity: 5xsi-xp-c5-3q-y3dhef-8vfgvf4-9c-ze-qm-znlsr-ehs
+    Tag: Green Square
+    IntID: 4473985207640595341
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 5xsi-xp-c5-3q-y3dhef-8vfgvf4-9c-ze-qm-znlsr-ehs
+        - Name: Tag
+          Type: String
+          Data: Green Square
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 0
+            - 1
+            - 0
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [0, 1, 0, 1]
+      TilingFactor: 1
+  - Entity: 20fb-a4-no-qg-ypo22q-rdn7mb3-8-q8-at-p4d3rl-6xf
+    Tag: Camera Entity
+    IntID: 2541325202086738093
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 20fb-a4-no-qg-ypo22q-rdn7mb3-8-q8-at-p4d3rl-6xf
+        - Name: Tag
+          Type: String
+          Data: Camera Entity
+        - Name: EntityType
+          Type: String
+          Data: point_camera_2d
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: IsPrimary
+          Type: Bool
+          Data: true
+        - Name: FixedAspectRatio
+          Type: Bool
+          Data: false
+        - Name: Camera
+          Type: SerializationObject
+          Data:
+            - Name: ProjectionType
+              Type: Int32
+              Data: 1
+            - Name: PerspectiveFOV
+              Type: Float
+              Data: 0.785398185
+            - Name: PerspectiveNear
+              Type: Float
+              Data: 0.00999999978
+            - Name: PerspectiveFar
+              Type: Float
+              Data: 1000
+            - Name: OrthographicSize
+              Type: Float
+              Data: 10
+            - Name: OrthographicNear
+              Type: Float
+              Data: -1
+            - Name: OrthographicFar
+              Type: Float
+              Data: 1
+            - Name: AspectRatio
+              Type: Float
+              Data: 1.73060644
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: 8bb6-2s-br-n8-3mz7eo-0ba7803-4l-54-qg-yci8ko-s1p
+    Tag: Clip-Space Entity
+    IntID: 12600706144687226408
+    EntityType: point_camera_2d
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 8bb6-2s-br-n8-3mz7eo-0ba7803-4l-54-qg-yci8ko-s1p
+        - Name: Tag
+          Type: String
+          Data: Clip-Space Entity
+        - Name: EntityType
+          Type: String
+          Data: point_camera_2d
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: IsPrimary
+          Type: Bool
+          Data: true
+        - Name: FixedAspectRatio
+          Type: Bool
+          Data: false
+        - Name: Camera
+          Type: SerializationObject
+          Data:
+            - Name: ProjectionType
+              Type: Int32
+              Data: 1
+            - Name: PerspectiveFOV
+              Type: Float
+              Data: 0.785398185
+            - Name: PerspectiveNear
+              Type: Float
+              Data: 0.00999999978
+            - Name: PerspectiveFar
+              Type: Float
+              Data: 1000
+            - Name: OrthographicSize
+              Type: Float
+              Data: 10
+            - Name: OrthographicNear
+              Type: Float
+              Data: -1
+            - Name: OrthographicFar
+              Type: Float
+              Data: 1
+            - Name: AspectRatio
+              Type: Float
+              Data: 1.73060644
+    PointCamera2D:
+      ProjectionType: 1
+      PerspectiveFOV: 0.785398185
+      PerspectiveNear: 0.00999999978
+      PerspectiveFar: 1000
+      OrthographicSize: 10
+      OrthographicNear: -1
+      OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+  - Entity: m94-xh-nt-sa-m28y08-6394v36-mn-lh-mv-q0ikr0-db8
+    Tag: lua Test
+    IntID: 8615698671319997945
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: m94-xh-nt-sa-m28y08-6394v36-mn-lh-mv-q0ikr0-db8
+        - Name: Tag
+          Type: String
+          Data: lua Test
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Behaviour
+          Type: SerializationObject
+          Data:
+            - Name: Behaviour
+              Type: String
+              Data: slvf-r5-2x-ad-04hdl2-nvl7x4-00-xd-bg-xv3tch-760
+            - Name: BehaviourType
+              Type: String
+              Data: lua_script
+            - Name: filepath
+              Type: String
+              Data: E:\Games_In_C++\11\Vertex\Vertex-Editor\assets\lua\test.lua
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1

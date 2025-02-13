@@ -92,6 +92,8 @@ namespace Vertex
 			return m_Buffer->As<T>();
 		}
 		operator bool() const { return m_Buffer; }
+
+		operator Buffer*() { return m_Buffer; }
 	private:
 		Buffer* m_Buffer;
 	};

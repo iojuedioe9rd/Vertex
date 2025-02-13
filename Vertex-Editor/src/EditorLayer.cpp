@@ -116,15 +116,15 @@ namespace Vertex {
 			
             auto squareEntity = dynamic_cast<ENTPropStaticSprite*>(m_ActiveScene->CreateEntity("prop_static_sprite", "Green Square"));
             
-			m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
+			//m_ActiveScene->CreateEntity<ENTEnvStaticTilemap>("Tilemap").AddTile(glm::i32vec2(1, 5), nullptr, m_SquareColor);
 
-			m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
+			//m_CameraEntity = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Camera Entity");
 
-			m_CameraEntity->isPrimary = true;
+			//m_CameraEntity->isPrimary = true;
 
-			m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
+			//m_SecondCamera = &m_ActiveScene->CreateEntity<ENTPointCamera2D>("Clip-Space Entity");
 
-			m_SecondCamera->isPrimary = false;
+			//m_SecondCamera->isPrimary = false;
 
 
 

@@ -288,10 +288,10 @@ namespace YAML {
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int16, int16_t, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int32, int32_t, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Int64, int32_t, rhs, name);
-					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint8, uint8_t, rhs, name);
+					//READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint8, uint8_t, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint16, uint16_t, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint32, uint32_t, rhs, name);
-					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint64, uint32_t, rhs, name);
+					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Uint64, uint64_t, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Float, float, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, Double, double, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, String, std::string, rhs, name);
@@ -305,7 +305,7 @@ namespace YAML {
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObject, Vertex::SerializationObject, rhs, name);
 					READ_SERIALIZED_OBJECT_FIELD(dataValueNode, SerializationObjectArray, Vertex::SerializationObjectArray, rhs, name);
 				default:
-					throw std::runtime_error("Unsupported type during decoding: " + typeStr);
+					VX_CORE_INFO("rtdrt");
 				}
 			}
 			return true;

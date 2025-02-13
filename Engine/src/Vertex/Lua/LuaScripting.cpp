@@ -3,9 +3,17 @@
 #include "LuaScripting.h"
 #include "Vertex/Core/Buffer.h"
 #include "Vertex/Core/FileSystem.h"
+#include "Vertex/Lua/LuaGlue.h"
 
-#include "luacpp.hpp"
+extern "C" {
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
+}
 #include "ArenaAllocator.h"
+#include "sol/config.hpp"
+#include "sol/forward.hpp"
+#include "sol/sol.hpp"
 
 /* Size for the buffer, in bytes */
 #define BUFSEEDB	(sizeof(void*) + sizeof(time_t))
@@ -39,6 +47,7 @@ static unsigned int luai_makeseed(void) {
 
 namespace Vertex
 {
+	
 
 	static std::function<int(lua_State*)>* g_lambda;  // Static pointer for the lambda
 
@@ -64,6 +73,8 @@ namespace Vertex
 	struct LuaScriptingData
 	{
 		lua_State* testState = nullptr;
+		std::unordered_map<LuaScriptHandle, LuaScript*> scriptMap;
+
 	};
 
 	static LuaScriptingData* s_Data;
@@ -72,6 +83,10 @@ namespace Vertex
 	{
 		s_Data = new LuaScriptingData();
 
+		// Initialize the main Lua state
+		s_Data->testState = luaL_newstate();
+		luaL_openlibs(s_Data->testState);
+
 		std::string cmd = "x = 7.53456 + 11.67558 + math.sin(23.7)";
 
 		RunTests();
@@ -79,9 +94,136 @@ namespace Vertex
 
 	void LuaScripting::Shutdown()
 	{
-		lua_close(s_Data->testState);
-		s_Data->testState = nullptr;
+		if (s_Data->testState)
+		{
+			lua_close(s_Data->testState);
+			s_Data->testState = nullptr;
+		}
+
 		delete s_Data;
+		s_Data = nullptr;
+	}
+
+	LuaScriptHandle LuaScripting::NewScript(std::string name)
+	{
+		LuaScriptHandle handle = LuaScriptHandle();
+		LuaScript* script = new LuaScript(handle);
+
+		constexpr int POOL_SIZE = 1024 * 10;
+		// Allocate memory on the heap to prevent stack corruption
+		char* memory = new char[POOL_SIZE];
+		ArenaAllocator* pool = new ArenaAllocator(memory, memory + POOL_SIZE);
+
+		script->m_ArenaAllocator = pool;
+		script->m_State = new sol::state(sol::default_at_panic, pool->l_alloc, pool);
+		script->m_Name = name;
+
+		s_Data->scriptMap[handle] = script;
+
+		return handle;
+	}
+
+	bool LuaScripting::LoadScript(LuaScriptHandle& handle, Buffer* buffer, LuaBufferType bufferType)
+	{
+		auto it = s_Data->scriptMap.find(handle);
+		if (it == s_Data->scriptMap.end())
+			return false;
+
+		LuaScript* script = it->second;
+
+		switch (bufferType)
+		{
+		case LuaScripting::LuaBufferType::Text:
+			return LoadScript_Text(script, buffer);
+		case LuaScripting::LuaBufferType::RawData:
+			// Handle raw data case if needed
+			return false;
+		default:
+			return false;
+		}
+	}
+
+	bool LuaScripting::UpdateScript(LuaScriptHandle& handle, Timestep& ts)
+	{
+		auto it = s_Data->scriptMap.find(handle);
+		if (it == s_Data->scriptMap.end())
+		{
+			std::cerr << "Error: Script handle not found!" << std::endl;
+			return false;
+		}
+
+		LuaScript* script = it->second;
+		if (!script || !script->m_State)
+		{
+			std::cerr << "Error: Script or state is null!" << std::endl;
+			return false;
+		}
+
+		sol::state& luaState = *script->m_State;
+		sol::protected_function func = luaState["update"];
+
+		if (!func.valid())
+		{
+			std::cerr << "Error: 'update' function not found in Lua script!" << std::endl;
+			return false;
+		}
+
+		sol::protected_function_result result = func.call(ts.GetSeconds());
+
+		if (!result.valid())
+		{
+			sol::error err = result.get<sol::error>();
+			std::cerr << "Lua error: " << err.what() << std::endl;
+			return false;
+		}
+
+		return true;
+	}
+
+	bool LuaScripting::LoadScript_Text(LuaScript* script, Buffer* buffer)
+	{
+		try
+		{
+			PreSetupLuaState(script);
+			sol::protected_function_result result = script->m_State->safe_script(buffer->As<char>(), sol::script_pass_on_error);
+
+			if (!result.valid())
+			{
+				sol::error err = result.get<sol::error>();
+				std::cerr << "Lua script load error: " << err.what() << std::endl;
+				return false;
+			}
+			PostSetupLuaState(script);
+			return true;
+		}
+		catch (const std::exception& ex)
+		{
+			VX_CORE_ASSERT(false, ex.what());
+			return false;
+		}
+	}
+
+	
+
+	void LuaScripting::PreSetupLuaState(LuaScript* script)
+	{
+		script->m_State->open_libraries(sol::lib::base, sol::lib::io, sol::lib::math, sol::lib::table);
+		LuaGlue::PreSetupLuaState(script);
+		
+		
+	}
+
+	void LuaScripting::PostSetupLuaState(LuaScript* script)
+	{
+		LuaGlue::PostSetupLuaState(script);
+	}
+
+	void LuaScripting::SetScriptBehaviour(LuaScriptHandle& handle, BEHAVIOURLuaScript* behaviour)
+	{
+		auto it = s_Data->scriptMap.find(handle);
+		LuaScript* script = it->second;
+
+		script->m_Behaviour = behaviour;
 	}
 
 	void LuaScripting::RunTests()
@@ -371,7 +513,7 @@ namespace Vertex
 			};
 
 			void* ud = nullptr;
-			lua_State* L = lua_newstate(LuaMem::l_alloc, ud, luai_makeseed());
+			lua_State* L = lua_newstate(LuaMem::l_alloc, ud);
 			successfulTests += (L != nullptr) ? 1 : 0;
 			lua_close(L);
 		}
@@ -382,7 +524,7 @@ namespace Vertex
 			constexpr int POOL_SIZE = 1024 * 10;
 			char memory[POOL_SIZE];
 			ArenaAllocator pool(memory, &memory[POOL_SIZE - 1]);
-			lua_State* L = lua_newstate(ArenaAllocator::l_alloc, &pool, luai_makeseed());
+			lua_State* L = lua_newstate(ArenaAllocator::l_alloc, &pool);
 			successfulTests += (L != nullptr) ? 1 : 0;
 			lua_close(L);
 		}
@@ -393,7 +535,7 @@ namespace Vertex
 			constexpr int POOL_SIZE = 1024 * 10;
 			char memory[POOL_SIZE];
 			ArenaAllocator pool(memory, &memory[POOL_SIZE - 1]);
-			lua_State* L = lua_newstate(ArenaAllocator::l_alloc, &pool, luai_makeseed());
+			lua_State* L = lua_newstate(ArenaAllocator::l_alloc, &pool);
 
 			struct alignas(8) Thing
 			{
@@ -539,34 +681,34 @@ namespace Vertex
 					}
 				};
 
-			auto SpriteNewIndex = [](lua_State* L) -> int
-				{
-					VX_CORE_ASSERT(lua_isuserdata(L, -3));  //1
-					VX_CORE_ASSERT(lua_isstring(L, -2));	//2
-					// -1 - value we want to set	//3
-
-					Sprite* sprite = (Sprite*)lua_touserdata(L, -3);
-					const char* index = lua_tostring(L, -2);
-					if (strcmp(index, "x") == 0)
+				auto SpriteNewIndex = [](lua_State* L) -> int
 					{
-						sprite->x = (int)lua_tonumber(L, -1);
-					}
-					else if (strcmp(index, "y") == 0)
-					{
-						sprite->y = (int)lua_tonumber(L, -1);
-					}
-					else
-					{
-						lua_getuservalue(L, 1);	//1
-						lua_pushvalue(L, 2);	//2
-						lua_pushvalue(L, 3);	//3
-						lua_settable(L, -3);	//1[2] = 3
-					}
+						VX_CORE_ASSERT(lua_isuserdata(L, -3));  //1
+						VX_CORE_ASSERT(lua_isstring(L, -2));	//2
+						// -1 - value we want to set	//3
 
-					return 0;
-				};
+						Sprite* sprite = (Sprite*)lua_touserdata(L, -3);
+						const char* index = lua_tostring(L, -2);
+						if (strcmp(index, "x") == 0)
+						{
+							sprite->x = (int)lua_tonumber(L, -1);
+						}
+						else if (strcmp(index, "y") == 0)
+						{
+							sprite->y = (int)lua_tonumber(L, -1);
+						}
+						else
+						{
+							lua_getuservalue(L, 1);	//1
+							lua_pushvalue(L, 2);	//2
+							lua_pushvalue(L, 3);	//3
+							lua_settable(L, -3);	//1[2] = 3
+						}
 
-			constexpr char* LUA_FILE = R"(
+						return 0;
+					};
+
+				constexpr char* LUA_FILE = R"(
 		sprite = Sprite.new()
 		sprite:Move( 6, 7 )		-- Sprite.Move( sprite, 6, 7 )
 		sprite:Draw()
@@ -578,57 +720,156 @@ namespace Vertex
 		Sprite.new()
 		)";
 
-			constexpr int POOL_SIZE = 1024 * 10;
-			char memory[POOL_SIZE];
-			ArenaAllocator pool(memory, &memory[POOL_SIZE - 1]);
-			lua_State* L = lua_newstate(ArenaAllocator::l_alloc, &pool, luai_makeseed());
+				constexpr int POOL_SIZE = 1024 * 10;
+				char memory[POOL_SIZE];
+				ArenaAllocator pool(memory, &memory[POOL_SIZE - 1]);
+				lua_State* L = lua_newstate(ArenaAllocator::l_alloc, &pool);
 
-			lua_newtable(L);
-			int spriteTableIdx = lua_gettop(L);
-			lua_pushvalue(L, spriteTableIdx);
-			lua_setglobal(L, "Sprite");
+				lua_newtable(L);
+				int spriteTableIdx = lua_gettop(L);
+				lua_pushvalue(L, spriteTableIdx);
+				lua_setglobal(L, "Sprite");
 
-			constexpr int NUMBER_OF_UPVALUES = 1;
-			lua_pushlightuserdata(L, &spriteManager);
-			lua_pushcclosure(L, CreateSprite, NUMBER_OF_UPVALUES);
-			lua_setfield(L, -2, "new");
-			lua_pushcfunction(L, MoveSprite);
-			lua_setfield(L, -2, "Move");
-			lua_pushcfunction(L, DrawSprite);
-			lua_setfield(L, -2, "Draw");
+				constexpr int NUMBER_OF_UPVALUES = 1;
+				lua_pushlightuserdata(L, &spriteManager);
+				lua_pushcclosure(L, CreateSprite, NUMBER_OF_UPVALUES);
+				lua_setfield(L, -2, "new");
+				lua_pushcfunction(L, MoveSprite);
+				lua_setfield(L, -2, "Move");
+				lua_pushcfunction(L, DrawSprite);
+				lua_setfield(L, -2, "Draw");
 
-			luaL_newmetatable(L, "SpriteMetaTable");
-			lua_pushstring(L, "__gc");
-			lua_pushlightuserdata(L, &spriteManager);
-			lua_pushcclosure(L, DestroySprite, NUMBER_OF_UPVALUES);
-			lua_settable(L, -3);
+				luaL_newmetatable(L, "SpriteMetaTable");
+				lua_pushstring(L, "__gc");
+				lua_pushlightuserdata(L, &spriteManager);
+				lua_pushcclosure(L, DestroySprite, NUMBER_OF_UPVALUES);
+				lua_settable(L, -3);
 
-			lua_pushstring(L, "__index");
-			lua_pushcfunction(L, SpriteIndex);
-			lua_settable(L, -3);
+				lua_pushstring(L, "__index");
+				lua_pushcfunction(L, SpriteIndex);
+				lua_settable(L, -3);
 
-			lua_pushstring(L, "__newindex");
-			lua_pushcfunction(L, SpriteNewIndex);
-			lua_settable(L, -3);
+				lua_pushstring(L, "__newindex");
+				lua_pushcfunction(L, SpriteNewIndex);
+				lua_settable(L, -3);
 
-			int doResult = luaL_dostring(L, LUA_FILE);
-			if (doResult != LUA_OK)
+				int doResult = luaL_dostring(L, LUA_FILE);
+				if (doResult != LUA_OK)
+				{
+					VX_CORE_INFO("Error: {}", lua_tostring(L, -1));
+				}
+				else
+				{
+					successfulTests++;
+				}
+
+				lua_close(L);
+
+				VX_CORE_ASSERT(spriteManager.numberOfSpritesExisting == 0);
+				VX_CORE_ASSERT(spriteManager.numberOfSpritesMade == 3);
+		}
+
+		
+		{
+
+
+			tests++;
+			
+			sol::state state = sol::state();
+			state.open_libraries(sol::lib::base, sol::lib::io, sol::lib::math, sol::lib::table);
+			state.do_string("a = (2 + 2) * 10");
+			int a = state["a"].get<int>();
+			VX_CORE_INFO("a is {0}", a);
+			if (a == 40)
 			{
-				VX_CORE_INFO("Error: {}", lua_tostring(L, -1));
+				successfulTests++;
 			}
-			else
+		}
+
+		{
+			tests++;
+
+			sol::state state = sol::state();
+			state.open_libraries(sol::lib::base, sol::lib::io, sol::lib::math, sol::lib::table);
+			constexpr char* LUA_FILE = R"(
+			function update()
+				return 4.2 + 5.1
+			end)";
+
+
+			state.do_string(LUA_FILE);
+			
+			float updateCallRet = state["update"].call().get<float>();
+
+			if ((int)updateCallRet == 9)
+			{
+				successfulTests++;
+			}
+		}
+
+		{
+			tests++;
+
+			sol::state state = sol::state();
+			state.open_libraries(sol::lib::base, sol::lib::io, sol::lib::math, sol::lib::table);
+			
+			try
+			{
+				state.safe_script("a = 1 + 24d34t + egr43");
+			}
+			catch (const std::exception& ex)
 			{
 				successfulTests++;
 			}
 
-			lua_close(L);
-
-			VX_CORE_ASSERT(spriteManager.numberOfSpritesExisting == 0);
-			VX_CORE_ASSERT(spriteManager.numberOfSpritesMade == 3);
 		}
+
+		{
+			tests++;
+
+			sol::state state = sol::state();
+			state.do_string("player = {Name = \"Test\", IQ = \"1\"}");
+
+
+			sol::table a_table = state["player"];
+			if (a_table)
+			{
+				int sfdf = 0;
+				for (const auto& entry : a_table)
+				{
+					sol::object key = entry.first;
+					sol::object value = entry.second;
+
+					std::string sKey = key.as<std::string>();
+
+					
+
+					if (sKey == "IQ")
+					{
+						if (value.as<std::string>() == "1") { sfdf++; }
+					}
+
+					if (sKey == "Name")
+					{
+						if (value.as<std::string>() == "Test") { sfdf++; }
+					}
+
+					
+				}
+				if (sfdf == 2) { successfulTests++; }
+			}
+		}
+
+		
 
 		VX_CORE_INFO("{0} / {1} tests successful!", successfulTests, tests);
 	}
+
+	
+
+	
+
+
 
 	
 }

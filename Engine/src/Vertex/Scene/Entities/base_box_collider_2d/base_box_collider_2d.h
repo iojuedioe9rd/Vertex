@@ -30,9 +30,9 @@ namespace Vertex
 		float Restitution = 0.0f;
 		float RestitutionThreshold = 0.5f;
 
-		virtual SerializationObject Serialize() override
+		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{
-			SerializationObject obj = ENTBaseRigidbody2D::Serialize();
+			SerializationObject obj = ENTBaseRigidbody2D::Serialize(isInSerializer);
 			obj.Set("Density", SerializationType::Float, Density);
 			obj.Set("Friction", SerializationType::Float, Friction);
 			obj.Set("Restitution", SerializationType::Float, Restitution);
@@ -42,9 +42,9 @@ namespace Vertex
 			return obj;
 		}
 
-		virtual bool DeSerialize(SerializationObject obj) override
+		virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false) override
 		{
-			ENTBaseRigidbody2D::DeSerialize(obj);
+			ENTBaseRigidbody2D::DeSerialize(obj, isInSerializer);
 			Density = obj.Get<float>("Density", SerializationType::Float);
 			Friction = obj.Get<float>("Friction", SerializationType::Float);
 			Restitution = obj.Get<float>("Restitution", SerializationType::Float);

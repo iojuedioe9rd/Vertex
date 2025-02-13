@@ -22,11 +22,15 @@ namespace Vertex
         virtual void OnDestroy() {}
         virtual void OnUpdate(Timestep& ts) {}
         virtual void OnDraw() {}
-        virtual void OnPhysUpdate(Timestep& deltaTime) {}
+        virtual void OnPhysUpdate(Timestep& ts) {}
 
-        virtual std::string GetTypeName() = 0;
+        virtual void ImGuiDrawProperties() {}
 
-        virtual SerializationObject Serialize()
+        virtual std::string GetTypeName() {
+            return "";
+        }
+
+        virtual SerializationObject Serialize(bool isInSerializer = false)
         {
             SerializationObject obj = SerializationObject();
             obj.Set<UUID>("Behaviour", SerializationType::String, GetID());
@@ -35,7 +39,7 @@ namespace Vertex
             return obj;
         }
 
-        virtual bool DeSerialize(SerializationObject obj)
+        virtual bool DeSerialize(SerializationObject obj, bool isInSerializer = false)
         {
             SetID(obj.Get<std::string>("Behaviour", SerializationType::String));
             
@@ -45,20 +49,15 @@ namespace Vertex
 		
 
     protected:
-        Behaviour(Entity* entity) : m_Entity(entity) {}
+        Behaviour(Entity* entity);
         ~Behaviour() { m_Entity = nullptr; };
 
 		
 
         Entity* m_Entity;
 
-        static Behaviour* CreateBehaviour(const std::string& name, Entity* entity)
-        {
-            auto it = GetBehaviourMap().find(name);
-            if (it != GetBehaviourMap().end())
-                return it->second(entity);
-            return nullptr;
-        }
+        static Behaviour* CreateBehaviour(const std::string& name, Entity* entity);
+        
 
     private:
 

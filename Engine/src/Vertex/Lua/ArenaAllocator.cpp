@@ -1,5 +1,6 @@
 #include <vxpch.h>
 #include "ArenaAllocator.h"
+#include <Vertex/CustomAlloc/custom_alloc.h>
 
 namespace Vertex
 {

@@ -88,6 +88,7 @@ namespace Vertex
 				else
 				{
 					// can't find path
+					ImGui::End();
 					return;
 				}
 

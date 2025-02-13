@@ -28,6 +28,40 @@
 static bool has_sse4 = false;
 static bool has_xop = false;
 static bool has_fma3 = false;
+/*
+void* operator new(size_t size) {
+    return custom_malloc(size, "Unknown", 0);
+}
+
+void* operator new[](size_t size) {
+    return custom_malloc(size, "Unknown", 0);
+}
+
+void* operator new(size_t size, const char* file, int line) {
+    return custom_malloc(size, file, line);
+}
+
+void* operator new[](size_t size, const char* file, int line) {
+    return custom_malloc(size, file, line);
+}
+
+void operator delete(void* ptr) noexcept {
+    custom_free(ptr);
+}
+
+void operator delete[](void* ptr) noexcept {
+    custom_free(ptr);
+}
+
+void operator delete(void* ptr, size_t size) noexcept {
+    (void)size; // Size is not used in custom_free
+    custom_free(ptr);
+}
+
+void operator delete[](void* ptr, size_t size) noexcept {
+    (void)size;
+    custom_free(ptr);
+}*/
 
 void detect_features() {
     int cpu_info[4] = { 0 };
@@ -37,10 +71,13 @@ void detect_features() {
     __cpuid(cpu_info, 0);
     has_sse4 = (cpu_info[3] & (1 << 19)) != 0;  // Bit 19 in ECX indicates SSE4.1 support
     has_fma3 = (cpu_info[2] & (1 << 12)) != 0; // Bit 12 in ECX indicates FMA3 support
+
+    
 }
 
 // Memory block structure
 struct MemBlock {
+    void* raw_ptr;    // Pointer returned by malloc (needed for free)
     size_t size;
     const char* file;
     int line;
@@ -217,14 +254,27 @@ static void log_memory_op(const char* op, void* ptr, size_t size, const char* fi
 
 // FMA3/SSE4/SSE2/XOP-aligned malloc
 void* custom_malloc(size_t size, const char* file, int line) {
-#ifndef VX_DEBUG
+
+    return std::malloc(size);
+
+    // Total size: header + requested size + extra for alignment adjustment.
     size_t total_size = sizeof(MemBlock) + size + ALIGNMENT;
-    void* raw_ptr = malloc(total_size);
-    if (!raw_ptr) return nullptr;
+    void* raw_ptr = std::malloc(total_size);
+    if (!raw_ptr)
+        return nullptr;
 
-    void* aligned_ptr = (void*)(((uintptr_t)raw_ptr + ALIGNMENT - 1) & ~(ALIGNMENT - 1));
-    MemBlock* block = (MemBlock*)aligned_ptr - 1;
+    // Compute an aligned address that leaves space for the header.
+    uintptr_t raw_addr = reinterpret_cast<uintptr_t>(raw_ptr);
+    uintptr_t aligned_addr = (raw_addr + sizeof(MemBlock) + ALIGNMENT - 1) & ~(ALIGNMENT - 1);
+    void* aligned_ptr = reinterpret_cast<void*>(aligned_addr);
 
+    // Store the header immediately before the aligned pointer.
+    MemBlock* block = reinterpret_cast<MemBlock*>(aligned_ptr) - 1;
+    block->raw_ptr = raw_ptr;  // Save original pointer to free() later.
+    if (raw_ptr == (void*)0x000002877f5e6c30)
+    {
+        __debugbreak();
+    }
     block->size = size;
     block->file = file;
     block->line = line;
@@ -232,17 +282,8 @@ void* custom_malloc(size_t size, const char* file, int line) {
     block->canary_pre = CANARY_VALUE;
     block->canary_post = CANARY_VALUE;
 
-    thread_memory_info.allocations[aligned_ptr] = *block;
-    thread_memory_info.total_allocated += size;
-
-    if (thread_memory_info.total_allocated > thread_memory_info.peak_allocated)
-        thread_memory_info.peak_allocated = thread_memory_info.total_allocated;
-
-    global_allocated += size;
-    size_t peak = global_allocated.load();
-    if (peak > global_peak_allocated.load())
-        global_peak_allocated.store(peak);
-
+    // Zero out the allocated memory.
+    // (Replace these with your optimized SIMD versions if available.)
     if (has_fma3)
         fma3_memset(aligned_ptr, size);
     else if (has_sse4)
@@ -252,91 +293,89 @@ void* custom_malloc(size_t size, const char* file, int line) {
     else
         sse2_memset(aligned_ptr, size);
 
-    //log_memory_op("MALLOC", aligned_ptr, size, file, line);
-
-#else
-	void* aligned_ptr = std::malloc(size);
-	if (!aligned_ptr) return nullptr;
-#endif
-
-
     return aligned_ptr;
+
+    // In debug mode, simply call std::malloc.
+    //return std::malloc(size);
+
 }
+
 
 // FMA3/SSE4/SSE2/XOP-aligned realloc
 void* custom_realloc(void* ptr, size_t new_size, const char* file, int line) {
-    if (!ptr) return custom_malloc(new_size, file, line);
-#ifndef VX_DEBUG
-    auto it = thread_memory_info.allocations.find(ptr);
-    if (it == thread_memory_info.allocations.end()) {
-        std::cerr << "[ERROR] Attempted to realloc an unknown pointer!" << std::endl;
+
+    return realloc(ptr, new_size);
+
+    // If the pointer is null, behave like custom_malloc.
+    if (!ptr)
+        return custom_malloc(new_size, file, line);
+
+    // Retrieve the header. The header was stored immediately before the aligned pointer.
+    MemBlock* old_block = reinterpret_cast<MemBlock*>(ptr) - 1;
+
+    // Validate the canary values to detect possible memory corruption.
+    if (old_block->canary_pre != CANARY_VALUE || old_block->canary_post != CANARY_VALUE) {
+        std::cerr << "[ERROR] Buffer overflow detected in custom_realloc for memory at " << ptr << std::endl;
         return nullptr;
     }
 
-    size_t old_size = it->second.size;
+    // Get the old allocation size.
+    size_t old_size = old_block->size;
+
+    // Allocate a new memory block with the new size.
     void* new_ptr = custom_malloc(new_size, file, line);
-    if (!new_ptr) return nullptr;
+    if (!new_ptr)
+        return nullptr;
 
-    if (has_fma3)
-        fma3_memcpy(new_ptr, ptr, (old_size < new_size) ? old_size : new_size);
-    else if (has_sse4)
-        sse4_memcpy(new_ptr, ptr, (old_size < new_size) ? old_size : new_size);
-    else if (has_xop)
-        xop_memcpy(new_ptr, ptr, (old_size < new_size) ? old_size : new_size);
-    else
-        sse2_memcpy(new_ptr, ptr, (old_size < new_size) ? old_size : new_size);
+    // Calculate the number of bytes to copy (the smaller of the two sizes).
+    size_t copy_size = (old_size < new_size) ? old_size : new_size;
 
+    // Use your custom_memcpy to copy the data from the old block to the new block.
+    // (If you have SIMD optimizations in custom_memcpy, they will be used.)
+    custom_memcpy(new_ptr, ptr, copy_size, file, line);
+
+    // Free the old block.
     custom_free(ptr);
-    log_memory_op("REALLOC", new_ptr, new_size, file, line);
 
-#else
-	void* new_ptr = std::realloc(ptr, new_size);
-	if (!new_ptr) return nullptr;
-#endif
+    // Return the new pointer.
     return new_ptr;
+
+   // In debug mode, fall back to the standard realloc.
+    //return std::realloc(ptr, new_size);
+
 }
 
 void custom_free(void* ptr) {
-#ifndef VX_DEBUG
-    if (!ptr) return;  // Don't free null pointers
 
+    return free(ptr);
 
+    if (!ptr)
+        return;  // Do nothing if pointer is null.
 
+    // Get the header stored just before the aligned pointer.
+    MemBlock* block = reinterpret_cast<MemBlock*>(ptr) - 1;
 
-    // Find the memory block information from the thread-local memory map
-    auto it = thread_memory_info.allocations.find(ptr);
-    if (it == thread_memory_info.allocations.end()) {
-        std::cerr << "[ERROR] Attempted to free an unknown or invalid pointer!" << std::endl;
-        return;
-    }
-
-
-
-    MemBlock* block = &it->second;
-
-    // Validate memory integrity using canary values
+    // Validate the canary values to detect buffer overruns.
     if (block->canary_pre != CANARY_VALUE || block->canary_post != CANARY_VALUE) {
         std::cerr << "[ERROR] Buffer overflow detected while freeing memory!" << std::endl;
         return;
     }
 
-    // Log the free operation with file/line details
-    log_memory_op("FREE", ptr, block->size, block->file, block->line);
+    // Optionally, you can clear the memory before freeing.
+    if (has_fma3)
+        fma3_memset(ptr, block->size);
+    else if (has_sse4)
+        sse4_memset(ptr, block->size);
+    else if (has_xop)
+        xop_memset(ptr, block->size);
+    else
+        sse2_memset(ptr, block->size);
 
-    // Update thread-local and global memory stats
-    thread_memory_info.total_allocated -= block->size;
-    global_allocated -= block->size;
+    // Free the original pointer returned by malloc.
+    std::free(block->raw_ptr);
 
-    
-
-    // Free the memory
-	IMPL_FUNC(memset, ptr, block->size);
-
-#else
-	std::free(ptr);
-
-#endif // !VX_DEBUG
-    
+    //std::free(ptr);
+//#endif
 }
 
 void custom_allocator_print_stats()

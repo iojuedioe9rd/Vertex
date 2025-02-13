@@ -92,6 +92,8 @@ namespace Vertex {
 			auto& [transform, mesh] = group.get<TransformComponent, MeshComponent>(entity);
 		}
 #endif
+
+		
 	}
 
 	Scene::~Scene()
@@ -107,6 +109,7 @@ namespace Vertex {
 
 	Entity* Scene::CreateEntity(const std::string& ent_name, const std::string& name)
 	{
+		std::lock_guard<std::mutex> lock(m_EntityMutex);
 		Entity* ent = EntityFactory::CreateEntity(ent_name, name, (Scene*)this);
 		m_Entitys.push_back(ent);
 		return ent;
@@ -114,6 +117,7 @@ namespace Vertex {
 
 	Entity* Scene::FindEntityByName(std::string_view name)
 	{
+		std::lock_guard<std::mutex> lock(m_EntityMutex);
 		for (Entity* ent : *this)
 		{
 			if (ent->name() == name)
@@ -126,6 +130,7 @@ namespace Vertex {
 
 	bool Scene::RemoveEntity(Entity& entity)
 	{
+		std::lock_guard<std::mutex> lock(m_EntityMutex);
 		m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());
 		delete& entity;
 		return true;
@@ -206,6 +211,8 @@ namespace Vertex {
 					}
 					return true;
 				});
+
+				ent->OnCreateTime();
 			}
 
 			
@@ -319,6 +326,11 @@ namespace Vertex {
 		delete m_PhysicsWorld;
 		m_PhysicsWorld = nullptr;
 		
+		for (Entity* ent : m_Entitys)
+		{
+			ent->OnDestroyTime();
+		}
+
 		if (true)
 		{
 			ScriptEngine::OnRuntimeStop();
@@ -390,6 +402,10 @@ namespace Vertex {
 		{
 			ent->DrawTime(ts);
 		}
+
+		{
+			gc_thread();
+		}
 	}
 
 	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
@@ -397,6 +413,10 @@ namespace Vertex {
 		for (Entity* ent : m_Entitys)
 		{
 			ent->DrawTime(ts);
+		}
+
+		{
+			gc_thread();
 		}
 	}
 
@@ -406,6 +426,8 @@ namespace Vertex {
 		{
 			ent->PostDeserialize();
 		}
+
+		
 	}
 
 	void Scene::OnEvent(Event& e)
@@ -471,6 +493,19 @@ namespace Vertex {
 		VX_CORE_INFO("~Registering Entities");
 	}
 
+	struct EntityPtrHash {
+		std::size_t operator()(const Entity* entity) const noexcept {
+			return reinterpret_cast<std::uintptr_t>(entity);
+		}
+	};
+
+	struct BehaviourPtrHash {
+		std::size_t operator()(const Behaviour* entity) const noexcept {
+			return reinterpret_cast<std::uintptr_t>(entity);
+		}
+	};
+
+
 	Scene* Scene::Copy(Scene* other, std::string& name)
 	{
 		Scene* newScene = new Scene(name);
@@ -494,4 +529,49 @@ namespace Vertex {
 		return newScene;
         
 	}
+	void Scene::gc_thread()
+	{
+		/*auto start = std::chrono::steady_clock::now();
+
+		std::unordered_set<Entity*, EntityPtrHash> uniqueEntities;
+		std::unordered_set<Behaviour*, BehaviourPtrHash> uniqueBehaviours;
+
+		std::lock_guard<std::mutex> lock(m_EntityMutex);
+
+		// Entity cleanup
+		m_Entitys.erase(std::remove_if(m_Entitys.begin(), m_Entitys.end(),
+			[&uniqueEntities](Entity* entity)
+			{
+				if (uniqueEntities.find(entity) != uniqueEntities.end())
+				{
+					return true; // Mark for removal
+				}
+				uniqueEntities.insert(entity);
+				return false;
+			}), m_Entitys.end());
+
+		// Behaviour cleanup
+		for (Entity* entity : m_Entitys)
+		{
+			auto& behaviours = entity->GetBehaviours();
+			behaviours.erase(std::remove_if(behaviours.begin(), behaviours.end(),
+				[&uniqueBehaviours, entity](Behaviour* behaviour)
+				{
+					if (uniqueBehaviours.find(behaviour) != uniqueBehaviours.end())
+					{
+						//entity->RemoveBehaviour(behaviour);
+						return false; // Mark for removal
+					}
+					uniqueBehaviours.insert(behaviour);
+					return false;
+				}), behaviours.end());
+		}*/
+	}
+
+
+			
+
+
+		//}
+	//}
 };

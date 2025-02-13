@@ -12,7 +12,7 @@ namespace Vertex {
 
 	public:
 		bool operator==(const Object& other) const {
-			return other.m_id == this->m_id;
+			return other.m_id == this->m_id && other.m_intUUID == this->m_intUUID;
 		}
 
 		Object();

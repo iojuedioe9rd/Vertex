@@ -62,6 +62,8 @@ namespace Vertex {
 		virtual const FramebufferSpecification& GetSpecification() const = 0;
 
 		static Framebuffer* Create(const FramebufferSpecification& spec);
+
+		virtual void BindAsTex(uint32_t index, uint32_t colorAttachmentRendererID = 0) = 0;
 	};
 
 }

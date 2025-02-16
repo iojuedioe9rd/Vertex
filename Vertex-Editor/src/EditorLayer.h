@@ -13,6 +13,8 @@
 #include "Vertex/Renderer/Font.h"
 #include <filesystem>
 #include <Vertex/AssetManager/EditorAssetManager.h>
+#include <Vertex/Renderer/PostProcessing.h>
+#include <Vertex/Renderer/UniformBuffer.h>
 
 
 
@@ -51,7 +53,6 @@ namespace Vertex {
 		void UI_Toolbar();
 	private:
 
-		
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
@@ -60,11 +61,17 @@ namespace Vertex {
 		Ref<Mesh> m_testMesh;
 		Ref<Font> m_Font;
 		Ref<Shader> m_testShader;
+		
+		float bloomIntensity = 0.5f;  // Adjust bloom strength
+		float bloomThreshold = 0.8f;  // Adjust brightness threshold for bloom
+		
+		//Ref<UniformBuffer> Buffer;
 
 		// Temp
 		Ref<VertexArray> m_SquareVA;
 		Ref<Shader> m_FlatColorShader;
 		Framebuffer* m_Framebuffer;
+		Framebuffer* m_Framebuffer2;
 
 		ENTPointCamera2D* m_CameraEntity;
 		ENTPointCamera2D* m_SecondCamera;

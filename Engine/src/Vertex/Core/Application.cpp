@@ -168,7 +168,12 @@ namespace Vertex
 			return;
 		}
 		
-		
+		if (e->GetEventType() == EventType::MouseMoved)
+		{
+			delete e;
+			return;
+		}
+
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowMoved)
 		{
 			Update();

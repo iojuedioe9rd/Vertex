@@ -75,7 +75,7 @@ project "Engine"
 		"Box2D",
 		"%{Library.mono}",
 		"lua",
-		"rttr"
+		"rttr_core_lib"
 		
 	}
 	

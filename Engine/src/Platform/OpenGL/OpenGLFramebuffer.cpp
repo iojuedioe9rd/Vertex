@@ -222,5 +222,19 @@ namespace Vertex {
 			Utils::VertexFBTextureFormatToGL(spec.TextureFormat), GL_INT, &value);
 	}
 
+	void OpenGLFramebuffer::BindAsTex(uint32_t index, uint32_t colorAttachmentRendererID)
+	{
+		if (colorAttachmentRendererID == 0)
+		{
+			colorAttachmentRendererID = GetColorAttachmentRendererID();
+		}
+
+		// Activate the specified texture unit (e.g., GL_TEXTURE0, GL_TEXTURE1, etc.)
+		glActiveTexture(GL_TEXTURE0 + index);
+
+		// Bind the framebuffer's color attachment as a texture to the active texture unit
+		glBindTexture(GL_TEXTURE_2D, colorAttachmentRendererID);
+
+	}
 
 }

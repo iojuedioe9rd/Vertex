@@ -21,6 +21,7 @@ namespace Vertex {
 		virtual void ClearAttachment(uint32_t attachmentIndex, int value) override;
 
 		virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const override { VX_CORE_ASSERT(index < m_ColorAttachments.size()); return m_ColorAttachments[index]; }
+		virtual void BindAsTex(uint32_t index, uint32_t colorAttachmentRendererID = 0) override;
 
 		virtual const FramebufferSpecification& GetSpecification() const override { return m_Specification; }
 	private:

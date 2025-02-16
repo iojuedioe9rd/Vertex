@@ -17,6 +17,7 @@
 #include <Vertex/Renderer/Font.h>
 #include <Vertex/AssetManager/AssetManager.h>
 #include <Vertex/Scripting/ScriptGlue.h>
+#include <Vertex/Renderer/UniformBuffer.h>
 
 
 
@@ -96,7 +97,8 @@ namespace Vertex {
 
 
 
-		m_Framebuffer = Framebuffer::Create(fbSpec);
+		m_Framebuffer2 = Framebuffer::Create(fbSpec);
+		//m_PostProcssing->Add(Shader::Create("assets/shaders/grayscale.glsl"));
 
 		m_ActiveScene = new Scene("ActiveScene");
 		m_EditorScene = new Scene("EditorScene");
@@ -199,8 +201,9 @@ namespace Vertex {
 				20, 21, 22, 22, 23, 20
 		}, textures));
 
-		//m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
-
+		m_testShader = Shader::Create("assets/shaders/grayscale.glsl");
+		m_testShader->Bind();
+		m_testShader->Unbind();
 		
 		
 
@@ -217,6 +220,51 @@ namespace Vertex {
 	void EditorLayer::OnDetach()
 	{
 		VX_PROFILE_FUNCTION();
+	}
+
+	void DrawFullScreenQuad(Ref<Shader> m_FlatColorShader, Framebuffer* m_Framebuffer2)
+	{
+		// Step 1: Define the vertex data for a full-screen quad
+		float vertices[] = {
+			// Positions         // Texture coordinates
+			-1.0f,  1.0f, 0.0f, 1.0f, 1.0f, // Top left
+			-1.0f, -1.0f, 0.0f, 1.0f, 0.0f, // Bottom left
+			 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // Bottom right
+			 1.0f,  1.0f, 0.0f, 0.0f, 1.0f  // Top right
+		};
+
+		unsigned int indices[] = {
+			0, 1, 2, 0, 2, 3  // Two triangles to make a quad
+		};
+
+		// Step 2: Create the vertex buffer and index buffer
+		Ref<VertexBuffer> vertexBuffer = Ref<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+		Ref<IndexBuffer> indexBuffer = Ref<IndexBuffer>(IndexBuffer::Create(indices, 6));
+
+		// Step 3: Create a VertexArray to hold the buffers
+		Ref<VertexArray> vertexArray = Ref<VertexArray>(VertexArray::Create());
+		vertexBuffer->SetLayout({
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float2, "a_UV" },
+			});
+		vertexArray->AddVertexBuffer(vertexBuffer);
+		vertexArray->SetIndexBuffer(indexBuffer);
+
+		// Step 4: Upload the texture uniform and bind the shader
+
+		
+
+		//m_FlatColorShader->UploadUniformInt("u_Texture", 0); // Assuming 'u_Texture' is the uniform name in the shader
+
+		m_FlatColorShader->Bind();
+
+		// Bind the framebuffer texture to texture unit 0
+		m_Framebuffer2->BindAsTex(0);
+
+		// Step 5: Bind the vertex array and issue the draw call
+		vertexArray->Bind();
+		RenderCommand::DrawIndexed(vertexArray, indexBuffer->GetCount());
+		vertexArray->Unbind();
 	}
 
 	void EditorLayer::OnUpdate(Timestep ts)
@@ -241,6 +289,7 @@ namespace Vertex {
 		// Render
 		Renderer2D::ResetStats();
 		m_Framebuffer->Bind();
+		//m_PostProcssing->Begin();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
@@ -340,7 +389,7 @@ namespace Vertex {
 			Renderer2D::EndScene();
 		}
 
-		RenderCommand::DisableDepthTesting();
+		
 
 		//m_testShader->Bind();
 		//m_testShader->UploadUniformFloat4("lightColor", glm::vec4(1));
@@ -348,10 +397,22 @@ namespace Vertex {
 		//m_testShader->UploadUniformMat4("model", glm::mat4(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
 		//m_testMesh->Draw(m_testShader);
 
-		RenderCommand::EnableDepthTesting();
+		
 
-
+		
 		m_Framebuffer->Unbind();
+		RenderCommand::DisableDepthTesting();
+
+		//m_PostProcssing->UnbindFramebuffer();
+		//m_Framebuffer->Bind();
+		//m_testShader->Bind();
+
+		//DrawFullScreenQuad(m_testShader, m_Framebuffer2);
+
+		//m_PostProcssing->End();
+		//m_Framebuffer->Unbind();
+
+		RenderCommand::EnableDepthTesting();
 	}
 
 	void EditorLayer::OnImGuiRender()
@@ -473,14 +534,17 @@ namespace Vertex {
 		if (m_ViewportSize != viewportPanelSize)
 		{
 			m_Framebuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
+			m_Framebuffer2->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 			m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);
 			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+			//m_PostProcssing->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 		}
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGuiLink::Image((void*)textureID, glm::vec2{ viewportPanelSize.x, viewportPanelSize.y }, glm::vec2{ 0, 1 }, glm::vec2{ 1, 0 });
+
 
 		auto windowSize = ImGuiLink::GetWindowSize();
 		auto minBound = ImGuiLink::GetWindowPos();
@@ -719,6 +783,6 @@ namespace Vertex {
 		ImGui::End();
 
 	}
-
+	 
 }
 

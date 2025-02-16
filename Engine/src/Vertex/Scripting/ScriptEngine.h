@@ -102,6 +102,7 @@ namespace Vertex {
 		void InvokeOnUpdate(float ts);
 		void InvokeOnPhysUpdate(float ts);
 		void InvokeOnDraw();
+		void InvokeOnImGuiDraw();
 
 		template<typename T>
 		T GetFieldValue(const std::string& name)
@@ -136,6 +137,7 @@ namespace Vertex {
 		MonoMethod* m_OnUpdateMethod = nullptr;
 		MonoMethod* m_OnPhysUpdateMethod = nullptr;
 		MonoMethod* m_OnDrawMethod = nullptr;
+		MonoMethod* m_OnImGuiDrawMethod = nullptr;
 
 		static char s_FieldValueBuffer[32];
 
@@ -163,6 +165,7 @@ namespace Vertex {
 		static void OnUpdateEntity(Entity* entity, Timestep ts);
 		static void OnPhysUpdateEntity(Entity* entity, Timestep ts);
 		static void OnDrawEntity(Entity* entity);
+		static void OnImGuiDrawEntity(Entity* entity);
 		static MonoClass* GetMonoClassFromName(MonoImage* image, std::string nameSpace, std::string name);
 		static bool IsSubclassOf(MonoClass* monoClass, MonoClass* subclass, bool checkInterfaces);
 

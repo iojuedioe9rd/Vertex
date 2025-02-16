@@ -22,6 +22,15 @@ namespace Vertex
 			ScriptEngine::OnDrawEntity(this);
 	}
 
+	void ENTEnvScript::OnImGuiDraw()
+	{
+		if (!m_Scene->IsEditor())
+		{
+			ScriptEngine::OnImGuiDrawEntity(this);
+		}
+			
+	}
+
 	void ENTEnvScript::PhysUpdate(Timestep& ts)
 	{
 		ScriptEngine::OnPhysUpdateEntity(this, ts);

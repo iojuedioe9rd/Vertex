@@ -422,6 +422,15 @@ namespace Vertex {
 		instance->InvokeOnDraw();
 	}
 
+	void ScriptEngine::OnImGuiDrawEntity(Entity* entity)
+	{
+		UUID entityUUID = entity->GetID();
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
+		instance->InvokeOnImGuiDraw();
+	}
+
 	MonoClass* ScriptEngine::GetMonoClassFromName(MonoImage* image, std::string nameSpace, std::string name)
 	{
 		return mono_class_from_name(image, nameSpace.c_str(), name.c_str());
@@ -634,6 +643,7 @@ namespace Vertex {
 		m_OnCreateMethod = scriptClass->GetMethod("OnCreate", 0);
 		m_OnUpdateMethod = scriptClass->GetMethod("OnUpdate", 1);
 		m_OnDrawMethod = scriptClass->GetMethod("OnDraw", 0);
+		m_OnImGuiDrawMethod = scriptClass->GetMethod("OnImGuiDraw", 0);
 		m_OnPhysUpdateMethod = scriptClass->GetMethod("OnPhysUpdate", 1);
 
 		// Call Entity constructor
@@ -674,6 +684,14 @@ namespace Vertex {
 		if (m_OnDrawMethod)
 		{
 			m_ScriptClass->InvokeMethod(m_Instance, m_OnDrawMethod, nullptr);
+		}
+	}
+
+	void ScriptInstance::InvokeOnImGuiDraw()
+	{
+		if (m_OnImGuiDrawMethod)
+		{
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnImGuiDrawMethod, nullptr);
 		}
 	}
 

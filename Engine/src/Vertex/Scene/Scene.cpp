@@ -377,6 +377,14 @@ namespace Vertex {
 
 	}
 
+	void Scene::OnImGuiDraw()
+	{
+		for (Entity* ent : m_Entitys)
+		{
+			ent->OnImGuiDraw();
+		}
+	}
+
 	void Scene::OnUpdateRuntime(Timestep ts)
 	{
 		for (Entity* ent : m_Entitys)
@@ -524,6 +532,11 @@ namespace Vertex {
 			newEntity->SetID(entity->GetID());
 			newEntity->SetID(entity->GetIntID());
 			newEntity->DeSerialize(entity->Serialize());
+		}
+
+		for (Entity* entity : other->m_Entitys)
+		{
+			entity->PostDeserializeTime();
 		}
 
 		return newScene;

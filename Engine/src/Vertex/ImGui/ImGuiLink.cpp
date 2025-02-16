@@ -5,7 +5,7 @@
 
 namespace Vertex
 {
-    bool ImGuiLink::Begin(char* name, bool* p_open, ImGuiWindowFlags flags)
+    bool ImGuiLink::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
     {
         return ImGui::Begin(name, p_open, flags);
     }
@@ -17,12 +17,12 @@ namespace Vertex
     }
 
 
-    bool ImGuiLink::ColorEdit3(char* name, float* value)
+    bool ImGuiLink::ColorEdit3(const char* name, float* value)
     {
         return ImGui::ColorEdit3(name, value);
     }
 
-    bool ImGuiLink::ColorEdit4(char* name, float* value)
+    bool ImGuiLink::ColorEdit4(const char* name, float* value)
     {
         return ImGui::ColorEdit4(name, value);
     }

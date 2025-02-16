@@ -39,9 +39,22 @@ namespace Sandbox
             base.OnDraw();
             //Logger.Info("Run");
             Renderer2D.DrawQuad(Pos, Size, "assets/textures/Player.png", 1.0f, new Colour(1, 1, 1, 1));
-            Renderer2D.DrawQuad(Pos + new Vector3(1, -1, 0), new Vector3(1, JumpTime / 10, 1), new Colour(0, .6f, 0, 1));
-            Renderer2D.DrawQuad(Pos + new Vector3(1, 0 ,0) , new Vector3(1, 1, 1), new Colour(.4f, .4f, .4f, 1));
-            
+
+            //Renderer2D.DrawQuad(Pos + new Vector3(0, Size.Y + 0.2f, 0),  // Position above the player
+            //                    new Vector3(1, JumpTime / 10, 1),
+            //                    new Colour(0, .6f, 0, 1));
+
+            //Renderer2D.DrawQuad(Pos + new Vector3(-0.1f, -0.1f, 0),  // Slight offset for a shadow effect
+            //                    Size,
+            //                    new Colour(.4f, .4f, .4f, 1)); 
+        }
+
+        protected override void OnImGuiDraw()
+        {
+            ImGuiLink.Begin("Test", true);
+            ImGuiLink.Text("Jump percent: %s", ((JumpTime / 30) * 100).ToString());
+            ImGuiLink.End();
+
         }
 
         protected override void OnPhysUpdate(float ts)
@@ -75,13 +88,13 @@ namespace Sandbox
 
             if(Input.IsKeyDown(KeyCode.Space))
             {
-                JumpTime += ts * 1.5f;
+                JumpTime += ts * 2.5f;
             }
 
             if (Velocity >= Vector2.Zero && Input.IsKeyUp(KeyCode.Space))
             {
-                velocity.Y += JumpTime * 10;
-                JumpTime = 0.001f;
+                velocity.Y += JumpTime * 11;
+                JumpTime = 0;
             }
 
             velocity *= speed;

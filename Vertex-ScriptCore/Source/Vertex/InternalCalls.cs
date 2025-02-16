@@ -121,6 +121,15 @@ namespace Vertex
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static object GetScriptInstance(string entityID);
 
-        
+        #region ImGui
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static bool ImGui_Begin(string name, ref bool open);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void ImGui_End();
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void ImGui_Text(string[] fmt);
+        #endregion
     }
 }

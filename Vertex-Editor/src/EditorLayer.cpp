@@ -348,7 +348,7 @@ namespace Vertex {
 				}
 			}
 			//VX_INFO("{0}", sinf(t));
-
+			/*
 			auto mx = ImGuiLink::GetMousePos().x;
 			auto my = ImGuiLink::GetMousePos().y;
 			mx -= m_ViewportBounds[0].x;
@@ -378,7 +378,7 @@ namespace Vertex {
 						break;
 					}
 				}
-			}
+			}*/
 
 			
 			Renderer2D::EndScene();
@@ -423,6 +423,11 @@ namespace Vertex {
 		static bool dockingEnabled = 1;
 
 		ImGuiLink::Docking(dockingEnabled, [this] { DockSpaceCallback(); });
+
+		if (m_SceneState == SceneState::Play)
+		{
+			m_ActiveScene->OnImGuiDraw();
+		}
 
 		if (!dockingEnabled)
 		{

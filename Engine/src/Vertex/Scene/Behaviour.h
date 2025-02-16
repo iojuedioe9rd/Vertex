@@ -46,7 +46,7 @@ namespace Vertex
             return true;
         }
 
-		
+        virtual void PostDeSerialize() {}
 
     protected:
         Behaviour(Entity* entity);

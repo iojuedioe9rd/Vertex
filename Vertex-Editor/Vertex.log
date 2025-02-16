@@ -1,85 +1,85 @@
-[16:58:34] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[16:58:35] [info] VERTEX: GLAD STATUS: 1
-[16:58:35] [info] VERTEX: OpenGL Info:
-[16:58:35] [info] VERTEX:   Vendor: NVIDIA Corporation
-[16:58:35] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[16:58:35] [info] VERTEX:   Version: 4.6.0 NVIDIA 566.36
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Quad.glsl
-[16:58:35] [trace] VERTEX:     1 uniform buffers
-[16:58:35] [trace] VERTEX:     0 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [trace] VERTEX:   _46_48
-[16:58:35] [trace] VERTEX:     Size = 64
-[16:58:35] [trace] VERTEX:     Binding = 0
-[16:58:35] [trace] VERTEX:     Members = 1
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Quad.glsl
-[16:58:35] [trace] VERTEX:     0 uniform buffers
-[16:58:35] [trace] VERTEX:     1 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [warning] VERTEX: Shader creation took 10.440602 ms
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Circle.glsl
-[16:58:35] [trace] VERTEX:     1 uniform buffers
-[16:58:35] [trace] VERTEX:     0 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [trace] VERTEX:   _47_49
-[16:58:35] [trace] VERTEX:     Size = 64
-[16:58:35] [trace] VERTEX:     Binding = 0
-[16:58:35] [trace] VERTEX:     Members = 1
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Circle.glsl
-[16:58:35] [trace] VERTEX:     0 uniform buffers
-[16:58:35] [trace] VERTEX:     0 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [warning] VERTEX: Shader creation took 4.2053003 ms
-[16:58:35] [error] VERTEX: Could not open file 'assets/shaders/Renderer2D_Line.glsl'
-[16:58:35] [warning] VERTEX: Shader creation took 2.1963003 ms
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Text.glsl
-[16:58:35] [trace] VERTEX:     1 uniform buffers
-[16:58:35] [trace] VERTEX:     0 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [trace] VERTEX:   _33_35
-[16:58:35] [trace] VERTEX:     Size = 64
-[16:58:35] [trace] VERTEX:     Binding = 0
-[16:58:35] [trace] VERTEX:     Members = 1
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Text.glsl
-[16:58:35] [trace] VERTEX:     0 uniform buffers
-[16:58:35] [trace] VERTEX:     1 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [warning] VERTEX: Shader creation took 12.023401 ms
-[16:58:35] [warning] VERTEX: Player has 4 fields:
-[16:58:35] [warning] VERTEX:   Speed (Float)
-[16:58:35] [warning] VERTEX:   Time (Float)
-[16:58:35] [warning] VERTEX:   JumpTime (Float)
-[16:58:35] [error] VERTEX: Unknown type: Vertex.Audio
-[16:58:35] [warning] VERTEX:   audio (<Invalid>)
-[16:58:35] [info] VERTEX: Registering Entities
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTProp2DCircle
-[16:58:35] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropText2D
-[16:58:35] [info] VERTEX: ~Registering Entities
-[16:58:35] [info] VERTEX: Test 1
-[16:58:35] [info] VERTEX: (TEST 1) X from LUA is 18.219654
-[16:58:35] [info] VERTEX: (TEST 2) 4
-[16:58:35] [info] VERTEX: (TEST 3) csqr = 5
-[16:58:35] [info] VERTEX: (TEST 3) a = 0
-[16:58:35] [info] VERTEX: (TEST 3) b = 0
-[16:58:35] [info] VERTEX: (TEST 4) csqr = 5
-[16:58:35] [info] VERTEX: (TEST 4) a = 3
-[16:58:35] [info] VERTEX: (TEST 4) b = 4
-[16:58:35] [info] VERTEX: (TEST 5) We got a sprite from Lua
-[16:58:35] [info] VERTEX: (TEST 5) x = 6, y = 6
-[16:58:35] [info] VERTEX: a is 40
-[16:58:35] [info] VERTEX: 13 / 13 tests successful!
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/grayscale.glsl
-[16:58:35] [trace] VERTEX:     0 uniform buffers
-[16:58:35] [trace] VERTEX:     0 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/grayscale.glsl
-[16:58:35] [trace] VERTEX:     0 uniform buffers
-[16:58:35] [trace] VERTEX:     1 resources
-[16:58:35] [trace] VERTEX: Uniform buffers:
-[16:58:35] [warning] VERTEX: Shader creation took 8.794701 ms
-[16:58:35] [info] VERTEX: Loaded 319 glyphs from font (out of 352)
+[21:38:19] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[21:38:19] [info] VERTEX: GLAD STATUS: 1
+[21:38:19] [info] VERTEX: OpenGL Info:
+[21:38:19] [info] VERTEX:   Vendor: NVIDIA Corporation
+[21:38:19] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[21:38:19] [info] VERTEX:   Version: 4.6.0 NVIDIA 566.36
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Quad.glsl
+[21:38:19] [trace] VERTEX:     1 uniform buffers
+[21:38:19] [trace] VERTEX:     0 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [trace] VERTEX:   _46_48
+[21:38:19] [trace] VERTEX:     Size = 64
+[21:38:19] [trace] VERTEX:     Binding = 0
+[21:38:19] [trace] VERTEX:     Members = 1
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Quad.glsl
+[21:38:19] [trace] VERTEX:     0 uniform buffers
+[21:38:19] [trace] VERTEX:     1 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [warning] VERTEX: Shader creation took 5.421601 ms
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Circle.glsl
+[21:38:19] [trace] VERTEX:     1 uniform buffers
+[21:38:19] [trace] VERTEX:     0 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [trace] VERTEX:   _47_49
+[21:38:19] [trace] VERTEX:     Size = 64
+[21:38:19] [trace] VERTEX:     Binding = 0
+[21:38:19] [trace] VERTEX:     Members = 1
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Circle.glsl
+[21:38:19] [trace] VERTEX:     0 uniform buffers
+[21:38:19] [trace] VERTEX:     0 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [warning] VERTEX: Shader creation took 4.9264007 ms
+[21:38:19] [error] VERTEX: Could not open file 'assets/shaders/Renderer2D_Line.glsl'
+[21:38:19] [warning] VERTEX: Shader creation took 1.3970003 ms
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Text.glsl
+[21:38:19] [trace] VERTEX:     1 uniform buffers
+[21:38:19] [trace] VERTEX:     0 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [trace] VERTEX:   _33_35
+[21:38:19] [trace] VERTEX:     Size = 64
+[21:38:19] [trace] VERTEX:     Binding = 0
+[21:38:19] [trace] VERTEX:     Members = 1
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Text.glsl
+[21:38:19] [trace] VERTEX:     0 uniform buffers
+[21:38:19] [trace] VERTEX:     1 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [warning] VERTEX: Shader creation took 3.2752006 ms
+[21:38:19] [warning] VERTEX: Player has 4 fields:
+[21:38:19] [warning] VERTEX:   Speed (Float)
+[21:38:19] [warning] VERTEX:   Time (Float)
+[21:38:19] [warning] VERTEX:   JumpTime (Float)
+[21:38:19] [error] VERTEX: Unknown type: Vertex.Audio
+[21:38:19] [warning] VERTEX:   audio (<Invalid>)
+[21:38:19] [info] VERTEX: Registering Entities
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTProp2DCircle
+[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropText2D
+[21:38:19] [info] VERTEX: ~Registering Entities
+[21:38:19] [info] VERTEX: Test 1
+[21:38:19] [info] VERTEX: (TEST 1) X from LUA is 18.219654
+[21:38:19] [info] VERTEX: (TEST 2) 4
+[21:38:19] [info] VERTEX: (TEST 3) csqr = 5
+[21:38:19] [info] VERTEX: (TEST 3) a = 0
+[21:38:19] [info] VERTEX: (TEST 3) b = 0
+[21:38:19] [info] VERTEX: (TEST 4) csqr = 5
+[21:38:19] [info] VERTEX: (TEST 4) a = 3
+[21:38:19] [info] VERTEX: (TEST 4) b = 4
+[21:38:19] [info] VERTEX: (TEST 5) We got a sprite from Lua
+[21:38:19] [info] VERTEX: (TEST 5) x = 6, y = 6
+[21:38:19] [info] VERTEX: a is 40
+[21:38:19] [info] VERTEX: 13 / 13 tests successful!
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/grayscale.glsl
+[21:38:19] [trace] VERTEX:     0 uniform buffers
+[21:38:19] [trace] VERTEX:     0 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/grayscale.glsl
+[21:38:19] [trace] VERTEX:     0 uniform buffers
+[21:38:19] [trace] VERTEX:     1 resources
+[21:38:19] [trace] VERTEX: Uniform buffers:
+[21:38:19] [warning] VERTEX: Shader creation took 3.6470006 ms
+[21:38:19] [info] VERTEX: Loaded 319 glyphs from font (out of 352)

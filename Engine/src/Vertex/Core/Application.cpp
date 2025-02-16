@@ -116,11 +116,12 @@ namespace Vertex
 	}
 
 
-	float m_LastFrameTime = 0.0f;
+	static float m_LastFrameTime = 0.0f;
+	static int t = 0;
 	void Application::Update()
 	{
 		VX_PROFILE_FUNCTION();
-		
+		t++;
 		float time = (float)Time::GetTime();
 		Timestep timestep = time - m_LastFrameTime;
 		m_LastFrameTime = time;
@@ -148,7 +149,10 @@ namespace Vertex
 			imGuiWindow->OnUpdate();
 		m_ImGuiLayer->End();
 		
-		m_Window->OnUpdate();
+		if(t > 10)
+			m_Window->OnUpdate();
+		
+			
 	}
 
 	void Application::Close()

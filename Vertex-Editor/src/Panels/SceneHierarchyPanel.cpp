@@ -59,6 +59,8 @@ namespace Vertex {
 
 					m_CreateEntityPopup = true;
 				}
+
+				
 				ImGuiLink::EndMenu();
 			}
 			
@@ -75,7 +77,10 @@ namespace Vertex {
 
 		ImGuiLink::Begin("Properties");
 		if (m_SelectionContext)
+		{
 			DrawEntity(m_SelectionContext);
+		}
+			
 		ImGuiLink::End();
 
 		if (m_CreateEntityPopup)
@@ -93,7 +98,7 @@ namespace Vertex {
 
 				// EZ way to create entities
 				m_SelectionContext = m_Context->CreateEntity(type, tag);
-				m_SelectionContext->AddBehaviour("lua_script");
+				m_SelectionContext->AddBehaviour("follow_ent");
 
 			}
 
@@ -125,10 +130,17 @@ namespace Vertex {
 
 		int flags = ((m_SelectionContext == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
 		
+		
 		bool opened = ImGuiLink::TreeNodeEx(entity->GetID(), flags, tag);
 		
+		if (ImGui::BeginDragDropSource())
+		{
+			
+			ImGui::SetDragDropPayload("ENT_DRAG_DROP", &entity->GetID(), sizeof(UUID));
+			ImGui::EndDragDropSource();
+		}
 		
-		if (ImGuiLink::IsItemClicked())
+		if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 		{
 			m_SelectionContext = entity;
 		}
@@ -541,6 +553,15 @@ namespace Vertex {
 								scriptInstance->SetFieldValue(name, data);
 							}
 						}
+
+						if (field.Type == ScriptFieldType::Int)
+						{
+							int data = scriptInstance->GetFieldValue<int>(name);
+							if (ImGui::DragInt(name.c_str(), &data))
+							{
+								scriptInstance->SetFieldValue(name, data);
+							}
+						}
 					}
 				}
 			}
@@ -566,6 +587,13 @@ namespace Vertex {
 								if (ImGui::DragFloat(name.c_str(), &data))
 									scriptField.SetValue(data);
 							}
+
+							if (field.Type == ScriptFieldType::Int)
+							{
+								int data = scriptField.GetValue<int>();
+								if (ImGui::DragInt(name.c_str(), &data))
+									scriptField.SetValue(data);
+							}
 						}
 						else
 						{
@@ -574,6 +602,17 @@ namespace Vertex {
 							{
 								float data = 0.0f;
 								if (ImGui::DragFloat(name.c_str(), &data))
+								{
+									ScriptFieldInstance& fieldInstance = entityFields[name];
+									fieldInstance.Field = field;
+									fieldInstance.SetValue(data);
+								}
+							}
+
+							if (field.Type == ScriptFieldType::Int)
+							{
+								int data = 0;
+								if (ImGui::DragInt(name.c_str(), &data))
 								{
 									ScriptFieldInstance& fieldInstance = entityFields[name];
 									fieldInstance.Field = field;

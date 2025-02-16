@@ -24,8 +24,8 @@ namespace Vertex
         protected virtual void OnUpdate(float ts)     { }
         protected virtual void OnDraw()               { }
         protected virtual void OnPhysUpdate(float ts) { }
+        protected virtual void OnImGuiDraw() { }
 
-        
 
         public Vector3 Pos
         {

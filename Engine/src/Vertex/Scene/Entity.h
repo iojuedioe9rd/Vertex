@@ -114,6 +114,15 @@ namespace Vertex {
             }
         }
 
+        void OnImGuiDrawTime()
+        {
+            OnImGuiDraw();
+            for (Entity* ent : m_children)
+            {
+                ent->OnImGuiDraw();
+            }
+        }
+
         Scene* GetScene() { return m_Scene; }
 
         void DrawTime(Timestep& ts)
@@ -161,8 +170,22 @@ namespace Vertex {
             }
         }
 
+        void PostDeserializeTime()
+        {
+            PostDeserialize();
+            for (Entity* ent : m_children)
+            {
+                ent->PostDeserializeTime();
+            }
+            if (m_Behaviour)
+            {
+                m_Behaviour->PostDeSerialize();
+            }
+        }
+
         virtual void Update(Timestep& ts) = NULL;
         virtual void EventH(Event& e) {}
+        virtual void OnImGuiDraw() {}
         virtual void OnCreate() {}
         virtual void OnDestroy() {}
         virtual void Draw(Timestep& ts) = NULL;

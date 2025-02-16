@@ -20,6 +20,7 @@
 #include "Vertex/Renderer/TextureManager.h"
 #include "../Scene/Entities/Entities.h"
 #include <Vertex/Audio/Audio.h>
+#include <Vertex/ImGui/ImGuiLink.h>
 
 
 
@@ -38,6 +39,66 @@ namespace Vertex
 
 	AssetHandle(*getAsset_funk)(std::filesystem::path);
 	AssetManagerBase*(*getAssetMan_funk)();
+
+	static bool ImGui_Begin(MonoString* name, bool* open)
+	{
+		char* nameCStr = mono_string_to_utf8(name);
+		bool v = ImGuiLink::Begin(nameCStr, open);
+		delete nameCStr;
+		return v;
+	}
+
+#include <mono/metadata/object.h>
+#include <imgui.h>
+#include <vector>
+#include <string>
+#include <cstdarg>
+
+	static void ImGui_Text(MonoArray* fmt)
+	{
+		if (!fmt) return;
+
+		int length = mono_array_length(fmt);
+		if (length == 0) return;
+
+		// Extract the first string as the format
+		MonoString* formatStr = mono_array_get(fmt, MonoString*, 0);
+		if (!formatStr) return;
+
+		const char* format = mono_string_to_utf8(formatStr);
+
+		// Collect arguments
+		std::vector<const char*> args;
+		for (int i = 1; i < length; i++)
+		{
+			MonoString* monoStr = mono_array_get(fmt, MonoString*, i);
+			if (!monoStr) continue;
+
+			args.push_back(mono_string_to_utf8(monoStr));
+		}
+
+		// Allocate buffer for formatted string
+		char buffer[512]; // Adjust size as needed
+		int written = snprintf(buffer, sizeof(buffer), format, args.empty() ? nullptr : args[0], args.size() > 1 ? args[1] : "", args.size() > 2 ? args[2] : "");
+
+		if (written > 0)
+		{
+			ImGui::Text("%s", buffer);
+		}
+
+		// Free allocated memory
+		mono_free((void*)format);
+		for (const char* arg : args)
+		{
+			mono_free((void*)arg);
+		}
+	}
+
+
+	static void ImGui_End()
+	{
+		ImGuiLink::End();
+	}
 
 
 	static MonoString* Entity_FindEntityByName(MonoString* name)
@@ -424,6 +485,9 @@ namespace Vertex
 		VX_ADD_INTERNAL_CALL(Audio_SetSoundLooped);
 		VX_ADD_INTERNAL_CALL(Audio_SetSoundPitch);
 
+		VX_ADD_INTERNAL_CALL(ImGui_Begin);
+		VX_ADD_INTERNAL_CALL(ImGui_End);
+		VX_ADD_INTERNAL_CALL(ImGui_Text);
 	}
 
 	void ScriptGlue::SetupGetingAssets(AssetHandle(*getAsset)(std::filesystem::path), AssetManagerBase*(*getAssetMan)())

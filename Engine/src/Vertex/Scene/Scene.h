@@ -64,6 +64,7 @@ namespace Vertex
 
 		bool GetACameraInScene(Ref<Camera>* mainCamera, bool is2D, glm::mat4* cameraTransform = nullptr, ENTPointCamera2D** cam = nullptr, bool usePrimaryCam = true);
 		void OnUpdate(Timestep ts);
+		void OnImGuiDraw();
 		void OnUpdateRuntime(Timestep ts);
 		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
 		void OnPostDeserialize();

@@ -33,8 +33,11 @@ namespace Vertex
 			SerializationObject obj = Behaviour::Serialize(isInSerializer);
 			
 			obj.Set("speed", SerializationType::Float, speed);
+
 			obj.Set("gotoPos", SerializationType::Vector3, gotoPos);
-			obj.Set("m_InitialPosition", SerializationType::Vector3, m_InitialPosition);
+			
+			
+			//obj.Set("m_InitialPosition", SerializationType::Vector3, m_InitialPosition);
 			obj.Set("m_Dir", SerializationType::Bool, m_Dir);
 
 			return obj;
@@ -45,8 +48,12 @@ namespace Vertex
 			Behaviour::DeSerialize(obj, isInSerializer);
 
 			speed = obj.Get<float>("speed", SerializationType::Float);
-			gotoPos = obj.Get<glm::vec3>("gotoPos", SerializationType::Vector3);
-			m_InitialPosition = obj.Get<glm::vec3>("m_InitialPosition", SerializationType::Vector3);
+			if (1 + 1 == 2)
+			{
+				gotoPos = obj.Get<glm::vec3>("gotoPos", SerializationType::Vector3);
+			}
+			
+			//m_InitialPosition = obj.Get<glm::vec3>("m_InitialPosition", SerializationType::Vector3);
 			m_Dir = obj.Get<bool>("m_Dir", SerializationType::Bool);
 
 

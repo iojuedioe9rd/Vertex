@@ -16,6 +16,8 @@ namespace Vertex
 
 	void ENTPropText::Update(Timestep& ts)
 	{
+		rotation.x += 25 * ts;
+		rotation.y += 15 * ts;
 	}
 
 	void ENTPropText::Draw(Timestep& ts)

@@ -191,6 +191,8 @@ namespace Vertex {
 
 	void OpenGLShader::CompileOrGetVulkanBinaries(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		GLint m_Success = false;
+
 		GLuint program = glCreateProgram();
 
 		shaderc::Compiler compiler;
@@ -243,7 +245,29 @@ namespace Vertex {
 		}
 
 		for (auto&& [stage, data] : shaderData)
-			Reflect(stage, data);
+		{
+			GLuint shaderID = glCreateShader(stage);
+			glShaderBinary(1, &shaderID, GL_SHADER_BINARY_FORMAT_SPIR_V, data.data(), data.size() * sizeof(uint32_t));
+			glSpecializeShader(shaderID, "main", 0, nullptr, nullptr);
+			glAttachShader(program, shaderID);
+			glDeleteShader(shaderID);
+		}
+
+		glLinkProgram(program);
+
+		glGetProgramiv(program, GL_LINK_STATUS, &m_Success);
+		if (m_Success != GL_TRUE)
+		{
+			GLint maxLength = 0;
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+			std::vector<GLchar> infoLog(maxLength);
+			glGetProgramInfoLog(program, maxLength, &maxLength, infoLog.data());
+
+			VX_CORE_ERROR("Shader Linking Failed: {0}", infoLog.data());
+			VX_CORE_ASSERT(false);
+		}
+
+		m_RendererID = program;
 	}
 
 	void OpenGLShader::CompileOrGetOpenGLBinaries()

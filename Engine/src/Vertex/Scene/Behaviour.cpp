@@ -9,7 +9,7 @@ namespace Vertex
         
     }
 
-    Behaviour* Behaviour::CreateBehaviour(const std::string& name, Entity* entity)
+    Behaviour* Behaviour::CreateBehaviour(const std::string name, Entity* entity)
     {
 
         auto it = GetBehaviourMap().find(name);
@@ -17,5 +17,14 @@ namespace Vertex
             return it->second(entity);
         return nullptr;
     }
+    /*
+    Behaviour* Behaviour::CreateBehaviour(const std::string& name, Entity* entity)
+    {
+
+        auto it = GetBehaviourMap().find(name);
+        if (it != GetBehaviourMap().end())
+            return it->second(entity);
+        return nullptr;
+    }*/
 }
 

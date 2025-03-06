@@ -31,9 +31,40 @@ namespace Vertex
 			
 	}
 
+	void ENTEnvScript::OnLava()
+	{
+		ScriptEngine::OnLava(this);
+	}
+
 	void ENTEnvScript::PhysUpdate(Timestep& ts)
 	{
 		ScriptEngine::OnPhysUpdateEntity(this, ts);
+	}
+
+	void ENTEnvScript::OnRemove()
+	{
+		ScriptEngine::RemoveEntity(this);
+	}
+
+	void ENTEnvScript::BeginContact(Entity* entity)
+	{
+		if (entity == (Entity*)0xcccccccccccccccc)
+		{
+			return;
+		}
+
+		if (auto script = dynamic_cast<ENTEnvScript*>(entity))
+		{
+			ScriptEngine::OnBeginContactEntity(this, script);
+		}
+	}
+
+	void ENTEnvScript::EndContact(Entity* entity)
+	{
+		if (auto script = dynamic_cast<ENTEnvScript*>(entity))
+		{
+			ScriptEngine::OnEndContactEntity(this, script);
+		}
 	}
 
 	ENT_REGISTER_ENTITY(ENTEnvScript, env_script);

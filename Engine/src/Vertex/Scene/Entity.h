@@ -67,7 +67,7 @@ namespace Vertex {
         }
 
         // Add single behaviour instead of multiple
-        Behaviour* AddBehaviour(const std::string& name)
+        Behaviour* AddBehaviour(const std::string name)
         {
             if (m_Behaviour != nullptr) { return m_Behaviour; } // Prevent adding more than one behaviour
 
@@ -80,15 +80,24 @@ namespace Vertex {
         // More member functions...
         void UpdateTime(Timestep& ts)
         {
+            if (this == (Entity*)0xdddddddddddddddd || this == (Entity*)0xFFFFFFFFFFFFFFFF || this->m_Scene == (Scene*)0xdddddddddddddddd || this->m_Scene == (Scene*)0xFFFFFFFFFFFFFFFF)
+            {
+                return;
+            }
             Update(ts);
             if (m_Behaviour) {
                 m_Behaviour->OnUpdate(ts);
             }
-            for (Entity* ent : m_children)
-            {
-                ent->UpdateTime(ts);
+            
+        }
+        void OnRemoveTime()
+        {
+            OnRemove();
+            if (m_Behaviour) {
+                m_Behaviour->OnRemove();
             }
         }
+
 
         void OnCreateTime()
         {
@@ -129,6 +138,7 @@ namespace Vertex {
         {
             try
             {
+                if (this == nullptr) return;
                 Draw(ts);
                 if (m_Behaviour) {
                     m_Behaviour->OnDraw();
@@ -188,6 +198,7 @@ namespace Vertex {
         virtual void OnImGuiDraw() {}
         virtual void OnCreate() {}
         virtual void OnDestroy() {}
+        virtual void OnRemove() {}
         virtual void Draw(Timestep& ts) = NULL;
         virtual std::string GetEntName() = NULL;
         virtual void PhysUpdate(Timestep& ts) {}
@@ -240,12 +251,16 @@ namespace Vertex {
             m_Scene = scene;
         }
 
+        virtual void BeginContact(Entity* entity) {}
+        virtual void EndContact(Entity* entity) {}
+
     protected:
         Scene* m_Scene = nullptr;
         std::string m_name = "";
 
     private:
         std::vector<Entity*> m_children;
+
         Entity* m_parent = nullptr;
         bool m_isLoaded = false;
         bool m_isVisible = true;

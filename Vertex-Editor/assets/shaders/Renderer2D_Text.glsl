@@ -36,12 +36,16 @@ void main()
 layout(location = 0) out vec4 o_Color;
 layout(location = 1) out int o_EntityID;
 
-// Explicit locations for inputs
 layout(location = 0) in vec4 v_Color;
 layout(location = 1) in vec2 v_TexCoord;
 layout(location = 2) in flat int v_EntityID;
 
-layout (binding = 0) uniform sampler2D u_FontAtlas;
+layout(binding = 0) uniform sampler2D u_FontAtlas;
+
+layout(std140, binding = 1) uniform Data
+{
+    float time;
+} u_Data;
 
 float screenPxRange() {
     const float pxRange = 2.0; // set to distance field's pixel range
@@ -56,7 +60,14 @@ float median(float r, float g, float b) {
 
 void main()
 {
-    vec4 texColor = v_Color * texture(u_FontAtlas, v_TexCoord);
+    float colorF = 0.5 + 0.5 * sin(u_Data.time) * (v_TexCoord.x / v_TexCoord.y);
+    vec3 color = vec3(colorF, 1.0 - colorF, sin(u_Data.time * 2.0) * 0.5 + 0.5);
+    
+    // Option 1: Multiply only the RGB components
+    // vec4 texColor = vec4(color * texture(u_FontAtlas, v_TexCoord).rgb, texture(u_FontAtlas, v_TexCoord).a);
+    
+    // Option 2: Convert 'color' to vec4 before multiplying
+    vec4 texColor = vec4(color, 1.0) * texture(u_FontAtlas, v_TexCoord);
 
     vec3 msd = texture(u_FontAtlas, v_TexCoord).rgb;
     float sd = median(msd.r, msd.g, msd.b);
@@ -66,7 +77,7 @@ void main()
         discard;
 
     vec4 bgColor = vec4(0.0);
-    o_Color = mix(bgColor, v_Color, opacity);
+    o_Color = mix(bgColor, vec4(color, 1.0), opacity);
     if (o_Color.a == 0.0)
         discard;
 

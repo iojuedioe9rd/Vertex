@@ -15,7 +15,7 @@ namespace Vertex
 
 
 
-		UUID* entUUID = nullptr;
+		UUID entUUID = nullptr;
 		Entity* ent = nullptr;
 
 		float speed = 5.0f;
@@ -48,9 +48,11 @@ namespace Vertex
 			speed = obj.Get<float>("speed", SerializationType::Float);
 			if (obj.Contains("entUUID"))
 			{
-				this->entUUID = &obj.Get<UUID>("entUUID", SerializationType::String);
-				VX_CORE_INFO("{}", entUUID->c_str());
+				this->entUUID = obj.Get<UUID>("entUUID", SerializationType::String);
+				VX_CORE_INFO("{}", entUUID.c_str());
 			}
+
+			return true;
 			
 		}
 
@@ -60,7 +62,7 @@ namespace Vertex
 		{
 			for (Entity* ent: *m_Entity->GetScene())
 			{
-				if (ent->GetID() == *entUUID)
+				if (ent->GetID() == entUUID)
 				{
 					this->ent = ent;
 				}

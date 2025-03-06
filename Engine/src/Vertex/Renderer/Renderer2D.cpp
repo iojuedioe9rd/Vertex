@@ -113,6 +113,15 @@ namespace Vertex {
 		{
 			glm::mat4 ViewProjection;
 		};
+
+		struct TimeData
+		{
+			float time;
+		};
+
+		TimeData timeBuffer;
+		Ref<UniformBuffer> TimeUniformBuffer;
+
 		CameraData CameraBuffer;
 		Ref<UniformBuffer> CameraUniformBuffer;
 	};
@@ -222,6 +231,7 @@ namespace Vertex {
 		s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 
 		s_Data.CameraUniformBuffer = UniformBuffer::Create(sizeof(Renderer2DData::CameraData), 0);
+		s_Data.TimeUniformBuffer = UniformBuffer::Create(sizeof(Renderer2DData::TimeData), 1);
 	}
 
 	void Renderer2D::Shutdown()
@@ -248,15 +258,20 @@ namespace Vertex {
 		s_Data.CameraBuffer.ViewProjection = camera.GetProjection() * glm::inverse(transform);
 		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
+		s_Data.timeBuffer.time += Time::GetTS();
+		s_Data.TimeUniformBuffer->SetData(&s_Data.timeBuffer, sizeof(Renderer2DData::TimeData));
+
 		StartBatch();
 	}
-
 	void Renderer2D::BeginScene(const glm::mat4 viewProjectionMatrix)
 	{
 		VX_PROFILE_FUNCTION();
 
 		s_Data.CameraBuffer.ViewProjection = viewProjectionMatrix;
 		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
+
+		s_Data.timeBuffer.time += Time::GetTS();
+		s_Data.TimeUniformBuffer->SetData(&s_Data.timeBuffer, sizeof(Renderer2DData::TimeData));
 
 		StartBatch();
 	}

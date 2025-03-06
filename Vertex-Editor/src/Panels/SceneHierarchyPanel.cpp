@@ -26,10 +26,17 @@ namespace Vertex {
 
 	extern const std::filesystem::path g_AssetPath;
 
+	char ent_name_buffer[256];
+	char ent_type_buffer[256];
+	char Behaviour_buffer[256];
+
 	SceneHierarchyPanel::SceneHierarchyPanel(Scene* scene)
 	{
 		SetContext(scene);
 		ScriptEngine::OnRuntimeStart(scene);
+
+		
+		
 	}
 
 	void SceneHierarchyPanel::SetContext(Scene* scene)
@@ -37,8 +44,7 @@ namespace Vertex {
 		m_Context = scene;
 		m_SelectionContext = nullptr;
 	}
-	char ent_name_buffer[256];
-	char ent_type_buffer[256];
+	
 	void SceneHierarchyPanel::OnImGuiRender()
 	{
 		
@@ -58,6 +64,14 @@ namespace Vertex {
 					strcpy_s(ent_type_buffer, sizeof(ent_type_buffer), "prop_static_sprite");
 
 					m_CreateEntityPopup = true;
+				}
+
+				if (ImGuiLink::MenuItem("Create Behaviour"))
+				{
+					memset(Behaviour_buffer, 0, sizeof(Behaviour_buffer));
+					strcpy_s(Behaviour_buffer, sizeof(Behaviour_buffer), "move_to_pos_and_back");
+
+					m_CreateBehaviourPopup = true;
 				}
 
 				
@@ -98,19 +112,41 @@ namespace Vertex {
 
 				// EZ way to create entities
 				m_SelectionContext = m_Context->CreateEntity(type, tag);
-				m_SelectionContext->AddBehaviour("follow_ent");
+				//m_SelectionContext->AddBehaviour("follow_ent");
 
 			}
 
 			ImGuiLink::End();
 
-			if (m_EntityToRemove != nullptr)
+			
+		}
+
+		if (m_CreateBehaviourPopup)
+		{
+			ImGuiLink::Begin("Behaviour Maker", &m_CreateBehaviourPopup);
+			if (m_SelectionContext)
 			{
-				m_Context->RemoveEntity(*m_EntityToRemove);
-				if (m_SelectionContext == m_EntityToRemove)
-					m_SelectionContext = nullptr;
-				m_EntityToRemove = nullptr;
+				ImGuiLink::Text("Entity Selected %s", m_SelectionContext->name());
+
+				
+				ImGuiLink::InputText("Type", Behaviour_buffer, 255);
+
+				if (ImGuiLink::Button("Create Behaviour"))
+				{
+					m_CreateBehaviourPopup = false;
+					std::string type = std::string(Behaviour_buffer);
+
+					m_SelectionContext->AddBehaviour(type);
+				}
 			}
+			else
+			{
+				ImGuiLink::Text("No Entity Selected!");
+			}
+
+			
+
+			ImGuiLink::End();
 		}
 
 		if (m_EntityToRemove)
@@ -526,7 +562,16 @@ namespace Vertex {
 			if (!scriptClassExists)
 				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.2f, 0.3f, 1.0f));
 
-			ImGui::InputText("Class Name", script->classname.data(), 128);
+			ScopedBuffer buffer = ScopedBuffer(128);
+			for (size_t i = 0; i < 128; i++)
+			{
+				buffer.As<char>()[i] = '\0';
+			}
+			memcpy(buffer.As<void>(), script->classname.c_str(), script->classname.size());
+			if (ImGui::InputText("Class Name", buffer.As<char>(), 128))
+			{
+				script->classname = std::string(buffer.As<char>());
+			}
 
 
 			if (!scriptClassExists)
@@ -558,6 +603,24 @@ namespace Vertex {
 						{
 							int data = scriptInstance->GetFieldValue<int>(name);
 							if (ImGui::DragInt(name.c_str(), &data))
+							{
+								scriptInstance->SetFieldValue(name, data);
+							}
+						}
+
+						if (field.Type == ScriptFieldType::Vector2)
+						{
+							glm::vec2 data = scriptInstance->GetFieldValue<glm::vec2>(name);
+							if (ImGuiLink::DrawVec2Control(name.c_str(), data))
+							{
+								scriptInstance->SetFieldValue(name, data);
+							}
+						}
+
+						if (field.Type == ScriptFieldType::Vector3)
+						{
+							glm::vec3 data = scriptInstance->GetFieldValue<glm::vec3>(name);
+							if (ImGuiLink::DrawVec3Control(name.c_str(), data))
 							{
 								scriptInstance->SetFieldValue(name, data);
 							}
@@ -594,6 +657,20 @@ namespace Vertex {
 								if (ImGui::DragInt(name.c_str(), &data))
 									scriptField.SetValue(data);
 							}
+
+							if (field.Type == ScriptFieldType::Vector2)
+							{
+								glm::vec2 data = scriptField.GetValue<glm::vec2>();
+								if (ImGuiLink::DrawVec2Control(name.c_str(), data))
+									scriptField.SetValue(data);
+							}
+
+							if (field.Type == ScriptFieldType::Vector3)
+							{
+								glm::vec3 data = scriptField.GetValue<glm::vec3>();
+								if (ImGuiLink::DrawVec3Control(name.c_str(), data))
+									scriptField.SetValue(data);
+							}
 						}
 						else
 						{
@@ -613,6 +690,28 @@ namespace Vertex {
 							{
 								int data = 0;
 								if (ImGui::DragInt(name.c_str(), &data))
+								{
+									ScriptFieldInstance& fieldInstance = entityFields[name];
+									fieldInstance.Field = field;
+									fieldInstance.SetValue(data);
+								}
+							}
+
+							if (field.Type == ScriptFieldType::Vector2)
+							{
+								glm::vec2 data = glm::vec2(0);
+								if (ImGuiLink::DrawVec2Control(name.c_str(), data))
+								{
+									ScriptFieldInstance& fieldInstance = entityFields[name];
+									fieldInstance.Field = field;
+									fieldInstance.SetValue(data);
+								}
+							}
+
+							if (field.Type == ScriptFieldType::Vector3)
+							{
+								glm::vec3 data = glm::vec3(0);
+								if (ImGuiLink::DrawVec3Control(name.c_str(), data))
 								{
 									ScriptFieldInstance& fieldInstance = entityFields[name];
 									fieldInstance.Field = field;

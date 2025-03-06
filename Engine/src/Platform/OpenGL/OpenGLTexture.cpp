@@ -27,6 +27,7 @@ namespace Vertex
 			{
 			case ImageFormat::RGB8:  return GL_RGB;
 			case ImageFormat::RGBA8: return GL_RGBA;
+			case ImageFormat::RGBA32F: return GL_RGBA;
 			}
 			VX_CORE_ASSERT(false);
 			return 0;
@@ -38,23 +39,25 @@ namespace Vertex
 			{
 			case ImageFormat::RGB8:  return GL_RGB8;
 			case ImageFormat::RGBA8: return GL_RGBA8;
+			case ImageFormat::RGBA32F: return GL_RGBA32F;
 			}
 			VX_CORE_ASSERT(false);
 			return 0;
 		}
+
 	}
 
-#define NEW_GL_TEX(tex, InternalFormat, Width, Height, DataFormat) \
+#define NEW_GL_TEX(tex, InternalFormat, Width, Height, DataFormat, DataType) \
     glCreateTextures(GL_TEXTURE_2D, 1, &tex); \
-	glBindTexture(GL_TEXTURE_2D, tex); \
-	glTexImage2D(GL_TEXTURE_2D, 0, InternalFormat, Width, Height, 0, DataFormat, GL_UNSIGNED_BYTE, nullptr);\
-\
-	glTextureParameteri(tex, GL_TEXTURE_MIN_FILTER, GL_LINEAR);\
-	glTextureParameteri(tex, GL_TEXTURE_MAG_FILTER, GL_NEAREST);\
-\
-	glTextureParameteri(tex, GL_TEXTURE_WRAP_S, GL_REPEAT);\
-	glTextureParameteri(tex, GL_TEXTURE_WRAP_T, GL_REPEAT) \
-	\
+    glBindTexture(GL_TEXTURE_2D, tex); \
+    glTexImage2D(GL_TEXTURE_2D, 0, InternalFormat, Width, Height, 0, DataFormat, DataType, nullptr); \
+    \
+    glTextureParameteri(tex, GL_TEXTURE_MIN_FILTER, GL_LINEAR); \
+    glTextureParameteri(tex, GL_TEXTURE_MAG_FILTER, GL_NEAREST); \
+    \
+    glTextureParameteri(tex, GL_TEXTURE_WRAP_S, GL_REPEAT); \
+    glTextureParameteri(tex, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path)
@@ -81,8 +84,8 @@ namespace Vertex
 		}
 
 		VX_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
-
-		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat);
+		m_DataType = GL_UNSIGNED_BYTE;
+		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE);
 
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 
@@ -102,7 +105,9 @@ namespace Vertex
 		m_InternalFormat = Utils::VertexImageFormatToGLInternalFormat(m_Specification.Format);
 		m_DataFormat = Utils::VertexImageFormatToGLDataFormat(m_Specification.Format);
 
-		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat);
+		m_DataType = (m_Specification.Format == ImageFormat::RGBA32F) ? GL_FLOAT : GL_UNSIGNED_BYTE;
+
+		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat, m_DataType);
 
 		if (data)
 			SetData(data);
@@ -132,8 +137,8 @@ namespace Vertex
 		}
 
 		VX_CORE_ASSERT(m_InternalFormat & m_DataFormat, "Format not supported!");
-
-		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat);
+		m_DataType = (m_Specification.Format == ImageFormat::RGBA32F) ? GL_FLOAT : GL_UNSIGNED_BYTE;
+		NEW_GL_TEX(m_RendererID, m_InternalFormat, m_Width, m_Height, m_DataFormat, m_DataType);
 
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 
@@ -207,11 +212,26 @@ namespace Vertex
 
 	void OpenGLTexture2D::SetData(Buffer* data)
 	{
-		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+		bool IS_FLOAT = m_DataType == GL_FLOAT;
+		// (m_DataFormat == GL_RGBA32F) ? 16 : (m_DataFormat == GL_RGBA ? 4 : 3)
+
+
+		uint32_t bpp;
+		if (IS_FLOAT)
+		{
+			bpp = 16;
+		}
+		else
+		{
+			bpp = (m_DataFormat == GL_RGBA32F) ? 16 : (m_DataFormat == GL_RGBA ? 4 : 3);
+		}
 		uint32_t expectedSize = m_Width * m_Height * bpp;
-		VX_CORE_ASSERT(data->Size == m_Width * m_Height * bpp, "Data must be entire texture! " + std::to_string(expectedSize));
-		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data->Data);
+		VX_CORE_ASSERT(data->Size == expectedSize, std::string("Data must be entire texture! Expected: ") + std::to_string(expectedSize));
+
+		GLenum type = (m_DataFormat == GL_RGBA32F) ? GL_FLOAT : GL_UNSIGNED_BYTE;
+		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, type, data->Data);
 	}
+
 
 	void OpenGLTexture2D::Resize(uint32_t newWidth, uint32_t newHeight, bool aspect_ratio)
 	{
@@ -254,7 +274,8 @@ namespace Vertex
 		std::cout << "Resizing texture to: " << newWidth << "x" << newHeight << std::endl;
 
 		uint32_t newTex2D;
-		NEW_GL_TEX(newTex2D, m_InternalFormat, newWidth, newHeight, m_DataFormat);
+		m_DataType = (m_Specification.Format == ImageFormat::RGBA32F) ? GL_FLOAT : GL_UNSIGNED_BYTE;
+		NEW_GL_TEX(newTex2D, m_InternalFormat, newWidth, newHeight, m_DataFormat, m_DataType);
 
 		// Check for any OpenGL errors before framebuffer generation
 		GLenum err = glGetError();

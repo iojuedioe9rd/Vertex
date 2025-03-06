@@ -8,6 +8,8 @@
 #include "Vertex/Scripting/ScriptEngine.h"
 #include "Vertex/Lua/LuaScripting.h"
 #include <GLFW/glfw3.h>
+#include <Vertex/Renderer/Renderer2D.h>
+#include <Vertex/Core/Intro/IntroData.h>
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
 	// Your fuzzing logic here
@@ -47,7 +49,7 @@ namespace Vertex
 
 	
 	Application::Application(const std::string& name, uint32_t width, uint32_t height, ApplicationCommandLineArgs args)
-		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CommandLineArgs(args)
+		: m_Camera(-1.6f * 2, 1.6f * 2, -0.9f * 2, 0.9f * 2), m_CommandLineArgs(args)
 	{
 		
 		
@@ -64,6 +66,11 @@ namespace Vertex
 		m_Window = Ref<Window>(Window::Create(WindowProps(name, width, height)));
 		m_Window->SetEventCallback(VX_BIND_EVENT_FN(Vertex::Application::OnEvent));
 		app = this;
+		{
+			Timer t{};
+			SetupIntroData();
+			VX_CORE_INFO("SetupIntroData() {0}ms", t.ElapsedMillis());
+		}
 
 		Renderer::Init();
 		ScriptEngine::Init();
@@ -116,8 +123,10 @@ namespace Vertex
 	}
 
 
+
 	static float m_LastFrameTime = 0.0f;
 	static int t = 0;
+	static bool FirstRun = false;
 	void Application::Update()
 	{
 		VX_PROFILE_FUNCTION();
@@ -133,21 +142,60 @@ namespace Vertex
 		ExecuteMainThreadQueue();
 
 		//VX_CORE_INFO("{0}", timestep.GetMilliseconds());
-		
-
-		if (!m_Minimized)
+		if (!m_IsInIntro)
 		{
+			if (!m_Minimized)
+			{
+				for (Layer* layer : *m_LayerStack)
+					layer->OnUpdate(timestep);
+			}
+
+
+			m_ImGuiLayer->Begin();
 			for (Layer* layer : *m_LayerStack)
-				layer->OnUpdate(timestep);
+				layer->OnImGuiRender();
+			for (BaseImGuiWindow* imGuiWindow : *m_ImGuiWindowStack)
+				imGuiWindow->OnUpdate();
+			m_ImGuiLayer->End();
 		}
 
-		
-		m_ImGuiLayer->Begin();
-		for (Layer* layer : *m_LayerStack)
-			layer->OnImGuiRender();
-		for (BaseImGuiWindow* imGuiWindow : *m_ImGuiWindowStack)
-			imGuiWindow->OnUpdate();
-		m_ImGuiLayer->End();
+		if (m_IsInIntro)
+		{
+			if (FirstRun) { m_IntroTimer = Timer(); }
+
+
+			RenderCommand::SetClearColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
+			RenderCommand::Clear();
+
+			Renderer2D::BeginScene(m_Camera.GetViewProjectionMatrix());
+
+			Renderer2D::DrawQuad(glm::vec2(0, 0), glm::vec2(1, 1), GetCatTexture());
+			float offset = sinf(m_IntroTimer.ElapsedMillis() / 1000) / 10;
+
+			Renderer2D::DrawQuad(glm::vec2(0.41, -0.2 + offset), glm::vec2(.3, .3), GetCircleTexture());
+			Renderer2D::DrawQuad(glm::vec2(-0.46, -0.2 + offset), glm::vec2(.3, .3), GetCircleTexture());
+
+			static bool camMoveUp = false;
+
+			if (m_IntroTimer.ElapsedSeconds() >= 5.0f)
+			{
+				camMoveUp = true;
+			}
+
+			if (camMoveUp)
+			{
+				m_camPos += glm::vec3(0, 1, 0) * timestep.operator float();
+				m_Camera.SetPosition(m_camPos);
+			}
+
+			Renderer2D::EndScene();
+			if (m_IntroTimer.ElapsedSeconds() >= 14.999f)
+			{
+				m_IsInIntro = false;
+			}
+		}
+
+		FirstRun = false;
 		
 		if(t > 10)
 			m_Window->OnUpdate();

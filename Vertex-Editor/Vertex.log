@@ -1,85 +1,100 @@
-[21:38:19] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
-[21:38:19] [info] VERTEX: GLAD STATUS: 1
-[21:38:19] [info] VERTEX: OpenGL Info:
-[21:38:19] [info] VERTEX:   Vendor: NVIDIA Corporation
-[21:38:19] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
-[21:38:19] [info] VERTEX:   Version: 4.6.0 NVIDIA 566.36
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Quad.glsl
-[21:38:19] [trace] VERTEX:     1 uniform buffers
-[21:38:19] [trace] VERTEX:     0 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [trace] VERTEX:   _46_48
-[21:38:19] [trace] VERTEX:     Size = 64
-[21:38:19] [trace] VERTEX:     Binding = 0
-[21:38:19] [trace] VERTEX:     Members = 1
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Quad.glsl
-[21:38:19] [trace] VERTEX:     0 uniform buffers
-[21:38:19] [trace] VERTEX:     1 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [warning] VERTEX: Shader creation took 5.421601 ms
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Circle.glsl
-[21:38:19] [trace] VERTEX:     1 uniform buffers
-[21:38:19] [trace] VERTEX:     0 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [trace] VERTEX:   _47_49
-[21:38:19] [trace] VERTEX:     Size = 64
-[21:38:19] [trace] VERTEX:     Binding = 0
-[21:38:19] [trace] VERTEX:     Members = 1
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Circle.glsl
-[21:38:19] [trace] VERTEX:     0 uniform buffers
-[21:38:19] [trace] VERTEX:     0 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [warning] VERTEX: Shader creation took 4.9264007 ms
-[21:38:19] [error] VERTEX: Could not open file 'assets/shaders/Renderer2D_Line.glsl'
-[21:38:19] [warning] VERTEX: Shader creation took 1.3970003 ms
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/Renderer2D_Text.glsl
-[21:38:19] [trace] VERTEX:     1 uniform buffers
-[21:38:19] [trace] VERTEX:     0 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [trace] VERTEX:   _33_35
-[21:38:19] [trace] VERTEX:     Size = 64
-[21:38:19] [trace] VERTEX:     Binding = 0
-[21:38:19] [trace] VERTEX:     Members = 1
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/Renderer2D_Text.glsl
-[21:38:19] [trace] VERTEX:     0 uniform buffers
-[21:38:19] [trace] VERTEX:     1 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [warning] VERTEX: Shader creation took 3.2752006 ms
-[21:38:19] [warning] VERTEX: Player has 4 fields:
-[21:38:19] [warning] VERTEX:   Speed (Float)
-[21:38:19] [warning] VERTEX:   Time (Float)
-[21:38:19] [warning] VERTEX:   JumpTime (Float)
-[21:38:19] [error] VERTEX: Unknown type: Vertex.Audio
-[21:38:19] [warning] VERTEX:   audio (<Invalid>)
-[21:38:19] [info] VERTEX: Registering Entities
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTProp2DCircle
-[21:38:19] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropText2D
-[21:38:19] [info] VERTEX: ~Registering Entities
-[21:38:19] [info] VERTEX: Test 1
-[21:38:19] [info] VERTEX: (TEST 1) X from LUA is 18.219654
-[21:38:19] [info] VERTEX: (TEST 2) 4
-[21:38:19] [info] VERTEX: (TEST 3) csqr = 5
-[21:38:19] [info] VERTEX: (TEST 3) a = 0
-[21:38:19] [info] VERTEX: (TEST 3) b = 0
-[21:38:19] [info] VERTEX: (TEST 4) csqr = 5
-[21:38:19] [info] VERTEX: (TEST 4) a = 3
-[21:38:19] [info] VERTEX: (TEST 4) b = 4
-[21:38:19] [info] VERTEX: (TEST 5) We got a sprite from Lua
-[21:38:19] [info] VERTEX: (TEST 5) x = 6, y = 6
-[21:38:19] [info] VERTEX: a is 40
-[21:38:19] [info] VERTEX: 13 / 13 tests successful!
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_VERTEX_SHADER assets/shaders/grayscale.glsl
-[21:38:19] [trace] VERTEX:     0 uniform buffers
-[21:38:19] [trace] VERTEX:     0 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [trace] VERTEX: OpenGLShader::Reflect - GL_FRAGMENT_SHADER assets/shaders/grayscale.glsl
-[21:38:19] [trace] VERTEX:     0 uniform buffers
-[21:38:19] [trace] VERTEX:     1 resources
-[21:38:19] [trace] VERTEX: Uniform buffers:
-[21:38:19] [warning] VERTEX: Shader creation took 3.6470006 ms
-[21:38:19] [info] VERTEX: Loaded 319 glyphs from font (out of 352)
+[16:27:48] [info] VERTEX: Creating window: Vertex Editor (1600, 900, 1.7777778)
+[16:27:49] [info] VERTEX: GLAD STATUS: 1
+[16:27:49] [info] VERTEX: OpenGL Info:
+[16:27:49] [info] VERTEX:   Vendor: NVIDIA Corporation
+[16:27:49] [info] VERTEX:   Renderer: NVIDIA GeForce GTX 1660 SUPER/PCIe/SSE2
+[16:27:49] [info] VERTEX:   Version: 4.6.0 NVIDIA 566.36
+[16:27:49] [info] VERTEX: SetupIntroData() 9.1099ms
+[16:27:59] [warning] VERTEX: Shader creation took 10261.685 ms
+[16:28:07] [warning] VERTEX: Shader creation took 7740.855 ms
+[16:28:07] [error] VERTEX: Could not open file 'assets/shaders/Renderer2D_Line.glsl'
+[16:28:07] [error] VERTEX: Assertion 'false' failed at OpenGLShader.cpp:267
+[16:28:33] [warning] VERTEX: Shader creation took 26031.537 ms
+[16:28:43] [warning] VERTEX: Shader creation took 10517.157 ms
+[16:28:44] [trace] VERTEX: .<Module>
+[16:28:44] [trace] VERTEX: Vertex.Asset
+[16:28:45] [trace] VERTEX: Vertex.Audio
+[16:28:45] [trace] VERTEX: Vertex.CPPEntity
+[16:28:45] [trace] VERTEX: Vertex.ENTBaseBoxCollier2D
+[16:28:45] [trace] VERTEX: Vertex.ENTBaseRigidbody2D
+[16:28:45] [trace] VERTEX: Vertex.Entity
+[16:28:45] [trace] VERTEX: Vertex.ImGuiLink
+[16:28:45] [trace] VERTEX: Vertex.Input
+[16:28:45] [trace] VERTEX: Vertex.InternalCalls
+[16:28:45] [trace] VERTEX: Vertex.KeyCode
+[16:28:45] [trace] VERTEX: Vertex.MouseCode
+[16:28:45] [trace] VERTEX: Vertex.Logger
+[16:28:45] [trace] VERTEX: Vertex.BaseLogger
+[16:28:45] [trace] VERTEX: Vertex.AppLogger
+[16:28:45] [trace] VERTEX: Vertex.CoreLogger
+[16:28:45] [trace] VERTEX: Vertex.Object
+[16:28:45] [trace] VERTEX: Vertex.Renderer2D
+[16:28:45] [trace] VERTEX: Vertex.Texture2D
+[16:28:45] [trace] VERTEX: Vertex.Timer
+[16:28:45] [trace] VERTEX: Vertex.Colour
+[16:28:45] [trace] VERTEX: Vertex.Vector2
+[16:28:45] [trace] VERTEX: Vertex.Vector3
+[16:28:45] [trace] VERTEX: Vertex.Vector4
+[16:28:45] [trace] VERTEX: .BodyType
+[16:28:45] [trace] VERTEX: .ImGuiWindowFlags
+[16:28:45] [trace] VERTEX: .ImGuiStyleVar_
+[16:28:45] [trace] VERTEX: .<Module>
+[16:28:45] [trace] VERTEX: .Enemy
+[16:28:45] [trace] VERTEX: .EnemyGunerBu
+[16:28:45] [trace] VERTEX: .MapBG
+[16:28:45] [trace] VERTEX: Sandbox.GunBase
+[16:28:45] [trace] VERTEX: Sandbox.Player
+[16:28:45] [trace] VERTEX: Sandbox.TestGun
+[16:28:45] [trace] VERTEX: .EnemyAI_Type
+[16:28:45] [warning] VERTEX: Enemy has 8 fields:
+[16:28:45] [warning] VERTEX:   PointA (Vector2)
+[16:28:45] [warning] VERTEX:   PointB (Vector2)
+[16:28:45] [warning] VERTEX:   enemyAI_ID (Int)
+[16:28:45] [error] VERTEX: Unknown type: Vertex.Timer
+[16:28:45] [warning] VERTEX:   timer (<Invalid>)
+[16:28:45] [error] VERTEX: Unknown type: Vertex.Timer
+[16:28:45] [warning] VERTEX:   timer2 (<Invalid>)
+[16:28:45] [warning] VERTEX: EnemyGunerBu has 4 fields:
+[16:28:45] [warning] VERTEX:   Dir (Vector2)
+[16:28:45] [warning] VERTEX:   speed (Float)
+[16:28:45] [error] VERTEX: Unknown type: Vertex.Timer
+[16:28:45] [warning] VERTEX:   timer (<Invalid>)
+[16:28:45] [warning] VERTEX:   size (Float)
+[16:28:45] [warning] VERTEX: MapBG has 0 fields:
+[16:28:45] [warning] VERTEX: Player has 9 fields:
+[16:28:45] [error] VERTEX: Unknown type: System.Collections.Generic.List<Sandbox.GunBase>
+[16:28:45] [warning] VERTEX:   Guns (<Invalid>)
+[16:28:45] [warning] VERTEX:   Speed (Float)
+[16:28:45] [warning] VERTEX:   Time (Float)
+[16:28:45] [warning] VERTEX:   Time34 (Float)
+[16:28:45] [warning] VERTEX:   JumpTime (Float)
+[16:28:45] [error] VERTEX: Unknown type: Vertex.Audio
+[16:28:45] [warning] VERTEX:   audio (<Invalid>)
+[16:28:45] [warning] VERTEX:   gunIndex (UShort)
+[16:28:45] [warning] VERTEX:   cooked (Bool)
+[16:28:45] [error] VERTEX: Unknown type: Vertex.Timer
+[16:28:45] [warning] VERTEX:   cookedTimer (<Invalid>)
+[16:28:45] [info] VERTEX: Registering Entities
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropDynamicSprite
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropStaticSprite
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvStaticTilemap
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTEnvScript
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTPointCamera2D
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTProp2DCircle
+[16:28:45] [error] VERTEX: 	Could not find ENT type Vertex.ENTPropText2D
+[16:28:45] [info] VERTEX: ~Registering Entities
+[16:28:45] [info] VERTEX: Test 1
+[16:28:45] [info] VERTEX: (TEST 1) X from LUA is 18.219654
+[16:28:45] [info] VERTEX: (TEST 2) 4
+[16:28:45] [info] VERTEX: (TEST 3) csqr = 5
+[16:28:45] [info] VERTEX: (TEST 3) a = 0
+[16:28:45] [info] VERTEX: (TEST 3) b = 0
+[16:28:45] [info] VERTEX: (TEST 4) csqr = 5
+[16:28:45] [info] VERTEX: (TEST 4) a = 3
+[16:28:45] [info] VERTEX: (TEST 4) b = 4
+[16:28:45] [info] VERTEX: (TEST 5) We got a sprite from Lua
+[16:28:45] [info] VERTEX: (TEST 5) x = 6, y = 6
+[16:28:45] [info] VERTEX: a is 40
+[16:28:45] [info] VERTEX: 13 / 13 tests successful!
+[16:28:46] [info] VERTEX: Loaded 319 glyphs from font (out of 352)
+[16:28:59] [warning] VERTEX: Shader creation took 8376.086 ms

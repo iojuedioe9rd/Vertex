@@ -25,6 +25,8 @@ namespace Vertex
         protected virtual void OnDraw()               { }
         protected virtual void OnPhysUpdate(float ts) { }
         protected virtual void OnImGuiDraw() { }
+        protected virtual void OnBeginContact(Entity ent) { }
+        protected virtual void OnEndContact(Entity ent) { }
 
 
         public Vector3 Pos
@@ -33,6 +35,12 @@ namespace Vertex
             {
                 
                 InternalCalls.Entity_GetTranslation(UUID, out Vector3 result);
+
+                if(result.X == (1 << 0xDEAD1) || result.Y == (2 << 0xDEAD2) || result.Z == (1 << 0xDEAD3))
+                {
+                    throw new Exception("DATA ERROR: " + result.ToString());
+                }
+
                 return result;
             }
             set
@@ -42,7 +50,7 @@ namespace Vertex
         }
 
 
-        public Entity FindEntityByName(string name)
+        public static Entity FindEntityByName(string name)
         {
             string entityID = InternalCalls.Entity_FindEntityByName(name);
             if (entityID == string.Empty)
@@ -57,6 +65,19 @@ namespace Vertex
         {
             object instance = InternalCalls.GetScriptInstance(UUID);
             return instance as T;
+        }
+
+        public static T Instantiate<T>(string name, Vector3 pos = new Vector3(), Vector3? size = null, Vector3 rotation = new Vector3()) where T : Entity, new()
+        {
+            Vector3 finalSize = size ?? new Vector3(1, 1, 1);
+            string instance = InternalCalls.Entity_Instantiate(typeof(T).Name, name, ref pos, ref finalSize, ref rotation);
+            Entity entity = new Entity(instance);
+            return entity.As<T>();
+        }
+
+        public static void RemoveENT(Entity entity)
+        {
+            InternalCalls.Entity_Remove(entity.UUID);
         }
     }
 }

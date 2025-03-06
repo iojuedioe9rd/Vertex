@@ -16,6 +16,13 @@ namespace Vertex
 	}
 	void ENTPropStaticSprite::Update(Timestep& ts)
 	{
+		ENTBaseBoxCollier2D::Update(ts);
+		// Do nothing but if we don't define it won't work ╰（‵□′）╯
+	}
+
+	void ENTPropStaticSprite::PhysUpdate(Timestep& ts)
+	{
+		ENTBaseBoxCollier2D::PhysUpdate(ts);
 		// Do nothing but if we don't define it won't work ╰（‵□′）╯
 	}
 

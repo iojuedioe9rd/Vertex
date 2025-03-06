@@ -13,7 +13,7 @@ namespace Vertex
         public float Y;
         public float Z;
 
-        public Vector2 XY { get {  return new Vector2(X, Y); } }
+        public Vector2 XY { get {  return new Vector2(X, Y); } set { X = value.X; Y = value.Y; } }
 
         // Constructor
         public Vector3(float x, float y, float z)
@@ -28,6 +28,13 @@ namespace Vertex
             X = XY.X;
             Y = XY.Y;
             Z = z;
+        }
+
+        public Vector3(float v) : this()
+        {
+            X = v;
+            Y = v;
+            Z = v;
         }
 
         // Properties

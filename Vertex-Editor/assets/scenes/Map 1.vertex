@@ -1,7 +1,8 @@
 Scene: Untitled
 Entities:
-  - Entity: dxe-48-6z-r2-1vqxs6-6hgzee7-oh-91-et-061ybv-x91
+  - Entity: cnel-nn-td-cv-5akp1e-i3ty090-o9-0r-ct-xnyr2c-by1
     Tag: Floor
+    IntID: 7197152443505165075
     EntityType: prop_static_sprite
     Transform:
       Translation: [0, 0, 0]
@@ -17,16 +18,142 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: cnel-nn-td-cv-5akp1e-i3ty090-o9-0r-ct-xnyr2c-by1
+        - Name: Tag
+          Type: String
+          Data: Floor
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 9.30000019
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, -24]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 0.641869903
+            - 0.67181468
+            - 0.334610432
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 22.2999992
     PropStaticSprite:
       Colour: [0.641869903, 0.67181468, 0.334610432, 1]
       TilingFactor: 22.2999992
-  - Entity: qqos-nx-ob-4x-293y43-tq451sm-z9-ce-8p-17mm2g-5p7
+  - Entity: amls-rz-z6-35-ovdrr-9bq1qap-t2-ld-0r-vz2l17-t9h
     Tag: Camera
+    IntID: 16693124672926149251
     EntityType: point_camera_2d
     Transform:
       Translation: [0, 4.30000019, 16.8999996]
       Size: [1, 1, 1]
       Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: amls-rz-z6-35-ovdrr-9bq1qap-t2-ld-0r-vz2l17-t9h
+        - Name: Tag
+          Type: String
+          Data: Camera
+        - Name: EntityType
+          Type: String
+          Data: point_camera_2d
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 4.30000019
+            - 16.8999996
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: IsPrimary
+          Type: Bool
+          Data: true
+        - Name: FixedAspectRatio
+          Type: Bool
+          Data: false
+        - Name: Camera
+          Type: SerializationObject
+          Data:
+            - Name: ProjectionType
+              Type: Int32
+              Data: 0
+            - Name: PerspectiveFOV
+              Type: Float
+              Data: 0.785398185
+            - Name: PerspectiveNear
+              Type: Float
+              Data: 0.00999999978
+            - Name: PerspectiveFar
+              Type: Float
+              Data: 1000
+            - Name: OrthographicSize
+              Type: Float
+              Data: 10
+            - Name: OrthographicNear
+              Type: Float
+              Data: -1
+            - Name: OrthographicFar
+              Type: Float
+              Data: 1
+            - Name: AspectRatio
+              Type: Float
+              Data: 1.88425052
     PointCamera2D:
       ProjectionType: 0
       PerspectiveFOV: 0.785398185
@@ -37,21 +164,59 @@ Entities:
       OrthographicFar: 1
       Primary: true
       FixedAspectRatio: false
-  - Entity: l5pk-z7-n6-et-3t5b58-yk7878-tb-mt-b7-v806bg-hki
+  - Entity: s2d0-sl-rb-8a-68pkv8-mtl5iq-0n-16-qa-fmffr-o0h
     Tag: Player
+    IntID: 6976032132713907444
     EntityType: env_script
     Transform:
       Translation: [0, 4.19999981, 0]
       Size: [1, 1, 1]
       Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: s2d0-sl-rb-8a-68pkv8-mtl5iq-0n-16-qa-fmffr-o0h
+        - Name: Tag
+          Type: String
+          Data: Player
+        - Name: EntityType
+          Type: String
+          Data: env_script
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 4.19999981
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Use Rigidbody 2D
+          Type: Bool
+          Data: false
+        - Name: Classname
+          Type: String
+          Data: Sandbox.Player
+        - Name: Script Object
+          Type: SerializationObject
+          Data: ~
     EnvScript:
       Classname: Sandbox.Player
       ScriptFields:
-        - Name: Speed
-          Type: Float
-          Data: 10
-  - Entity: rif8-k8-00-9p-vlvsap-3yp0r84-kr-bz-q7-4eg7oc-n7v
+        []
+  - Entity: yt8-qk-rr-0k-6o905-xtvpf1p-0h-y-i2-xkletv-4ig
     Tag: Floor 2
+    IntID: 17754026315541992996
     EntityType: prop_static_sprite
     Transform:
       Translation: [14.3999996, 0.100000001, 0]
@@ -67,11 +232,75 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: yt8-qk-rr-0k-6o905-xtvpf1p-0h-y-i2-xkletv-4ig
+        - Name: Tag
+          Type: String
+          Data: Floor 2
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 14.3999996
+            - 0.100000001
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 9.60000038
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 0.55914551
+            - 0.590733588
+            - 0.109479584
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
     PropStaticSprite:
       Colour: [0.55914551, 0.590733588, 0.109479584, 1]
       TilingFactor: 1
-  - Entity: 7phq-q5-8m-4e-m8ps9i-g1f410o-1a-0g-le-40zx2y-9co
+  - Entity: 569v-sy-3m-x-oqkbxl-abb5mr8-4c-z2-7n-fgx704-ks6
     Tag: name
+    IntID: 14456405539278390889
     EntityType: prop_static_sprite
     Transform:
       Translation: [28.5, 0.699999988, 0]
@@ -87,7 +316,1993 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 569v-sy-3m-x-oqkbxl-abb5mr8-4c-z2-7n-fgx704-ks6
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 28.5
+            - 0.699999988
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 15.8000002
+            - 0.800000012
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 0.699127734
+            - 0.776061773
+            - 0.20675005
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
     PropStaticSprite:
       Colour: [0.699127734, 0.776061773, 0.20675005, 1]
-      TexturePath: assets\textures\Player.png
+      TilingFactor: 1
+  - Entity: 8ey7-2i-rc-is-sqp96f-61if0ci-xg-gg-t-zct9i-p37
+    Tag: opp 01
+    IntID: 5207693231197238009
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [6.4000001, -15.8000002, 0]
+      Size: [5.89999866, 0.999998927, 0.999997795]
+      Rotation: [0, 0, 90]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 8ey7-2i-rc-is-sqp96f-61if0ci-xg-gg-t-zct9i-p37
+        - Name: Tag
+          Type: String
+          Data: opp 01
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 6.4000001
+            - -15.8000002
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 5.89999866
+            - 0.999998927
+            - 0.999997795
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 90
+        - Name: Behaviour
+          Type: SerializationObject
+          Data:
+            - Name: Behaviour
+              Type: String
+              Data: 23l3-kb-7d-b9-7l391l-xqxh21m-3l-go-5e-44lge9-16
+            - Name: BehaviourType
+              Type: String
+              Data: move_to_pos_and_back
+            - Name: speed
+              Type: Float
+              Data: 5
+            - Name: gotoPos
+              Type: Vector3
+              Data:
+                - 6.4000001
+                - 11.5
+                - 0
+            - Name: m_Dir
+              Type: Bool
+              Data: false
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: 58v1-9f-dp-ii-fyty49-zknn2gr-8q-b-so-xgph1-i8t
+    Tag: name
+    IntID: 13452829350769878405
+    EntityType: env_script
+    Transform:
+      Translation: [0, 1.39999998, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 58v1-9f-dp-ii-fyty49-zknn2gr-8q-b-so-xgph1-i8t
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: env_script
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 1.39999998
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Use Rigidbody 2D
+          Type: Bool
+          Data: false
+        - Name: Classname
+          Type: String
+          Data: Enemy
+        - Name: Script Object
+          Type: SerializationObject
+          Data: ~
+    EnvScript:
+      Classname: Enemy
+      ScriptFields:
+        []
+  - Entity: 1px-6f-5l-2o-alqhx5-bcyt2ci-37-0n-v6-ixr2v-lii
+    Tag: lava
+    IntID: 2733125603025785238
+    EntityType: trigger_lava
+    Transform:
+      Translation: [645.799988, -64.8000031, 0]
+      Size: [1428.80005, 120.400002, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0, 0]
+      Density: 0
+      Friction: 0
+      Restitution: 0
+      RestitutionThreshold: 0
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 1px-6f-5l-2o-alqhx5-bcyt2ci-37-0n-v6-ixr2v-lii
+        - Name: Tag
+          Type: String
+          Data: lava
+        - Name: EntityType
+          Type: String
+          Data: trigger_lava
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 645.799988
+            - -64.8000031
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1428.80005
+            - 120.400002
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 0
+        - Name: Friction
+          Type: Float
+          Data: 0
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0, 0]
+  - Entity: 0msy-pl-vl-3c-mtgqaq-ot26xl1-dh-29-a1-8gm9nr-bte
+    Tag: script
+    IntID: 1885190066335953160
+    EntityType: env_script
+    Transform:
+      Translation: [0, 0, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 0msy-pl-vl-3c-mtgqaq-ot26xl1-dh-29-a1-8gm9nr-bte
+        - Name: Tag
+          Type: String
+          Data: script
+        - Name: EntityType
+          Type: String
+          Data: env_script
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Use Rigidbody 2D
+          Type: Bool
+          Data: false
+        - Name: Classname
+          Type: String
+          Data: MapBG
+        - Name: Script Object
+          Type: SerializationObject
+          Data: ~
+    EnvScript:
+      Classname: MapBG
+  - Entity: vm37-io-as-ma-5x844-hghhfo5-4y-8d-6l-e56v12-d0i
+    Tag: name
+    IntID: 9039066310559725932
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [45.2000008, 1.60000002, 0]
+      Size: [11.1000004, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: vm37-io-as-ma-5x844-hghhfo5-4y-8d-6l-e56v12-d0i
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 45.2000008
+            - 1.60000002
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 11.1000004
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: zrfk-i-45-d7-r7hdba-g6bnn84-92-k-yb-59g0na-z2x
+    Tag: name
+    IntID: 13606513172297216206
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [67.6999969, -0.600000024, 0]
+      Size: [20.5, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: zrfk-i-45-d7-r7hdba-g6bnn84-92-k-yb-59g0na-z2x
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 67.6999969
+            - -0.600000024
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 20.5
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: ozko-m7-rz-1m-dttczp-f30rlao-vo-0r-xk-4q1da8-p2t
+    Tag: name
+    IntID: 7319590257393532515
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [90.1999969, 0, 0]
+      Size: [15.3299999, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: ozko-m7-rz-1m-dttczp-f30rlao-vo-0r-xk-4q1da8-p2t
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 90.1999969
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 15.3299999
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: ny04-ec-83-g7-xnmqi4-5l2xy2q-mo-rm-zi-3azrm-bo2
+    Tag: name
+    IntID: 8307911038368223346
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [115.099998, 4.5999999, 0]
+      Size: [22.6000004, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: ny04-ec-83-g7-xnmqi4-5l2xy2q-mo-rm-zi-3azrm-bo2
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 115.099998
+            - 4.5999999
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 22.6000004
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: 138f-ps-d8-fs-1ldar-tas3nrh-xf-p2-ko-0dt5r4-q8
+    Tag: name
+    IntID: 16959953115429118325
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [144.899994, 2, 0]
+      Size: [20.7999992, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 138f-ps-d8-fs-1ldar-tas3nrh-xf-p2-ko-0dt5r4-q8
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 144.899994
+            - 2
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 20.7999992
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: y89x-ke-m-fg-s2mkyl-tgrplk-e7-bo-gm-9dbem1-ga
+    Tag: name
+    IntID: 12168194386689612539
+    EntityType: env_script
+    Transform:
+      Translation: [66.6999969, 0.699999988, 0]
+      Size: [1, 1, 1]
+      Rotation: [0, 0, 0]
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: y89x-ke-m-fg-s2mkyl-tgrplk-e7-bo-gm-9dbem1-ga
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: env_script
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 66.6999969
+            - 0.699999988
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Use Rigidbody 2D
+          Type: Bool
+          Data: false
+        - Name: Classname
+          Type: String
+          Data: Enemy
+        - Name: Script Object
+          Type: SerializationObject
+          Data: ~
+    EnvScript:
+      Classname: Enemy
+      ScriptFields:
+        []
+  - Entity: op2d-ea-az-lk-54hr3m-s1dd0c-3x-h0-96-7vnoad-aq6
+    Tag: name
+    IntID: 7281286569070294883
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [171.300003, -1, 0]
+      Size: [20.1000004, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: op2d-ea-az-lk-54hr3m-s1dd0c-3x-h0-96-7vnoad-aq6
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 171.300003
+            - -1
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 20.1000004
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: vfvx-3r-1e-v1-a8s0ar-kgsqdsc-vf-z8-kx-yrd803-6sx
+    Tag: name
+    IntID: 17396160149465104302
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [159.100006, -21.2000008, 0]
+      Size: [1, 11.1000004, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: vfvx-3r-1e-v1-a8s0ar-kgsqdsc-vf-z8-kx-yrd803-6sx
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 159.100006
+            - -21.2000008
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 11.1000004
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Behaviour
+          Type: SerializationObject
+          Data:
+            - Name: Behaviour
+              Type: String
+              Data: 0dnm-4g-0z-to-yamym-a9d9k9g-50-qt-qn-0m95qm-fs1
+            - Name: BehaviourType
+              Type: String
+              Data: move_to_pos_and_back
+            - Name: speed
+              Type: Float
+              Data: 1
+            - Name: gotoPos
+              Type: Vector3
+              Data:
+                - 159.100006
+                - 21.2000008
+                - 0
+            - Name: m_Dir
+              Type: Bool
+              Data: false
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: td4n-z8-yb-gq-5mt179-k22dagg-5z-xl-qt-382em-2rz
+    Tag: name
+    IntID: 17896226529067921348
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [197.899994, 1.89999998, 0]
+      Size: [21.8999996, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: td4n-z8-yb-gq-5mt179-k22dagg-5z-xl-qt-382em-2rz
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 197.899994
+            - 1.89999998
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 21.8999996
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: 09ev-8i-s-b-sekvcp-hredapi-2x-b4-zn-v1stn7-bpm
+    Tag: name
+    IntID: 12952108811542879903
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [228.699997, 0, 0]
+      Size: [29.1000004, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0.660000026
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 09ev-8i-s-b-sekvcp-hredapi-2x-b4-zn-v1stn7-bpm
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 228.699997
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 29.1000004
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0.660000026
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 0.586872578
+            - 1
+            - 0
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [0.586872578, 1, 0, 1]
+      TilingFactor: 1
+  - Entity: ebqa-ax-n0-b5-x52h75-120l6h2-4z-ca-4v-yvpd2t-lrh
+    Tag: name
+    IntID: 9504534782906930579
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [258.899994, -1.70000005, 0]
+      Size: [18.7000008, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: ebqa-ax-n0-b5-x52h75-120l6h2-4z-ca-4v-yvpd2t-lrh
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 258.899994
+            - -1.70000005
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 18.7000008
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: c7x4-qo-qr-ra-7vbkfn-gh4i919-o-7t-vo-8atyg9-9sv
+    Tag: name
+    IntID: 15455338057176158818
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [284.799988, -3.5, 0]
+      Size: [21.2999992, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: c7x4-qo-qr-ra-7vbkfn-gh4i919-o-7t-vo-8atyg9-9sv
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 284.799988
+            - -3.5
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 21.2999992
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: dzxt-hg-94-iy-35rdyq-0i3ka1i-8c-b2-ie-mft3vr-74v
+    Tag: name
+    IntID: 2671662840627817656
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [312.899994, 2.20000005, 0]
+      Size: [23.7999992, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: dzxt-hg-94-iy-35rdyq-0i3ka1i-8c-b2-ie-mft3vr-74v
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 312.899994
+            - 2.20000005
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 23.7999992
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: 3sfn-km-9f-hz-2zx0qp-imy2pif-0q-l3-99-lhrry-8c9
+    Tag: name
+    IntID: 18278985787095350439
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [349.700012, 1.29999995, 0]
+      Size: [27.1000004, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 3sfn-km-9f-hz-2zx0qp-imy2pif-0q-l3-99-lhrry-8c9
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 349.700012
+            - 1.29999995
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 27.1000004
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: p4ks-54-cr-xs-oasfql-pboc0p8-h2-48-nk-v062rn-1fl
+    Tag: name
+    IntID: 14484469885663254587
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [378.5, -1.70000005, 0]
+      Size: [20.2999992, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: p4ks-54-cr-xs-oasfql-pboc0p8-h2-48-nk-v062rn-1fl
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 378.5
+            - -1.70000005
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 20.2999992
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: so5g-gk-lm-1p-grpmiz-7dsh10-5-qa-5d-drk33t-1bn
+    Tag: name
+    IntID: 8183287564161201869
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [405.100006, 0, 0]
+      Size: [17.5, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: so5g-gk-lm-1p-grpmiz-7dsh10-5-qa-5d-drk33t-1bn
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 405.100006
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 17.5
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: d7r8-os-ah-o5-z3eqys-lq2rksp-0q-8-bo-s4r07-ep5
+    Tag: name
+    IntID: 6785435479216128414
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [428.5, -2.79999995, 0]
+      Size: [16.8999996, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: d7r8-os-ah-o5-z3eqys-lq2rksp-0q-8-bo-s4r07-ep5
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 428.5
+            - -2.79999995
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 16.8999996
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: vpr3-8-an-k6-mtx6vf-ic8mn4y-ia-op-rb-atpsg6-2a0
+    Tag: name
+    IntID: 4946311150422706124
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [452.200012, 0, 0]
+      Size: [21.7000008, 1, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: vpr3-8-an-k6-mtx6vf-ic8mn4y-ia-op-rb-atpsg6-2a0
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 452.200012
+            - 0
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 21.7000008
+            - 1
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
+      TilingFactor: 1
+  - Entity: 59op-zi-om-td-kh7a3b-dz8i2ng-si-st-0v-iarge4-bk
+    Tag: name
+    IntID: 4660854210478766342
+    EntityType: prop_text_2d
+    Transform:
+      Translation: [439.700012, 2.4000001, 0]
+      Size: [7.99999952, 10, 1]
+      Rotation: [0, 0, 0]
+    ENTPropText:
+      Text: YOU WIN
+      TextParams:
+        Color: [1, 1, 1, 1]
+        Kerning: 0
+        LineSpacing: 0
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 59op-zi-om-td-kh7a3b-dz8i2ng-si-st-0v-iarge4-bk
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_text_2d
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 439.700012
+            - 2.4000001
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 7.99999952
+            - 10
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Text
+          Type: String
+          Data: YOU WIN
+  - Entity: 3hy-sg-6i-o0-6b8z6z-aekgnb2-33-fz-a8-gseh9f-kh7
+    Tag: name
+    IntID: 3369616145016231950
+    EntityType: prop_static_sprite
+    Transform:
+      Translation: [77.4499969, 2.29999995, 0]
+      Size: [1, 5.0999999, 1]
+      Rotation: [0, 0, 0]
+    BaseRigidbody2D:
+      BodyType: Static
+      FixedRotation: false
+    BaseBoxCollier2D:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restitution: 0
+      RestitutionThreshold: 0.5
+    CustomEntity:
+      Fields:
+        - Name: Entity
+          Type: String
+          Data: 3hy-sg-6i-o0-6b8z6z-aekgnb2-33-fz-a8-gseh9f-kh7
+        - Name: Tag
+          Type: String
+          Data: name
+        - Name: EntityType
+          Type: String
+          Data: prop_static_sprite
+        - Name: Transform_Translation
+          Type: Vector3
+          Data:
+            - 77.4499969
+            - 2.29999995
+            - 0
+        - Name: Transform_Size
+          Type: Vector3
+          Data:
+            - 1
+            - 5.0999999
+            - 1
+        - Name: Transform_Rotation
+          Type: Vector3
+          Data:
+            - 0
+            - 0
+            - 0
+        - Name: Behaviour
+          Type: SerializationObject
+          Data:
+            - Name: Behaviour
+              Type: String
+              Data: rfyy-r4-n3-gv-1ksog1-919alrs-78-rh-v9-abkmox-6xh
+            - Name: BehaviourType
+              Type: String
+              Data: move_to_pos_and_back
+            - Name: speed
+              Type: Float
+              Data: 1.5
+            - Name: gotoPos
+              Type: Vector3
+              Data:
+                - 58
+                - 2.29999995
+                - 0
+            - Name: m_Dir
+              Type: Bool
+              Data: false
+        - Name: RB2DType
+          Type: Int32
+          Data: 0
+        - Name: RB2DFixedRotation
+          Type: Bool
+          Data: false
+        - Name: Density
+          Type: Float
+          Data: 1
+        - Name: Friction
+          Type: Float
+          Data: 0.5
+        - Name: Restitution
+          Type: Float
+          Data: 0
+        - Name: RestitutionThreshold
+          Type: Float
+          Data: 0.5
+        - Name: Offset
+          Type: Vector2
+          Data: [0, 0]
+        - Name: Size
+          Type: Vector2
+          Data: [0.5, 0.5]
+        - Name: Colour
+          Type: Vector4
+          Data:
+            - 1
+            - 1
+            - 1
+            - 1
+        - Name: TilingFactor
+          Type: Float
+          Data: 1
+    PropStaticSprite:
+      Colour: [1, 1, 1, 1]
       TilingFactor: 1

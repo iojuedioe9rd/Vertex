@@ -5,6 +5,7 @@
 #include <Vertex/Core/Buffer.h>
 #include "Vertex/Lua/ArenaAllocator.h"
 #include "Vertex/Scene/Entity.h"
+#include "Vertex/Scene/Behaviour.h"
 #include "Vertex/Scene/Behaviours/lua_script/lua_script.h"
 
 

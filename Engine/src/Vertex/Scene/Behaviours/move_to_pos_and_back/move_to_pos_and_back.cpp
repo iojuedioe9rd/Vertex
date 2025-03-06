@@ -8,14 +8,11 @@ static glm::vec3 MoveTowards(const glm::vec3& current, const glm::vec3& target, 
 	glm::vec3 direction = target - current;
 	float distance = glm::length(direction);
 
-	// If the distance is smaller than the maxDelta, just return the target
-	if (distance <= maxDistanceDelta || distance == 0.0f) {
+	if (distance <= maxDistanceDelta || glm::abs(distance) < glm::epsilon<float>()) {
 		return target;
 	}
 
-	// Normalize the direction and move in that direction
-	direction = glm::normalize(direction);
-	return current + direction * maxDistanceDelta;
+	return current + (direction / distance) * maxDistanceDelta;  // Normalize safely
 }
 
 namespace Vertex
@@ -26,11 +23,11 @@ namespace Vertex
 	{
 		
 
-		if (glm::distance(m_InitialPosition, gotoPos) < 0.3f)
+		if (glm::distance(m_Entity->pos, (m_Dir ? gotoPos : m_InitialPosition)) < 0.3f)
 		{
+			m_Entity->pos = (m_Dir ? gotoPos : m_InitialPosition);
 			m_Dir = !m_Dir;
 		}
-
 		if (m_Dir)
 		{
 			m_Entity->pos = MoveTowards(m_Entity->pos, gotoPos, speed * ts);

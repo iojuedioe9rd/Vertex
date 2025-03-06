@@ -34,6 +34,8 @@ project "Vertex-Editor"
 	
 	filter "system:windows"
 		systemversion "latest"
+		linkoptions { "/manifest:embed" }
+		files { "app.manifest" }
 
 	filter "configurations:Debug"
 		defines "VX_DEBUG"

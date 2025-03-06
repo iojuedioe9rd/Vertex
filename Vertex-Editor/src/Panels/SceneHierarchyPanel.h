@@ -24,6 +24,7 @@ namespace Vertex {
 	private:
 		Scene* m_Context;
 		bool m_CreateEntityPopup;
+		bool m_CreateBehaviourPopup;
 		Entity* m_SelectionContext = nullptr;
 		Entity* m_EntityToRemove = nullptr;
 	};

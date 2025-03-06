@@ -19,6 +19,7 @@ namespace Vertex {
 		~ENTPropDynamicSprite();
 
 		virtual void Update(Timestep& ts) override;
+		virtual void PhysUpdate(Timestep& ts) override;
 		virtual void Draw(Timestep& ts)   override;
 		virtual std::string GetEntName()  override
 		{

@@ -17,5 +17,24 @@ namespace Vertex
         {
             return !IsKeyDown(keycode);
         }
+
+        public static Vector2 GetMousePos()
+        {
+            Vector2 pos = new Vector2();
+            InternalCalls.Input_GetMousePos(ref pos, true);
+            return pos;
+        }
+
+        public static Vector2 GetMousePosWorld()
+        {
+            Vector2 pos = new Vector2();
+            InternalCalls.Input_GetMousePos(ref pos, false);
+            return pos;
+        }
+
+        public static bool IsMouseButtonPressed(MouseCode mouseCode)
+        {
+            return InternalCalls.Input_IsMouseButtonPressed(mouseCode);
+        }
     }
 }

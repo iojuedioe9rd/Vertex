@@ -14,6 +14,7 @@ namespace Vertex
 {
 	class ENTPointCamera2D;
 	class Entity;
+	class ENTEnvScript;
 	class Behaviour;
 	class EntityFactory;
 	
@@ -56,6 +57,7 @@ namespace Vertex
 		
 		Entity* FindEntityByName(std::string_view name);
 		bool RemoveEntity(Entity& entity);
+		void Add_ENT_To_Mono(ENTEnvScript* script);
 
 		void OnRuntimeStart();
 		void OnRuntimeStop();
@@ -119,9 +121,11 @@ namespace Vertex
 		bool m_IsEditor = true;
 		bool m_IsRunning = false;
 
+		void* m_ContactListener = nullptr;
 		b2World* m_PhysicsWorld = nullptr;
 		
 		friend class Entity;
+		friend class ScriptEngine;
 		friend class EntityFactory;
 	};
 

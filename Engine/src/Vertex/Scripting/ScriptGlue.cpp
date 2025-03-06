@@ -117,12 +117,34 @@ namespace Vertex
 		return mono_string_new(ScriptEngine::GetAppDomain(), newID);
 	}
 
-	static MonoObject* GetScriptInstance(UUID entityID)
+	static MonoObject* GetScriptInstance(MonoString* entityID)
 	{
-		return ScriptEngine::GetManagedInstance(entityID);
+		char* entityIDCStr = mono_string_to_utf8(entityID);
+		return ScriptEngine::GetManagedInstance(entityIDCStr);
 	}
 
-	
+	static void Entity_Remove(MonoString* id)
+	{
+		char* entityIDCStr = mono_string_to_utf8(id);
+
+		Scene* scene = ScriptEngine::GetSceneContext();
+		VX_CORE_ASSERT(scene);
+		Entity* entity = nullptr;
+
+		for (Entity* ent : *scene)
+		{
+
+			if (ent->GetID() == std::string(entityIDCStr))
+			{
+				entity = ent;
+				break;
+			}
+		}
+
+		
+		scene->RemoveEntity(*entity);
+
+	}
 
 	static bool Input_IsKeyDown(KeyCode keycode)
 	{
@@ -248,6 +270,13 @@ namespace Vertex
 		VX_CORE_ASSERT(scene);
 		Entity* entity = nullptr;
 		char* cStr = mono_string_to_utf8(entityID);
+		if (!cStr)
+		{
+			(*outTranslation).x = 1 << 0xDEAD1;
+			(*outTranslation).y = 2 << 0xDEAD2;
+			(*outTranslation).z = 3 << 0xDEAD3;
+			return;
+		}
 		for (Entity* ent : *scene)
 		{
 			
@@ -257,9 +286,45 @@ namespace Vertex
 				break;
 			}
 		}
-		VX_CORE_ASSERT(entity);
+		if (!entity)
+		{
+			(*outTranslation).x = 1 << 0xDEAD1;
+			(*outTranslation).y = 2 << 0xDEAD2;
+			(*outTranslation).z = 3 << 0xDEAD3;
+			return;
+		}
 
 		*outTranslation = entity->pos;
+	}
+
+	// internal extern static void Input_GetMousePos(ref Vector2 pos, bool isinPix);
+
+	static void Input_GetMousePos(glm::vec2* pos, bool isinPix)
+	{
+		(*pos) = Input::GetMousePositionVec2();
+
+		if (!isinPix)
+		{
+			Ref<Camera> mainCamera{};
+			if (ScriptEngine::GetSceneContext()->GetACameraInScene(&mainCamera, true))
+			{
+				// Assuming mainCamera has a method GetViewProjectionMatrix()
+				glm::mat4 invVP = glm::inverse(mainCamera->GetProjection());
+
+				// Get normalized device coordinates (NDC)
+				glm::vec2 windowSize = Application::GetWindowSize(); // Replace with actual function
+				glm::vec4 ndc = {
+					(2.0f * (*pos).x) / windowSize.x - 1.0f,
+					1.0f - (2.0f * (*pos).y) / windowSize.y,
+					0.0f,  // Assuming Z = 0 for now
+					1.0f
+				};
+
+				// Transform to world-space
+				glm::vec4 worldPos = invVP * ndc;
+				*pos = glm::vec2(worldPos.x / worldPos.w, worldPos.y / worldPos.w);
+			}
+		}
 	}
 
 	static MonoString* Object_GenerateUUID()
@@ -392,7 +457,7 @@ namespace Vertex
 				break;
 			}
 		}
-		VX_CORE_ASSERT(entity);
+		if (entity == nullptr) return;
 		entity->pos = *translation;
 	}
 
@@ -416,6 +481,37 @@ namespace Vertex
 		return glm::dot(NewParameter, NewParameter);
 	}
 
+	// internal extern static bool Input_IsMouseButtonPressed(MouseCode button);
+	bool Input_IsMouseButtonPressed(MouseCode button)
+	{
+		return Input::IsMouseButtonPressed(button);
+	}
+
+	
+	// internal extern static string Entity_Instantiate(string typename, string name, ref Vector3 translation, ref Vector3 size, ref Vector3 rotation);
+	static MonoString* Entity_Instantiate(MonoString* typenameMono, MonoString* nameMono, glm::vec3* translation, glm::vec3* size, glm::vec3* rotation)
+	{
+		char* typenameCstr = mono_string_to_utf8(typenameMono);
+		char* nameCstr = mono_string_to_utf8(nameMono);
+
+		Scene* scene = ScriptEngine::GetSceneContext();
+		VX_CORE_ASSERT(scene);
+
+		Entity* ent = scene->CreateEntity("env_script", nameCstr);
+		VX_CORE_ASSERT(ent && dynamic_cast<ENTEnvScript*>(ent));
+
+		ENTEnvScript* script = (ENTEnvScript*)ent;
+		script->pos = *translation;
+		script->size = *size;
+		script->rotation = *rotation;
+		script->classname = typenameCstr;
+
+		scene->Add_ENT_To_Mono(script);
+
+		MonoString* str = mono_string_new(ScriptEngine::GetAppDomain(), script->GetID().c_str());
+		return str;
+	}
+	
 	template<typename... ENT>
 	static void RegisterENT()
 	{
@@ -466,8 +562,12 @@ namespace Vertex
 		VX_ADD_INTERNAL_CALL(Entity_GetTranslation);
 		VX_ADD_INTERNAL_CALL(Entity_SetTranslation);
 		VX_ADD_INTERNAL_CALL(Entity_FindEntityByName);
+		VX_ADD_INTERNAL_CALL(Entity_Instantiate);
+		VX_ADD_INTERNAL_CALL(Entity_Remove);
 
 		VX_ADD_INTERNAL_CALL(Input_IsKeyDown);
+		VX_ADD_INTERNAL_CALL(Input_GetMousePos);
+		VX_ADD_INTERNAL_CALL(Input_IsMouseButtonPressed);
 
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_ApplyLinearImpulse);
 		VX_ADD_INTERNAL_CALL(Rigidbody2D_ApplyLinearImpulseToCenter);

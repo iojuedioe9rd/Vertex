@@ -1,4 +1,7 @@
 #include "vxpch.h"
+
+#include "Vertex/Scene/Behaviour.h"
+
 #include "Vertex/CustomAlloc/custom_alloc.h"
 #include "LuaScripting.h"
 #include "Vertex/Core/Buffer.h"

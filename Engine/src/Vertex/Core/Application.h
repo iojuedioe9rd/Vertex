@@ -10,6 +10,7 @@
 #include "Vertex/Renderer/Buffer.h"
 #include "Vertex/Renderer/VertexArray.h"
 #include "Vertex/Renderer/OrthographicCamera.h"
+#include "Vertex/Core/Timer.h"
 
 namespace Vertex
 {
@@ -69,7 +70,10 @@ namespace Vertex
 
 		void ExecuteMainThreadQueue();
 
-		
+		Timer m_IntroTimer;
+		bool m_IsInIntro = true;
+
+		glm::vec3 m_camPos = glm::vec3(0);
 
 		OrthographicCamera m_Camera;
 	};

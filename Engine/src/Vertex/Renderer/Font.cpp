@@ -98,7 +98,7 @@ namespace Vertex {
 
         // Simplified the coloring process and improved performance using the preferred method
         uint64_t coloringSeed = 0;
-        bool expensiveColoring = true;
+        bool expensiveColoring = false;
 
         if (expensiveColoring)
         {

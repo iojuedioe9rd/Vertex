@@ -60,10 +60,22 @@ namespace Vertex
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static string Entity_FindEntityByName(string name);
 
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static string Entity_Instantiate(string typename, string name, ref Vector3 translation, ref Vector3 size, ref Vector3 rotation);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Entity_Remove(string uuid);
+
         #endregion
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static bool Input_IsKeyDown(KeyCode keycode);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Input_GetMousePos(ref Vector2 pos, bool isinPix);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static bool Input_IsMouseButtonPressed(MouseCode button);
 
         #region RB 2D Entity
 

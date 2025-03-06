@@ -92,6 +92,8 @@ namespace Vertex
 
         public static bool ColourEdit(string name, ref Vector4 colour)
         {
+            
+            throw new NotImplementedException();
             return true;
         }
 

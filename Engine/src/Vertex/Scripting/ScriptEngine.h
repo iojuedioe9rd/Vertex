@@ -102,7 +102,10 @@ namespace Vertex {
 		void InvokeOnUpdate(float ts);
 		void InvokeOnPhysUpdate(float ts);
 		void InvokeOnDraw();
+		void InvokeOnLava();
 		void InvokeOnImGuiDraw();
+		void InvokeOnBeginContact(Ref<ScriptInstance> scriptInstance);
+		void InvokeOnEndContact(Ref<ScriptInstance> scriptInstance);
 
 		template<typename T>
 		T GetFieldValue(const std::string& name)
@@ -138,6 +141,9 @@ namespace Vertex {
 		MonoMethod* m_OnPhysUpdateMethod = nullptr;
 		MonoMethod* m_OnDrawMethod = nullptr;
 		MonoMethod* m_OnImGuiDrawMethod = nullptr;
+		MonoMethod* m_OnBeginContactMethod = nullptr;
+		MonoMethod* m_OnEndContactMethod = nullptr;
+		MonoMethod* m_OnLavaMethod = nullptr;
 
 		static char s_FieldValueBuffer[32];
 
@@ -160,12 +166,17 @@ namespace Vertex {
 		static void OnRuntimeStart(Scene* scene);
 		static void OnRuntimeStop();
 
+		static void RemoveEntity(Entity* entity);
+
 		static bool EntityClassExists(const std::string& fullClassName);
 		static void OnCreateEntity(Entity* entity, std::function<bool(ENTEnvScript*)> func);
 		static void OnUpdateEntity(Entity* entity, Timestep ts);
 		static void OnPhysUpdateEntity(Entity* entity, Timestep ts);
 		static void OnDrawEntity(Entity* entity);
 		static void OnImGuiDrawEntity(Entity* entity);
+		static void OnLava(Entity* entity);
+		static void OnBeginContactEntity(Entity* entity1, Entity* entity2);
+		static void OnEndContactEntity(Entity* entity1, Entity* entity2);
 		static MonoClass* GetMonoClassFromName(MonoImage* image, std::string nameSpace, std::string name);
 		static bool IsSubclassOf(MonoClass* monoClass, MonoClass* subclass, bool checkInterfaces);
 

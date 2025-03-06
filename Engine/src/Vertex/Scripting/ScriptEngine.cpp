@@ -15,6 +15,11 @@
 #include "Vertex/Core/Buffer.h"
 #include "Vertex/Core/FileSystem.h"
 
+#include "box2d/b2_world.h"
+#include "box2d/b2_body.h"
+#include "box2d/b2_fixture.h"
+#include "box2d/b2_polygon_shape.h"
+#include <box2d/box2d.h>
 
 #include "Vertex/Core/Application.h"
 #include "Vertex/Scene/Entities/Entities.h"
@@ -39,11 +44,11 @@ namespace Vertex {
 		{ "System.UInt32", ScriptFieldType::UInt },
 		{ "System.UInt64", ScriptFieldType::ULong },
 
-		{ "Vetex.Vector2", ScriptFieldType::Vector2 },
-		{ "Vetex.Vector3", ScriptFieldType::Vector3 },
-		{ "Vetex.Vector4", ScriptFieldType::Vector4 },
-		{ "Vetex.Colour", ScriptFieldType::Vector4 },
-		{ "Vetex.Entity", ScriptFieldType::Entity },
+		{ "Vertex.Vector2", ScriptFieldType::Vector2 },
+		{ "Vertex.Vector3", ScriptFieldType::Vector3 },
+		{ "Vertex.Vector4", ScriptFieldType::Vector4 },
+		{ "Vertex.Colour", ScriptFieldType::Vector4 },
+		{ "Vertex.Entity", ScriptFieldType::Entity },
 	};
 
 	namespace Utils {
@@ -321,7 +326,7 @@ namespace Vertex {
 		auto assemb = s_Data->AppAssembly;
 		s_Data->AppAssemblyImage = mono_assembly_get_image(s_Data->AppAssembly);
 		auto assembi = s_Data->AppAssemblyImage;
-		// Utils::PrintAssemblyTypes(s_Data->AppAssembly);
+		Utils::PrintAssemblyTypes(s_Data->AppAssembly);
 
 		
 	}
@@ -350,7 +355,7 @@ namespace Vertex {
 		s_Data->CoreAssemblyFilepath = filepath;
 		s_Data->CoreAssembly = Utils::LoadMonoAssembly(filepath, s_Data->EnableDebugging);
 		s_Data->CoreAssemblyImage = mono_assembly_get_image(s_Data->CoreAssembly);
-		// Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
+		Utils::PrintAssemblyTypes(s_Data->CoreAssembly);
 	}
 
 	void ScriptEngine::OnRuntimeStart(Scene* scene)
@@ -401,7 +406,8 @@ namespace Vertex {
 		VX_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
 
 		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
-		instance->InvokeOnUpdate((float)ts);
+		if(instance)
+			instance->InvokeOnUpdate((float)ts);
 	}
 
 	void ScriptEngine::OnPhysUpdateEntity(Entity* entity, Timestep ts)
@@ -410,7 +416,8 @@ namespace Vertex {
 		VX_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
 
 		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
-		instance->InvokeOnPhysUpdate((float)ts);
+		if (instance)
+			instance->InvokeOnPhysUpdate((float)ts);
 	}
 
 	void ScriptEngine::OnDrawEntity(Entity* entity)
@@ -419,7 +426,8 @@ namespace Vertex {
 		VX_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
 
 		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
-		instance->InvokeOnDraw();
+		if (instance)
+			instance->InvokeOnDraw();
 	}
 
 	void ScriptEngine::OnImGuiDrawEntity(Entity* entity)
@@ -428,7 +436,49 @@ namespace Vertex {
 		VX_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
 
 		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
-		instance->InvokeOnImGuiDraw();
+		if (instance)
+			instance->InvokeOnImGuiDraw();
+	}
+
+	void ScriptEngine::OnLava(Entity* entity)
+	{
+		UUID entityUUID = entity->GetID();
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(entityUUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance = s_Data->EntityInstances[entityUUID];
+		if (instance)
+			instance->InvokeOnLava();
+		
+	}
+
+	void ScriptEngine::OnBeginContactEntity(Entity* entity1, Entity* entity2)
+	{
+		UUID entity1UUID = entity1->GetID();
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(entity1UUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance1 = s_Data->EntityInstances[entity1UUID];
+
+		UUID entity2UUID = entity1->GetID();
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(entity2UUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance2 = s_Data->EntityInstances[entity2UUID];
+		if (instance1 || instance2)
+			instance1->InvokeOnBeginContact(instance2);
+	}
+
+	void ScriptEngine::OnEndContactEntity(Entity* entity1, Entity* entity2)
+	{
+		UUID entity1UUID = entity1->GetID();
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(entity1UUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance1 = s_Data->EntityInstances[entity1UUID];
+
+		UUID entity2UUID = entity1->GetID();
+		VX_CORE_ASSERT(s_Data->EntityInstances.find(entity2UUID) != s_Data->EntityInstances.end());
+
+		Ref<ScriptInstance> instance2 = s_Data->EntityInstances[entity2UUID];
+		if (instance1 || instance2)
+			instance1->InvokeOnEndContact(instance2);
 	}
 
 	MonoClass* ScriptEngine::GetMonoClassFromName(MonoImage* image, std::string nameSpace, std::string name)
@@ -460,6 +510,49 @@ namespace Vertex {
 		s_Data->SceneContext = nullptr;
 
 		s_Data->EntityInstances.clear();
+	}
+
+	void ScriptEngine::RemoveEntity(Entity* entity)
+	{
+		VX_CORE_ASSERT(entity);
+
+		UUID entityID = entity->GetID();
+
+		// Remove script instance if it exists
+		auto instanceIt = s_Data->EntityInstances.find(entityID);
+		if (instanceIt == s_Data->EntityInstances.end())
+			return;
+		MonoClass* RB2DClass = nullptr;
+		MonoClass* BC2DClass = nullptr;
+
+		RB2DClass = ScriptEngine::GetMonoClassFromName(ScriptEngine::GetCoreAssemblyImage(), "Vertex", "ENTBaseRigidbody2D");
+		BC2DClass = ScriptEngine::GetMonoClassFromName(ScriptEngine::GetCoreAssemblyImage(), "Vertex", "ENTBaseBoxCollier2D");
+
+
+		if (ScriptEngine::IsSubclassOf(instanceIt->second->m_ScriptClass->m_MonoClass, BC2DClass, false))
+		{
+			MonoClassField* bodyPtrField = mono_class_get_field_from_name(RB2DClass, "bodyPtr");
+
+			void* body = nullptr;
+
+			mono_field_get_value(instanceIt->second->m_Instance, bodyPtrField, (void*)(&body));
+
+			if (body)
+			{
+				entity->GetScene()->m_PhysicsWorld->DestroyBody((b2Body*)body);
+			}
+		}
+
+		if (instanceIt != s_Data->EntityInstances.end())
+			s_Data->EntityInstances.erase(instanceIt);
+
+		// Remove script field mappings if they exist
+		auto fieldIt = s_Data->EntityScriptFields.find(entityID);
+		if (fieldIt != s_Data->EntityScriptFields.end())
+			s_Data->EntityScriptFields.erase(fieldIt);
+
+		// Optionally: Remove entity class if it's the last reference (depends on your system)
+		// If each entity has a unique script class, you might want to remove it as well.
 	}
 
 	Ref<ScriptClass> ScriptEngine::GetEntityClass(const std::string& name)
@@ -645,6 +738,9 @@ namespace Vertex {
 		m_OnDrawMethod = scriptClass->GetMethod("OnDraw", 0);
 		m_OnImGuiDrawMethod = scriptClass->GetMethod("OnImGuiDraw", 0);
 		m_OnPhysUpdateMethod = scriptClass->GetMethod("OnPhysUpdate", 1);
+		m_OnBeginContactMethod = scriptClass->GetMethod("OnBeginContact", 1);
+		m_OnEndContactMethod = scriptClass->GetMethod("OnEndContact", 1);
+		m_OnLavaMethod = scriptClass->GetMethod("OnLavaMethod", 0);
 
 		// Call Entity constructor
 		{
@@ -687,11 +783,37 @@ namespace Vertex {
 		}
 	}
 
+	void ScriptInstance::InvokeOnLava()
+	{
+		if (m_OnLavaMethod)
+		{
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnLavaMethod, nullptr);
+		}
+	}
+
 	void ScriptInstance::InvokeOnImGuiDraw()
 	{
 		if (m_OnImGuiDrawMethod)
 		{
 			m_ScriptClass->InvokeMethod(m_Instance, m_OnImGuiDrawMethod, nullptr);
+		}
+	}
+
+	void ScriptInstance::InvokeOnBeginContact(Ref<ScriptInstance> scriptInstance)
+	{
+		if (m_OnBeginContactMethod)
+		{
+			void* param = scriptInstance->m_Instance;
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnBeginContactMethod, &param);
+		}
+	}
+
+	void ScriptInstance::InvokeOnEndContact(Ref<ScriptInstance> scriptInstance)
+	{
+		if (m_OnEndContactMethod)
+		{
+			void* param = scriptInstance->m_Instance;
+			m_ScriptClass->InvokeMethod(m_Instance, m_OnEndContactMethod, &param);
 		}
 	}
 

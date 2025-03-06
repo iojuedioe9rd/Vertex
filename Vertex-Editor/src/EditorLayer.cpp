@@ -109,7 +109,7 @@ namespace Vertex {
 		{
 			auto sceneFilePath = commandLineArgs[1];
 			SceneSerializer serializer(&m_ActiveScene);
-			//OpenScene(((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->ImportAsset(sceneFilePath));
+			OpenScene(((EditorAssetManager*)(void*)AssetManager::GetAssetManager().get())->ImportAsset(sceneFilePath));
 			m_EditorScene = m_ActiveScene;
 		}
 		else

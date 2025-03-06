@@ -14,6 +14,9 @@ namespace Vertex
 
 		}
 
+		virtual void PhysUpdate(Timestep& ts) override;
+		virtual void Update(Timestep& ts) override;
+
 		void SetRuntimeFixture(void* NewRuntimeFixture)
 		{
 			RuntimeFixture = NewRuntimeFixture;
@@ -57,7 +60,7 @@ namespace Vertex
 	protected:
 		void* RuntimeFixture = nullptr;
 	private:
-
+		friend class Scene;
 	};
 
 

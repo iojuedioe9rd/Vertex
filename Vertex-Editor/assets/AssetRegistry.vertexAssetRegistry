@@ -5,8 +5,14 @@ AssetRegistry:
   - Handle: 2227233634013898305
     FilePath: assets/scenes/Example.vertex
     Type: AssetType::Scene
+  - Handle: 2481684468866771408
+    FilePath: E:/Games_In_C++/11/Vertex/Vertex-Editor//assets/scenes/Example.vertex
+    Type: AssetType::Scene
   - Handle: 2494910796225794415
     FilePath: Resources/Icons/PlayButton.png
+    Type: AssetType::Texture2D
+  - Handle: 3232777753484639784
+    FilePath: assets/textures/cathead.png
     Type: AssetType::Texture2D
   - Handle: 4032386798816729396
     FilePath: assets/textures/Checkerboard.png
@@ -31,6 +37,12 @@ AssetRegistry:
     Type: AssetType::Texture2D
   - Handle: 16312005786595815595
     FilePath: E:/Games_In_C++/11/Vertex/Vertex-Editor/assets/scenes/lua Test.vertex
+    Type: AssetType::Scene
+  - Handle: 16905404168116878514
+    FilePath: assets/textures/circle.png
+    Type: AssetType::Texture2D
+  - Handle: 17369598211851078916
+    FilePath: E:/Games_In_C++/11/Vertex/Vertex-Editor/assets/scenes/Map 1.vertex
     Type: AssetType::Scene
   - Handle: 17802424601827375978
     FilePath: assets/music/idk.wav

@@ -23,10 +23,7 @@ namespace Vertex {
 			
 		}
 
-		virtual void Update(Timestep& ts) override
-		{
-
-		}
+		virtual void Update(Timestep& ts) override;
 
 
 		virtual void Draw(Timestep& ts)   override

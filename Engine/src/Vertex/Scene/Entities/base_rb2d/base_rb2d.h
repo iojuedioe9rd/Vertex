@@ -42,10 +42,13 @@ namespace Vertex
 			return true;
 		}
 
+		
+
 	protected:
 		void* RuntimeBody = nullptr;
+		bool isATrigger = false;
 	private:
-
+		friend class Scene;
 	};
 
 	

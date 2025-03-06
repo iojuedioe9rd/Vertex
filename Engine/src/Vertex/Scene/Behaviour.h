@@ -23,6 +23,7 @@ namespace Vertex
         virtual void OnUpdate(Timestep& ts) {}
         virtual void OnDraw() {}
         virtual void OnPhysUpdate(Timestep& ts) {}
+        virtual void OnRemove() {}
 
         virtual void ImGuiDrawProperties() {}
 
@@ -56,13 +57,13 @@ namespace Vertex
 
         Entity* m_Entity;
 
-        static Behaviour* CreateBehaviour(const std::string& name, Entity* entity);
+        static Behaviour* CreateBehaviour(const std::string name, Entity* entity);
         
 
     private:
 
         template<typename T>
-        static void RegisterBehaviour(const std::string& name)
+        static void RegisterBehaviour(const std::string name)
         {
             GetBehaviourMap()[name] = [](Entity* entity) -> Behaviour* { return new T(entity); };
         }

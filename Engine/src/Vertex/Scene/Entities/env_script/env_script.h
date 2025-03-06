@@ -21,6 +21,7 @@ namespace Vertex
 		virtual void Update(Timestep& ts) override;
 		virtual void Draw(Timestep& ts)   override;
 		virtual void OnImGuiDraw()		  override;
+		virtual void OnLava();
 		virtual void EventH(Event& e) override
 		{
 
@@ -29,7 +30,7 @@ namespace Vertex
 
 
 		virtual void PhysUpdate(Timestep& ts) override;
-
+		virtual void OnRemove() override;
 		virtual std::string GetEntName()  override
 		{
 			return "env_script";
@@ -38,6 +39,9 @@ namespace Vertex
 		bool called = 0;
 		std::string classname;
 		SerializationObject obj;
+
+		virtual void BeginContact(Entity* entity) override;
+		virtual void EndContact(Entity* entity) override;
 
 		virtual SerializationObject Serialize(bool isInSerializer = false) override
 		{

@@ -44,7 +44,7 @@ namespace Vertex {
 		std::string m_Path = std::string();
 		uint32_t m_Width, m_Height;
 		uint32_t m_RendererID;
-		GLenum m_InternalFormat, m_DataFormat;
+		GLenum m_InternalFormat, m_DataFormat, m_DataType;
 	};
 
 	class VERTEX_API OpenGLTexture2DAnimated : public Texture2DAnimated

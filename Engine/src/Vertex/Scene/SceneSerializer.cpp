@@ -266,8 +266,6 @@ namespace YAML {
 		}
 
 		static bool decode(const Node& node, ::Vertex::SerializationObject& rhs) {
-			if (!node.IsSequence())
-				return false;
 			for (std::size_t i = 0; i < node.size(); ++i) {
 				const Node& dataNode = node[i];
 				std::string name;
@@ -531,7 +529,7 @@ namespace Vertex {
 			// Fields
 			Ref<ScriptClass> entityClass = ScriptEngine::GetEntityClass(script->classname);
 			const auto& fields = entityClass->GetFields();
-			if (fields.size() > 0)
+			if (entityClass && fields.size() > 0)
 			{
 				out << YAML::Key << "ScriptFields" << YAML::Value;
 				auto& entityFields = ScriptEngine::GetScriptFieldMap(entity);
@@ -922,7 +920,11 @@ namespace Vertex {
 							READ_SCRIPT_FIELD(UShort, uint16_t);
 							READ_SCRIPT_FIELD(UInt, uint32_t);
 							READ_SCRIPT_FIELD(ULong, uint64_t);
-							READ_SCRIPT_FIELD(Vector2, glm::vec2);
+							case ScriptFieldType::Vector2: {
+								glm::vec2 data = scriptField["Data"].as<glm::vec2>();
+								fieldInstance.SetValue(data);
+								break;
+							};
 							READ_SCRIPT_FIELD(Vector3, glm::vec3);
 							READ_SCRIPT_FIELD(Vector4, glm::vec4);
 							READ_SCRIPT_FIELD(Colour, glm::vec4);

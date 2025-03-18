@@ -40,3 +40,6 @@
 [submodule "Engine/vendor/lua"]
 	path = Engine/vendor/lua
 	url = https://github.com/iojuedioe9rd/lua
+[submodule "Engine/vendor/OpenAL"]
+	path = Engine/vendor/OpenAL
+	url = https://github.com/iojuedioe9rd/OpenAL-Soft-Premake

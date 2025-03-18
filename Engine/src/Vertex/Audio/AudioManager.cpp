@@ -22,7 +22,7 @@ namespace Vertex
 
 		return v;
 	}
-	Audio* AudioManager::GetAudioFromFileName(const std::filesystem::path& fileName, bool looping)
+	Audio* AudioManager::GetAudioFromFileName(const std::filesystem::path& fileName, AudioSpecification& specification)
 	{
 		Audio* audio = nullptr;
 
@@ -37,7 +37,7 @@ namespace Vertex
 		}
 		else
 		{
-			audio = Audio::Create(fileName, looping);
+			audio = Audio::Create(fileName, specification);
 		}
 
 
@@ -48,6 +48,11 @@ namespace Vertex
 
 	void AudioManager::AddAudioFromObj(const std::filesystem::path& fileName, Audio* obj)
 	{
+		if (s_main == nullptr)
+		{
+			AudioManager::Init();
+		}
+
 		if (s_Data->AudioDictionary[fileName] != nullptr)
 		{
 
@@ -59,6 +64,7 @@ namespace Vertex
 
 	void AudioManager::Bye()
 	{
+		if (s_main == nullptr) { return; }
 		delete s_main;
 	}
 

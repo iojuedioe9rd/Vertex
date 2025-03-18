@@ -11,8 +11,8 @@ namespace Vertex {
 	class VERTEX_API OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc);
-		OpenGLShader(const std::string& filepath);
+		OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc, const bool isHLSL);
+		OpenGLShader(const std::string& filepath, const bool isHLSL);
 		virtual ~OpenGLShader();
 
 		virtual void Bind() const override;
@@ -45,6 +45,7 @@ namespace Vertex {
 		uint32_t m_RendererID;
 		std::string m_FilePath;
 		std::string m_Name;
+		bool m_IsHLSL;
 
 		std::unordered_map<GLenum, std::vector<uint32_t>> m_VulkanSPIRV;
 		std::unordered_map<GLenum, std::vector<uint32_t>> m_OpenGLSPIRV;

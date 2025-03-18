@@ -902,7 +902,7 @@ namespace Vertex {
 
 						ScriptFieldInstance& fieldInstance = entityFields[name];
 
-						// TODO: turn this assert into Hazelnut log warning
+						// TODO: turn this assert into Vertex log warning
 						VX_CORE_ASSERT(fields.find(name) != fields.end());
 
 						if (fields.find(name) == fields.end())

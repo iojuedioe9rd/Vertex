@@ -13,14 +13,14 @@
 namespace Vertex {
 
 	// Convert narrow string to wide string
-	std::wstring StringToWideString(const std::string& str) {
+	static std::wstring StringToWideString(const std::string& str) {
 		int size_needed = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), NULL, 0);
 		std::wstring wideStr(size_needed, 0);
 		MultiByteToWideChar(CP_UTF8, 0, str.c_str(), (int)str.size(), &wideStr[0], size_needed);
 		return wideStr;
 	}
 
-	unsigned char* LoadTextureFromResource(int resourceID, const char* format, int* width, int* height, int* channels) {
+	static unsigned char* LoadTextureFromResource(int resourceID, const char* format, int* width, int* height, int* channels) {
 		// Get the handle to the current module
 		HMODULE hModule = GetModuleHandle(NULL);
 
@@ -140,6 +140,60 @@ namespace Vertex {
 	float Time::GetFPS()
 	{
 		return FPS;
+	}
+
+	static struct PlatformDLLInstanceData
+	{
+		HMODULE hModule;
+		std::fs::path dllpath;
+	};
+
+	DLLInstance::DLLInstance(const std::fs::path& path)
+	{
+		// Load the DLL
+		PlatformDLLInstanceData* instance = new PlatformDLLInstanceData();
+		instance->dllpath = path;
+		instance->hModule = LoadLibrary(path.c_str());
+		m_PlatformInstance = instance;
+	}
+
+	DLLInstance::~DLLInstance()
+	{
+		PlatformDLLInstanceData* data = static_cast<PlatformDLLInstanceData*>(m_PlatformInstance);
+		if (data->hModule != nullptr)
+		{
+			FreeLibrary(data->hModule);
+		}
+		delete data;
+	}
+
+	bool DLLInstance::IsLoaded() const
+	{
+		PlatformDLLInstanceData* data = static_cast<PlatformDLLInstanceData*>(m_PlatformInstance);
+		return data->hModule != nullptr;
+	}
+	
+
+	std::string DLLInstance::GetName() const
+	{
+		PlatformDLLInstanceData* data = static_cast<PlatformDLLInstanceData*>(m_PlatformInstance);
+		return data->dllpath.filename().string();
+	}
+
+	std::fs::path& DLLInstance::GetPath() const
+	{
+		PlatformDLLInstanceData* data = static_cast<PlatformDLLInstanceData*>(m_PlatformInstance);
+		return data->dllpath;
+	}
+
+	void* DLLInstance::GetFunction(const std::string& functionName)
+	{
+		PlatformDLLInstanceData* data = static_cast<PlatformDLLInstanceData*>(m_PlatformInstance);
+		if (data->hModule != nullptr)
+		{
+			return GetProcAddress(data->hModule, functionName.c_str());
+		}
+		return nullptr;
 	}
 
 	// unsigned char* LoadTextureFromResource(int resourceID, const char* format, int* width, int* height, int* channels)

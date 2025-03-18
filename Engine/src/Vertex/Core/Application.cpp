@@ -46,8 +46,8 @@ namespace Vertex
 	Application* Application::app = nullptr;
 
 	
-	Application::Application(const std::string& name, uint32_t width, uint32_t height, ApplicationCommandLineArgs args)
-		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CommandLineArgs(args)
+	Application::Application(ApplicationSettings& settings)
+		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CommandLineArgs(settings.Args), m_Settings(settings)
 	{
 		
 		
@@ -61,7 +61,7 @@ namespace Vertex
 		m_ImGuiWindowStack = new ImGuiWindowStack();
 		m_ConsoleWindow = &ConsoleWindow::Get();
 		m_ImGuiWindowStack->PushImGuiWindow(m_ConsoleWindow);
-		m_Window = Ref<Window>(Window::Create(WindowProps(name, width, height)));
+		m_Window = Ref<Window>(Window::Create(WindowProps(settings.Name, settings.Width, settings.Height)));
 		m_Window->SetEventCallback(VX_BIND_EVENT_FN(Vertex::Application::OnEvent));
 		app = this;
 
@@ -73,8 +73,52 @@ namespace Vertex
 		PushOverlay(m_ImGuiLayer);
 
 		
+		
+		if (m_Settings.EnablePlugins)
+		{
+			VX_CORE_INFO("Loading Plugins");
+			SetupPlugins();
+			VX_CORE_INFO("Plugins Loaded");
+		}
+		
+	}
 
+	void Application::SetupPlugins()
+	{
+		if (!std::filesystem::exists("plugins"))
+		{
+			return;
+		}
 
+		LoadDLLFromDirectory(std::filesystem::directory_iterator("plugins"));
+	}
+
+	void Application::LoadDLLFromDirectory(const std::filesystem::directory_iterator directory_iterator, uint16_t i)
+	{
+		if (i == 0)
+		{
+			return;
+		}
+		
+		
+		for (const auto& entry : directory_iterator)
+		{
+			
+			if (entry.is_directory())
+			{
+				
+				const std::filesystem::directory_iterator subDirectoryIterator = std::filesystem::directory_iterator(entry.path());
+				LoadDLLFromDirectory(subDirectoryIterator, i - 1);
+			}
+			else
+			{
+				if (entry.path().extension() == ".dll")
+				{
+
+					LoadDLL(entry.path());
+				}
+			}
+		}
 		
 	}
 
@@ -133,6 +177,14 @@ namespace Vertex
 
 		//VX_CORE_INFO("{0}", timestep.GetMilliseconds());
 		
+		for (Ref<DLLInstance> dll : m_DLLs)
+		{
+			auto OnUpdateFunction = dll->GetFunctionPointer<void(*)(Timestep)>("OnUpdate");
+			if (timestep && OnUpdateFunction)
+			{
+				OnUpdateFunction(timestep);
+			}
+		}
 
 		if (!m_Minimized)
 		{
@@ -142,6 +194,16 @@ namespace Vertex
 
 		
 		m_ImGuiLayer->Begin();
+
+		for (Ref<DLLInstance> dll : m_DLLs)
+		{
+			auto OnImGuiDrawFunction = dll->GetFunctionPointer<void(*)(Timestep)>("OnImGuiDraw");
+			if (timestep && OnImGuiDrawFunction)
+			{
+				OnImGuiDrawFunction(timestep);
+			}
+		}
+
 		for (Layer* layer : *m_LayerStack)
 			layer->OnImGuiRender();
 		for (BaseImGuiWindow* imGuiWindow : *m_ImGuiWindowStack)
@@ -160,7 +222,14 @@ namespace Vertex
 	{
 		VX_PROFILE_FUNCTION();
 
-		
+		for (Ref<DLLInstance> dll : m_DLLs)
+		{
+			auto OnEventFunction = dll->GetFunctionPointer<void(*)(Event*)>("OnEvent");
+			if (e && OnEventFunction)
+			{
+				OnEventFunction(e);
+			}
+		}
 
 		if (e->IsInCategory(EventCategoryApplication) && e->GetEventType() == EventType::WindowClose)
 		{
@@ -210,6 +279,22 @@ namespace Vertex
 	{
 		std::scoped_lock<std::mutex> lock(m_MainThreadQueueMutex);
 		m_MainThreadQueue.emplace_back(function);
+	}
+
+	void Application::LoadDLL(const std::fs::path& path)
+	{
+		Ref<DLLInstance> dll = CreateRef<DLLInstance>(path);
+		m_DLLs.push_back(dll);
+	}
+
+	Ref<DLLInstance> Application::GetDLL(const std::fs::path& path)
+	{
+		for (Ref<DLLInstance> dll : m_DLLs)
+		{
+			if (dll->GetPath() == path)
+				return dll;
+		}
+		return nullptr;
 	}
 
 	void Application::ExecuteMainThreadQueue()

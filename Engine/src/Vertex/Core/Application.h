@@ -24,10 +24,22 @@ namespace Vertex
 		}
 	};
 
+	struct VERTEX_API ApplicationSettings
+	{
+		std::string Name = "Vertex App";
+		uint32_t Width = 1600;
+		uint32_t Height = 900;
+		ApplicationCommandLineArgs Args = ApplicationCommandLineArgs();
+		bool VSync = true;
+		bool EnablePlugins = true;
+	};
+
+	
+
 	class VERTEX_API Application
 	{
 	public:
-		Application(const std::string& name = "Vertex App", uint32_t width = 1600, uint32_t height = 900, ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
+		Application(ApplicationSettings& settings = ApplicationSettings());
 		virtual ~Application();
 
 		void PushLayer(Layer* layer);
@@ -51,7 +63,14 @@ namespace Vertex
 		void SubmitToMainThread(const std::function<void()>& function);
 
 		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
+
+		void LoadDLL(const std::fs::path& path);
+		Ref<DLLInstance> GetDLL(const std::fs::path& path);
 	private:
+		void SetupPlugins();
+		void LoadDLLFromDirectory(const std::filesystem::directory_iterator directory_iterator, uint16_t i = 100);
+
+		ApplicationSettings m_Settings;
 		ApplicationCommandLineArgs m_CommandLineArgs;
 		ImGuiLayer* m_ImGuiLayer;
 		ImGuiWindows::ConsoleWindow* m_ConsoleWindow;
@@ -69,7 +88,7 @@ namespace Vertex
 
 		void ExecuteMainThreadQueue();
 
-		
+		std::vector<Ref<DLLInstance>> m_DLLs;
 
 		OrthographicCamera m_Camera;
 	};

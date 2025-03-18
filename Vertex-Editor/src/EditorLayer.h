@@ -13,7 +13,8 @@
 #include "Vertex/Renderer/Font.h"
 #include <filesystem>
 #include <Vertex/AssetManager/EditorAssetManager.h>
-
+#include <Vertex/Audio/Audio.h>
+#include <Vertex/Core/Timer.h>
 
 
 namespace Vertex {
@@ -50,7 +51,7 @@ namespace Vertex {
 		// UI Panels
 		void UI_Toolbar();
 	private:
-
+		Timer m_Timer;
 		
 
 		bool m_ViewportFocused = false, m_ViewportHovered = false;

@@ -113,7 +113,8 @@ namespace Vertex
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern static void Audio_SetSoundPitch(UInt64 soundID, float pitch);
 
-
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern static void Audio_Remove(UInt64 soundID);
 
 
         #endregion

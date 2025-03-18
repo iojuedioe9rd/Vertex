@@ -31,6 +31,8 @@ namespace Vertex
 		const AssetRegistry& GetAssetRegistry() const { return m_AssetRegistry; }
 		void SerializeAssetRegistry();
 		bool DeserializeAssetRegistry();
+
+		~EditorAssetManager() = default;
 	private:
 		std::filesystem::path AssetRegistryPath;
 

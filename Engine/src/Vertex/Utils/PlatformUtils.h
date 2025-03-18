@@ -49,4 +49,30 @@ namespace Vertex {
 		friend class Application;
 		
 	};
+
+	class VERTEX_API DLLInstance
+	{
+
+	public:
+		DLLInstance(const std::fs::path& path);
+		~DLLInstance();
+
+		
+		bool IsLoaded() const;
+		std::string GetName() const;
+		std::fs::path& GetPath() const;
+
+		// Add a template to cast function pointer
+		template <typename FuncType>
+		FuncType GetFunctionPointer(std::string functionName)
+		{
+			void* funcPtr = GetFunction(functionName);
+			return funcPtr ? reinterpret_cast<FuncType>(funcPtr) : nullptr;
+		}
+
+	private:
+		void* m_PlatformInstance; // Platform-specific instance (opaque pointer)
+		void* GetFunction(const std::string& functionName);
+	
+	};
 }

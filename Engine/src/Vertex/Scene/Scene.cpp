@@ -250,6 +250,12 @@ namespace Vertex {
 
 					Ref<ScriptInstance> Instance = ScriptEngine::GetEntityInstance(ent->GetID());
 
+					if (Instance->m_Instance == nullptr)
+					{
+						VX_WARN("Instance is null");
+						return;
+					}
+
 					if (ScriptEngine::IsSubclassOf(Instance->m_ScriptClass->m_MonoClass, BC2DClass, false))
 					{
 						MonoClassField* bodyTypeField = mono_class_get_field_from_name(RB2DClass, "Type");

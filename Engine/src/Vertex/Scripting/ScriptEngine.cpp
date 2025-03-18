@@ -565,6 +565,7 @@ namespace Vertex {
 	MonoObject* ScriptEngine::InstantiateClass(MonoClass* monoClass)
 	{
 		MonoObject* instance = mono_object_new(s_Data->AppDomain, monoClass);
+		if (!instance) return nullptr;
 		mono_runtime_object_init(instance);
 		return instance;
 	}

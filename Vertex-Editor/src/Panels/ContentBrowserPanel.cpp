@@ -117,7 +117,7 @@ namespace Vertex
 				ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
 				if (ImGui::ImageButton((ImTextureID)icon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 1 }, { 1, 0 }) && !isDirectory && item.extension() == ".wav")
 				{
-					AudioManager::GetAudioFromFileName(currentDir / item, false)->Play();
+					AudioManager::GetAudioFromFileName(currentDir / item)->Play();
 					VX_INFO("Playing sound: {0}", item.generic_string());
 				}
 

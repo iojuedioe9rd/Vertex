@@ -15,7 +15,8 @@ workspace "Vertex"
 
    defines
    {
-      "YAML_CPP_STATIC_DEFINE"
+      "YAML_CPP_STATIC_DEFINE",
+	  "MOJOSHADER_NO_VERSION_INCLUDE"
    }
 
    flags
@@ -40,6 +41,7 @@ workspace "Vertex"
       include "Engine/vendor/msdf-atlas-gen"
       include "Engine/vendor/lua"
       include "Engine/vendor/rttr"
+	  include "Engine/vendor/OpenAL"
    group "" -- End Dependencies group
 
    

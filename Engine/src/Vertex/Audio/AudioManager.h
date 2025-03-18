@@ -12,7 +12,7 @@ namespace Vertex
 		
 		static bool Init();
 
-		static Audio* GetAudioFromFileName(const std::filesystem::path& fileName, bool looping = 0);
+		static Audio* GetAudioFromFileName(const std::filesystem::path& fileName, AudioSpecification& specification = AudioSpecification{});
 
 		static void AddAudioFromObj(const std::filesystem::path& fileName, Audio* obj);
 

@@ -9,6 +9,20 @@
 
 namespace Vertex
 {
+	Ref<Mesh> Mesh::Create(std::vector<MeshVertex> vertices, std::vector<uint32_t> indices, std::vector<Ref<MeshTexture2D>> textures)
+	{
+		switch (RendererAPI::GetAPI())
+		{
+		case RendererAPI::API::None:
+			VX_CORE_ASSERT(false, "Renderer API is not supported");
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			//return CreateRef<OpenGLMesh>(vertices, indices, textures);
+		default:
+			break;
+		}
+	}
+	/*
 	Mesh::Mesh(std::vector<MeshVertex> vertices, std::vector<uint32_t> indices, std::vector<Ref<MeshTexture2D>> textures)
 	{
 		this->textures = textures;
@@ -52,6 +66,7 @@ namespace Vertex
 
 	}
 
+	
 	void Mesh::SetupMesh(Ref<VertexBuffer> VB, Ref<IndexBuffer> IB)
 	{
 		vertexArray = Ref<VertexArray>(VertexArray::Create());
@@ -88,6 +103,7 @@ namespace Vertex
 		vertexArray->Unbind();
 		shader->Unbind();
 	}
+	*/
 }
 
 

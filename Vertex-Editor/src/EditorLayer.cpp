@@ -147,7 +147,7 @@ namespace Vertex {
 		std::vector <uint32_t> ind(indices, indices + sizeof(indices) / sizeof(uint32_t));
 		
 		std::vector<Ref<MeshTexture2D>> textures;
-
+		/*
 		m_testMesh.reset(new Mesh({
 			// Front face
 			{{-1.0f, -1.0f,  1.0f}, {0.0f,  0.0f,  1.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}},
@@ -197,7 +197,7 @@ namespace Vertex {
 				16, 17, 18, 18, 19, 16,
 				// Bottom face
 				20, 21, 22, 22, 23, 20
-		}, textures));
+		}, textures));*/
 
 		//m_testShader = Shader::Create("assets/shaders/3DTest.glsl");
 
@@ -219,8 +219,10 @@ namespace Vertex {
 		VX_PROFILE_FUNCTION();
 	}
 
-	void EditorLayer::OnUpdate(Timestep ts)
+	void EditorLayer::OnUpdate(register Timestep ts)
 	{
+		
+
 		if (m_EditorScene == nullptr)
 		{
 
@@ -308,7 +310,7 @@ namespace Vertex {
 			my = viewportSize.y - my;
 			int mouseX = (int)mx;
 			int mouseY = (int)my;
-
+			/*
 			if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 			{
 				int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
@@ -330,7 +332,7 @@ namespace Vertex {
 					}
 				}
 			}
-
+			*/
 			
 			Renderer2D::EndScene();
 

@@ -15,7 +15,7 @@ extern "C" {
 
 
 
-struct LuaVec3
+static struct LuaVec3
 {
 	float x, y, z = 0;
 
@@ -43,6 +43,33 @@ struct LuaVec3
 	LuaVec3(float x) : x(x) {}
 	LuaVec3(float x, float y) : x(x), y(y) {}
 	LuaVec3(float x, float y, float z) : x(x), y(y), z(z) {}
+};
+
+static struct LuaVec2
+{
+    float x, y = 0;
+
+    static LuaVec2 FromGLM(glm::vec2 pos)
+    {
+        LuaVec2 vec{};
+        vec.x = pos.x;
+        vec.y = pos.y;
+
+        return vec;
+    }
+
+    static glm::vec2 ToGLM(LuaVec2 vec)
+    {
+        glm::vec2 glmVEC3{};
+        glmVEC3.x = vec.x;
+        glmVEC3.y = vec.y;
+
+        return glmVEC3;
+    }
+
+    LuaVec2() {};
+    LuaVec2(float x) : x(x) {}
+    LuaVec2(float x, float y) : x(x), y(y) {}
 };
 
 namespace Vertex
@@ -220,6 +247,16 @@ namespace Vertex
 			"y", &LuaVec3::y,
 			"z", &LuaVec3::z
 		);
+
+        script->m_State->new_usertype<LuaVec2>("vec2",
+            sol::constructors<
+            LuaVec2(),
+            LuaVec2(float),
+            LuaVec2(float, float)
+            >(),
+            "x", &LuaVec2::x,
+            "y", &LuaVec2::y
+        );
 
 		script->m_State->set_function("set_pos", [script](LuaVec3 vec3) {
 			set_pos(script, vec3.x, vec3.y, vec3.z);

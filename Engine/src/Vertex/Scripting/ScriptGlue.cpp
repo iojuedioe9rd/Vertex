@@ -61,7 +61,6 @@ namespace Vertex
 		return ScriptEngine::GetManagedInstance(entityID);
 	}
 
-	
 
 	static bool Input_IsKeyDown(KeyCode keycode)
 	{

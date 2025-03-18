@@ -86,8 +86,8 @@ namespace Vertex {
 
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& filepath)
-		: m_FilePath(filepath)
+	OpenGLShader::OpenGLShader(const std::string& filepath, const bool isHLSL)
+		: m_FilePath(filepath), m_IsHLSL(isHLSL)
 	{
 		VX_PROFILE_FUNCTION();
 
@@ -112,8 +112,8 @@ namespace Vertex {
 		m_Name = filepath.substr(lastSlash, count);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
-		: m_Name(name)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc, const bool isHLSL)
+		: m_Name(name), m_IsHLSL(isHLSL)
 	{
 		VX_PROFILE_FUNCTION();
 

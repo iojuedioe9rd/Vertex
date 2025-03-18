@@ -90,11 +90,15 @@ static int ParseCommandLine(char* cmdline, char** argv)
 //MessageBoxA(NULL, "Memory allocation failed!", "Error", MB_OK | MB_ICONERROR);
 static int OutOfMemory(void)
 {
-    MessageBoxA(NULL, "Out of memory - aborting", "Fatal Error", MB_OK | MB_ICONERROR);
+#if UNICODE
+    MessageBox(NULL, L"Out of memory - aborting", L"Fatal Error", MB_OK | MB_ICONERROR);
+#else
+	MessageBox(NULL, "Out of memory - aborting", "Fatal Error", MB_OK | MB_ICONERROR);
+#endif
     return BIT(32);
 }
 
-int VERTEX_API Vertex_main_getcmdline(std::function<int(int, char**)> vx_main)
+int VERTEX_API Vertex_main_getcmdline(int(*vx_main)(int, char**))
 {
     char** argv = nullptr;
     int argc = 0;
@@ -143,8 +147,10 @@ int VERTEX_API Vertex_main_getcmdline(std::function<int(int, char**)> vx_main)
     // Parse the command line into argc and argv
     argc = ParseCommandLine(cmdline, argv);
 
+    
     // Call the main function with parsed arguments
     retval = vx_main(argc, argv);
+    
 
     // Free allocated memory
     VirtualFree(argv, cmdalloc, MEM_DECOMMIT);

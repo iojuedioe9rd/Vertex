@@ -23,6 +23,7 @@ IncludeDir["sol2"] = "%{wks.location}/Engine/vendor/sol2/single/include"
 IncludeDir["rttr"] = "%{wks.location}/Engine/vendor/rttr/src"
 IncludeDir["SPIRV_Cross"] = "%{wks.location}/Engine/vendor/SPIRV-Cross"
 IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
+IncludeDir["OpenAL"] = "%{wks.location}/Engine/vendor/OpenAL/include"
 
 LibraryDir = {}
 LibraryDir["mono"] = "%{wks.location}/Engine/vendor/mono/lib/%{cfg.buildcfg}"

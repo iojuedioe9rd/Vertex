@@ -1,6 +1,8 @@
 #pragma once
 #include <filesystem>
 
+typedef unsigned int ALuint;
+
 namespace std
 {
 	namespace fs = filesystem;

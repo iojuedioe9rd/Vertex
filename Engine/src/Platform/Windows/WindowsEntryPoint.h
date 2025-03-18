@@ -10,7 +10,7 @@
 extern Vertex::Application* Vertex::CreateApp(ApplicationCommandLineArgs args);
 extern int Vertex_main(int argc, char** argv);
 
-int VERTEX_API Vertex_main_getcmdline(std::function<int(int, char**)> vx_main);
+int VERTEX_API Vertex_main_getcmdline(int(*vx_main)(int, char**));
 
 #if defined(_MSC_VER)
 # define console_ansi_main main

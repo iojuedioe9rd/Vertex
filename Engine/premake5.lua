@@ -25,12 +25,19 @@ project "Engine"
 		"vendor/miniaudio/**.cpp",
 		"vendor/simple_ecs/**.h",
 		"vendor/simple_ecs/**.cpp",
+		"vendor/mojoshader/mojoshader*.h",
+		"vendor/mojoshader/mojoshader*.c",
 	}
+	
+	
 	
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS",
-		"GLFW_INCLUDE_NONE"
+		"GLFW_INCLUDE_NONE",
+		"USING_VERTEX=1",
+		"VERTEX_ENGINE_RES_TYPE=\"BETA\"",
+		"AL_LIBTYPE_STATIC"
 	}
 	
 	includedirs {
@@ -58,7 +65,9 @@ project "Engine"
 		"%{IncludeDir.rttr}",
 		"%{IncludeDir.luawrapper}",
 		"%{IncludeDir.boost}",
-		"%{IncludeDir.sol2}"
+		"%{IncludeDir.sol2}",
+		"%{IncludeDir.OpenAL}",
+		"vendor/mojoshader"
 	}
 	
 	links {
@@ -75,9 +84,12 @@ project "Engine"
 		"Box2D",
 		"%{Library.mono}",
 		"lua",
-		"rttr"
+		"rttr_core_lib",
+		"OpenAL-Soft"
 		
 	}
+	filter "files:vendor/mojoshader/mojoshader*.c"
+		flags {"NoPCH"}
 	
 	filter "system:windows"
 		systemversion "latest"

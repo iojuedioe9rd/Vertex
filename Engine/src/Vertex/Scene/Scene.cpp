@@ -30,6 +30,7 @@
 #include "mono/metadata/object.h"
 
 #include "Vertex/Scripting/ScriptEngine.h"
+#include <Vertex/Core/Timer.h>
 
 #define SPACE_CHAR ' '
 
@@ -395,8 +396,8 @@ namespace Vertex {
 
 
 
-			const int32_t velocityIterations = 6 * 2;
-			const int32_t positionIterations = 2 * 2;
+			const int32_t velocityIterations = 6;
+			const int32_t positionIterations = 2;
 			m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);
 			for (Entity* ent : m_Entitys)
 			{

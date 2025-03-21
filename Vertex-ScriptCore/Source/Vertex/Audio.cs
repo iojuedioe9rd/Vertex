@@ -18,9 +18,9 @@ namespace Vertex
             InternalCalls.Audio_PlaySound(Handle);
         }
 
-        ~Audio()
-        {
-            InternalCalls.Audio_Remove(Handle);
-        }
+        //~Audio()
+        //{
+        //    InternalCalls.Audio_Remove(Handle);
+        //}
     }
 }

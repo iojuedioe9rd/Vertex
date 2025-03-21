@@ -143,7 +143,7 @@ namespace Vertex
 	float timeDiff;
 	uint32_t counter = 0;
 
-	float GetFPS()
+	static float GetFPS()
 	{
 		crntTime = Time::GetTime();
 		timeDiff = crntTime - prevTime;

@@ -8,6 +8,7 @@
 #include "Vertex/Scripting/ScriptEngine.h"
 #include "Vertex/Lua/LuaScripting.h"
 #include <GLFW/glfw3.h>
+#include "Random.h"
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
 	// Your fuzzing logic here
@@ -50,7 +51,7 @@ namespace Vertex
 		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CommandLineArgs(settings.Args), m_Settings(settings)
 	{
 		
-		
+		Random::Init(settings.RandomSeed);
 		
 		VX_PROFILE_FUNCTION();
 
@@ -114,7 +115,7 @@ namespace Vertex
 			{
 				if (entry.path().extension() == ".dll")
 				{
-
+					VX_CORE_INFO("Loading DLL: {0}", entry.path().string());
 					LoadDLL(entry.path());
 				}
 			}

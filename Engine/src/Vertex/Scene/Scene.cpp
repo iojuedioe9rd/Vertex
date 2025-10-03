@@ -66,10 +66,10 @@ namespace Vertex {
 
 	Scene::Scene(std::string name)
 	{
-		
+
 
 		m_name = name;
-		
+
 #if ENTT_EXAMPLE_CODE
 		entt::entity entity = m_Registry.create();
 		m_Registry.emplace<TransformComponent>(entity, glm::mat4(1.0f));
@@ -94,7 +94,7 @@ namespace Vertex {
 		}
 #endif
 
-		
+
 	}
 
 	Scene::~Scene()
@@ -105,7 +105,7 @@ namespace Vertex {
 		}
 	}
 
-	
+
 
 
 	Entity* Scene::CreateEntity(const std::string& ent_name, const std::string& name)
@@ -131,9 +131,7 @@ namespace Vertex {
 
 	bool Scene::RemoveEntity(Entity& entity)
 	{
-		std::lock_guard<std::mutex> lock(m_EntityMutex);
-		m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), &entity), m_Entitys.end());
-		delete& entity;
+		m_EntitysToRemove.push_back(&entity);
 		return true;
 	}
 
@@ -154,14 +152,14 @@ namespace Vertex {
 
 
 
-	
+
 
 	void Scene::OnRuntimeStart()
 	{
 		m_IsRunning = true;
 
 		m_IsEditor = false;
-		
+
 		MonoClass* RB2DClass = nullptr;
 		MonoClass* BC2DClass = nullptr;
 		if (true)
@@ -172,9 +170,9 @@ namespace Vertex {
 			for (Entity* ent : m_Entitys)
 			{
 				ScriptEngine::OnCreateEntity(ent, [&](ENTEnvScript* sc) {
-					
 
-					for (auto& obj : sc->obj.GetAll() )
+
+					for (auto& obj : sc->obj.GetAll())
 					{
 						if (has_space(obj.name))
 						{
@@ -207,23 +205,23 @@ namespace Vertex {
 
 							}
 
-							
+
 						}
 					}
 					return true;
-				});
+					});
 
 				ent->OnCreateTime();
 			}
 
-			
+
 		}
 
-		
+
 
 		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
 
-		for (Entity* ent: m_Entitys)
+		for (Entity* ent : m_Entitys)
 		{
 			if (auto boxCollider = dynamic_cast<ENTBaseBoxCollier2D*>(ent))
 			{
@@ -241,7 +239,7 @@ namespace Vertex {
 
 				body->CreateFixture(&fixtureDef);
 			}
-			
+
 			if (ent->GetEntName() == "env_script")
 			{
 				if (BC2DClass != nullptr)
@@ -262,7 +260,7 @@ namespace Vertex {
 						MonoClassField* bodyTypeField = mono_class_get_field_from_name(RB2DClass, "Type");
 						int32_t bodyTypeEnumValue;
 						mono_field_get_value(Instance->m_Instance, bodyTypeField, &bodyTypeEnumValue); // Pass the address of the variable
-						
+
 						MonoClassField* fixedRotationField = mono_class_get_field_from_name(RB2DClass, "FixedRotation");
 						bool FixedRotation;
 						mono_field_get_value(Instance->m_Instance, fixedRotationField, &FixedRotation); // Pass the address of the variable
@@ -279,11 +277,11 @@ namespace Vertex {
 						b2Body* body = m_PhysicsWorld->CreateBody(&bodyDef);
 						body->SetFixedRotation(FixedRotation);
 
-						
-						
+
+
 						MonoClassField* bodyPtrField = mono_class_get_field_from_name(RB2DClass, "bodyPtr");
 
-						
+
 
 						mono_field_set_value(Instance->m_Instance, bodyPtrField, (void*)(&body));
 
@@ -302,7 +300,7 @@ namespace Vertex {
 
 						MonoClassField* densityField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Density");
 						mono_field_get_value(Instance->m_Instance, densityField, &fixtureDef.density); // Pass the address of the variable
-						
+
 						// Friction
 						MonoClassField* frictionField = mono_class_get_field_from_name(Instance->m_ScriptClass->m_MonoClass, "Friction");
 						mono_field_get_value(Instance->m_Instance, frictionField, &fixtureDef.friction); // Pass the address of the variable
@@ -319,7 +317,7 @@ namespace Vertex {
 
 					}
 
-					
+
 				}
 			}
 		}
@@ -332,7 +330,7 @@ namespace Vertex {
 		m_IsEditor = true;
 		delete m_PhysicsWorld;
 		m_PhysicsWorld = nullptr;
-		
+
 		for (Entity* ent : m_Entitys)
 		{
 			ent->OnDestroyTime();
@@ -351,7 +349,7 @@ namespace Vertex {
 			if (is2D && ent->GetEntName() == "point_camera_2d")
 			{
 				ENTPointCamera2D* camera2D = dynamic_cast<ENTPointCamera2D*>(ent);
-				
+
 				if (0 || camera2D->isPrimary) // Optionally check if it's the primary camera
 				{
 					*mainCamera = camera2D->camera; // Set the main camera
@@ -368,7 +366,7 @@ namespace Vertex {
 						*cameraTransform = transform;
 					}
 
-					
+
 					return true; // Successfully found a 2D camera
 				}
 
@@ -404,7 +402,7 @@ namespace Vertex {
 				ent->PhysUpdate(ts);
 			}
 		}
-		
+
 		for (Entity* ent : m_Entitys)
 		{
 			ent->DrawTime(ts);
@@ -434,7 +432,7 @@ namespace Vertex {
 			ent->PostDeserialize();
 		}
 
-		
+
 	}
 
 	void Scene::OnEvent(Event& e)
@@ -460,7 +458,7 @@ namespace Vertex {
 				{
 					camera2D->camera->SetViewportSize(width, height);
 				}
-				
+
 			}
 		}
 	}
@@ -534,10 +532,26 @@ namespace Vertex {
 		}
 
 		return newScene;
-        
+
 	}
 	void Scene::gc_thread()
 	{
+		for (auto it = m_EntitysToRemove.begin(); it != m_EntitysToRemove.end(); )
+		{
+			Entity* entity = *it;
+
+			{
+				std::lock_guard<std::mutex> lock(m_EntityMutex);
+
+				// remove from main entity list
+				m_Entitys.erase(std::remove(m_Entitys.begin(), m_Entitys.end(), entity), m_Entitys.end());
+
+				// remove from remove list
+				it = m_EntitysToRemove.erase(it);
+			}
+
+			delete entity; // delete the actual object
+		}
 		/*auto start = std::chrono::steady_clock::now();
 
 		std::unordered_set<Entity*, EntityPtrHash> uniqueEntities;
@@ -576,9 +590,9 @@ namespace Vertex {
 	}
 
 
-			
 
 
-		//}
+
 	//}
+//}
 };

@@ -32,6 +32,7 @@ namespace Vertex
 		ApplicationCommandLineArgs Args = ApplicationCommandLineArgs();
 		bool VSync = true;
 		bool EnablePlugins = true;
+		SafeObject<int64_t> RandomSeed = SafeObject<int64_t>();
 	};
 
 	

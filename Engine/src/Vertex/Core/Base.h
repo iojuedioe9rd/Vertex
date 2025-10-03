@@ -72,6 +72,25 @@ namespace std
 namespace Vertex {
 
 	template<typename T>
+	struct VERTEX_API SafeObject
+	{
+		bool isGood = false;
+		T object;
+
+		SafeObject() : isGood(false), object() {}
+		SafeObject(T obj) : isGood(true), object(obj) {}
+
+		operator bool() const { return isGood; }
+
+		T& get() { return object; }
+		const T& get() const { return object; }
+	};
+}
+
+
+namespace Vertex {
+
+	template<typename T>
 	using Scope = std::unique_ptr<T>;
 	template<typename T, typename ... Args>
 	constexpr Scope<T> CreateScope(Args&& ... args)
